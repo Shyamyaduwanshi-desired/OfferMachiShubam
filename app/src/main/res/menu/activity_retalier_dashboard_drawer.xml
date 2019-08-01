@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_nav"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_avatar"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_offer"
+            android:icon="@drawable/ic_tag"
+            android:title="@string/offersdeals" />
+
+        <!--<item-->
+        <!--android:id="@+id/nav_addnew"-->
+        <!--android:icon="@drawable/ic_tag"-->
+        <!--android:title="@string/addnew" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_offerviewoffer"-->
+        <!--android:icon="@drawable/ic_tag"-->
+        <!--android:title="@string/viewoffer" />-->
+
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/dealsday"
+            android:icon="@drawable/appointment"
+            android:title="@string/dealsoftheday" />
+        <item
+            android:id="@+id/nav_pushoffer"
+            android:icon="@drawable/coupon"
+            android:title="@string/push" />
+
+        <item
+            android:id="@+id/nav_redeemcode"
+            android:icon="@drawable/ic_blackberry_qr_code_variant"
+            android:title="@string/redeemcode" />
+
+        <!--<item-->
+        <!--android:id="@+id/nav_qrcode"-->
+        <!--android:icon="@drawable/ic_blackberry_qr_code_variant"-->
+        <!--android:title="@string/qrcode" />-->
+        <!--<item-->
+        <!--android:id="@+id/nav_couponcode"-->
+        <!--android:icon="@drawable/qrcode"-->
+        <!--android:title="@string/couponcode" />-->
+
+        <item
+            android:id="@+id/nav_statistics"
+            android:icon="@drawable/computer"
+            android:title="@string/statistics" />
+
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_notification_bell"
+            android:title="@string/notification" />
+
+
+        <item
+            android:id="@+id/nav_rateapp"
+            android:icon="@drawable/support"
+            android:title="@string/rate" />
+
+        <item
+            android:id="@+id/nav_invite"
+            android:icon="@drawable/collaboration"
+            android:title="@string/invite" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_info"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/nav_customer"
+            android:icon="@drawable/support"
+            android:title="@string/customer" />
+
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/terms"
+            android:title="@string/terms" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
+    </group>
+</menu>
+

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="140dp">
+
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:outlineSpotShadowColor="@color/black"
+                    app:cardCornerRadius="4dp"
+                    android:layout_margin="10dp"
+                    app:cardElevation="15dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/banner"
+                        android:scaleType="fitXY"/>
+
+                </android.support.v7.widget.CardView>
+
+
+                <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/viewPager"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="150dp" />-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/SliderDots"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_below="@+id/viewPager"-->
+                    <!--android:gravity="center_vertical|center_horizontal"-->
+                    <!--android:orientation="horizontal" />-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/yellow">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smart Shopping"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/black"
+                    />
+                <Switch
+                    android:layout_width="70dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="140dp"
+                    android:theme="@style/SwitchCompatTheme"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp">
+                    <TextView
+                        android:id="@+id/dealsoftheday_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:text="Trending Deals &amp; Coupon Codes"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:id="@+id/view_text_id"
+                        android:layout_width="60dp"
+                        android:layout_height="21dp"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:text="View All"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:background="@drawable/view_background" />
+                </RelativeLayout>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_product_linear_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_above="@+id/rl">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/trendingdeals_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:text="Store Exclusive Coupon Codes"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        />
+                    <TextView
+                        android:id="@+id/viewall_text_id"
+                        android:layout_width="60dp"
+                        android:layout_height="21dp"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:text="View All"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="70dp"
+                        android:background="@drawable/view_background" />
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recommendede_recycler_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="100dp"
+                    android:layout_above="@+id/rl">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical"
+        android:background="@color/purple">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:drawableLeft="@drawable/menu_icon"
+                android:drawablePadding="15dp"
+                android:text="Electronics"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_background"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/lightcolour"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/search_background"
+                    android:hint="Type a store name or your location"
+                    android:textSize="9dp"
+                    android:drawableLeft="@drawable/search"
+                    android:drawablePadding="10dp"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/contentfirst_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Shop Non-Stop With THe Best Discounts And Coupons"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="15dp"
+            android:textSize="13dp"/>
+        <TextView
+            android:id="@+id/contentsecond_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Retails Outets,14000 Discounts and Counting 500+"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:layout_marginTop="3dp"
+            android:textSize="10dp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_avatar"
+            android:title="@string/profile" />
+        <item
+            android:id="@+id/nav_feeds"
+            android:icon="@drawable/feeds"
+            android:title="@string/feeds" />
+
+        <item
+            android:id="@+id/nav_smartshopping"
+            android:icon="@drawable/onlineshop"
+            android:title="@string/smartshopping" />
+
+        <item
+            android:id="@+id/nav_dealsday"
+            android:icon="@drawable/deals"
+            android:title="@string/dealsday" />
+        <item
+            android:id="@+id/nav_mycoupons"
+            android:icon="@drawable/coupon"
+            android:title="@string/mycoupons" />
+
+        <item
+            android:id="@+id/nav_follow"
+            android:icon="@drawable/follow"
+            android:title="@string/follow" />
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/favorite"
+            android:title="@string/fav" />
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/rating"
+            android:title="@string/rate" />
+        <item
+            android:id="@+id/nav_invite"
+            android:icon="@drawable/collaboration"
+            android:title="@string/invite" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_info"
+            android:title="@string/help" />
+        <item
+            android:id="@+id/nav_customer"
+            android:icon="@drawable/support"
+            android:title="@string/customer" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_notification_bell"
+            android:title="@string/notification" />
+        <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/terms"
+            android:title="@string/terms" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
+    </group>
+
+</menu>

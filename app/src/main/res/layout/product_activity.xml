@@ -165,50 +165,55 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:weightSum="2">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp">
+                    android:layout_weight="1">
                     <TextView
                         android:id="@+id/reviewstext_id"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Brand Name :"
+                        android:layout_weight="1"
                         android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="14dp" />
+                        android:textSize="12dp" />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Pizza"
+                        android:layout_weight="1"
                         android:textColor="@color/blue"
-                        android:textSize="14dp"
-                        android:layout_marginLeft="10dp"/>
+                        android:textSize="12dp"
+                        android:layout_marginLeft="5dp"/>
                 </LinearLayout>
 
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="20dp">
+                    android:layout_weight="1">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Purchase Mode:"
+                        android:layout_weight="1"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="50dp"
                         android:textStyle="bold"
-                        android:textSize="13dp" />
+                        android:textSize="12dp" />
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:text="Takeway"
-                        android:textSize="13dp" />
+                        android:layout_weight="1"
+                        android:layout_marginLeft="3dp"
+                        android:text="Takeaway"
+                        android:textSize="12dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -356,7 +361,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Dominos Pizza"
+                                    android:text="Dominos"
                                     android:textColor="@color/black" />
 
                                 <TextView
@@ -386,8 +391,8 @@
                             android:gravity="center"
                             android:layout_marginRight="10dp">
                             <ImageView
-                                android:layout_width="190dp"
-                                android:layout_height="120dp"
+                                android:layout_width="230dp"
+                                android:layout_height="150dp"
                                 android:src="@drawable/pizza"
                                android:scaleType="fitXY"
                                 />

@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     private List<slider_model> productdatasetcategory=new ArrayList<>();
     RecyclerView product_recyclerview;
     private ProductAdapter productAdapter;
-    private Context mContext;
+    //private Context mContext;
 
     RecyclerView homeproduct_recyclerview;
     private CategoryAdapter categoryAdapter;
@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
        });
 
         product_recyclerview = (RecyclerView) view.findViewById(R.id.recommendede_recycler_id);
-        productAdapter = new ProductAdapter(mContext, (ArrayList<slider_model>) productdatasetcategory);
+        productAdapter = new ProductAdapter(getContext(), (ArrayList<slider_model>) productdatasetcategory);
         product_recyclerview.setLayoutManager((new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)));
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         product_recyclerview.setAdapter(productAdapter);

@@ -62,7 +62,7 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ProductActivity.this, ViewOfferActivity.class);
+                Intent intent = new Intent(ProductActivity.this, ViewStoreOfferActivity.class);
                 startActivity(intent);
             }
         });

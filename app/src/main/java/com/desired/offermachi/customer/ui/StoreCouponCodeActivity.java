@@ -12,6 +12,7 @@ import com.desired.offermachi.R;
 public class StoreCouponCodeActivity extends AppCompatActivity {
 
     ImageView imageViewback;
+    ImageView proimg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,13 +25,21 @@ public class StoreCouponCodeActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        proimg=findViewById(R.id.proimg);
+        proimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StoreCouponCodeActivity.this, ViewAllOfferFollowActivity.class);
+                startActivity(intent);
+            }
+        });
         LinearLayout productlinearunfollow =(LinearLayout)findViewById(R.id.product_linear_unfollow_id);
         productlinearunfollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(StoreCouponCodeActivity.this, ViewAllOfferFollowActivity.class);
+            //    Intent intent = new Intent(StoreCouponCodeActivity.this, ViewAllOfferFollowActivity.class);
+                Intent intent = new Intent(StoreCouponCodeActivity.this, ViewStoreOfferActivity.class);
                 startActivity(intent);
 
             }

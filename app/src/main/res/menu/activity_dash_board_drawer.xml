@@ -22,6 +22,10 @@
             android:id="@+id/nav_smartshopping"
             android:icon="@drawable/onlineshop"
             android:title="@string/smartshopping" />
+        <item
+            android:id="@+id/nav_store"
+            android:icon="@drawable/onlineshop"
+            android:title="Stores" />
 
         <item
             android:id="@+id/nav_dealsday"

@@ -28,7 +28,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.my_profile_activity, container, false);
-        ((DashBoardActivity)getActivity()).setToolTittle("My Profile",2);
+       ((DashBoardActivity)getActivity()).setToolTittle("My Profile",2);
 
         edittextlinear=(LinearLayout)view.findViewById(R.id.edit_text_linear_id);
         edittextlinear.setOnClickListener(new View.OnClickListener() {

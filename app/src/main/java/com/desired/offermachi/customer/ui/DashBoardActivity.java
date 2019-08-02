@@ -30,6 +30,7 @@ import com.desired.offermachi.customer.fragment.MycouponsFragment;
 import com.desired.offermachi.customer.fragment.NotificationFragment;
 import com.desired.offermachi.customer.fragment.ProfileFragment;
 import com.desired.offermachi.customer.fragment.SmartShoppingFragment;
+import com.desired.offermachi.customer.fragment.StoreFragment;
 import com.desired.offermachi.customer.fragment.TermConditionFragment;
 
 
@@ -258,9 +259,12 @@ public class DashBoardActivity extends AppCompatActivity
 
             case R.id.nav_home:
                 fragmentClass = HomeFragment.class;
+                toolbar.setTitle("");
                 break;
                 case R.id.nav_profile:
                 fragmentClass = ProfileFragment.class;
+
+                   // toolbar.setTitle("My Profile");
                 break;
             case R.id.nav_feeds:
                 fragmentClass = FeedsFragment.class;
@@ -268,7 +272,9 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_smartshopping:
                 fragmentClass = SmartShoppingFragment.class;
                 break;
-
+            case  R.id.nav_store:
+                fragmentClass = StoreFragment.class;
+                break;
             case R.id.nav_dealsday:
                 fragmentClass = DealsoftheDayFragment.class;
                 break;

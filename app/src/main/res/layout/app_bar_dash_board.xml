@@ -53,7 +53,7 @@
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="65dp"
+                        android:layout_marginLeft="70dp"
                         android:layout_toRightOf="@+id/rl_title"
                         android:src="@drawable/ic_notification_bell" />
 

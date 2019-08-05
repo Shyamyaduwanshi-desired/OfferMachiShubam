@@ -64,7 +64,6 @@ public class SharedPrefManagerLogin {
                 sharedPreferences.getString(KEY_STOREDAYHOURS, null),
                 sharedPreferences.getString(KEY_STOREABOUTSTORE, null)
         );
-
     }
     public void logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

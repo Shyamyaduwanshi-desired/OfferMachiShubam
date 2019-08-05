@@ -29,7 +29,6 @@ public class RetalierForgotPassword extends AppCompatActivity {
         donebutton=(Button)findViewById(R.id.done_button_id);
         resetlinear=(LinearLayout)findViewById(R.id.resetlinear_id);
 
-
         TextView topdealsoftheday=(TextView)findViewById(R.id.forgot_password_text_id);
         Typeface forgotpassword= ResourcesCompat.getFont(getApplicationContext(), R.font.ralewaybold);
         topdealsoftheday.setTypeface(forgotpassword);

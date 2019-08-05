@@ -9,15 +9,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.retalier.fragment.ProfilePersonalDetailsFragment;
-import com.desired.offermachi.retalier.fragment.StoreDetailsFrgment;
+import com.desired.offermachi.retalier.fragment.RegistrationProfileDetailsFragment;
+import com.desired.offermachi.retalier.fragment.RegistrationStoreDetailsFrgment;
 import com.desired.offermachi.retalier.retalieradapter.RetalierTabLayoutAdapter;
 
 public class RetalierRegistration extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
-    public TabLayout tabLayout;
+    public static TabLayout tabLayout;
+    public static ViewPager viewPager1;
+
     RetalierTabLayoutAdapter adapter;
-    private ViewPager viewPager1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         tabLayout.setOnTabSelectedListener(RetalierRegistration.this);
+
         viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -51,6 +54,7 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+
         viewPager1.setCurrentItem(tab.getPosition());
     }
 
@@ -81,16 +85,15 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
             //Returning the current tabs
             switch (position) {
                 case 0:
-                    ProfilePersonalDetailsFragment tab1 = new ProfilePersonalDetailsFragment();
+                    RegistrationProfileDetailsFragment tab1 = new RegistrationProfileDetailsFragment();
                     return tab1;
                 case 1:
-                    StoreDetailsFrgment tab2 = new StoreDetailsFrgment();
+                    RegistrationStoreDetailsFrgment tab2 = new RegistrationStoreDetailsFrgment();
                     return tab2;
                 default:
                     return null;
             }
         }
-
         @Override
         public int getCount() {
             return tabCount;

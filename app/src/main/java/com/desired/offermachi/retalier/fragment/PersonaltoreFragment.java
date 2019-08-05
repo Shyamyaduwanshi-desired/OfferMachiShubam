@@ -9,17 +9,16 @@ import android.view.ViewGroup;
 
 import com.desired.offermachi.R;
 
-public class RetalierPersonalDetailsStoreFragment extends Fragment {
+public class PersonaltoreFragment extends Fragment {
     View view;
 
 
-    public RetalierPersonalDetailsStoreFragment() {
+    public PersonaltoreFragment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.retalier_personal_store_detalis_activity, container, false);
-
         return  view;
     }
 }

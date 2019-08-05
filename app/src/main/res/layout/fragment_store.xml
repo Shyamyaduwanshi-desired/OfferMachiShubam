@@ -17,18 +17,42 @@
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:weightSum="2">
+                    <TextView
+                        android:id="@+id/filter_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.1"
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:drawablePadding="10dp"
+                        android:background="@drawable/filter_background"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:text="Filter"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white">
+                    </View>
+                    <TextView
+                        android:id="@+id/sortby_text_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:background="@drawable/filter_background"
+                        android:text="Sort By"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Store Exclusive Coupon Codes"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="18dp"
-                        />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

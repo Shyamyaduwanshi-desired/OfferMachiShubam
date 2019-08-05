@@ -31,9 +31,8 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
 
         public CardView categorylinear;
         ImageView productimg,likeimg;
-        TextView productname,productcontent,productdate,productshare;
+        TextView productname,productdate,productshare;
         Button productbutton;
-
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -45,7 +44,6 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
             this.productbutton=(Button)itemView.findViewById(R.id.product_button_id);
             this.likeimg=(ImageView)itemView.findViewById(R.id.heart_image_id);
         }
-
     }
 
     public CategoryAdapter(Context context,ArrayList<category_model> data) {
@@ -156,7 +154,6 @@ public class CategoryAdapter  extends RecyclerView.Adapter<CategoryAdapter.MyVie
         });
 
     }
-
     @Override
     public int getItemCount() {
         return productdataset.size();

@@ -61,9 +61,9 @@ public class ProductActivity extends AppCompatActivity {
         viewalloffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(ProductActivity.this, ViewStoreOfferActivity.class);
                 startActivity(intent);
+
             }
         });
         shareiconimge =(LinearLayout)findViewById(R.id.shareicon_image_id);

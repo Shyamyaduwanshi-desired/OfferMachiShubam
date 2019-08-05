@@ -11,7 +11,7 @@
     <string name="profile">My Profile</string>
     <string name="feeds">Feeds</string>
     <string name="smartshopping">Smart Shopping</string>
-    <string name="dealsday">Deals of the day</string>
+    <string name="dealsday">Deals of the Day</string>
     <string name="mycoupons">My Coupons</string>
     <string name="follow">iFollow</string>
     <string name="fav">Favourites</string>
@@ -41,6 +41,8 @@
     <string name="couponcode">Coupon Code</string>
     <string name="statistics">Statistics</string>
     <string name="push">Push Offers</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

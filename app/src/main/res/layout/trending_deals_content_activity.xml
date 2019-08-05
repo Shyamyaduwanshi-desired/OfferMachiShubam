@@ -47,7 +47,7 @@
                 android:text="Dominoz Pizza"
                 android:textColor="@color/black"/>
             <LinearLayout
-                android:id="@+id/product_linear_unfollow_id"
+                android:id="@+id/product_linear_unfollow_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/view_offer_background"

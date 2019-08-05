@@ -1,5 +1,6 @@
 package com.desired.offermachi.customer.ui;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,10 +22,14 @@ public class ViewStoreOfferActivity extends AppCompatActivity {
     RecyclerView product_recyclerview;
     private CategoryAdapter categoryAdapter;
     private List<category_model> productdataset = new ArrayList<>();
+    private Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_store_offer);
+
+        mContext=getApplicationContext();
+
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(new View.OnClickListener() {
             @Override

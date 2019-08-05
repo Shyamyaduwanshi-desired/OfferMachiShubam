@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Post Offer &amp; Discount"
+            android:text="Add Offer &amp; Discount"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="26dp"
@@ -124,68 +123,62 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="40dp"
                                                 android:hint="Select Type"
-                                                android:layout_marginLeft="10dp"
                                                 android:backgroundTint="@color/white"
-                                                android:gravity="center_vertical"
-                                                android:paddingLeft="20dp"/>
+                                               />
                                             <ImageView
                                                 android:layout_width="20dp"
                                                 android:layout_height="20dp"
                                                 android:src="@drawable/downarrow"
-                                                android:layout_marginLeft="2dp"
+                                                android:layout_marginLeft="35dp"
                                                 android:layout_marginRight="10dp"
                                                 android:layout_gravity="center"/>
                                         </LinearLayout>
-
-                                        <LinearLayout
-                                            android:id="@+id/select_typehide_linear_id"
-                                            android:layout_width="170dp"
-                                            android:layout_height="80dp"
-                                            android:background="@drawable/hide_background"
-                                            android:layout_marginLeft="90dp"
-                                            android:visibility="gone"
-                                            android:orientation="vertical">
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:text="Fixed Price"
-                                                android:layout_marginLeft="10dp"
-                                                android:textSize="20dp"
-                                                />
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:text="Percentage"
-                                                android:layout_marginLeft="10dp"
-                                                android:textSize="20dp"
-                                                android:layout_marginTop="10dp"
-                                                />
-                                        </LinearLayout>
+                                        <!--<LinearLayout-->
+                                            <!--android:id="@+id/select_typehide_linear_id"-->
+                                            <!--android:layout_width="170dp"-->
+                                            <!--android:layout_height="80dp"-->
+                                            <!--android:background="@drawable/hide_background"-->
+                                            <!--android:layout_marginLeft="90dp"-->
+                                            <!--android:visibility="gone"-->
+                                            <!--android:orientation="vertical">-->
+                                            <!--<TextView-->
+                                                <!--android:layout_width="match_parent"-->
+                                                <!--android:layout_height="wrap_content"-->
+                                                <!--android:text="Fixed Price"-->
+                                                <!--android:layout_marginLeft="10dp"-->
+                                                <!--android:textSize="20dp"-->
+                                                <!--/>-->
+                                            <!--<TextView-->
+                                                <!--android:layout_width="match_parent"-->
+                                                <!--android:layout_height="wrap_content"-->
+                                                <!--android:text="Percentage"-->
+                                                <!--android:layout_marginLeft="10dp"-->
+                                                <!--android:textSize="20dp"-->
+                                                <!--android:layout_marginTop="10dp"-->
+                                                <!--/>-->
+                                        <!--</LinearLayout>-->
                                     </LinearLayout>
-
                                 </LinearLayout>
                             </LinearLayout>
-
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 >
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Type"
+                                    android:text="Value"
                                     android:textSize="18dp"
                                     android:layout_gravity="center"
                                     android:textColor="@color/black" />
                                 <LinearLayout
                                     android:layout_width="190dp"
                                     android:layout_height="40dp"
-                                    android:layout_marginLeft="80dp"
+                                    android:layout_marginLeft="73dp"
                                     android:background="@drawable/edit_background">
                                     <EditText
                                         android:layout_width="wrap_content"
@@ -208,21 +201,18 @@
                                         android:textSize="20dp" />
                                 </LinearLayout>
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
                                 android:layout_marginTop="30dp">
-
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Offers &amp; Discount Image"
                                     android:textColor="@color/black"
                                     android:layout_marginLeft="10dp"
-                                    android:textSize="18dp"
-                                    />
+                                    android:textSize="18dp" />
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="120dp"
@@ -247,9 +237,7 @@
                                         android:imeOptions="actionNext"/>
                                 </LinearLayout>
                             </LinearLayout>
-
                             <LinearLayout
-                                android:visibility="gone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
@@ -319,20 +307,16 @@
                                 android:textAllCaps="false"
                                 android:textColor="@color/white" />
                         </LinearLayout>
-
                         <LinearLayout
                             android:id="@+id/second_home_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:visibility="gone"
-                            >
-
+                            android:orientation="vertical">
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -346,17 +330,23 @@
                                         android:text="Expiry Date"
                                         android:textSize="18dp"
                                         android:layout_gravity="center"
+                                        android:layout_marginRight="10dp"
                                         android:textColor="@color/black" />
                                     <LinearLayout
-                                        android:layout_width="190dp"
+                                        android:layout_width="150dp"
                                         android:layout_height="40dp"
-                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginLeft="60dp"
                                         android:background="@drawable/edit_background">
                                         <EditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="40dp"
+                                            android:id="@+id/editexpirydate"
+                                            android:layout_width="150dp"
+                                            android:layout_height="wrap_content"
+                                            android:ems="10"
                                             android:backgroundTint="@color/white"
-                                            android:paddingLeft="20dp"/>
+                                            android:paddingLeft="10dp"
+                                            android:layout_marginLeft="10dp"
+                                            android:layout_marginRight="10dp"
+                                            android:hint="Enter Date" />
                                     </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -377,7 +367,6 @@
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="180dp"/>
-
                             </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -387,26 +376,28 @@
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="10dp">
                                 <TextView
-                                    android:layout_width="210dp"
-                                    android:layout_height="40dp"
+                                    android:layout_width="160dp"
+                                    android:layout_height="30dp"
                                     android:text="Generate Coupon Code"
                                     android:background="@drawable/view_background"
-                                    android:textSize="18dp"
+                                    android:textSize="14dp"
                                     android:gravity="center_vertical"
-                                    android:paddingLeft="10dp"
+                                    android:paddingLeft="7dp"
                                     android:layout_gravity="center"
                                     android:textColor="@color/white" />
                                 <LinearLayout
-                                    android:layout_width="100dp"
+                                    android:layout_width="140dp"
                                     android:layout_height="40dp"
-                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginLeft="10dp"
                                     android:background="@drawable/edit_background">
                                     <EditText
                                         android:layout_width="match_parent"
                                         android:layout_height="40dp"
+                                        android:textAlignment="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
                                         android:backgroundTint="@color/white"
                                         android:paddingLeft="0dp"/>
-
                                 </LinearLayout>
                             </LinearLayout>
                             <LinearLayout
@@ -424,34 +415,33 @@
                                     android:layout_gravity="center"
                                     android:textColor="@color/black" />
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
                                     android:orientation="horizontal"
-                                    android:layout_marginLeft="50dp">
-                                    <LinearLayout
-                                        android:layout_width="100dp"
+                                    android:layout_marginLeft="70dp"
+                                   >
+
+                                    <EditText
+                                        android:id="@+id/time_view_start"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="40dp"
-                                        android:layout_marginLeft="10dp"
-                                        android:background="@drawable/edit_background">
-                                        <EditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="40dp"
-                                            android:backgroundTint="@color/white"
-                                            android:hint="00:00 AM"
-                                            android:paddingLeft="10dp"/>
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:layout_width="100dp"
+                                        android:text="20:00"
+                                        android:layout_weight="0.3"
+                                        android:paddingLeft="30dp"
+                                        android:editable="false"
+                                        android:background="@drawable/edit_background"/>
+
+                                    <EditText
+                                        android:id="@+id/time_view_end"
+                                        android:layout_width="wrap_content"
                                         android:layout_height="40dp"
+                                        android:text="20:00"
+                                        android:paddingLeft="30dp"
+                                        android:layout_weight="0.3"
+                                        android:editable="false"
                                         android:layout_marginLeft="10dp"
-                                        android:background="@drawable/edit_background">
-                                        <EditText
-                                            android:layout_width="match_parent"
-                                            android:layout_height="40dp"
-                                            android:backgroundTint="@color/white"
-                                            android:hint="00:00 PM"
-                                            android:paddingLeft="10dp"/>
-                                    </LinearLayout>
+                                        android:background="@drawable/edit_background"/>
+
                                 </LinearLayout>
                             </LinearLayout>
                             <LinearLayout
@@ -469,18 +459,20 @@
                                     android:layout_gravity="center"
                                     android:textColor="@color/black" />
                                 <LinearLayout
-                                    android:layout_width="190dp"
+                                    android:layout_width="150dp"
                                     android:layout_height="40dp"
-                                    android:layout_marginLeft="80dp"
+                                    android:layout_marginLeft="130dp"
                                     android:background="@drawable/edit_background">
                                     <EditText
-                                        android:layout_width="match_parent"
-                                        android:layout_height="40dp"
+                                        android:id="@+id/editText1"
+                                        android:layout_width="150dp"
+                                        android:layout_height="wrap_content"
+                                        android:ems="10"
                                         android:backgroundTint="@color/white"
-                                        android:paddingLeft="20dp"
-                                        android:hint="dd/mm/yyyy"
-                                        />
-
+                                        android:paddingLeft="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="14dp"
+                                        android:hint="Enter Date" />
                                 </LinearLayout>
                             </LinearLayout>
                             <LinearLayout
@@ -506,7 +498,6 @@
                     </LinearLayout>
                 </ScrollView>
             </android.support.v7.widget.CardView>
-
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

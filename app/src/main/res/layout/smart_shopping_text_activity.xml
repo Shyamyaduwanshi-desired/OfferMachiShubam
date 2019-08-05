@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
     <android.support.v7.widget.CardView
@@ -33,13 +34,6 @@
                 android:textStyle="bold"
                 android:gravity="center"/>
             <ImageView
-                android:layout_width="39dp"
-                android:layout_height="33dp"
-                android:padding="5dp"
-                android:layout_marginLeft="280dp"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/ic_filter" />
-            <ImageView
                 android:id="@+id/imgNotiBell"
                 android:layout_width="39dp"
                 android:layout_height="35dp"
@@ -50,6 +44,39 @@
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:weightSum="2">
+        <TextView
+            android:id="@+id/filter_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.1"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:drawablePadding="10dp"
+            android:background="@drawable/filter_background"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Filter"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+        </View>
+        <TextView
+            android:id="@+id/sortby_text_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="@drawable/filter_background"
+            android:text="Sort By"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -58,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +143,6 @@
                                     android:layout_marginTop="3dp"
                                     android:background="@drawable/simple_circle_background">
                                     <ImageView
-                                        android:id="@+id/heart_image_id"
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
                                         android:src="@drawable/heart"/>
@@ -161,7 +187,7 @@
                                         android:drawablePadding="5dp"
                                         android:textSize="12dp"/>
                                     <TextView
-                                        android:id="@+id/share_imge_id"
+
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Share"
@@ -206,7 +232,7 @@
                         android:layout_height="360dp"
                         android:layout_marginTop="20dp">
                         <LinearLayout
-                            android:id="@+id/productlinear_id"
+
                             android:layout_width="165dp"
                             android:layout_height="360dp"
                             android:background="@drawable/content_background"
@@ -574,4 +600,4 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

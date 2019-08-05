@@ -22,6 +22,8 @@ import com.desired.offermachi.customer.adapter.CategoryAdapter;
 import com.desired.offermachi.customer.adapter.ProductAdapter;
 import com.desired.offermachi.customer.model.category_model;
 import com.desired.offermachi.customer.model.slider_model;
+import com.desired.offermachi.customer.ui.CategoryActivity;
+import com.desired.offermachi.customer.ui.CategoryListActivity;
 import com.desired.offermachi.customer.ui.DashBoardActivity;
 import com.desired.offermachi.customer.ui.StoreCouponCodeActivity;
 import com.desired.offermachi.customer.ui.ViewOfferActivity;
@@ -36,7 +38,7 @@ public class HomeFragment extends Fragment {
     private List<slider_model> productdatasetcategory=new ArrayList<>();
     RecyclerView product_recyclerview;
     private ProductAdapter productAdapter;
-    //private Context mContext;
+    private Context mContext;
 
     RecyclerView homeproduct_recyclerview;
     private CategoryAdapter categoryAdapter;
@@ -50,6 +52,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.home_fragment, container, false);
+        mContext=getActivity();
 
         ((DashBoardActivity)getActivity()).setToolTittle("",1);
         TextView contentfirst=(TextView)view.findViewById(R.id.contentfirst_id);
@@ -77,8 +80,15 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        TextView category =(TextView)view.findViewById(R.id.category_list_id);
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
         homeproduct_recyclerview = (RecyclerView) view.findViewById(R.id.home_product_linear_id);
         categoryAdapter = new CategoryAdapter(getContext(), (ArrayList<category_model>) productdataset);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
@@ -100,7 +110,7 @@ public class HomeFragment extends Fragment {
        });
 
         product_recyclerview = (RecyclerView) view.findViewById(R.id.recommendede_recycler_id);
-        productAdapter = new ProductAdapter(getContext(), (ArrayList<slider_model>) productdatasetcategory);
+        productAdapter = new ProductAdapter(mContext, (ArrayList<slider_model>) productdatasetcategory);
         product_recyclerview.setLayoutManager((new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)));
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         product_recyclerview.setAdapter(productAdapter);

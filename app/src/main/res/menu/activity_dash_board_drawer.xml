@@ -15,42 +15,42 @@
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_feeds"
-            android:icon="@drawable/feeds"
+            android:icon="@drawable/ic_rss"
             android:title="@string/feeds" />
 
         <item
             android:id="@+id/nav_smartshopping"
-            android:icon="@drawable/onlineshop"
+            android:icon="@drawable/onlineshoppurple"
             android:title="@string/smartshopping" />
         <item
             android:id="@+id/nav_store"
-            android:icon="@drawable/onlineshop"
+            android:icon="@drawable/ic_shopping_cart"
             android:title="Stores" />
 
         <item
             android:id="@+id/nav_dealsday"
-            android:icon="@drawable/deals"
+            android:icon="@drawable/ic_deal"
             android:title="@string/dealsday" />
         <item
             android:id="@+id/nav_mycoupons"
-            android:icon="@drawable/coupon"
+            android:icon="@drawable/couponpurple"
             android:title="@string/mycoupons" />
 
         <item
             android:id="@+id/nav_follow"
-            android:icon="@drawable/follow"
+            android:icon="@drawable/followpurple"
             android:title="@string/follow" />
         <item
             android:id="@+id/nav_fav"
-            android:icon="@drawable/favorite"
+            android:icon="@drawable/favoritepurple"
             android:title="@string/fav" />
         <item
             android:id="@+id/nav_rate"
-            android:icon="@drawable/rating"
+            android:icon="@drawable/ic_rating"
             android:title="@string/rate" />
         <item
             android:id="@+id/nav_invite"
-            android:icon="@drawable/collaboration"
+            android:icon="@drawable/cllection"
             android:title="@string/invite" />
         <item
             android:id="@+id/nav_help"
@@ -58,19 +58,19 @@
             android:title="@string/help" />
         <item
             android:id="@+id/nav_customer"
-            android:icon="@drawable/support"
+            android:icon="@drawable/ic_support"
             android:title="@string/customer" />
         <item
             android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_notification_bell"
+            android:icon="@drawable/notification_purple"
             android:title="@string/notification" />
         <item
             android:id="@+id/nav_terms"
-            android:icon="@drawable/terms"
+            android:icon="@drawable/ic_term"
             android:title="@string/terms" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
+            android:icon="@drawable/ic_logout"
             android:title="@string/logout" />
     </group>
 

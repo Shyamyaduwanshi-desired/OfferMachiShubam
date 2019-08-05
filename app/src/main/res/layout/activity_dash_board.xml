@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             app:itemTextColor="#000"
-            app:itemIconTint="#000"
+            app:itemIconTint="@color/purple"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header_dash_board"

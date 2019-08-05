@@ -35,6 +35,7 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/store_name_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -70,15 +71,16 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/store_contact_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
-                        android:hint="State Contact Number"
+                        android:hint="Store Contact Number"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
-                        android:inputType="textCapSentences"
+                        android:inputType="number"
                         android:imeOptions="actionNext"
                         android:textColor="@color/purple"/>
                 </LinearLayout>
@@ -104,6 +106,7 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/store_address_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -114,17 +117,15 @@
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
                         android:imeOptions="actionNext"
-                        android:textColor="@color/purple"
-                        />
+                        android:textColor="@color/purple" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:weightSum="2"
-                    android:layout_marginTop="30dp"
-                    >
+                    android:layout_marginTop="30dp">
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:layout_weight="1"
                         android:background="@drawable/edit_background"
@@ -145,111 +146,30 @@
                                 android:src="@drawable/addressicon"
                                 android:layout_gravity="center_vertical"/>
                         </LinearLayout>
-                        <TextView
+                        <EditText
+                            android:id="@+id/city_edt_id"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="2"
                             android:textSize="18dp"
-                            android:text="City"
-                            android:gravity="center"
-                            android:paddingLeft="5dp"
+                            android:hint="City"
+                            android:paddingLeft="25dp"
                             android:drawablePadding="10dp"
                             android:paddingTop="3dp"
+                            android:backgroundTint="@color/white"
+                            android:layout_marginRight="20dp"
                             android:layout_marginLeft="0dp"
-                            />
-                        <Spinner
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_gravity="center">
-
-                        </Spinner>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="44dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_background"
-                        android:layout_marginTop="0dp"
-                        android:layout_marginRight="10dp"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:background="@drawable/circle_background"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginTop="2dp"
-                            android:gravity="center">
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="23dp"
-                                android:src="@drawable/addressicon"
-                                android:layout_gravity="center_vertical"/>
-                        </LinearLayout>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="2"
-                            android:textSize="18dp"
-                            android:text="State"
-                            android:gravity="center"
-                            android:paddingLeft="5dp"
-                            android:drawablePadding="10dp"
-                            android:paddingTop="3dp"
-                            android:layout_marginLeft="0dp"
-                            />
-                        <Spinner
-                            android:layout_width="30dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_gravity="center">
-
-                        </Spinner>
+                            android:textColor="@color/purple"/>
+                        <!--<Spinner-->
+                            <!--android:layout_width="30dp"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginRight="10dp"-->
+                            <!--android:layout_gravity="center">-->
+                        <!--</Spinner>-->
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:background="@drawable/edit_background"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="2dp"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/brazilicon"
-                            android:layout_gravity="center_vertical"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="2"
-                        android:textSize="18dp"
-                        android:text="Country"
-                        android:layout_gravity="center"
-                        android:paddingLeft="5dp"
-                        android:drawablePadding="0dp"
-                        android:paddingTop="3dp"
-                        android:layout_marginLeft="10dp"
-                        />
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="center">
-
-                    </Spinner>
-                </LinearLayout>
-                <LinearLayout
+                    android:id="@+id/store_image_id"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginLeft="20dp"
@@ -297,7 +217,8 @@
                         android:gravity="center_vertical"
                         android:layout_marginTop="10dp">
                         <EditText
-                            android:layout_width="90dp"
+                            android:id="@+id/days_edt_id"
+                            android:layout_width="120dp"
                             android:layout_height="35dp"
                             android:background="@drawable/edit_background"
                             android:paddingLeft="15dp"
@@ -305,21 +226,26 @@
                             android:hint="Days"
                             android:inputType="textCapSentences"/>
                         <EditText
-                            android:layout_width="90dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/edit_background"
+                            android:id="@+id/time_view_start"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:text="20:00"
+                            android:layout_weight="0.4"
                             android:paddingLeft="10dp"
-                            android:hint="00:00 AM"
-                            android:inputType="textCapSentences"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5dp"
+                            android:editable="false"
+                            android:background="@drawable/edit_background"/>
+
                         <EditText
-                            android:layout_width="90dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/edit_background"
+                            android:id="@+id/time_view_end"
+                            android:layout_width="30dp"
+                            android:layout_height="40dp"
+                            android:text="20:00"
                             android:paddingLeft="10dp"
-                            android:hint="00:00 PM"
-                            android:inputType="textCapSentences"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_weight="0.4"
+                            android:editable="false"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/edit_background"/>
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="35dp"
@@ -334,14 +260,17 @@
                         android:layout_marginTop="35dp"
                         android:layout_gravity="center"
                         android:background="@drawable/content_background">
-                        <TextView
+                        <EditText
+                            android:id="@+id/about_store_name_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="About Store Image"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="18dp"
+                            android:hint="About Store"
+                            android:backgroundTint="@color/white"
+                            android:textSize="19dp"
+                            android:paddingLeft="20dp"
                             android:layout_marginTop="10dp"
-                            android:imeOptions="actionNext"/>
+                            android:imeOptions="actionNext"
+                            android:textColor="@color/purple"/>
                     </LinearLayout>
                     <Button
                         android:id="@+id/registerbutton_button_id"

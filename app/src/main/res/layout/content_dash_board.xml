@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.DashBoardActivity"
     android:orientation="vertical"
     android:id="@+id/drawer_layout_second"
     tools:showIn="@layout/app_bar_dash_board">
@@ -31,6 +30,7 @@
         android:layout_height="3dp"
         android:layout_above="@+id/bottomly"
         android:background="?android:attr/listDivider" />
+
     <LinearLayout
         android:id="@+id/bottomly"
         android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:textSize="10sp"
-                    android:text="Deals of the day"
+                    android:text="Deals of the Day"
                     android:paddingTop="5dp"/>
 
             </LinearLayout>
@@ -169,6 +169,7 @@
 
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

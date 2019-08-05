@@ -1,9 +1,14 @@
 package com.desired.offermachi.customer.ui;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,11 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.fragment.CustomerSupportFragment;
 import com.desired.offermachi.customer.fragment.DealsoftheDayFragment;
 import com.desired.offermachi.customer.fragment.FavouritesFragment;
 import com.desired.offermachi.customer.fragment.FeedsFragment;
@@ -46,6 +53,7 @@ public class DashBoardActivity extends AppCompatActivity
     DrawerLayout drawer;
     ImageView ivTitleLogo;
     TextView tvMainTitle;
+    ImageView search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +87,30 @@ public class DashBoardActivity extends AppCompatActivity
         accounttext=(TextView)findViewById(R.id.accountext_id);
         carttext=(TextView)findViewById(R.id.carttext_id);
         moretext=(TextView)findViewById(R.id.moretext_id);
+
+        search=(ImageView)findViewById(R.id.search_id);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashBoardActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+        FloatingActionButton fab = findViewById(R.id.floting_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(DashBoardActivity.this, SearchActivity.class);
+                startActivity(intent);
+
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
 
         home.setOnClickListener(new View.OnClickListener() {
@@ -213,6 +245,11 @@ public class DashBoardActivity extends AppCompatActivity
         drawer.closeDrawers();
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    private int dpToPx(Context applicationContext, int i) {
+        return 0;
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

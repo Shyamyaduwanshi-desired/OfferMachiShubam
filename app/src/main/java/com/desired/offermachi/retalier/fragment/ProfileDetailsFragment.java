@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 
 import com.desired.offermachi.R;
 
-public class ProfileStoreDetailsFragment extends Fragment {
+public class ProfileDetailsFragment extends Fragment {
     View view;
 
 
-    public ProfileStoreDetailsFragment() {
+    public ProfileDetailsFragment() {
     }
 
     @Override

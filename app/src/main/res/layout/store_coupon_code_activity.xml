@@ -60,7 +60,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
@@ -68,9 +67,9 @@
                         android:text="Store Exclusive Coupon Codes"
                         android:textColor="@color/black"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
                         android:textSize="18dp"
                         />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

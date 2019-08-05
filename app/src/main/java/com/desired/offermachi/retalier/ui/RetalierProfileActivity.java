@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.retalier.fragment.ProfileStoreDetailsFragment;
-import com.desired.offermachi.retalier.fragment.RetalierPersonalDetailsStoreFragment;
+import com.desired.offermachi.retalier.fragment.ProfileDetailsFragment;
+import com.desired.offermachi.retalier.fragment.PersonaltoreFragment;
 import com.desired.offermachi.retalier.retalieradapter.RetalierTabLayoutAdapter;
 
 public class RetalierProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
@@ -26,7 +26,6 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retalier_my_profile_activity);
-
 
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(new View.OnClickListener() {
@@ -93,10 +92,10 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
             //Returning the current tabs
             switch (position) {
                 case 0:
-                    ProfileStoreDetailsFragment tab1 = new ProfileStoreDetailsFragment();
+                    ProfileDetailsFragment tab1 = new ProfileDetailsFragment();
                     return tab1;
                 case 1:
-                    RetalierPersonalDetailsStoreFragment tab2 = new RetalierPersonalDetailsStoreFragment();
+                    PersonaltoreFragment tab2 = new PersonaltoreFragment();
                     return tab2;
                 default:
                     return null;

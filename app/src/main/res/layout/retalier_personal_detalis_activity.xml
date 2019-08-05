@@ -37,6 +37,7 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/name_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -47,6 +48,7 @@
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
                         android:imeOptions="actionNext"
+                        android:textColor="@color/purple"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -71,6 +73,7 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/mobile_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -79,8 +82,9 @@
                         android:hint="Mobile"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
-                        android:inputType="textCapSentences"
+                        android:inputType="number"
                         android:imeOptions="actionNext"
+                        android:textColor="@color/purple"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -105,6 +109,7 @@
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/email_edt_id"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -115,6 +120,7 @@
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
                         android:imeOptions="actionNext"
+                        android:textColor="@color/purple"
                         />
                 </LinearLayout>
                 <Button

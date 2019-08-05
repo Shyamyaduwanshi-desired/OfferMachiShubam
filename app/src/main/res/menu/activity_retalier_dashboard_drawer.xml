@@ -4,33 +4,23 @@
         android:id="@+id/menu_top"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/home_nav"
-            android:icon="@drawable/ic_home"
-            android:title="Home" />
-        <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_avatar"
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_offer"
-            android:icon="@drawable/ic_tag"
-            android:title="@string/offersdeals" />
-
-        <!--<item-->
-        <!--android:id="@+id/nav_addnew"-->
-        <!--android:icon="@drawable/ic_tag"-->
-        <!--android:title="@string/addnew" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_offerviewoffer"-->
-        <!--android:icon="@drawable/ic_tag"-->
-        <!--android:title="@string/viewoffer" />-->
-
-    </group>
-
-    <group
-        android:id="@+id/menu_bottom"
-        android:checkableBehavior="none">
-
+            android:title="@string/offersdeals">
+            <menu>
+                <item
+                    android:id="@+id/navigation_sub_item_1"
+                    android:icon="@drawable/ic_tag"
+                    android:title="@string/addnew" />
+                <item
+                    android:id="@+id/navigation_sub_item_2"
+                    android:icon="@drawable/ic_tag"
+                    android:title="@string/viewoffer" />
+            </menu>
+        </item>
         <item
             android:id="@+id/dealsday"
             android:icon="@drawable/appointment"
@@ -42,17 +32,18 @@
 
         <item
             android:id="@+id/nav_redeemcode"
-            android:icon="@drawable/ic_blackberry_qr_code_variant"
-            android:title="@string/redeemcode" />
-
-        <!--<item-->
-        <!--android:id="@+id/nav_qrcode"-->
-        <!--android:icon="@drawable/ic_blackberry_qr_code_variant"-->
-        <!--android:title="@string/qrcode" />-->
-        <!--<item-->
-        <!--android:id="@+id/nav_couponcode"-->
-        <!--android:icon="@drawable/qrcode"-->
-        <!--android:title="@string/couponcode" />-->
+            android:title="@string/redeemcode">
+            <menu>
+                <item
+                    android:id="@+id/nav_qrcode"
+                    android:icon="@drawable/qrcode"
+                    android:title="@string/qrcode" />
+                <item
+                    android:id="@+id/nav_couponcode"
+                    android:icon="@drawable/coupon"
+                    android:title="@string/couponcode" />
+            </menu>
+        </item>
 
         <item
             android:id="@+id/nav_statistics"
@@ -93,5 +84,6 @@
             android:icon="@drawable/logout"
             android:title="@string/logout" />
     </group>
+
 </menu>
 

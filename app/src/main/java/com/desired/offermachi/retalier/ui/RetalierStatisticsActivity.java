@@ -25,8 +25,8 @@ public class RetalierStatisticsActivity  extends AppCompatActivity {
             }
         });
 
-        TextView firsttext =(TextView)findViewById(R.id.first_text_id);
-        firsttext.setOnClickListener(new View.OnClickListener() {
+        TextView gotthecoupontext =(TextView)findViewById(R.id.gotthecoupon_text_id);
+        gotthecoupontext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -35,12 +35,22 @@ public class RetalierStatisticsActivity  extends AppCompatActivity {
             }
         });
 
-        TextView secondtext =(TextView)findViewById(R.id.second_text_id);
-        secondtext.setOnClickListener(new View.OnClickListener() {
+        TextView redeemthecoupontext =(TextView)findViewById(R.id.redeemthecoupon_text_id);
+        redeemthecoupontext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(RetalierStatisticsActivity.this, RetalierListPeopleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        TextView Offerdiscounttext =(TextView)findViewById(R.id.Offerdiscount_text_id);
+        Offerdiscounttext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(RetalierStatisticsActivity.this, ListOfPeople0fferDiscount.class);
                 startActivity(intent);
             }
         });

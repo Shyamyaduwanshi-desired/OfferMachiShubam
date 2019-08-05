@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_linear_id"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            >
+            <LinearLayout
+                android:id="@+id/productlinear_id"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/content_background"
+                android:layout_marginLeft="8dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="0dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Flat"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="2dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="50%"
+                        android:textColor="@color/pink"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="18dp"
+                        android:layout_marginTop="2dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Off"
+                        android:textColor="@color/black"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="18dp"
+                        android:layout_marginTop="2dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+
+                    >
+                    <ImageView
+                        android:id="@+id/product_image_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:src="@drawable/myvegpizza"
+                        />
+                    <TextView
+                        android:id="@+id/pushname_product_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DOMINOZ PIZZA"
+                        android:textSize="17dp"
+                        android:textColor="@color/blue"
+                        android:layout_marginTop="10dp"/>
+                    <View
+                        android:layout_width="130dp"
+                        android:layout_height="2dp"
+                        android:background="@color/orange"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/product_date_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jul 31,2019"
+                            android:textColor="@color/orange"
+                            android:drawableLeft="@drawable/ic_clock_circular_outline"
+                            android:drawablePadding="5dp"
+                            android:textSize="12dp"/>
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/view_offer_button_id"
+                        android:layout_width="150dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/add_cart_button"
+                        android:text="Add to deals"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:layout_marginBottom="10dp"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+</LinearLayout>

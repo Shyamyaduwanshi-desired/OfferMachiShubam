@@ -22,16 +22,12 @@ public class RetalierLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retalier_login);
-
         forgotpasswordtext=(TextView)findViewById(R.id.forgot_password_id);
         registertext=(TextView)findViewById(R.id.register_text_id);
         loginnbutton=(Button)findViewById(R.id.login_button_id);
-
-
         TextView topdealsoftheday=(TextView)findViewById(R.id.login_text_id);
         Typeface otp= ResourcesCompat.getFont(getApplicationContext(), R.font.ralewaybold);
         topdealsoftheday.setTypeface(otp);
-
 
         forgotpasswordtext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +37,6 @@ public class RetalierLogin extends AppCompatActivity {
             }
         });
 
-
         registertext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +44,6 @@ public class RetalierLogin extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         loginnbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

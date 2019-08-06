@@ -36,7 +36,6 @@ public class RegistrationProfileDetailsFragment extends Fragment {
 
         view = inflater.inflate(R.layout.retalier_personal_detalis_activity, container, false);
 
-
          nameedt=(EditText)view.findViewById(R.id.name_edt_id);
          mobileedt=(EditText)view.findViewById(R.id.mobile_edt_id);
          emailedt=(EditText)view.findViewById(R.id.email_edt_id);
@@ -47,7 +46,7 @@ public class RegistrationProfileDetailsFragment extends Fragment {
                 Registraionvalid();
             }
         });
-        return  view;
+         return  view;
     }
     private void Registraionvalid() {
 

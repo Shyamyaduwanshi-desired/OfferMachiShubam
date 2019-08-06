@@ -66,6 +66,7 @@
         <activity android:name=".customer.ui.FilterShowActivity"/>
         <activity android:name=".retalier.ui.ListOfPeople0fferDiscount"/>
         <activity android:name=".retalier.ui.RetalierProductActivity"/>
+        <activity android:name=".customer.ui.InfoActivity"/>
         <activity android:name="com.desired.offermachi.customer.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

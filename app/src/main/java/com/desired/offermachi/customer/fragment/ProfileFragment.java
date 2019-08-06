@@ -39,13 +39,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-//        imageViewback=(ImageView)view.findViewById(R.id.imageback);
-//        imageViewback.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
         return  view;
     }
 }

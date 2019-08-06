@@ -8,7 +8,6 @@
     android:orientation="vertical"
     android:id="@+id/drawer_layout_second"
     tools:showIn="@layout/app_bar_dash_board">
-
     <FrameLayout
         android:id="@+id/screenarea"
         android:layout_width="match_parent"
@@ -16,9 +15,7 @@
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-26dp"
         tools:layout_editor_absoluteY="0dp">
-
     </FrameLayout>
-
     <FrameLayout
         android:id="@+id/framelayout_id"
         android:layout_width="match_parent"
@@ -30,13 +27,12 @@
         android:layout_height="3dp"
         android:layout_above="@+id/bottomly"
         android:background="?android:attr/listDivider" />
-
     <LinearLayout
         android:id="@+id/bottomly"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/purple"
         android:weightSum="5">
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,19 +50,17 @@
                     android:id="@+id/home_img"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/onlineshop"/>
+                    android:src="@drawable/yellowonlineshop"/>
                 <TextView
                     android:id="@+id/hometext_id"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="10sp"
                     android:paddingTop="5dp"
                     android:text="Smart Shopping"/>
-
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/category_linear_id"
                 android:layout_width="0dp"
@@ -80,17 +74,16 @@
                     android:id="@+id/categoryimg_id"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/deals"/>
+                    android:src="@drawable/yellowdeals"/>
                 <TextView
                     android:id="@+id/categorytext_id"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="10sp"
                     android:text="Deals of the Day"
                     android:paddingTop="5dp"/>
-
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/account_linear_id"
@@ -106,7 +99,7 @@
                     android:id="@+id/account_img"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/coupon" />
+                    android:src="@drawable/yellowcoupon" />
 
                 <TextView
                     android:id="@+id/accountext_id"
@@ -115,9 +108,8 @@
                     android:gravity="center"
                     android:paddingTop="5dp"
                     android:text="MY Coupons"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="10sp" />
-
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/cart_linear_id"
@@ -132,17 +124,16 @@
                     android:id="@+id/cart_img"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/favorite"/>
+                    android:src="@drawable/yellowfavorite"/>
                 <TextView
                     android:id="@+id/carttext_id"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:text="Favourites"
                     android:paddingTop="5dp"/>
-
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/more_linear_id"
@@ -156,20 +147,17 @@
                     android:id="@+id/more_img"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/follow"/>
+                    android:src="@drawable/yellowfollow"/>
                 <TextView
                     android:id="@+id/moretext_id"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/yellow"
                     android:textSize="10sp"
                     android:text="iFollow"
                     android:paddingTop="5dp"/>
-
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
-
 </RelativeLayout>

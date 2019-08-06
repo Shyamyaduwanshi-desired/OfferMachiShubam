@@ -33,9 +33,9 @@ public class FilterShowAdapter extends RecyclerView.Adapter<FilterShowAdapter.My
 
             super(itemView);
 
-            this.productimg = (ImageView) itemView.findViewById(R.id.category_image_id);
-            this.productname = (TextView) itemView.findViewById(R.id.category_name_id);
-            this.categorylinear=(LinearLayout)itemView.findViewById(R.id.linear_category_id);
+            this.productimg = (ImageView) itemView.findViewById(R.id.filter_image_id);
+            this.productname = (TextView) itemView.findViewById(R.id.filter_name_id);
+            this.categorylinear=(LinearLayout)itemView.findViewById(R.id.linear_electronics_id);
         }
     }
     public FilterShowAdapter(Context context, ArrayList<filter_show_model> data) {

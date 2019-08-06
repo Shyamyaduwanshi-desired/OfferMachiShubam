@@ -46,14 +46,14 @@ public class DashBoardActivity extends AppCompatActivity
 
     FragmentManager FM;
     FragmentTransaction FT;
-    LinearLayout home,category,account,cart,more;
-    ImageView homeimg,categoryimg,accountimage,cartimg,moreimg;
-    TextView hometext,categorytext,accounttext,carttext,moretext;
+    LinearLayout smartshopping,dealsoftheday,coupons,favourites,ifollow;
+    ImageView smartshoppingimg,dealsofthedayimg,couponsimg,favouritesimg,ifollowimg;
+    TextView smartshoppingtext,dealsofthedaytext,couponstext,favouritestext,ifollowtext;
     Toolbar toolbar;
     DrawerLayout drawer;
     ImageView ivTitleLogo;
     TextView tvMainTitle;
-    ImageView search;
+    ImageView info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,35 +68,34 @@ public class DashBoardActivity extends AppCompatActivity
         FT = FM.beginTransaction();
         FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
 
-        home=(LinearLayout)findViewById(R.id.homelinear);
-        category=(LinearLayout)findViewById(R.id.category_linear_id);
-        account=(LinearLayout)findViewById(R.id.account_linear_id);
-        cart=(LinearLayout)findViewById(R.id.cart_linear_id);
-        more=(LinearLayout)findViewById(R.id.more_linear_id);
+        smartshopping=(LinearLayout)findViewById(R.id.homelinear);
+        dealsoftheday=(LinearLayout)findViewById(R.id.category_linear_id);
+        coupons=(LinearLayout)findViewById(R.id.account_linear_id);
+        favourites=(LinearLayout)findViewById(R.id.cart_linear_id);
+        ifollow=(LinearLayout)findViewById(R.id.more_linear_id);
 
 
-        homeimg=(ImageView)findViewById(R.id.home_img);
-        categoryimg=(ImageView)findViewById(R.id.categoryimg_id);
-        accountimage=(ImageView)findViewById(R.id.account_img);
-        cartimg=(ImageView)findViewById(R.id.cart_img);
-        moreimg=(ImageView)findViewById(R.id.more_img);
+        smartshoppingimg=(ImageView)findViewById(R.id.home_img);
+        dealsofthedayimg=(ImageView)findViewById(R.id.categoryimg_id);
+        couponsimg=(ImageView)findViewById(R.id.account_img);
+        favouritesimg=(ImageView)findViewById(R.id.cart_img);
+        ifollowimg=(ImageView)findViewById(R.id.more_img);
 
 
-        hometext=(TextView) findViewById(R.id.hometext_id);
-        categorytext=(TextView)findViewById(R.id.categorytext_id);
-        accounttext=(TextView)findViewById(R.id.accountext_id);
-        carttext=(TextView)findViewById(R.id.carttext_id);
-        moretext=(TextView)findViewById(R.id.moretext_id);
+        smartshoppingtext=(TextView) findViewById(R.id.hometext_id);
+        dealsofthedaytext=(TextView)findViewById(R.id.categorytext_id);
+        couponstext=(TextView)findViewById(R.id.accountext_id);
+        favouritestext=(TextView)findViewById(R.id.carttext_id);
+        ifollowtext=(TextView)findViewById(R.id.moretext_id);
 
-        search=(ImageView)findViewById(R.id.search_id);
-        search.setOnClickListener(new View.OnClickListener() {
+        info=(ImageView)findViewById(R.id.info_id);
+        info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashBoardActivity.this, SearchActivity.class);
+                Intent intent = new Intent(DashBoardActivity.this, InfoActivity.class);
                 startActivity(intent);
             }
         });
-
 
 
         FloatingActionButton fab = findViewById(R.id.floting_button);
@@ -113,22 +112,23 @@ public class DashBoardActivity extends AppCompatActivity
         });
 
 
-        home.setOnClickListener(new View.OnClickListener() {
+
+        smartshopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                homeimg.setImageDrawable(getResources().getDrawable(R.drawable.onlineshoppurple));
-                categoryimg.setImageDrawable(getResources().getDrawable(R.drawable.deals));
-                accountimage.setImageDrawable(getResources().getDrawable(R.drawable.coupon));
-                cartimg.setImageDrawable(getResources().getDrawable(R.drawable.favorite));
-                moreimg.setImageDrawable(getResources().getDrawable(R.drawable.follow));
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
 
-                hometext.setTextColor(getResources().getColor(R.color.purple));
-                categorytext.setTextColor(getResources().getColor(R.color.black));
-                accounttext.setTextColor(getResources().getColor(R.color.black));
-                carttext.setTextColor(getResources().getColor(R.color.black));
-                moretext.setTextColor(getResources().getColor(R.color.black));
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.white));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -137,22 +137,21 @@ public class DashBoardActivity extends AppCompatActivity
                         .commit(); }
         });
 
-        category.setOnClickListener(new View.OnClickListener() {
+        dealsoftheday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
-                homeimg.setImageDrawable(getResources().getDrawable(R.drawable.onlineshop));
-                categoryimg.setImageDrawable(getResources().getDrawable(R.drawable.dealspurple));
-                accountimage.setImageDrawable(getResources().getDrawable(R.drawable.coupon));
-                cartimg.setImageDrawable(getResources().getDrawable(R.drawable.favorite));
-                moreimg.setImageDrawable(getResources().getDrawable(R.drawable.follow));
 
-
-                hometext.setTextColor(getResources().getColor(R.color.black));
-                categorytext.setTextColor(getResources().getColor(R.color.purple));
-                accounttext.setTextColor(getResources().getColor(R.color.black));
-                carttext.setTextColor(getResources().getColor(R.color.black));
-                moretext.setTextColor(getResources().getColor(R.color.black));
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.white));
+                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -162,22 +161,22 @@ public class DashBoardActivity extends AppCompatActivity
         });
 
 
-        account.setOnClickListener(new View.OnClickListener() {
+        coupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                homeimg.setImageDrawable(getResources().getDrawable(R.drawable.onlineshop));
-                categoryimg.setImageDrawable(getResources().getDrawable(R.drawable.deals));
-                accountimage.setImageDrawable(getResources().getDrawable(R.drawable.couponpurple));
-                cartimg.setImageDrawable(getResources().getDrawable(R.drawable.favorite));
-                moreimg.setImageDrawable(getResources().getDrawable(R.drawable.follow));
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
 
-                hometext.setTextColor(getResources().getColor(R.color.black));
-                categorytext.setTextColor(getResources().getColor(R.color.black));
-                accounttext.setTextColor(getResources().getColor(R.color.purple));
-                carttext.setTextColor(getResources().getColor(R.color.black));
-                moretext.setTextColor(getResources().getColor(R.color.black));
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+                couponstext.setTextColor(getResources().getColor(R.color.white));
+                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -187,21 +186,20 @@ public class DashBoardActivity extends AppCompatActivity
         });
 
 
-        cart.setOnClickListener(new View.OnClickListener() {
+        favourites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
-                homeimg.setImageDrawable(getResources().getDrawable(R.drawable.onlineshop));
-                categoryimg.setImageDrawable(getResources().getDrawable(R.drawable.deals));
-                accountimage.setImageDrawable(getResources().getDrawable(R.drawable.coupon));
-                cartimg.setImageDrawable(getResources().getDrawable(R.drawable.favoritepurple));
-                moreimg.setImageDrawable(getResources().getDrawable(R.drawable.follow));
-
-                hometext.setTextColor(getResources().getColor(R.color.black));
-                categorytext.setTextColor(getResources().getColor(R.color.black));
-                accounttext.setTextColor(getResources().getColor(R.color.black));
-                carttext.setTextColor(getResources().getColor(R.color.purple));
-                moretext.setTextColor(getResources().getColor(R.color.black));
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+                favouritestext.setTextColor(getResources().getColor(R.color.white));
+                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -209,21 +207,21 @@ public class DashBoardActivity extends AppCompatActivity
                         .addToBackStack(null)
                         .commit(); }
         });
-           more.setOnClickListener(new View.OnClickListener() {
+        ifollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                homeimg.setImageDrawable(getResources().getDrawable(R.drawable.onlineshop));
-                categoryimg.setImageDrawable(getResources().getDrawable(R.drawable.deals));
-                accountimage.setImageDrawable(getResources().getDrawable(R.drawable.coupon));
-                cartimg.setImageDrawable(getResources().getDrawable(R.drawable.favorite));
-                moreimg.setImageDrawable(getResources().getDrawable(R.drawable.followpurple));
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefollow));
 
-                hometext.setTextColor(getResources().getColor(R.color.black));
-                categorytext.setTextColor(getResources().getColor(R.color.black));
-                accounttext.setTextColor(getResources().getColor(R.color.black));
-                carttext.setTextColor(getResources().getColor(R.color.black));
-                moretext.setTextColor(getResources().getColor(R.color.purple));
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+                ifollowtext.setTextColor(getResources().getColor(R.color.white));
 
 
                 getSupportFragmentManager()

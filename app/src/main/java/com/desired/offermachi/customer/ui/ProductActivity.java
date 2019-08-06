@@ -75,7 +75,7 @@ public class ProductActivity extends AppCompatActivity {
      });
 
 
-     final ImageView likeimg =(ImageView)findViewById(R.id.heartfirst_image_id);
+      final ImageView likeimg =(ImageView)findViewById(R.id.heartfirst_image_id);
 
         likeimg.setOnClickListener(new View.OnClickListener() {
             String wish = "0";
@@ -94,6 +94,15 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
+        TextView productname =(TextView)findViewById(R.id.product_name_id);
+        productname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, ViewAllOfferFollowActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void Itemshardialog() {
@@ -107,16 +116,12 @@ public class ProductActivity extends AppCompatActivity {
 
     }
     private void showdialog() {
-
         final Dialog dialog = new Dialog(ProductActivity.this);
         dialog.setContentView(R.layout.coupon_code_activity);
         dialog.setTitle("Custom Dialog");
         Button submitbutton=(Button)dialog.findViewById(R.id.coupon_button_apply_id);
         TextView checkbox=(TextView) dialog.findViewById(R.id.coupon_ok_id);
         dialog.show();
-
-    }
-
-}
+    }}
 
 

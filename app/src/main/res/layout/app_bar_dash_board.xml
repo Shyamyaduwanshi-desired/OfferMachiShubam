@@ -49,13 +49,14 @@
                             />
                     </RelativeLayout>
                     <ImageView
-                        android:id="@+id/search_id"
+                        android:id="@+id/info_id"
                         android:layout_width="27dp"
                         android:layout_height="20dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_toRightOf="@+id/rl_title"
-                        android:src="@drawable/ic_search_magnifier_interface_symbol" />
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_info" />
                     <ImageView
                         android:layout_width="29dp"
                         android:layout_height="20dp"

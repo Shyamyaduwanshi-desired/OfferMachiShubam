@@ -43,7 +43,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
         categortListAdapter = new CategortListAdapter(getApplicationContext(), (ArrayList<Category_list_model>) categorylistdataset);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         product_recyclerview.setAdapter(categortListAdapter);

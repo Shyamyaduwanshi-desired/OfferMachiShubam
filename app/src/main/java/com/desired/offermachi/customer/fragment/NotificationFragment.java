@@ -34,9 +34,6 @@ public class NotificationFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DoNotDistrubActivity.class);
                 startActivity(intent);
 
-//                Intent intent = new Intent(NotificationFragment.this, DoNotDistrubActivity.class);
-//                startActivity(intent);
-
             }
         });
 

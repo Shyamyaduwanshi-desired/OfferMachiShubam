@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="100dp"
+    android:layout_margin="6dp">
+    <LinearLayout
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/category_background">
+                <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="29dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/view_background"
+                    android:text="Follow"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="9dp" />
+
+                <ImageView
+                    android:id="@+id/storeimg"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:src="@drawable/brandfirst" />
+                <TextView
+                    android:id="@+id/store_name_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dominos"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="1dp"
+                    android:textSize="13dp"/>
+                <LinearLayout
+                    android:id="@+id/product_linear_unfollow_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/view_offer_background"
+                    android:layout_marginTop="6dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="View All Offer"
+                        android:textSize="8dp"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

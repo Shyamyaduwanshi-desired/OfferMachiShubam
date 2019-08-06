@@ -47,7 +47,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment {
     Button registerbutton;
     String shop_name,shop_contact_number,address,city,about_store,shop_hours,shop_day_hours;
     String name,mobile,email;
-    String userid,group,role,username,password,salt,shop_name_slug,shop_logo;
+    String  id,group,role,username,password,salt,shop_name_slug,shop_logo;
 
 
 
@@ -71,21 +71,6 @@ public class RegistrationStoreDetailsFrgment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -240,7 +225,6 @@ public class RegistrationStoreDetailsFrgment extends Fragment {
                                 e.printStackTrace();
                             }
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -266,6 +250,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment {
 
             }
         };
+
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
 

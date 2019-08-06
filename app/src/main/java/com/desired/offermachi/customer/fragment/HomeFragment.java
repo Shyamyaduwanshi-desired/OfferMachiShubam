@@ -54,16 +54,7 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.home_fragment, container, false);
         mContext=getActivity();
 
-        ((DashBoardActivity)getActivity()).setToolTittle("",1);
-        TextView contentfirst=(TextView)view.findViewById(R.id.contentfirst_id);
-        Typeface content= ResourcesCompat.getFont(getContext(), R.font.nunitoregular);
-        contentfirst.setTypeface(content);
-
-        TextView contentsecond=(TextView)view.findViewById(R.id.contentsecond_id);
-        Typeface content1= ResourcesCompat.getFont(getContext(), R.font.nunitoregular);
-        contentsecond.setTypeface(content1);
-
-       TextView trendingdeals=(TextView)view.findViewById(R.id.dealsoftheday_text_id);
+        TextView trendingdeals=(TextView)view.findViewById(R.id.dealsoftheday_text_id);
         Typeface content2= ResourcesCompat.getFont(getContext(), R.font.ralewaybold);
         trendingdeals.setTypeface(content2);
 
@@ -91,7 +82,7 @@ public class HomeFragment extends Fragment {
         });
         homeproduct_recyclerview = (RecyclerView) view.findViewById(R.id.home_product_linear_id);
         categoryAdapter = new CategoryAdapter(getContext(), (ArrayList<category_model>) productdataset);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.HORIZONTAL, false);
         homeproduct_recyclerview.setLayoutManager(gridLayoutManager);
         homeproduct_recyclerview.setItemAnimator(new DefaultItemAnimator());
         homeproduct_recyclerview.setAdapter(categoryAdapter);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -29,7 +29,7 @@
                         android:layout_height="wrap_content"
                         android:text="Flat"
                         android:textColor="@color/black"
-                        android:textSize="18dp"
+                        android:textSize="15dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="2dp"
                         />
@@ -39,7 +39,7 @@
                         android:text="50%"
                         android:textColor="@color/pink"
                         android:layout_marginLeft="5dp"
-                        android:textSize="18dp"
+                        android:textSize="15dp"
                         android:layout_marginTop="2dp"
                         />
                     <TextView
@@ -48,13 +48,13 @@
                         android:text="Off"
                         android:textColor="@color/black"
                         android:layout_marginLeft="5dp"
-                        android:textSize="18dp"
+                        android:textSize="15dp"
                         android:layout_marginTop="2dp"/>
                     <LinearLayout
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:gravity="center"
-                        android:layout_marginLeft="33dp"
+                        android:layout_marginLeft="43dp"
                         android:layout_marginTop="3dp"
                         android:background="@drawable/simple_circle_background">
                         <ImageView
@@ -78,19 +78,24 @@
                         android:layout_height="170dp"
                         android:src="@drawable/myvegpizza"
                         />
-                    <TextView
-                        android:id="@+id/name_product_id"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="DOMINOZ PIZZA"
-                        android:textSize="17dp"
-                        android:textColor="@color/blue"
-                        android:layout_marginTop="10dp"/>
-                    <View
-                        android:layout_width="130dp"
-                        android:layout_height="2dp"
-                        android:background="@color/orange"/>
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/name_product_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DOMINOZ PIZZA"
+                            android:textSize="15dp"
+                            android:textColor="@color/blue"
+                            android:layout_marginTop="10dp"/>
+                        <View
+                            android:layout_width="120dp"
+                            android:layout_height="2dp"
+                            android:background="@color/orange"/>
 
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -127,7 +132,7 @@
                         android:background="@drawable/add_cart_button"
                         android:text="Get Coupon Code"
                         android:textColor="@color/white"
-                        android:textSize="14dp"
+                        android:textSize="13dp"
                         android:textAllCaps="false"/>
                 </LinearLayout>
             </LinearLayout>

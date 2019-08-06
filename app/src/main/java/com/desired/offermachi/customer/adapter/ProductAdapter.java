@@ -44,7 +44,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             this.producttext=(LinearLayout)itemView.findViewById(R.id.product_linear_unfollow_text_id);
         }
     }
-
     public ProductAdapter(Context context,ArrayList<slider_model> data) {
         this.productdatasetcategory = data;
         this.mContext = context;
@@ -62,17 +61,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     @Override
     public void onBindViewHolder(final ProductAdapter.MyViewHolder holder, final int listPosition) {
 
-
         ImageView productimg = holder.productimg;
         TextView productname = holder.productname;
         LinearLayout producttext =holder.producttext;
 
 
-       productimg.setImageResource(productdatasetcategory.get(listPosition).getImg());
+        productimg.setImageResource(productdatasetcategory.get(listPosition).getImg());
         productname.setText(productdatasetcategory.get(listPosition).getProductname());
 
         productimg.setImageResource(productdatasetcategory.get(listPosition).getImg());
         productname.setText(productdatasetcategory.get(listPosition).getProductname());
+
         productimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,8 +87,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ViewStoreOfferActivity.class);
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
-
             }
         });
     }

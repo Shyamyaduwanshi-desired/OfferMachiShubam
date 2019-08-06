@@ -94,6 +94,7 @@
                         android:textSize="15dp"
                         />
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/forgot_password_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

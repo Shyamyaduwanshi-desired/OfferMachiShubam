@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/farerate"
+            android:text="Select Follower"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
+            android:fontFamily="serif-monospace"
+            android:drawableTint="#000"
+            android:textColor="@color/purple"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewrate"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+        </android.support.v7.widget.RecyclerView>
+        <Button
+            android:id="@+id/sendoffer"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/add_cart_button"
+            android:text="Send Offers"
+            android:textColor="@color/white"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="17dp"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

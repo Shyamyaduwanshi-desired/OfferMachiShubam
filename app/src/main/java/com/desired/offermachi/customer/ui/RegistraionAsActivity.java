@@ -10,7 +10,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.retalier.ui.RetalierLogin;
+import com.desired.offermachi.retalier.view.activity.RetalierLogin;
 
 public class RegistraionAsActivity extends AppCompatActivity {
 

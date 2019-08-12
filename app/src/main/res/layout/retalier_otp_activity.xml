@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -71,10 +71,11 @@
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ic_access"
+                            app:srcCompat="@drawable/ic_access"
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/etotp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -84,8 +85,7 @@
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
-                        android:imeOptions="actionNext"
-                        />
+                        android:imeOptions="actionNext"/>
                 </LinearLayout>
                 <Button
                     android:id="@+id/submit_button_id"
@@ -105,6 +105,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp">
                     <TextView
+                        android:id="@+id/resendotp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Resend Again"

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -18,7 +17,7 @@
                 android:id="@+id/imageviewback"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_left_arrow"
+                app:srcCompat="@drawable/ic_left_arrow"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="20dp" />
@@ -76,28 +75,14 @@
                         android:layout_marginLeft="10dp"
                         android:background="@color/white">
                         <TextView
+                            android:id="@+id/offertypename"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Flat"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="18dp"
-                            android:layout_marginLeft="5dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="50%"
-                            android:textColor="@color/pink"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="18dp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Off"
-                            android:textColor="@color/black"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="18dp" />
+                            android:layout_marginLeft="5dp"/>
+
 
                     </LinearLayout>
                     <LinearLayout
@@ -127,7 +112,7 @@
                 android:orientation="vertical"
                 android:layout_marginTop="30dp">
                 <TextView
-                    android:id="@+id/dproductname"
+                    android:id="@+id/offername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -142,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
                 <TextView
-                    android:id="@+id/dproddetailsname"
+                    android:id="@+id/offerdescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -173,6 +158,7 @@
                         android:textColor="@color/black"
                         android:textSize="19dp" />
                     <TextView
+                        android:id="@+id/brandname"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Pizza"
@@ -204,6 +190,7 @@
                         android:layout_marginTop="1dp"
                         android:textSize="19dp"/>
                     <TextView
+                        android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12:00AM -12:15PM"
@@ -231,6 +218,7 @@
                     android:textSize="19dp"
                     android:textStyle="bold"/>
                 <TextView
+                    android:id="@+id/enddate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jul 31,2019"

@@ -1,6 +1,5 @@
 package com.desired.offermachi.customer.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,15 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.adapter.CategortListAdapter;
-import com.desired.offermachi.customer.adapter.CategoryAdapter;
 import com.desired.offermachi.customer.model.Category_list_model;
-import com.desired.offermachi.customer.model.category_model;
-import com.desired.offermachi.retalier.model.retalier_category_model;
-import com.desired.offermachi.retalier.retalieradapter.RetalierCategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

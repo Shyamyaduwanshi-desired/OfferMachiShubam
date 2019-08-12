@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -168,24 +168,46 @@
                         <!--</Spinner>-->
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/store_image_id"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="180dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="35dp"
                     android:layout_gravity="center"
                     android:background="@drawable/store_image_background">
-                    <TextView
+                    <ImageView
+                        android:id="@+id/imagestore"
+                        android:layout_width="200dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitCenter"/>
+                    <RelativeLayout
+                        android:id="@+id/pickly"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Store Image"
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:imeOptions="actionNext"/>
-
-                </LinearLayout>
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/img_camera"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="30dp"
+                            app:srcCompat="@drawable/ic_photo"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:text="Store Image"
+                            android:textSize="18dp"
+                            android:layout_alignParentBottom="true"
+                            android:imeOptions="actionNext"/>
+                    </RelativeLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -211,46 +233,334 @@
                             android:textSize="18dp"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/lymonday"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:weightSum="4"
                         android:layout_marginTop="10dp">
                         <EditText
-                            android:id="@+id/days_edt_id"
-                            android:layout_width="120dp"
-                            android:layout_height="35dp"
-                            android:background="@drawable/edit_background"
-                            android:paddingLeft="15dp"
-                            android:layout_marginLeft="10dp"
-                            android:hint="Days"
-                            android:inputType="textCapSentences"/>
-                        <EditText
-                            android:id="@+id/time_view_start"
-                            android:layout_width="40dp"
+                            android:id="@+id/editmonday"
+                            android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:text="20:00"
-                            android:layout_weight="0.4"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
                             android:paddingLeft="10dp"
-                            android:layout_marginLeft="5dp"
-                            android:editable="false"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Monday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editmondaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
                             android:background="@drawable/edit_background"/>
 
-                        <EditText
-                            android:id="@+id/time_view_end"
-                            android:layout_width="30dp"
+                        <TextView
+                            android:id="@+id/editmondaytimeto"
+                            android:layout_width="0dp"
                             android:layout_height="40dp"
-                            android:text="20:00"
-                            android:paddingLeft="10dp"
-                            android:layout_weight="0.4"
-                            android:editable="false"
-                            android:layout_marginLeft="5dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
                             android:background="@drawable/edit_background"/>
                         <ImageView
-                            android:layout_width="40dp"
+                            android:id="@+id/monplus"
+                            android:layout_width="0dp"
                             android:layout_height="35dp"
+                            android:layout_weight="0.4"
                             android:src="@drawable/plus"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lytuesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/edittuesday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Tuesday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/edittuesdaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/edittuesdaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+                        <ImageView
+                            android:id="@+id/tuesplus"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/plus"
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lywednesday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/editwednesday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Wednesday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editwednesdaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/editwednesdaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+                        <ImageView
+                            android:id="@+id/wedplus"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/plus"
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lythursday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/editthursday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Thursday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editthursdaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/editthursdaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+                        <ImageView
+                            android:id="@+id/thurplus"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/plus"
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lyfriday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/editfriday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Friday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editfridaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/editfridaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+                        <ImageView
+                            android:id="@+id/friplus"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/plus"
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lysaturday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/editsaturday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Saturday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editsaturdaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/editsaturdaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+                        <ImageView
+                            android:id="@+id/saturplus"
+                            android:layout_width="0dp"
+                            android:layout_height="35dp"
+                            android:layout_weight="0.4"
+                            android:src="@drawable/plus"
+                            android:layout_marginLeft="2dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lysunday"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:weightSum="4"
+                        android:visibility="gone"
+                        android:layout_marginTop="10dp">
+                        <EditText
+                            android:id="@+id/editsunday"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1.4"
+                            android:background="@drawable/edit_background"
+                            android:paddingLeft="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:enabled="false"
+                            android:text="Sunday"
+                            android:textColor="@color/purple"
+                            android:inputType="textCapSentences"/>
+                        <TextView
+                            android:id="@+id/editsundaytime"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 AM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
+
+                        <TextView
+                            android:id="@+id/editsundaytimeto"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:hint="00:00 PM"
+                            android:gravity="center"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="2dp"
+                            android:background="@drawable/edit_background"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"

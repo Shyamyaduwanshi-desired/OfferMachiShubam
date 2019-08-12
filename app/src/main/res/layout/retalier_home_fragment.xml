@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -72,7 +73,6 @@
                 android:layout_height="match_parent"
                 card_view:cardBackgroundColor="#fff"
                 android:layout_margin="10dp">
-
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -80,142 +80,149 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
                         <LinearLayout
                             android:id="@+id/firsthome_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:visibility="visible">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical">
+                                android:orientation="horizontal"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:weightSum="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Offer Title"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black" />
+                                <EditText
+                                    android:id="@+id/offertitle"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="0.6"
+                                    android:hint="Offer title"
+                                    android:textSize="14sp"
+                                    android:paddingLeft="10dp"
+                                    android:background="@drawable/edit_background"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:weightSum="1">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Brand Name"
+                                    android:layout_gravity="center"
+                                    android:textSize="18dp"
+                                    android:textColor="@color/black" />
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6">
+
+                                    <Spinner
+                                        android:id="@+id/brandnamespinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edit_background"
+                                        android:gravity="center"
+                                        android:padding="8dp" />
+
+                                    <TextView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="12dp"
+                                        android:background="@drawable/downarrow" />
+                                </RelativeLayout>
+                            </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:layout_marginTop="20dp"
                                     android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp">
+                                    android:layout_marginRight="10dp"
+                                    android:weightSum="1">
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:text="Type"
-                                        android:textSize="18dp"
+                                        android:layout_weight="0.4"
+                                        android:text="Offer Type"
                                         android:layout_gravity="center"
-                                        android:layout_marginTop="10dp"
+                                        android:textSize="18dp"
                                         android:textColor="@color/black" />
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
+                                    <RelativeLayout
+                                        android:layout_width="0dp"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical"
-                                        android:layout_marginTop="20dp">
-                                        <LinearLayout
-                                            android:id="@+id/select_type_linear_hide_id"
-                                            android:layout_width="190dp"
-                                            android:layout_height="40dp"
-                                            android:layout_marginLeft="80dp"
-                                            android:gravity="center"
-                                            android:background="@drawable/edit_background">
-                                            <EditText
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="40dp"
-                                                android:hint="Select Type"
-                                                android:backgroundTint="@color/white"
-                                               />
-                                            <ImageView
-                                                android:layout_width="20dp"
-                                                android:layout_height="20dp"
-                                                android:src="@drawable/downarrow"
-                                                android:layout_marginLeft="35dp"
-                                                android:layout_marginRight="10dp"
-                                                android:layout_gravity="center"/>
-                                        </LinearLayout>
-                                        <!--<LinearLayout-->
-                                            <!--android:id="@+id/select_typehide_linear_id"-->
-                                            <!--android:layout_width="170dp"-->
-                                            <!--android:layout_height="80dp"-->
-                                            <!--android:background="@drawable/hide_background"-->
-                                            <!--android:layout_marginLeft="90dp"-->
-                                            <!--android:visibility="gone"-->
-                                            <!--android:orientation="vertical">-->
-                                            <!--<TextView-->
-                                                <!--android:layout_width="match_parent"-->
-                                                <!--android:layout_height="wrap_content"-->
-                                                <!--android:text="Fixed Price"-->
-                                                <!--android:layout_marginLeft="10dp"-->
-                                                <!--android:textSize="20dp"-->
-                                                <!--/>-->
-                                            <!--<TextView-->
-                                                <!--android:layout_width="match_parent"-->
-                                                <!--android:layout_height="wrap_content"-->
-                                                <!--android:text="Percentage"-->
-                                                <!--android:layout_marginLeft="10dp"-->
-                                                <!--android:textSize="20dp"-->
-                                                <!--android:layout_marginTop="10dp"-->
-                                                <!--/>-->
-                                        <!--</LinearLayout>-->
-                                    </LinearLayout>
+                                        android:layout_weight="0.6">
+
+                                        <Spinner
+                                            android:id="@+id/offertypespinner"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/edit_background"
+                                            android:padding="8dp" />
+
+                                        <TextView
+                                            android:layout_width="18dp"
+                                            android:layout_height="18dp"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginRight="12dp"
+                                            android:background="@drawable/downarrow" />
+                                    </RelativeLayout>
                                 </LinearLayout>
-                            </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                >
+                                android:weightSum="1">
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Value"
+                                    android:layout_weight="0.4"
+                                    android:text="Offer Value"
                                     android:textSize="18dp"
-                                    android:layout_gravity="center"
                                     android:textColor="@color/black" />
-                                <LinearLayout
-                                    android:layout_width="190dp"
+                                <EditText
+                                    android:id="@+id/offervalue"
+                                    android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:layout_marginLeft="73dp"
-                                    android:background="@drawable/edit_background">
-                                    <EditText
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="40dp"
-                                        android:hint="Select Type"
-                                        android:backgroundTint="@color/white"
-                                        android:paddingLeft="20dp"
-                                        android:layout_marginLeft="10dp"/>
-                                    <View
-                                        android:layout_width="1dp"
-                                        android:layout_height="40dp"
-                                        android:layout_gravity="center"
-                                        android:background="@color/lightcolour"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginRight="10dp"/>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="%"
-                                        android:textSize="20dp" />
-                                </LinearLayout>
+                                    android:layout_weight="0.6"
+                                    android:hint="Offer Value"
+                                    android:textSize="14sp"
+                                    android:paddingLeft="10dp"
+                                    android:background="@drawable/edit_background"/>
+
                             </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginTop="30dp">
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="Offers &amp; Discount Image"
                                     android:textColor="@color/black"
                                     android:layout_marginLeft="10dp"
+                                    android:layout_marginTop="20dp"
                                     android:textSize="18dp" />
-                                <LinearLayout
+                                <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="120dp"
+                                    android:layout_height="180dp"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginRight="20dp"
                                     android:layout_marginTop="10dp"
@@ -223,76 +230,96 @@
                                     android:orientation="vertical"
                                     android:background="@drawable/home_offer_background">
                                     <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginTop="20dp"
-                                        android:src="@drawable/ic_photo_cam"/>
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:text="Image"
-                                        android:gravity="center"
-                                        android:textSize="18dp"
-                                        android:imeOptions="actionNext"/>
-                                </LinearLayout>
-                            </LinearLayout>
+                                        android:id="@+id/offerimage"
+                                        android:layout_width="150dp"
+                                        android:layout_height="100dp"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginBottom="10dp"/>
+                                    <LinearLayout
+                                        android:id="@+id/imagepicker"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginBottom="10dp"
+                                        android:orientation="vertical">
+                                        <ImageView
+                                            android:layout_width="30dp"
+                                            android:layout_height="30dp"
+                                            android:layout_gravity="center"
+                                            app:srcCompat="@drawable/ic_photo"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Offer Image"
+                                            android:textSize="18dp"/>
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                >
+                                android:layout_marginRight="10dp">
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="Category"
+                                    android:layout_weight="0.4"
+                                    android:text="Offer Category"
                                     android:textSize="18dp"
                                     android:layout_gravity="center"
                                     android:textColor="@color/black" />
-                                <LinearLayout
-                                    android:layout_width="170dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="30dp"
-                                    android:background="@drawable/edit_background">
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6">
 
-                                    <ImageView
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:src="@drawable/downarrow"
-                                        android:layout_marginLeft="120dp"
-                                        android:layout_marginRight="10dp"
-                                        android:layout_gravity="center"/>
-                                </LinearLayout>
-                                <ImageView
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:src="@drawable/plus"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_gravity="center"/>
+                                    <Spinner
+                                        android:id="@+id/categoryspinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edit_background"
+                                        android:padding="8dp" />
+
+                                    <TextView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="12dp"
+                                        android:background="@drawable/downarrow" />
+                                </RelativeLayout>
+
                             </LinearLayout>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Offers Details"
+                                android:text="Offer Details"
                                 android:textColor="@color/black"
                                 android:textSize="18dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginTop="20dp"
-                                />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="120dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginRight="20dp"
-                                android:layout_marginTop="15dp"
-                                android:layout_gravity="center"
-                                android:orientation="vertical"
-                                android:background="@drawable/simple_background">
-                            </LinearLayout>
+                                android:layout_marginTop="20dp"/>
+
+                                <EditText
+                                    android:id="@+id/offerdescription"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="120dp"
+                                    android:inputType="textMultiLine"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginTop="15dp"
+                                    android:gravity="start"
+                                    android:textSize="14sp"
+                                    android:hint="Enter here offer description"
+                                    android:paddingLeft="10dp"
+                                    android:paddingTop="10dp"
+                                    android:background="@drawable/simple_background"/>
+
                             <Button
                                 android:id="@+id/next_button_id"
                                 android:layout_width="match_parent"
@@ -301,7 +328,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginRight="20dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginBottom="100dp"
+                                android:layout_marginBottom="50dp"
                                 android:text="Next"
                                 android:textSize="20dp"
                                 android:textAllCaps="false"
@@ -311,175 +338,111 @@
                             android:id="@+id/second_home_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:orientation="vertical"
                             android:visibility="gone"
-                            android:orientation="vertical">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp">
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp">
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Expiry Date"
+                                        android:text="Offer Date"
                                         android:textSize="18dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginRight="10dp"
                                         android:textColor="@color/black" />
                                     <LinearLayout
-                                        android:layout_width="150dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginLeft="60dp"
-                                        android:background="@drawable/edit_background">
-                                        <EditText
-                                            android:id="@+id/editexpirydate"
-                                            android:layout_width="150dp"
-                                            android:layout_height="wrap_content"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:weightSum="2">
+                                        <TextView
+                                            android:id="@+id/editText1"
+                                            android:layout_width="0dp"
+                                            android:layout_height="40dp"
+                                            android:gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_marginRight="5dp"
                                             android:ems="10"
-                                            android:backgroundTint="@color/white"
-                                            android:paddingLeft="10dp"
-                                            android:layout_marginLeft="10dp"
-                                            android:layout_marginRight="10dp"
-                                            android:hint="Enter Date" />
+                                            android:background="@drawable/edit_background"
+                                            android:hint="Start Date" />
+                                        <TextView
+                                            android:id="@+id/editexpirydate"
+                                            android:layout_width="0dp"
+                                            android:layout_height="40dp"
+                                            android:gravity="center"
+                                            android:layout_weight="1"
+                                            android:layout_marginLeft="5dp"
+                                            android:ems="10"
+                                            android:background="@drawable/edit_background"
+                                            android:hint="Expire Date" />
                                     </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Genrate Coupon Code"
+                                android:textSize="18dp"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="20dp">
+                                android:weightSum="2"
+                                android:layout_marginTop="10dp">
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Status"
-                                    android:textSize="18dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:textColor="@color/black"/>
-                                <Switch
-                                    android:id="@+id/simpleSwitch"
-                                    android:layout_width="80dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="180dp"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="10dp">
+                                    android:id="@+id/offercouponcode"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="1"
+                                    android:text="Coupon Code"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="14dp"
+                                    android:gravity="center"
+                                    android:background="@drawable/edit_background"/>
                                 <TextView
-                                    android:layout_width="160dp"
-                                    android:layout_height="30dp"
+                                    android:id="@+id/btngenerate"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_weight="1"
                                     android:text="Generate Coupon Code"
+                                    android:layout_marginLeft="5dp"
                                     android:background="@drawable/view_background"
                                     android:textSize="14dp"
-                                    android:gravity="center_vertical"
-                                    android:paddingLeft="7dp"
-                                    android:layout_gravity="center"
+                                    android:gravity="center"
                                     android:textColor="@color/white" />
-                                <LinearLayout
-                                    android:layout_width="140dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:background="@drawable/edit_background">
-                                    <EditText
-                                        android:layout_width="match_parent"
-                                        android:layout_height="40dp"
-                                        android:textAlignment="center"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginRight="10dp"
-                                        android:backgroundTint="@color/white"
-                                        android:paddingLeft="0dp"/>
-                                </LinearLayout>
                             </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Offer Time"
+                                android:textSize="18dp"
+                                android:layout_marginTop="10dp"
+                                android:textColor="@color/black" />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp">
+                                android:weightSum="2"
+                                android:layout_marginTop="10dp">
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Time"
-                                    android:textSize="18dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black" />
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                    android:id="@+id/time_view_start"
+                                    android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:orientation="horizontal"
-                                    android:layout_marginLeft="70dp"
-                                   >
-
-                                    <EditText
-                                        android:id="@+id/time_view_start"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="40dp"
-                                        android:text="20:00"
-                                        android:layout_weight="0.3"
-                                        android:paddingLeft="30dp"
-                                        android:editable="false"
-                                        android:background="@drawable/edit_background"/>
-
-                                    <EditText
-                                        android:id="@+id/time_view_end"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="40dp"
-                                        android:text="20:00"
-                                        android:paddingLeft="30dp"
-                                        android:layout_weight="0.3"
-                                        android:editable="false"
-                                        android:layout_marginLeft="10dp"
-                                        android:background="@drawable/edit_background"/>
-
-                                </LinearLayout>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp">
+                                    android:layout_weight="1"
+                                    android:hint="00:00"
+                                    android:layout_marginRight="5dp"
+                                    android:gravity="center"
+                                    android:background="@drawable/edit_background"/>
                                 <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Date"
-                                    android:textSize="18dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black" />
-                                <LinearLayout
-                                    android:layout_width="150dp"
+                                    android:id="@+id/time_view_end"
+                                    android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:layout_marginLeft="130dp"
-                                    android:background="@drawable/edit_background">
-                                    <EditText
-                                        android:id="@+id/editText1"
-                                        android:layout_width="150dp"
-                                        android:layout_height="wrap_content"
-                                        android:ems="10"
-                                        android:backgroundTint="@color/white"
-                                        android:paddingLeft="10dp"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginRight="14dp"
-                                        android:hint="Enter Date" />
-                                </LinearLayout>
+                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:hint="00:00"
+                                    android:background="@drawable/edit_background"/>
+
                             </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginTop="30dp">
                                 <Button
                                     android:id="@+id/submit_button_id"
                                     android:layout_width="match_parent"
@@ -488,12 +451,11 @@
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginRight="20dp"
                                     android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="100dp"
+                                    android:layout_marginBottom="50dp"
                                     android:text="Submit"
                                     android:textSize="20dp"
                                     android:textAllCaps="false"
                                     android:textColor="@color/white" />
-                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </ScrollView>

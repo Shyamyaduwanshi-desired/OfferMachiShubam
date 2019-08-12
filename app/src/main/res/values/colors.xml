@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#842b8a</color>
     <color name="colorAccent">#21a291</color>
     <color name="white">#FFF</color>
+    <color name="transparent">#00000000</color>
     <color name="black">#000</color>
     <color name="darkgray">#616A6B</color>
     <color name="purple">#842b8a</color>
@@ -19,23 +20,4 @@
     <color name="lightyellowcolour">#61FFD400</color>
     <color name="darkgreen">#376209</color>
     <color name="darkred">#ff0000</color>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </resources>

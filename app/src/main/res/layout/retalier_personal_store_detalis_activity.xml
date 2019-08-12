@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,12 +22,56 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                   <!-- <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">-->
+                     <!--   <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_gravity="center"
+                            android:textSize="14dp"
+                            android:textColor="#000"
+                            android:textStyle="bold"
+                            android:text="Store Image :-"/>-->
+                    <RelativeLayout
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center">
+                        <ImageView
+                            android:id="@+id/storeimage"
+                            android:layout_width="150dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/shopimg"
+                            android:layout_gravity="center"/>
+                        <LinearLayout
+                            android:id="@+id/imagepicker"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:visibility="gone"
+                            android:background="@drawable/simple_circle_background">
+                            <ImageView
+                                android:id="@+id/picker"
+                                android:layout_width="20dp"
+                                android:layout_height="30dp"
+                                android:layout_marginLeft="5dp"
+                                app:srcCompat="@drawable/ic_photo_camera"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+
+                  <!--  </LinearLayout>-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="2">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
@@ -36,13 +80,15 @@
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Store Name :-"/>
-                        <TextView
-                            android:id="@+id/totalprize"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editstorename"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:background="@color/transparent"
                             android:layout_marginTop="10dp"
+                            android:enabled="false"
                             android:layout_marginRight="15dp"
                             android:textSize="14dp"
                             android:textColor="@color/purple"
@@ -63,12 +109,14 @@
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Store Contact Number :-"/>
-                        <TextView
-                            android:id="@+id/deliveryfee"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editstorecontact"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:enabled="false"
+                            android:background="@color/transparent"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
                             android:textSize="14dp"
@@ -81,35 +129,7 @@
                         android:weightSum="2"
                         android:layout_marginTop="10dp">
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="15dp"
-                            android:textSize="14dp"
-                            android:textColor="#000"
-                            android:textStyle="bold"
-                            android:text="Store Address :-"/>
-                        <TextView
-                            android:id="@+id/discount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="55dp"
-                            android:layout_weight="0"
-                            android:gravity="right"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginLeft="50dp"
-                            android:textSize="14dp"
-                            android:textColor="@color/purple"
-                            android:text="Shop No 1,Varsha  Tower Sheetal Nagr,Mira Road"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="2"
-                        android:layout_marginTop="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
@@ -117,16 +137,23 @@
                             android:textSize="14dp"
                             android:textColor="#000"
                             android:textStyle="bold"
-                            android:text="Store Image :-"/>
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="30dp"
-                            android:src="@drawable/shopimg"
+                            android:text="Store Address :-"/>
+                        <EditText
+                            android:id="@+id/editstoreaddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:background="@color/transparent"
+                            android:enabled="false"
+                            android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
-                            android:layout_marginLeft="160dp"
-                            />
+                            android:layout_marginLeft="50dp"
+                            android:textSize="14dp"
+                            android:textColor="@color/purple"
+                            android:text="Shop No 1,Varsha  Tower Sheetal Nagr,Mira Road"/>
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -148,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -157,22 +184,36 @@
                                 android:textColor="@color/purple"
                                 android:text="Monday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/mondayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:gravity="right"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/mondayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -181,22 +222,36 @@
                                 android:textColor="@color/purple"
                                 android:text="Tuesday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/tuesdayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
                                 android:gravity="right"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/tuesdayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -205,22 +260,36 @@
                                 android:textColor="@color/purple"
                                 android:text="Wednesday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/wednesdayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:gravity="right"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/wednesdayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -229,22 +298,36 @@
                                 android:textColor="@color/purple"
                                 android:text="Thursday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/thursdayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:gravity="right"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/thursdayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -253,22 +336,36 @@
                                 android:textColor="@color/purple"
                                 android:text="Friday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/fridayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:gravity="right"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/fridayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:layout_marginTop="10dp"
@@ -277,15 +374,67 @@
                                 android:textColor="@color/purple"
                                 android:text="Saturday"/>
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/saturdayopen"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="0.5"
                                 android:gravity="right"
+                                android:background="@color/transparent"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:textSize="14dp"
                                 android:textColor="@color/purple"
-                                android:text="11:00 AM    to    7:00 PM   "/>
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/saturdayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="Sunday"/>
+                            <TextView
+                                android:id="@+id/sundayopen"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="right"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 AM"/>
+                            <TextView
+                                android:id="@+id/sundayclose"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="center"
+                                android:background="@color/transparent"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:textSize="14dp"
+                                android:textColor="@color/purple"
+                                android:text="00:00 PM"/>
                         </LinearLayout>
                     </LinearLayout>
                     <LinearLayout
@@ -294,26 +443,27 @@
                         android:weightSum="2"
                         android:layout_marginTop="10dp">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0"
+                            android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:textSize="14dp"
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="About Store :-"/>
-                        <TextView
-                            android:id="@+id/estimatedtax"
-                            android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                        <EditText
+                            android:id="@+id/aboutstore"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:layout_marginRight="73dp"
                             android:layout_weight="1"
-                            android:gravity="right"
+                            android:enabled="false"
+                            android:background="@color/transparent"
+                            android:gravity="center"
+                            android:layout_marginRight="15dp"
                             android:text="Lorem Ipsum has been the industry's standard"
                             android:textColor="@color/purple"
-                            android:layout_marginLeft="40dp"
                             android:textSize="14dp" />
                     </LinearLayout>
 
@@ -326,7 +476,7 @@
                 android:gravity="center"
                 android:layout_marginTop="40dp">
                 <LinearLayout
-                    android:id="@+id/edit_text_linear_id"
+                    android:id="@+id/btnedit"
                     android:layout_width="98dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"

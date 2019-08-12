@@ -119,7 +119,7 @@
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionGo"
                         android:textColor="@color/purple"
                         />
                 </LinearLayout>

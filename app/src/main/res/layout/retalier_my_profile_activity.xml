@@ -30,7 +30,7 @@
                             android:layout_height="25dp"
                             android:layout_marginLeft="15dp"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_left_arrow"/>
+                            app:srcCompat="@drawable/ic_left_arrow"/>
                         <TextView
                             android:id="@+id/logo"
                             android:layout_width="wrap_content"
@@ -87,10 +87,10 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:id="@+id/imgProfileAvatar"
-                        android:src="@drawable/profile_user"
-                        android:foregroundGravity="center"
-                        />
+                        app:srcCompat="@drawable/profile_user"
+                        android:foregroundGravity="center"/>
                     <LinearLayout
+                        android:id="@+id/imagepicker"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
@@ -98,11 +98,11 @@
                         android:layout_marginRight="0dp"
                         android:background="@drawable/simple_circle_background">
                         <ImageView
-                            android:id="@+id/imagepicker"
+                            android:id="@+id/picker"
                             android:layout_width="20dp"
                             android:layout_height="30dp"
                             android:layout_marginLeft="5dp"
-                            android:src="@drawable/ic_photo_camera"/>
+                            app:srcCompat="@drawable/ic_photo_camera"/>
                     </LinearLayout>
                 </RelativeLayout>
             </RelativeLayout>

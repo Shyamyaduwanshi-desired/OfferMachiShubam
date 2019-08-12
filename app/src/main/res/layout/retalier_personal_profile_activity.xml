@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,24 +27,27 @@
                         android:layout_height="wrap_content"
                         android:weightSum="2">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:textSize="16dp"
+                            android:padding="10dp"
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Name :-"/>
-                        <TextView
-                            android:id="@+id/totalprize"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editname"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:enabled="false"
+                            android:background="@color/transparent"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
-                            android:textSize="16dp"
+                            android:textSize="14dp"
                             android:textColor="@color/purple"
                             android:text="Mohan Kumar"/>
                     </LinearLayout>
@@ -54,24 +57,27 @@
                         android:weightSum="2"
                         android:layout_marginTop="10dp">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:textSize="16dp"
+                            android:padding="10dp"
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Gender :-"/>
-                        <TextView
-                            android:id="@+id/deliveryfee"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editgender"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
-                            android:textSize="16dp"
+                            android:textSize="14dp"
+                            android:enabled="false"
+                            android:background="@color/transparent"
                             android:textColor="@color/purple"
                             android:text="Male"/>
                     </LinearLayout>
@@ -81,24 +87,27 @@
                         android:weightSum="2"
                         android:layout_marginTop="10dp">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:textSize="16dp"
+                            android:padding="10dp"
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Email :-"/>
-                        <TextView
-                            android:id="@+id/discount"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editemail"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:enabled="false"
+                            android:background="@color/transparent"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
-                            android:textSize="16dp"
+                            android:textSize="14dp"
                             android:textColor="@color/purple"
                             android:text="mohankumar@gmail.com"/>
                     </LinearLayout>
@@ -108,27 +117,30 @@
                         android:weightSum="2"
                         android:layout_marginTop="10dp">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:layout_marginLeft="15dp"
                             android:textSize="16dp"
+                            android:padding="10dp"
+                            android:enabled="false"
                             android:textColor="#000"
                             android:textStyle="bold"
                             android:text="Mobile :-"/>
 
-                        <TextView
-                            android:id="@+id/estimatedtax"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/editmobile"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="15dp"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:background="@color/transparent"
                             android:text="9163780252"
                             android:textColor="@color/purple"
-                            android:textSize="16dp" />
+                            android:textSize="14dp" />
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
@@ -139,7 +151,7 @@
                 android:gravity="center"
                 android:layout_marginTop="40dp">
                 <LinearLayout
-                    android:id="@+id/edit_text_linear_id"
+                    android:id="@+id/btnedit"
                     android:layout_width="98dp"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"
@@ -148,15 +160,16 @@
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:background="@drawable/view_background">
+
                     <TextView
                         android:id="@+id/edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/pencil"
+                        android:drawablePadding="10dp"
                         android:text="Edit"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:drawableLeft="@drawable/pencil"
-                        android:drawablePadding="10dp"/>
+                        android:textSize="15dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

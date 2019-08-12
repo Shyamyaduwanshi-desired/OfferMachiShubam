@@ -9,18 +9,18 @@
             android:title="@string/profile" />
         <item
             android:id="@+id/nav_offer"
-            android:title="@string/offersdeals">
-            <menu>
-                <item
-                    android:id="@+id/navigation_sub_item_1"
-                    android:icon="@drawable/ic_tag"
-                    android:title="@string/addnew" />
-                <item
-                    android:id="@+id/navigation_sub_item_2"
-                    android:icon="@drawable/ic_tag"
-                    android:title="@string/viewoffer" />
-            </menu>
-        </item>
+            android:icon="@drawable/ic_tag"
+            android:title="@string/offersdeals" />
+
+        <item
+            android:id="@+id/navigation_sub_item_1"
+            android:icon="@drawable/ic_tag"
+            android:title="@string/addnew" />
+        <item
+            android:id="@+id/navigation_sub_item_2"
+            android:icon="@drawable/ic_tag"
+            android:title="@string/viewoffer" />
+
         <item
             android:id="@+id/dealsday"
             android:icon="@drawable/appointment"
@@ -32,18 +32,18 @@
 
         <item
             android:id="@+id/nav_redeemcode"
-            android:title="@string/redeemcode">
-            <menu>
-                <item
-                    android:id="@+id/nav_qrcode"
-                    android:icon="@drawable/qrcode"
-                    android:title="@string/qrcode" />
-                <item
-                    android:id="@+id/nav_couponcode"
-                    android:icon="@drawable/coupon"
-                    android:title="@string/couponcode" />
-            </menu>
-        </item>
+            android:icon="@drawable/ic_coupon"
+            android:title="@string/redeemcode"/>
+
+            <item
+                android:id="@+id/nav_qrcode"
+                android:icon="@drawable/qrcode"
+                android:title="@string/qrcode" />
+            <item
+                android:id="@+id/nav_couponcode"
+                android:icon="@drawable/coupon"
+                android:title="@string/couponcode" />
+
 
         <item
             android:id="@+id/nav_statistics"

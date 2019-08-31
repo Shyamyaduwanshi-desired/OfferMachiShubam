@@ -105,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <ImageView
+                        android:id="@+id/facebook_id"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/facebook"
@@ -126,14 +127,14 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:id="@+id/googlelogo_id"
-                        android:src="@drawable/ic_google_plus"
+                        android:id="@+id/twitter_id"
+                        app:srcCompat="@drawable/twitter"
                         android:layout_gravity="center"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Whatsapp"
+                        android:text="Twitter"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
                         />
@@ -145,6 +146,7 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp">
                     <ImageView
+                        android:id="@+id/watsup_id"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/whatsapp"
@@ -153,7 +155,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Facebook"
+                        android:text="Whatsapp"
                         android:textColor="@color/black"
                         android:layout_marginTop="5dp"
                         />

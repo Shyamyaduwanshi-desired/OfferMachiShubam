@@ -1,7 +1,9 @@
 package com.desired.offermachi.retalier.presenter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -12,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
+import com.desired.offermachi.retalier.view.activity.RetalierOtpActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +39,7 @@ public class LoginPresenter {
         void fail(String response);
     }
 
-    public void sentRequest(final String mobile) {
+    public void sentRequest(final String mobile,final String password, final String devicekey) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Login Please Wait..");
         progress.setCancelable(false);
@@ -53,24 +56,13 @@ public class LoginPresenter {
                         login.success(reader.getString("message"));
                         String result=reader.getString("result");
                         JSONObject jsonObject=new JSONObject(result);
-                        UserModel userModel=new UserModel(
-                                jsonObject.getString("id"),
-                                jsonObject.getString("username"),
-                                jsonObject.getString("email"),
-                                jsonObject.getString("mobile"),
-                                jsonObject.getString("shop_name"),
-                                jsonObject.getString("shop_contact_number"),
-                                jsonObject.getString("address"),
-                                jsonObject.getString("city"),
-                                jsonObject.getString("shop_days"),
-                                jsonObject.getString("opening_time"),
-                                jsonObject.getString("closing_time"),
-                                jsonObject.getString("about_store"),
-                                jsonObject.getString("gender"),
-                                jsonObject.getString("profile_image"),
-                                jsonObject.getString("shop_logo")
-                        );
-                        SharedPrefManagerLogin.getInstance(context).userLogin(userModel);
+                        String userid=jsonObject.getString("user_id");
+                      //  String otp=jsonObject.getString("otp");
+                        Intent intent = new Intent(context, RetalierOtpActivity.class);
+                        intent.putExtra("userid",userid);
+                      //  intent.putExtra("otp",otp);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
 
                     }else if(status == 404){
                        login.error(reader.getString("message"));
@@ -92,7 +84,9 @@ public class LoginPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mobile", mobile);
-
+                params.put("password", password);
+                params.put("device_key",devicekey);
+                params.put("device_type", "Android");
                 return params;
             }
         };

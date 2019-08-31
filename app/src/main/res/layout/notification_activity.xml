@@ -8,7 +8,6 @@
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:layout_height="55dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -62,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="0dp"
+        android:layout_below="@+id/cv"
         android:orientation="vertical">
 
         <LinearLayout
@@ -83,66 +83,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
-        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/categoryrecycleview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:outlineSpotShadowColor="@color/black"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="15dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:gravity="center"
-                    android:layout_marginTop="0dp"
-                    android:background="@drawable/notification_background">
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/bell"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:textSize="16sp"
-                        android:text="Lorem Ipsum Doller Sit Amet"
-                        android:id="@+id/title"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Lorem Ipsum Doller Sit Amet Lorem Ipsum Doller Sit Amet"
-                        android:id="@+id/msg"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="40dp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/cancel" />
-                </LinearLayout>
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+            android:layout_marginBottom="20dp"
+            android:scrollbars="none">
+
+        </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
     <!--<View-->
         <!--android:layout_width="match_parent"-->

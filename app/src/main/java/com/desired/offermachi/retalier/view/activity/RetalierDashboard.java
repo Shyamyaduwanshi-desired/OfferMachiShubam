@@ -151,9 +151,7 @@ public class RetalierDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_notification) {
             drawer.closeDrawer(GravityCompat.START);
-            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
-
-//            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
 
         } else if (id == R.id.nav_rateapp) {
             drawer.closeDrawer(GravityCompat.START);
@@ -187,11 +185,11 @@ public class RetalierDashboard extends AppCompatActivity
 
         }else if (id == R.id.nav_terms) {
             drawer.closeDrawer(GravityCompat.START);
-            Intent viewIntent =
+          /*  Intent viewIntent =
                     new Intent("android.intent.action.VIEW",
                             Uri.parse("http://offermachi.in/pages/terms_condition"));
-            startActivity(viewIntent);
-//            startActivity(new Intent(getApplicationContext(), RetalierTermsConditionActivity.class));
+            startActivity(viewIntent);*/
+            startActivity(new Intent(getApplicationContext(), RetalierTermsConditionActivity.class));
 
         }else if (id == R.id.nav_logout) {
             drawer.closeDrawer(GravityCompat.START);

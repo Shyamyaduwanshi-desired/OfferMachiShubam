@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.desired.offermachi.customer.ui.SplashActivity;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierLogin;
 

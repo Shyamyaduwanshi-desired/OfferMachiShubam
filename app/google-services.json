@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "767311401987",
+    "firebase_url": "https://offermachi-3b242.firebaseio.com",
+    "project_id": "offermachi-3b242",
+    "storage_bucket": "offermachi-3b242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767311401987:android:acb56ec4922deb04",
+        "android_client_info": {
+          "package_name": "com.desired.offermachi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767311401987-ia53hg1hnp6eoe20khsra3oqgqpdtovc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.desired.offermachi",
+            "certificate_hash": "a89f2452bed3230b716713fa0156983eaaa93e63"
+          }
+        },
+        {
+          "client_id": "767311401987-ag9d3mk4niq3v8ugf0gcoqa11rpog6po.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkdcGo7Qxy_dkxuYMxWmFsbyVW1eUfzZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767311401987-ag9d3mk4niq3v8ugf0gcoqa11rpog6po.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

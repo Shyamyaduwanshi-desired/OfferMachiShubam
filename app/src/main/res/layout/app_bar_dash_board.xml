@@ -58,6 +58,7 @@
                         android:layout_marginLeft="20dp"
                         android:src="@drawable/ic_info" />
                     <ImageView
+                        android:id="@+id/btnnotification"
                         android:layout_width="29dp"
                         android:layout_height="20dp"
                         android:layout_centerVertical="true"
@@ -70,6 +71,7 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <include layout="@layout/content_dash_board" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floting_button"
         android:layout_width="wrap_content"
@@ -80,4 +82,5 @@
         android:src="@drawable/search_icon"
         app:backgroundTint="@color/purple"
         android:layout_marginRight="@dimen/margin_right"
-        /></android.support.design.widget.CoordinatorLayout>
+        />
+</android.support.design.widget.CoordinatorLayout>

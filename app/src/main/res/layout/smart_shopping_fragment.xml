@@ -56,6 +56,16 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
+                <Switch
+                    android:id="@+id/smartswitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:switchMinWidth="50dp"
+                    android:layout_gravity="right"
+                    android:text="Smart Shopping  "
+                    android:padding="10dp"
+                    android:textOff="OFF"
+                    android:textOn="ON"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +75,7 @@
                     android:textSize="18dp"
                     />
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/smartshopping_recycler_id"
+                    android:id="@+id/category_recycler_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="80dp"

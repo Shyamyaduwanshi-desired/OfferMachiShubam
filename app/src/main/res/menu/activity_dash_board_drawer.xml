@@ -32,6 +32,11 @@
             android:icon="@drawable/ic_deal"
             android:title="@string/dealsday" />
         <item
+            android:id="@+id/nav_exclusive"
+            android:icon="@drawable/couponpurple"
+            android:title="Exclusive Offers" />
+
+        <item
             android:id="@+id/nav_mycoupons"
             android:icon="@drawable/couponpurple"
             android:title="@string/mycoupons" />

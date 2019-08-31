@@ -8,18 +8,19 @@
     android:orientation="vertical"
     android:id="@+id/drawer_layout_second"
     tools:showIn="@layout/app_bar_dash_board">
-    <FrameLayout
+  <!--  <FrameLayout
         android:id="@+id/screenarea"
         android:layout_width="match_parent"
-        android:layout_height="672dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="-26dp"
         tools:layout_editor_absoluteY="0dp">
-    </FrameLayout>
+    </FrameLayout>-->
     <FrameLayout
         android:id="@+id/framelayout_id"
         android:layout_width="match_parent"
-        android:layout_height="670dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
 
     <View
         android:id="@+id/divider6"

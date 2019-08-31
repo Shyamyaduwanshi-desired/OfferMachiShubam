@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.ui.RegistraionAsActivity;
-import com.desired.offermachi.retalier.presenter.LoginPresenter;
 import com.desired.offermachi.retalier.presenter.VerifyCouponcodePresenter;
 
 import libs.mjn.prettydialog.PrettyDialog;

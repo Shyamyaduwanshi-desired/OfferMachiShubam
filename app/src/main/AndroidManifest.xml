@@ -1,82 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.desired.offermachi">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:hardwareAccelerated="true"
         android:icon="@drawable/shortlogo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".retalier.view.activity.VerifyCouponcodeActivity"></activity>
-        <activity android:name=".retalier.view.activity.QRcodeScannerActivity" />
-
-        <uses-library
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".customer.view.activity.MapActivity"></activity>
+        <activity android:name=".retalier.view.activity.RetailerChangePasswordActivity" />
+        <activity android:name=".retalier.view.activity.ResetPasswordActivity" />
+        <activity android:name=".customer.view.activity.CustomerResetPasswordActivity" />
+        <activity android:name=".customer.view.activity.NotificationActivity">
+            <intent-filter>
+                <action android:name="customer" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--
+           <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
+        -->
+        <service android:name=".service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_key" />
         <activity
-            android:name=".customer.ui.DashBoardActivity"
-            android:label="@string/title_activity_dash_board"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".customer.ui.RegistraionAsActivity" />
-        <activity android:name=".customer.ui.LoginActivity" />
-        <activity android:name=".customer.ui.RegisterActivity" />
-        <activity android:name=".customer.ui.VerifyActivity" />
-        <activity android:name=".customer.ui.ForgotPasswordActivity" />
-        <activity android:name=".customer.ui.OtpActivtivity" />
-        <activity android:name=".customer.ui.CategoryActivity" />
-        <activity android:name=".customer.ui.ProductActivity" />
-        <activity android:name=".customer.ui.EditProfileActivity" />
-        <activity android:name=".customer.ui.ChangePasswordActivity" />
-        <activity android:name=".customer.ui.CouponsActivity" />
-        <activity android:name=".customer.ui.ViewOfferActivity" />
-        <activity android:name=".customer.ui.SmartShoppingSecondActivity" />
-        <activity android:name=".customer.ui.SmartShoppigActivity" />
-        <activity android:name=".customer.ui.ViewAllOfferFollowActivity" />
-        <activity android:name=".customer.ui.StoreCouponCodeActivity" />
-        <activity android:name=".customer.ui.SmartShoppingRemoveActivity" />
-        <activity android:name=".customer.ui.DoNotDistrubActivity" />
-        <activity android:name=".retalier.view.activity.RetalierLogin" />
-        <activity android:name=".retalier.view.activity.RetalierRegistration" />
-        <activity android:name=".retalier.view.activity.RetalierForgotPassword" />
-        <activity android:name=".retalier.view.activity.RetalierVerifyActivity" />
-        <activity android:name=".retalier.view.activity.RetalierOtpActivity" />
-        <activity android:name=".retalier.view.activity.RetalierDashboard" />
-        <activity android:name=".retalier.view.activity.RetalierProfileActivity" />
-        <activity android:name=".retalier.view.activity.ListOfPeople0fferDiscount" />
-        <activity android:name=".retalier.view.activity.RetalierAddDeals" />
-        <activity android:name=".retalier.view.activity.RetalierCustomerSupportActivity" />
-        <activity android:name=".retalier.view.activity.RetalierDealsOftheDayActivity" />
-        <activity android:name=".retalier.view.activity.RetalierHelpActivity" />
-        <activity android:name=".retalier.view.activity.RetalierInviteFriendActivity" />
-        <activity android:name=".retalier.view.activity.RetalierNotificationActivity" />
-        <activity android:name=".retalier.view.activity.RetalierProductActivity" />
-        <activity android:name=".retalier.view.activity.RetalierViewOfferDiscount" />
-        <activity android:name=".retalier.view.activity.RetalierPushActivity" />
-        <activity android:name=".retalier.view.activity.RetalierStatisticsActivity"/>
-        <activity android:name=".retalier.view.activity.RetalierTermsConditionActivity"/>
-        <activity android:name=".retalier.view.activity.RetalierListPeopleActivity"/>
-        <activity android:name=".customer.ui.SearchActivity" />
-        <activity android:name=".customer.ui.CategoryListActivity" />
-        <activity android:name=".customer.ui.ViewStoreOfferActivity" />
-        <activity android:name=".customer.ui.FilterShowActivity" />
-        <activity android:name=".customer.ui.SplashActivity">
+            android:name=".customer.view.activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".customer.view.activity.DashBoardActivity"
+            android:label="@string/title_activity_dash_board"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".customer.view.activity.RegistraionAsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.VerifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.OtpActivtivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.EditProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".customer.view.activity.CouponsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ViewOfferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ViewOfferTrendingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.SmartShoppingSecondActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.SmartShoppigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ViewAllOfferFollowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.StoreCouponCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.SmartShoppingRemoveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.DoNotDistrubActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.SearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustNothing" />
+        <activity
+            android:name=".customer.view.activity.CategoryListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.ViewStoreOfferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.FilterShowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".customer.view.activity.InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierLogin"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.RetalierRegistration"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.RetalierForgotPassword"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.RetalierVerifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierOtpActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.RetalierDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.ListOfPeople0fferDiscount"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierAddDeals"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierCustomerSupportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".retalier.view.activity.RetalierDealsOftheDayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierInviteFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierNotificationActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="retailer" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".retalier.view.activity.RetalierProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierViewOfferDiscount"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierPushActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierStatisticsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierTermsConditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.RetalierListPeopleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.VerifyCouponcodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".retalier.view.activity.QRcodeScannerActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fdd36ffe60573d427fe3cf7a20600dc8d14270a0" />
     </application>
 
 </manifest>

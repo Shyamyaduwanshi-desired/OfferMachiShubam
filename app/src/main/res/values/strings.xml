@@ -1,14 +1,12 @@
 <resources>
     <string name="app_name">OfferMachi</string>
-
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="profile">My Profile</string>
+    <string name="profile">My Profile &amp; My Store</string>
     <string name="feeds">Feeds</string>
     <string name="smartshopping">Smart Shopping</string>
     <string name="dealsday">Deals of the Day</string>
@@ -31,7 +29,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="offersdeals">Offer/Discount</string>
     <string name="addnew">Add New Offer/Deals</string>
     <string name="viewoffer">View Offer/Deals List</string>
@@ -43,10 +40,8 @@
     <string name="push">Push Offers</string>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="dailog_title">Select Follower</string>
     <string name="ok_label">Send Offers</string>
     <string name="dismiss_label">Dismiss</string>
@@ -60,6 +55,9 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+    <string name="FCM_PREF" translatable="false">com.desired.offermachi.fcm_pref</string>
+    <string name="FCM_TOKEN" translatable="false">com.desired.offermachi.fcm_token</string>
+    <string name="google_key" translatable="false">AIzaSyBY0qoVDPVESCj2rh6U-TlcHOQzq8q9Ky0</string>
 
 
 </resources>

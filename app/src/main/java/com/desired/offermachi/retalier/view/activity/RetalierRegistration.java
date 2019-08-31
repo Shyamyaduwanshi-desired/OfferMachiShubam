@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.ui.RegistraionAsActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.view.fragment.RegistrationProfileDetailsFragment;
 import com.desired.offermachi.retalier.view.fragment.RegistrationStoreDetailsFrgment;

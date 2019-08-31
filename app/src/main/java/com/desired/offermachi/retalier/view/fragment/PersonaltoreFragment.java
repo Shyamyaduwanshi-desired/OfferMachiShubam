@@ -191,8 +191,10 @@ public class PersonaltoreFragment extends Fragment implements View.OnClickListen
         btnedit.setOnClickListener(this);
     }
     private void openGallery(){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent photoPickerIntent = new Intent();
         photoPickerIntent.setType("image/*");
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);//
+        // photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 100);
     }
 

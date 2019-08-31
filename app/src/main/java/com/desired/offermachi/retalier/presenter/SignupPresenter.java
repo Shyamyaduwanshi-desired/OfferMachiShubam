@@ -41,8 +41,8 @@ public class SignupPresenter {
         void fail(String response);
     }
 
-    public void sentRequest(final String name, final String mobile, final String email, final String shop_name, final String shop_contact_number, final String address, final String city
-    , final String shop_logo, final String shop_day_hours, final String opening_time, final String closing_time, final String about_store) {
+    public void sentRequest(final String name, final String mobile, final String email,final String password, final String shop_name, final String shop_contact_number, final String address, final String city
+    , final String shop_logo, final String shop_day_hours, final String opening_time, final String closing_time, final String about_store,final String devicekey,final String lati,final String longi) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Please Wait..");
         progress.setCancelable(false);
@@ -60,10 +60,10 @@ public class SignupPresenter {
                         String result=reader.getString("result");
                         JSONObject jsonObject=new JSONObject(result);
                                 String userid=jsonObject.getString("user_id");
-                                String otp=jsonObject.getString("otp");
+                                //String otp=jsonObject.getString("otp");
                                 Intent intent = new Intent(context, RetalierOtpActivity.class);
                                 intent.putExtra("userid",userid);
-                                intent.putExtra("otp",otp);
+                              //  intent.putExtra("otp",otp);
                                 context.startActivity(intent);
                                ((Activity)context).finish();
 
@@ -89,6 +89,7 @@ public class SignupPresenter {
                 params.put("name", name);
                 params.put("mobile", mobile);
                 params.put("email", email);
+                params.put("password", password);
                 params.put("shop_name", shop_name);
                 params.put("shop_contact_number", shop_contact_number);
                 params.put("address", address);
@@ -98,6 +99,10 @@ public class SignupPresenter {
                 params.put("opening_time",opening_time);
                 params.put("closing_time",closing_time);
                 params.put("about_store",about_store);
+                params.put("device_key",devicekey);
+                params.put("device_type", "Android");
+                params.put("latitude", lati);
+                params.put("longitude", longi);
                 return params;
             }
         };

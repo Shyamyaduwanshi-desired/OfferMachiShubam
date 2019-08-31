@@ -26,7 +26,7 @@ public class RetalierCategoryAdapter extends RecyclerView.Adapter<RetalierCatego
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public CardView categorylinear;
+      //  public CardView categorylinear;
         ImageView productimg,likeimg;
         TextView productname,productdate;
         Button productbutton;
@@ -34,7 +34,7 @@ public class RetalierCategoryAdapter extends RecyclerView.Adapter<RetalierCatego
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.categorylinear=(CardView)itemView.findViewById(R.id.card_linear_id);
+            //this.categorylinear=(CardView)itemView.findViewById(R.id.card_linear_id);
             this.productimg = (ImageView) itemView.findViewById(R.id.product_image_id);
             this.productname = (TextView) itemView.findViewById(R.id.pushname_product_id);
             this.productdate = (TextView) itemView.findViewById(R.id.product_date_id);
@@ -61,7 +61,7 @@ public class RetalierCategoryAdapter extends RecyclerView.Adapter<RetalierCatego
     @Override
     public void onBindViewHolder(final RetalierCategoryAdapter.MyViewHolder holder, final int listPosition) {
 
-        CardView categorylinear= (CardView) holder.categorylinear;
+       // CardView categorylinear= (CardView) holder.categorylinear;
         ImageView productimg = holder.productimg;
         TextView productname = holder.productname;
         TextView productdate = holder.productdate;

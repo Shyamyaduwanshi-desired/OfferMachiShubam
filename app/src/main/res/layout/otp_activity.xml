@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:background="@drawable/splash">
         <ImageView
-            android:layout_width="270dp"
-            android:layout_height="120dp"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
             android:src="@drawable/logooffermachi"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"/>
@@ -18,15 +18,20 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="220dp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp">
         <android.support.v7.widget.CardView
             android:id="@+id/card_view"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             card_view:cardBackgroundColor="#fff"
             android:layout_margin="10dp">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,10 +75,11 @@
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/ic_access"
+                            app:srcCompat="@drawable/ic_access"
                             android:layout_gravity="center_vertical"/>
                     </LinearLayout>
                     <EditText
+                        android:id="@+id/etotp"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:paddingLeft="5dp"
@@ -83,7 +89,7 @@
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionGo"
                         android:layout_marginTop="2dp"
                         android:textColor="@color/purple"
                         />
@@ -102,11 +108,14 @@
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="40dp"
                     android:layout_marginTop="20dp">
                     <TextView
+                        android:id="@+id/resendotp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Resend Again"
@@ -116,6 +125,7 @@
                         android:textSize="15dp"/>
                 </LinearLayout>
             </LinearLayout>
+            </ScrollView>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </RelativeLayout>

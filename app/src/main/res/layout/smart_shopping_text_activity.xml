@@ -78,7 +78,7 @@
             android:text="Sort By"/>
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/smart_shopping_remove_recycler_id"
+        android:id="@+id/categoryrecycleview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"

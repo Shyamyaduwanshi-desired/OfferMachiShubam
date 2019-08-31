@@ -7,22 +7,29 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -30,6 +37,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,25 +49,27 @@ import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
-import com.desired.offermachi.retalier.view.activity.RetalierDashboard;
+import com.desired.offermachi.retalier.view.adapter.MultiAdapter;
+import com.desired.offermachi.service.GeocodingLocation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
+
 import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 import static android.app.Activity.RESULT_OK;
 
-public class RegistrationStoreDetailsFrgment extends Fragment implements View.OnClickListener,SignupPresenter.SignUp  {
+public class RegistrationStoreDetailsFrgment extends Fragment implements LocationListener, View.OnClickListener,SignupPresenter.SignUp  {
     View view;
+    String android_id;
     private SignupPresenter presenter;
     EditText storename,storecontact,storeaddress,cityedt,aboutstore;
     Button registerbutton;
     String shop_name,shop_contact_number,address,city,about_store,shopopentime,shopclosetime;
-    String name,mobile,email;
+    String name,mobile,email,password;
     private String picture = "";
     private File file, compressedImage;
     ImageView imagestore;
@@ -77,6 +87,11 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
     ImageView monplus,tuesplus,wedplus,thurplus,friplus,saturplus;
     EditText etMonday,etTuesday,etWednesday,etThursday,etFriday,etSaturday,etSunday;
     TextView Mondaystart_Time,Mondayend_Time,Tuesdaystart_Time,Tuesdayend_Time,Wednesdaystart_Time,Wednesdayend_Time,Thursdaystart_Time,Thursdayend_Time,Fridaystart_Time,Fridayend_Time,Saturdaystart_Time,Saturdayend_Time,Sundaystart_Time,Sundayend_Time;
+    TextView txtstorecategory;
+    android.app.AlertDialog alertDialog;
+    LocationManager locationManager;
+    String lati ;
+    String longi ;
     public RegistrationStoreDetailsFrgment() {
     }
 
@@ -86,6 +101,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
         presenter = new SignupPresenter(getContext(), RegistrationStoreDetailsFrgment.this);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationReceiver,
                 new IntentFilter("Data"));
+        getLocation();
         initView() ;
         return  view;
     }
@@ -100,7 +116,11 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
         }
     }
     private void initView() {
+       /* android_id = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);*/
         storename=(EditText)view.findViewById(R.id.store_name_edt_id);
+      /*  txtstorecategory=view.findViewById(R.id.store_category);
+        txtstorecategory.setOnClickListener(this);*/
         storecontact=(EditText)view.findViewById(R.id.store_contact_edt_id);
         storeaddress=(EditText)view.findViewById(R.id.store_address_edt_id);
         cityedt=(EditText)view.findViewById(R.id.city_edt_id);
@@ -189,12 +209,15 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
             name = intent.getStringExtra("name");
             email = intent.getStringExtra("email");
             mobile = intent.getStringExtra("mobile");
+            password = intent.getStringExtra("password");
         }
     };
 
     private void openGallery(){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent photoPickerIntent = new Intent();
         photoPickerIntent.setType("image/*");
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);//
+        // photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 100);
     }
     @Override
@@ -280,15 +303,20 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
                 if (isStoragePermissionGranted()) {
                     openGallery();
                 } else {
-                    ActivityCompat.requestPermissions(getActivity(), permissions, 101);
+                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
                 }
             } else {
                 openGallery();
             }
-        }
+        }/*else if (v==txtstorecategory){
+            selectcategory();
+        }*/
 
     }
     private void Registraionvalid() {
+        SharedPreferences sharedPreferences= getActivity().getSharedPreferences(getString(R.string.FCM_PREF), Context.MODE_PRIVATE);
+        android_id=sharedPreferences.getString(getString(R.string.FCM_TOKEN),"");
+        Log.e("register", "android_id==="+android_id );
         shop_name = storename.getText().toString();
         shop_contact_number = storecontact.getText().toString().trim();
         address = storeaddress.getText().toString();
@@ -328,7 +356,9 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
         }
         else{
             if (isNetworkConnected()) {
-                presenter.sentRequest(name,mobile,email,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store);
+                GeocodingLocation locationAddress = new GeocodingLocation();
+                locationAddress.getAddressFromLocation(address, getContext(), new GeocoderHandler());
+              //  presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id);
             }
         }
 
@@ -380,7 +410,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
-                            ActivityCompat.requestPermissions(getActivity(), permissions, 101);
+                            ActivityCompat.requestPermissions(getActivity(), permissions, 100);
                         }
                     }).show();
         }
@@ -578,6 +608,109 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements View.On
     public void showError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        lati= String.valueOf(location.getLatitude());
+        longi= String.valueOf(location.getLongitude());
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Toast.makeText(getContext(), "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
+    }
+    void getLocation() {
+        try {
+            locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, this);
+        }
+        catch(SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+    private class GeocoderHandler extends Handler {
+        @Override
+        public void handleMessage(Message message) {
+            String locationAddress;
+            switch (message.what) {
+                case 1:
+                    Bundle bundle = message.getData();
+                    locationAddress = bundle.getString("address");
+                    String arr[] = locationAddress.split(",");
+                    String lat = arr[0];
+                    String lng = arr[1];
+                    if (isNetworkConnected()) {
+                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lat,lng);
+                    }
+                    break;
+                case 0:
+                    // Bundle bundle1 = message.getData();
+                    // locationAddress = bundle1.getString("address");
+                    //String arr[] = locationAddress.split(",");
+                    if (isNetworkConnected()) {
+                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lati,longi);
+                    }
+                    //locationAddress = null;
+
+            }
+
+        }
+    }
+
+   /* private void selectcategory (){
+        LayoutInflater li = LayoutInflater.from(getContext());
+        View confirmDialog = li.inflate(R.layout.dialog_followers, null);
+        RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
+        Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        multiAdapter = new MultiAdapter(getContext(),followerModels);
+        recyclerView.setAdapter(multiAdapter);
+        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getContext());
+        alert.setView(confirmDialog);
+        alertDialog = alert.create();
+        WindowManager.LayoutParams wmlp =  alertDialog.getWindow().getAttributes();
+        wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        wmlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        alertDialog.getWindow().setAttributes(wmlp);
+        alertDialog.show();
+        btnsend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (multiAdapter.getSelected().size() > 0) {
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < multiAdapter.getSelected().size(); i++) {
+                        stringBuilder.append(multiAdapter.getSelected().get(i).getId());
+                        stringBuilder.append(",");
+                    }
+                    String followerid=stringBuilder.toString();
+                    if (isNetworkConnected()) {
+                        followerpresenter.SendOffer(idholder,PushOfferid,followerid);
+                        //  Toast.makeText(RetalierPushActivity.this, ""+followerid, Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }  else {
+                        alertDialog.dismiss();
+                        showAlert("Please connect to internet.", R.style.DialogAnimation);
+                    }
+
+                } else {
+                    Toast.makeText(getContext(), "No Selection", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                }
+            }
+        });
+    }*/
 }
 
 

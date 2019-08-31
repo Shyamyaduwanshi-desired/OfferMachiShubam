@@ -28,10 +28,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.ChangePasswordActivity;
+import com.desired.offermachi.customer.view.activity.EditProfileActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.ProfilePresenter;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
+import com.desired.offermachi.retalier.view.activity.RetailerChangePasswordActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,6 +54,7 @@ EditText etname,etemail,etmobile,etgender;
     int editState = 0;
     TextView txtedit;
     private ProfilePresenter presenter;
+    TextView changepasswordtext;
     public ProfileDetailsFragment() {
     }
 
@@ -78,6 +82,8 @@ EditText etname,etemail,etmobile,etgender;
         etemail.setText(emailholder);
         etmobile.setText(phoneholder);
         btnedit.setOnClickListener(this);
+        changepasswordtext=view.findViewById(R.id.changepassword_id);
+        changepasswordtext.setOnClickListener(this);
     }
 
     @Override
@@ -92,6 +98,9 @@ EditText etname,etemail,etmobile,etgender;
                 updateprofile();
                 editState = 0;
             }
+        }else if (v==changepasswordtext){
+            Intent intent = new Intent(getContext(), RetailerChangePasswordActivity.class);
+            startActivity(intent);
         }
 
     }

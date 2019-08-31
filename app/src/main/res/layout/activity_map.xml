@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.view.activity.MapActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv"
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/splash">
+                <ImageView
+                    android:id="@+id/imageback"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_left_arrow"/>
+                <TextView
+                    android:id="@+id/logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="@string/smartshopping"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:textColor="@color/black"
+                    android:textSize="19dp"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+                <ImageView
+                    android:id="@+id/imgNotiBell"
+                    android:layout_width="39dp"
+                    android:layout_height="35dp"
+                    android:padding="5dp"
+                    android:layout_marginLeft="320dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/ic_notification_bell" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+        <LinearLayout
+            android:id="@+id/lypurple"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/cv"
+            android:background="@color/purple">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/selectkilometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:drawableLeft="@drawable/ic_arrowdown"
+                    android:drawableTint="@color/black"
+                    android:drawablePadding="10dp"
+                    android:text="0 Km"
+                    android:ellipsize="end"
+                    android:maxLength="12"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="17dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_background"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/lightcolour"/>
+                    <EditText
+                        android:id="@+id/etlocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/search_background"
+                        android:hint="Location"
+                        android:textSize="15dp"
+                        android:editable="false"
+                        android:drawablePadding="10dp"
+                        android:layout_marginLeft="10dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lypurple"
+            tools:context=".MyActivity" />
+    </RelativeLayout>
+
+</RelativeLayout>

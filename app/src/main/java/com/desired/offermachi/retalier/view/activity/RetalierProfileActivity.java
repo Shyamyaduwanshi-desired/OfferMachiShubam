@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
@@ -45,6 +46,8 @@ import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
+import libs.mjn.prettydialog.PrettyDialog;
+import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener, ProfileImagePresenter.ProfileImage {
 
@@ -109,8 +112,10 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
         }
     }
     private void openGallery(){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent photoPickerIntent = new Intent();
         photoPickerIntent.setType("image/*");
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);//
+        // photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 100);
     }
     @Override
@@ -234,22 +239,32 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
 
     @Override
     public void error(String response) {
-        showDialog(response);
+        showAlert(response, R.style.DialogAnimation);
     }
 
     @Override
     public void fail(String response) {
-        showDialog(response);
+        showAlert(response, R.style.DialogAnimation);
     }
-    private void showDialog(String message) {
-        new AlertDialog.Builder(RetalierProfileActivity.this)
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                }).show();
+    private void showAlert(String message, int animationSource){
+        final PrettyDialog prettyDialog = new PrettyDialog(RetalierProfileActivity.this);
+        prettyDialog.setCanceledOnTouchOutside(false);
+        TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
+        TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
+        title.setTextSize(15);
+        tvmessage.setTextSize(15);
+        prettyDialog.setIconTint(R.color.colorPrimary);
+        prettyDialog.setIcon(R.drawable.pdlg_icon_info);
+        prettyDialog.setTitle("");
+        prettyDialog.setMessage(message);
+        prettyDialog.setAnimationEnabled(false);
+        prettyDialog.getWindow().getAttributes().windowAnimations = animationSource;
+        prettyDialog.addButton("Ok", R.color.black, R.color.white, new PrettyDialogCallback() {
+            @Override
+            public void onClick() {
+                prettyDialog.dismiss();
+            }
+        }).show();
     }
     //tablayout
     public class Pager extends FragmentStatePagerAdapter {

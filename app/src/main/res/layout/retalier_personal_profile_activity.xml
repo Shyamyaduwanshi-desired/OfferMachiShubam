@@ -55,6 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:weightSum="2"
+                        android:visibility="gone"
                         android:layout_marginTop="10dp">
                         <TextView
                             android:layout_width="0dp"
@@ -144,6 +145,16 @@
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
+            <TextView
+                android:id="@+id/changepassword_id"
+                android:layout_below="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:textColor="@color/green"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="right"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

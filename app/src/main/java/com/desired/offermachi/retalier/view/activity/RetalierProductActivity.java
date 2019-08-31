@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.model.slider_model;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
@@ -35,6 +34,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import libs.mjn.prettydialog.PrettyDialog;
+import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierProductActivity extends AppCompatActivity implements View.OnClickListener, ViewOfferDetailPresenter.OfferDiscount {
 
@@ -73,7 +75,7 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(offerid);
         }  else {
-            showDialog("Please connect to internet.");
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
     }
 
@@ -154,24 +156,34 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
 
     @Override
     public void error(String response) {
-        showDialog(response);
+        showAlert(response, R.style.DialogAnimation);
     }
 
     @Override
     public void fail(String response) {
-        showDialog(response);
-    }
-    private void showDialog(String message) {
-        new AlertDialog.Builder(RetalierProductActivity.this)
-                .setMessage(message)
-                .setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                }).show();
+        showAlert(response, R.style.DialogAnimation);
     }
 
+    private void showAlert(String message, int animationSource){
+        final PrettyDialog prettyDialog = new PrettyDialog(this);
+        prettyDialog.setCanceledOnTouchOutside(false);
+        TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
+        TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
+        title.setTextSize(15);
+        tvmessage.setTextSize(15);
+        prettyDialog.setIconTint(R.color.colorPrimary);
+        prettyDialog.setIcon(R.drawable.pdlg_icon_info);
+        prettyDialog.setTitle("");
+        prettyDialog.setMessage(message);
+        prettyDialog.setAnimationEnabled(false);
+        prettyDialog.getWindow().getAttributes().windowAnimations = animationSource;
+        prettyDialog.addButton("Ok", R.color.black, R.color.white, new PrettyDialogCallback() {
+            @Override
+            public void onClick() {
+                prettyDialog.dismiss();
+            }
+        }).show();
+    }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;

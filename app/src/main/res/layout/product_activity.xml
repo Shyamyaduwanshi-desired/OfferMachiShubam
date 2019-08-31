@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
@@ -18,11 +17,10 @@
                 android:id="@+id/imageviewback"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_left_arrow"
+                app:srcCompat="@drawable/ic_left_arrow"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="0dp"
-                android:layout_marginLeft="20dp"
-              />
+                android:layout_marginLeft="20dp" />
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="90dp"
@@ -31,16 +29,27 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp" />
-
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_notification_bell"
-                android:layout_centerVertical="true"
-                android:layout_gravity="end"
-                android:layout_marginTop="0dp"
-                android:layout_toRightOf="@+id/logo"
-                android:layout_marginLeft="110dp"/>
+                android:id="@+id/imgNotiBell"
+                android:layout_width="39dp"
+                android:layout_height="32dp"
+                android:padding="5dp"
+                android:layout_marginLeft="310dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_notification_bell" />
+            <TextView
+                android:id="@+id/txtMessageCount"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_background"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="6sp"
+                app:layout_constraintEnd_toEndOf="@+id/imgNotiBell"
+                app:layout_constraintTop_toTopOf="@+id/imgNotiBell"
+                android:layout_marginLeft="330dp"
+                android:layout_marginTop="8dp"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
     <ScrollView
@@ -55,112 +64,77 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:background="@color/white">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Flat"
-                                android:textColor="@color/black"
-                                android:textSize="18dp"
-                                android:layout_marginLeft="5dp"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="50%"
-                                android:textColor="@color/pink"
-                                android:layout_marginLeft="5dp"
-                                android:textSize="18dp"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Off"
-                                android:textColor="@color/black"
-                                android:layout_marginLeft="5dp"
-                                android:textSize="18dp" />
-                            <LinearLayout
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:gravity="center"
-                                android:layout_marginLeft="200dp"
-                                android:layout_marginTop="5dp"
-                                android:background="@drawable/simple_circle_background">
-                                <ImageView
-                                    android:id="@+id/heartfirst_image_id"
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:src="@drawable/heart"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:background="@color/white">
-                            <LinearLayout
-                                android:id="@+id/shareicon_image_id"
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:gravity="center"
-                                android:layout_marginLeft="315dp"
-                                android:layout_marginTop="10dp"
-                                android:background="@drawable/simple_circle_background">
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:src="@drawable/shareicon"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center">
 
-                                <ImageView
-                                    android:id="@+id/viewPager_product"
-                                    android:layout_width="200dp"
-                                    android:layout_height="150dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/myvegpizza"
-                                    />
-                            </LinearLayout>
-                        </LinearLayout>
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/offertypename"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:layout_marginLeft="5dp"/>
+
+                    <ImageView
+                        android:id="@+id/heartfirst_image_id"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="right"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/heart"/>
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/heartfirst_image_id"
+                        android:src="@drawable/shareicon"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="20dp"/>
+
+
+
+                        <ImageView
+                            android:id="@+id/viewPager_product"
+                            android:layout_width="200dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/offertypename"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/myvegpizza"/>
+
+
+
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
                 <TextView
-                    android:id="@+id/dproductname"
+                    android:id="@+id/offername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Dominos Pizza"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
-                    android:textSize="16dp" />
+                    android:textSize="19dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
                 <TextView
-                    android:id="@+id/dproddetailsname"
+                    android:id="@+id/offerdescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Curabitur non nulla sit amet nisl temus convallis quis ac lectus.Donec rutrum congue leo eget malesuada. "
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:text="Curabitur non nulla sit amet nisl temus convallis quis ac lectus.Donec rutrum congue leo eget malesuada.Curabitur non nulla sit amet nisl temus convallis quis ac lectus.Donec rutrum congue leo eget malesuada. "
+                    android:layout_marginLeft="10dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,6 +159,7 @@
                         android:textColor="@color/black"
                         android:textSize="12dp" />
                     <TextView
+                        android:id="@+id/brandname"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Pizza"
@@ -203,14 +178,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Purchase Mode:"
-                        android:layout_weight="1"
+                        android:layout_weight="1.2"
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         android:textSize="12dp" />
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:layout_marginLeft="3dp"
                         android:text="Takeaway"
                         android:textSize="12dp" />
@@ -221,12 +196,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/productprice_id"
                         android:layout_width="wrap_content"
@@ -235,22 +209,20 @@
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="1dp"
-                        />
+                        android:layout_marginTop="1dp"/>
                     <TextView
+                        android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12:00AM -12:15PM"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="1dp"
-                        />
+                        android:layout_marginTop="1dp"/>
                 </LinearLayout>
 
-                <LinearLayout
+              <!--  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    >
+                    android:layout_marginLeft="25dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -267,14 +239,14 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="1dp"
                         />
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/product_date_id"
@@ -285,6 +257,7 @@
                     android:drawableLeft="@drawable/ic_clock_circular_outline"
                     android:drawablePadding="5dp"/>
                 <TextView
+                    android:id="@+id/enddate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Jul 31,2019"
@@ -297,7 +270,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@drawable/add_cart_button"
-                android:text="View Code"
+                android:text="Get Coupon Code"
                 android:textSize="18dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
@@ -344,6 +317,7 @@
                                 android:gravity="center">
 
                                 <ImageView
+                                    android:id="@+id/storelogothumb"
                                     android:layout_width="45dp"
                                     android:layout_height="40dp"
                                     android:layout_gravity="center"
@@ -359,23 +333,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/storename"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Dominos"
                                     android:textColor="@color/black" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="6 days ago" />
                             </LinearLayout>
 
                             <TextView
+                                android:id="@+id/btnfollow"
                                 android:layout_width="70dp"
                                 android:layout_height="19dp"
                                 android:layout_marginLeft="100dp"
                                 android:layout_marginTop="20dp"
-                                android:layout_marginRight="10dp"
                                 android:background="@drawable/view_background"
                                 android:gravity="center"
                                 android:text="Follow"
@@ -391,11 +361,11 @@
                             android:gravity="center"
                             android:layout_marginRight="10dp">
                             <ImageView
-                                android:layout_width="230dp"
+                                android:id="@+id/storeimage"
+                                android:layout_width="200dp"
                                 android:layout_height="150dp"
-                                android:src="@drawable/pizza"
-                               android:scaleType="fitXY"
-                                />
+                                android:layout_gravity="center"
+                                android:src="@drawable/myvegpizza"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -403,7 +373,7 @@
                             android:orientation="vertical"
                             android:layout_marginLeft="10dp">
                             <TextView
-                                android:id="@+id/product_name_id"
+                                android:id="@+id/storename2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Dominos"
@@ -416,6 +386,7 @@
                                 android:background="@color/orange"/>
 
                             <TextView
+                                android:id="@+id/storedescription"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the"
@@ -434,8 +405,7 @@
                                 android:text="View All Offers"
                                 android:textColor="@color/white"
                                 android:gravity="center"
-                                android:textSize="17dp"
-                                />
+                                android:textSize="17dp"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

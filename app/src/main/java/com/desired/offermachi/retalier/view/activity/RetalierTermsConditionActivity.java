@@ -3,6 +3,7 @@ package com.desired.offermachi.retalier.view.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.desired.offermachi.R;
@@ -22,6 +23,8 @@ public class RetalierTermsConditionActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        WebView mywebview = (WebView)findViewById(R.id.webView1);
+        mywebview.loadUrl("http://offermachi.in/pages/terms_condition");
 
     }
 }

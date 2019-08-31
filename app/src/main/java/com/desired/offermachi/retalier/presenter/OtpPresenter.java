@@ -126,9 +126,9 @@ public class OtpPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
-                        String result = reader.getString("result");
-                        JSONObject jsonObject = new JSONObject(result);
-                        otp.successresend(jsonObject.getString("otp"));
+                       /* String result = reader.getString("result");
+                        JSONObject jsonObject = new JSONObject(result);*/
+                        otp.successresend(reader.getString("message"));
                     } else if (status == 404) {
                         otp.errorresend(reader.getString("message"));
                     }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.ui.RegistraionAsActivity;
+import com.desired.offermachi.customer.view.activity.RegistraionAsActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.presenter.LoginPresenter;
 
@@ -23,10 +24,13 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierLogin extends AppCompatActivity implements View.OnClickListener, LoginPresenter.Login{
 
-    TextView forgotpasswordtext,registertext;
+    TextView registertext;
     Button loginnbutton;
     EditText etmobilenumber;
+    EditText etpassword;
     private LoginPresenter presenter;
+    String android_id;
+    TextView txtforgotpasssword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +44,16 @@ public class RetalierLogin extends AppCompatActivity implements View.OnClickList
         initView();
     }
     private void initView() {
+        android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         etmobilenumber=findViewById(R.id.mobilenumber);
-        forgotpasswordtext=(TextView)findViewById(R.id.forgot_password_id);
+        etpassword=findViewById(R.id.etpassword);
         registertext=(TextView)findViewById(R.id.register_text_id);
         loginnbutton=(Button)findViewById(R.id.login_button_id);
         loginnbutton.setOnClickListener(this);
         registertext.setOnClickListener(this);
-        forgotpasswordtext.setOnClickListener(this);
+        txtforgotpasssword=findViewById(R.id.forgot_password_id);
+        txtforgotpasssword.setOnClickListener(this);
         TextView topdealsoftheday=(TextView)findViewById(R.id.login_text_id);
         Typeface otp= ResourcesCompat.getFont(getApplicationContext(), R.font.ralewaybold);
         topdealsoftheday.setTypeface(otp);
@@ -59,23 +66,32 @@ public class RetalierLogin extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(RetalierLogin.this, RetalierRegistration.class);
             startActivity(intent);
             finish();
-        }else if (v==forgotpasswordtext){
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }else if (v==txtforgotpasssword){
             Intent intent = new Intent(RetalierLogin.this, RetalierForgotPassword.class);
             startActivity(intent);
             finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
     private void loginvalid() {
         String mobile = etmobilenumber.getText().toString().trim();
+        String password = etpassword.getText().toString().trim();
         if (mobile.isEmpty()) {
             etmobilenumber.requestFocus();
             etmobilenumber.setError("Please enter mobile number");
         }else if (!isValidMobile(mobile)){
             etmobilenumber.requestFocus();
             etmobilenumber.setError("Please enter valid mobile number");
+        }else if (password.isEmpty()){
+            etpassword.requestFocus();
+            etpassword.setError("Please enter password");
+        }else if (password.length() < 8) {
+            etpassword.requestFocus();
+            etpassword.setError("Please enter minimum 8 digit password");
         }else {
             if(isNetworkConnected()){
-                presenter.sentRequest(mobile);
+                presenter.sentRequest(mobile,password,android_id);
             }else {
                 showAlert("Please connect to internet", R.style.DialogAnimation);
             }
@@ -103,9 +119,7 @@ public class RetalierLogin extends AppCompatActivity implements View.OnClickList
     }
     @Override
     public void success(String response) {
-        Intent intent = new Intent(RetalierLogin.this, RetalierDashboard.class);
-        startActivity(intent);
-        finish();
+
     }
 
     @Override

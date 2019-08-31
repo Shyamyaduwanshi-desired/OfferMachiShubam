@@ -197,8 +197,10 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         });
     }
     private void openGallery(){
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        Intent photoPickerIntent = new Intent();
         photoPickerIntent.setType("image/*");
+        photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);//
+        // photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, 100);
     }
     private void PostOfferValidation() {
@@ -300,7 +302,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
                  if (isStoragePermissionGranted()) {
                      openGallery();
                  } else {
-                     ActivityCompat.requestPermissions(getActivity(), permissions, 101);
+                     ActivityCompat.requestPermissions(getActivity(), permissions, 100);
                  }
              } else {
                  openGallery();
@@ -326,7 +328,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
-                            ActivityCompat.requestPermissions(getActivity(), permissions, 101);
+                            ActivityCompat.requestPermissions(getActivity(), permissions, 100);
                         }
                     }).show();
         }

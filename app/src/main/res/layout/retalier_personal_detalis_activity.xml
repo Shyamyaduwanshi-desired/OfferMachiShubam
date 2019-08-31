@@ -120,8 +120,44 @@
                         android:backgroundTint="#fff"
                         android:inputType="textCapSentences"
                         android:imeOptions="actionGo"
-                        android:textColor="@color/purple"
-                        />
+                        android:textColor="@color/purple">
+                </EditText>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@drawable/edit_background"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/circle_background"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/password"
+                            android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/etpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingLeft="5dp"
+                        android:layout_marginLeft="21dp"
+                        android:layout_marginRight="20dp"
+                        android:hint="Password"
+                        android:drawablePadding="20dp"
+                        android:backgroundTint="#fff"
+                        android:inputType="textPassword"
+                        android:imeOptions="actionGo"
+                        android:textColor="@color/purple">
+                    </EditText>
                 </LinearLayout>
                 <Button
                     android:id="@+id/next_button_id"
@@ -131,6 +167,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
                     android:text="Next"
                     android:textSize="20dp"
                     android:textAllCaps="false"

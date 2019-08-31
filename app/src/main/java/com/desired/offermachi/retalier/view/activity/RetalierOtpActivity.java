@@ -39,9 +39,9 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
     private void init(){
         Intent intent=getIntent();
         Idholder= intent.getStringExtra("userid");
-        Otp=intent.getStringExtra("otp");
+       // Otp=intent.getStringExtra("otp");
         etotp=findViewById(R.id.etotp);
-        etotp.setText(Otp);
+       // etotp.setText(Otp);
         txtresendotp=findViewById(R.id.resendotp);
         txtresendotp.setOnClickListener(this);
         TextView topdealsoftheday=(TextView)findViewById(R.id.otp_text_id);
@@ -96,7 +96,8 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void successresend(String response) {
-        etotp.setText(response);
+        Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
+     //   etotp.setText(response);
     }
 
     @Override

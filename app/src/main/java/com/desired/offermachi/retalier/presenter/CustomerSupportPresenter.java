@@ -9,10 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.desired.offermachi.customer.fragment.CustomerSupportFragment;
 import com.desired.offermachi.retalier.constant.AppData;
-import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
-import com.desired.offermachi.retalier.model.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;

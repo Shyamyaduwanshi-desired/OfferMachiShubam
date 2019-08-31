@@ -7,8 +7,8 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cv"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
                     android:layout_width="match_parent"
                     android:visibility="gone"
                     android:layout_height="55dp">
@@ -85,7 +85,7 @@
                                     android:src="@drawable/profile_user"
                                     android:foregroundGravity="center"
                                     />
-                                <LinearLayout
+                              <!--  <LinearLayout
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
                                     android:layout_alignParentRight="true"
@@ -98,7 +98,7 @@
                                         android:layout_height="30dp"
                                         android:layout_marginLeft="5dp"
                                         android:src="@drawable/ic_photo_camera"/>
-                                </LinearLayout>
+                                </LinearLayout>-->
                             </RelativeLayout>
                         </RelativeLayout>
 
@@ -137,7 +137,7 @@
                                     android:editable="false"
                                     android:background="@drawable/edit_background"
                                     android:hint="Gender"
-                                    android:paddingLeft="20dp"
+                                    android:paddingLeft="30dp"
                                     android:textColor="#013896" />
 
 
@@ -170,7 +170,7 @@
                                     android:textColor="#013896"
                                     />
                                 <EditText
-                                    android:id="@+id/dateofbirth"
+                                    android:id="@+id/address"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:layout_below="@+id/mobile"

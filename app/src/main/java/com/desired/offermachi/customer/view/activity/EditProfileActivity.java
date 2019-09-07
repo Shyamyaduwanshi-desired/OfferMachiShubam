@@ -311,7 +311,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void success(String response) {
         Toast.makeText(getApplicationContext(), ""+response, Toast.LENGTH_SHORT).show();
-        onBackPressed();
+       /* onBackPressed();*/
+        startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+        finish();
     }
 
     @Override

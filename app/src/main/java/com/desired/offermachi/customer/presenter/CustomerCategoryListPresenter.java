@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.customer.model.CategoryListModel;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.view.activity.OtpActivtivity;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.model.DealsModel;
@@ -150,8 +151,6 @@ public class CustomerCategoryListPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
-
-
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

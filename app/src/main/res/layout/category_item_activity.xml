@@ -34,8 +34,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.6"
                         android:textColor="@color/black"
-                        android:textSize="12dp"
-                        android:layout_marginLeft="5dp"
+                        android:textSize="10dp"
                         android:layout_marginTop="2dp"/>
                     <ImageView
                         android:id="@+id/heart_image_id"
@@ -70,6 +69,7 @@
                             android:maxLines="1"
                             android:maxLength="100"
                             android:ellipsize="end"
+                            android:textAllCaps="true"
                             android:textColor="@color/blue"
                             android:layout_marginTop="10dp"/>
                     <View

@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -34,6 +35,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private CustomerNotificationPresenter presenter;
     RecyclerView categoryrecycle;
     String idholder;
+    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder;
+    String SoundHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +48,21 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         presenter=new CustomerNotificationPresenter(NotificationActivity.this,NotificationActivity.this);
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder=user.getId();
+        Nameholder= user.getUsername();
+        EmailHolder=user.getEmail();
+        PhoneHolder= user.getMobile();
+        AddressHolder= user.getAddress();
+        GenderHolder= user.getGender();
+        ImageHolder=user.getProfile();
+        SmartShoppingHolder=user.getSmartShopping();
+        SoundHolder=user.getNotificationsound();
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
-        simpleSwitch =findViewById(R.id.simpleSwitch);
+        simpleSwitch =findViewById(R.id.donotswitch);
         simpleSwitch.setOnCheckedChangeListener(this);
+        if (SoundHolder.equals("1")){
+            simpleSwitch.setChecked(true);
+        }
         categoryrecycle = findViewById(R.id.categoryrecycleview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(linearLayoutManager);
@@ -69,8 +83,31 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked){
-            Intent intent = new Intent(NotificationActivity.this, DoNotDistrubActivity.class);
-            startActivity(intent);
+            User user = new User(
+                    idholder,
+                    Nameholder,
+                    EmailHolder,
+                    PhoneHolder,
+                    AddressHolder,
+                    GenderHolder,
+                    ImageHolder,
+                    SmartShoppingHolder,
+                    "1"
+            );
+            UserSharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+        }else{
+            User user = new User(
+                    idholder,
+                    Nameholder,
+                    EmailHolder,
+                    PhoneHolder,
+                    AddressHolder,
+                    GenderHolder,
+                    ImageHolder,
+                    SmartShoppingHolder,
+                    "0"
+            );
+            UserSharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
         }
     }
 
@@ -116,35 +153,3 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         return cm.getActiveNetworkInfo() != null;
     }
 }
-
-
-//    private void showdilog() {
-//        final Dialog dialog = new Dialog(NotificationActivity.this);
-//        dialog.setContentView(R.layout.do_not_distrub_activity);
-//        dialog.setTitle("Custom Dialog");
-//        TextView text1 = (TextView) dialog.findViewById(R.id.donotdistrub_text_id);
-//        LinearLayout checkbox=(LinearLayout) dialog.findViewById(R.id.checkbox_id);
-//        Button submitbutton=(Button)dialog.findViewById(R.id.submit_button_id);
-//        dialog.show();
-//        submitbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showdilogsecond();
-//            }
-//        });
-//    }
-//    private void showdilogsecond() {
-//
-//        final Dialog dialog = new Dialog(NotificationActivity.this);
-//        dialog.setContentView(R.layout.disturb_dialog_activity);
-//        dialog.setTitle("Custom Dialog");
-//        TextView text1 = (TextView) dialog.findViewById(R.id.distrub_text_id);
-//        LinearLayout checkbox=(LinearLayout) dialog.findViewById(R.id.checkbox_id);
-//        Button submitbutton=(Button)dialog.findViewById(R.id.submit_button_id);
-//        dialog.show();
-//
-//    }
-
-
-
-

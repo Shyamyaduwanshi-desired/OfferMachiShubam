@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -63,6 +64,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
     private SmartShoppingOfferPresenter presenter;
     TextView txtselectkilometer;
     EditText edtlocation;
+    ImageView imgNotiBell;
+    ImageView imageViewback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +80,10 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         idholder=user.getId();
         txtselectkilometer=findViewById(R.id.selectkilometer);
         txtselectkilometer.setOnClickListener(this);
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
+        imageViewback = findViewById(R.id.imageback);
+        imageViewback.setOnClickListener(this);
         edtlocation=findViewById(R.id.etlocation);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -335,6 +342,10 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
     public void onClick(View v) {
         if (v==txtselectkilometer){
             showdialog();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
+        }else if (v == imageViewback) {
+            onBackPressed();
         }
     }
 }

@@ -2,6 +2,8 @@ package com.desired.offermachi.customer.presenter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -70,6 +72,7 @@ public class CustomerOtpPresenter {
                                 jsonObject.getString("address"),
                                 jsonObject.getString("gender"),
                                 jsonObject.getString("profile_image"),
+                                "0",
                                 "0"
 
                         );
@@ -117,9 +120,10 @@ public class CustomerOtpPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
-                       /* String result = reader.getString("result");
-                        JSONObject jsonObject = new JSONObject(result);*/
-                        customerotp.successresend(reader.getString("message"));
+                        Toast.makeText(context, ""+reader.getString("message"), Toast.LENGTH_SHORT).show();
+                        String result = reader.getString("result");
+                        /* JSONObject jsonObject = new JSONObject(result);*/
+                        customerotp.successresend(result);
                     } else if (status == 404) {
                         customerotp.errorresend(reader.getString("message"));
                     }

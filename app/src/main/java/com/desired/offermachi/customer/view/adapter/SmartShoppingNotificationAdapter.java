@@ -187,7 +187,9 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
         holder.removebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent("Remove");
+                intent.putExtra("offerid", selectCategoryModel.getId());
+                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             }
         });
     }

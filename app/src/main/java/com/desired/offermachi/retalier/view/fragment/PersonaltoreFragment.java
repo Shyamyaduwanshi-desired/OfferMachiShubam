@@ -134,53 +134,75 @@ public class PersonaltoreFragment extends Fragment implements View.OnClickListen
         UserModel user = SharedPrefManagerLogin.getInstance(getContext()).getUser();
         idholder= user.getId();
         storename= user.getStore_name();
-        storecontact=user.getStore_contact_number();
+        if (user.getStore_contact_number().equals("null")){
+            etstorecontact.setText("-");
+        }else{
+            storecontact=user.getStore_contact_number();
+            etstorecontact.setText(storecontact);
+        }
         storeaddress=user.getStore_address();
         storeimage=user.getStoreimage();
         storeday =user.getStore_day();
         //open time split
-        storeopentime=user.getStore_opentime();
-         StringTokenizer time = new StringTokenizer(storeopentime, ",");
-         Mondayopentime= time.nextToken();
-         txtmondayopen.setText(Mondayopentime);
-         Tuesdayopentime= time.nextToken();
-         txttuesdayopen.setText(Tuesdayopentime);
-         Wednesdayopentime= time.nextToken();
-         txtwednesdayopen.setText(Wednesdayopentime);
-         Thursdayopentime= time.nextToken();
-         txtthursdayopen.setText(Thursdayopentime);
-         Fridayopentime= time.nextToken();
-         txtfridayopen.setText(Fridayopentime);
-         Saturdayopentime= time.nextToken();
-         txtsaturdayopen.setText(Saturdayopentime);
-         Sundayopentime= time.nextToken();
-         txtsundayopen.setText(Sundayopentime);
+
+        Log.e("profile", "storeopentime=="+storeopentime );
+
+        if (user.getStore_opentime().equals("null")){
+
+        }else{
+            storeopentime=user.getStore_opentime();
+            StringTokenizer time = new StringTokenizer(storeopentime, ",");
+            Mondayopentime= time.nextToken();
+            txtmondayopen.setText(Mondayopentime);
+            Tuesdayopentime= time.nextToken();
+            txttuesdayopen.setText(Tuesdayopentime);
+            Wednesdayopentime= time.nextToken();
+            txtwednesdayopen.setText(Wednesdayopentime);
+            Thursdayopentime= time.nextToken();
+            txtthursdayopen.setText(Thursdayopentime);
+            Fridayopentime= time.nextToken();
+            txtfridayopen.setText(Fridayopentime);
+            Saturdayopentime= time.nextToken();
+            txtsaturdayopen.setText(Saturdayopentime);
+            Sundayopentime= time.nextToken();
+            txtsundayopen.setText(Sundayopentime);
+        }
+
+        if (user.getStore_closetime().equals("null")){
+
+        }else {
+            storeclosetime = user.getStore_closetime();
+            Log.e("profile", "storeclosetime==" + storeclosetime);
+            StringTokenizer timeto = new StringTokenizer(storeclosetime, ",");
+            Mondayclosetime = timeto.nextToken();
+            txtmondayclose.setText(Mondayclosetime);
+            Tuesdayclosetime = timeto.nextToken();
+            txttuesdayclose.setText(Tuesdayclosetime);
+            Wednesdayclosetime = timeto.nextToken();
+            txtwednesdayclose.setText(Wednesdayclosetime);
+            Thursdayclosetime = timeto.nextToken();
+            txtthursdayclose.setText(Thursdayclosetime);
+            Fridayclosetime = timeto.nextToken();
+            txtfridayclose.setText(Fridayclosetime);
+            Saturdayclosetime = timeto.nextToken();
+            txtsaturdayclose.setText(Saturdayclosetime);
+            Sundayclosetime = timeto.nextToken();
+            txtsundayclose.setText(Sundayclosetime);
+        }
+
          //close time split
-         storeclosetime=user.getStore_closetime();
-         StringTokenizer timeto = new StringTokenizer(storeclosetime, ",");
-         Mondayclosetime = timeto.nextToken();
-         txtmondayclose.setText(Mondayclosetime);
-         Tuesdayclosetime= timeto.nextToken();
-         txttuesdayclose.setText(Tuesdayclosetime);
-         Wednesdayclosetime= timeto.nextToken();
-         txtwednesdayclose.setText(Wednesdayclosetime);
-         Thursdayclosetime= timeto.nextToken();
-         txtthursdayclose.setText(Thursdayclosetime);
-         Fridayclosetime= timeto.nextToken();
-         txtfridayclose.setText(Fridayclosetime);
-         Saturdayclosetime= timeto.nextToken();
-         txtsaturdayclose.setText(Saturdayclosetime);
-         Sundayclosetime= timeto.nextToken();
-         txtsundayclose.setText(Sundayclosetime);
 
-        aboutstore=user.getAbout_store();
-
-
+if (user.getAbout_store().equals("null")){
+    etaboutstore.setText("-");
+}else{
+    aboutstore=user.getAbout_store();
+    etaboutstore.setText(aboutstore);
+}
 
         etstorename.setText(storename);
-        etstorecontact.setText(storecontact);
+
         etaddress.setText(storeaddress);
-        etaboutstore.setText(aboutstore);
+
 
         if (storeimage.equals("")||storeimage.equals("NA")){
 
@@ -547,6 +569,11 @@ public class PersonaltoreFragment extends Fragment implements View.OnClickListen
     @Override
     public void success(String response) {
         Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
+        etstorename.setEnabled(false);
+        etstorecontact.setEnabled(false);
+        etaddress.setEnabled(false);
+        etaboutstore.setEnabled(false);
+        imagepicker.setVisibility(View.GONE);
 
     }
 

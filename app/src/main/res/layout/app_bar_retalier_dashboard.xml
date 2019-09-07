@@ -34,6 +34,7 @@
                         android:layout_marginTop="0dp" />
 
                     <ImageView
+                        android:id="@+id/imgNotiBell"
                         android:layout_width="25dp"
                         android:layout_height="30dp"
                         android:src="@drawable/ic_notification_bell"

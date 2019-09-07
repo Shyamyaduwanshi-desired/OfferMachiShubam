@@ -92,7 +92,7 @@
                             android:layout_marginRight="15dp"
                             android:textSize="14dp"
                             android:textColor="@color/purple"
-                            android:text="Ayosi Jewellers"/>
+                            android:text=""/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                             android:layout_marginRight="15dp"
                             android:textSize="14dp"
                             android:textColor="@color/purple"
-                            android:text="9455808080432"/>
+                            android:text=""/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -151,7 +151,7 @@
                             android:layout_marginLeft="50dp"
                             android:textSize="14dp"
                             android:textColor="@color/purple"
-                            android:text="Shop No 1,Varsha  Tower Sheetal Nagr,Mira Road"/>
+                            android:text=""/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -462,7 +462,7 @@
                             android:background="@color/transparent"
                             android:gravity="center"
                             android:layout_marginRight="15dp"
-                            android:text="Lorem Ipsum has been the industry's standard"
+                            android:text=""
                             android:textColor="@color/purple"
                             android:textSize="14dp" />
                     </LinearLayout>

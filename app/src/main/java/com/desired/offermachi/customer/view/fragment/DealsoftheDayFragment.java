@@ -17,6 +17,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -81,7 +82,16 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CouponReceiver,
                 new IntentFilter("Refresh"));
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(FilterReceiver,
+                new IntentFilter("Category"));
     }
+    public BroadcastReceiver FilterReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String Catid = intent.getStringExtra("catid");
+            presenter.DealFilter(idholder,Catid);
+        }
+    };
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -108,8 +118,46 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
-            RelativeLayout atoz=(RelativeLayout)dialog.findViewById(R.id.atoz_id);
-            RelativeLayout ztoa=(RelativeLayout)dialog.findViewById(R.id.ztoa_id);
+            RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
+            RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
+            RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
+            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
+            rdone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="1";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdtwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="2";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdthree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="3";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdfour.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="4";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
             dialog.show();
         }else if (v==filtertext){
             Intent intent = new Intent(getContext(), FilterShowActivity.class);
@@ -149,12 +197,19 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void error(String response) {
-        showAlert(response, R.style.DialogAnimation);
+        if(getActivity() != null) {
+
+            showAlert(response, R.style.DialogAnimation);
+        }
     }
 
     @Override
     public void fail(String response) {
-        showAlert(response, R.style.DialogAnimation);
+        if(getActivity() != null) {
+
+            showAlert(response, R.style.DialogAnimation);
+        }
+
     }
     private void showAlert(String message, int animationSource){
         final PrettyDialog prettyDialog = new PrettyDialog(getContext());

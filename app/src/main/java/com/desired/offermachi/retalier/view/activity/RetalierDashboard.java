@@ -23,13 +23,14 @@ import com.desired.offermachi.R;
 
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
+import com.desired.offermachi.retalier.presenter.RetailerNotificationPresenter;
 import com.desired.offermachi.retalier.view.fragment.ReatalierHomeFragment;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class RetalierDashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     FragmentManager FM;
     FragmentTransaction FT;
     protected ActionBarDrawerToggle mDrawerToggle;
@@ -41,6 +42,7 @@ public class RetalierDashboard extends AppCompatActivity
     TextView name,email;
     ImageView imageView;
     String ImageHolder,username,useremail;
+    ImageView imgNotiBell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,8 @@ public class RetalierDashboard extends AppCompatActivity
             Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
         }
-
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
 
     }
 
@@ -136,7 +139,7 @@ public class RetalierDashboard extends AppCompatActivity
         }
         else if (id == R.id.nav_qrcode) {
             drawer.closeDrawer(GravityCompat.START);
-            startActivity(new Intent(getApplicationContext(), QRcodeScannerActivity.class));
+            startActivity(new Intent(getApplicationContext(), MobileVerifyActivity.class));
 
         }else if (id == R.id.nav_couponcode) {
             drawer.closeDrawer(GravityCompat.START);
@@ -145,9 +148,7 @@ public class RetalierDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_statistics) {
             drawer.closeDrawer(GravityCompat.START);
-            Toast.makeText(this, "Under Development", Toast.LENGTH_SHORT).show();
-
-           // startActivity(new Intent(getApplicationContext(), RetalierStatisticsActivity.class));
+            startActivity(new Intent(getApplicationContext(), RetalierStatisticsActivity.class));
 
         } else if (id == R.id.nav_notification) {
             drawer.closeDrawer(GravityCompat.START);
@@ -202,4 +203,20 @@ public class RetalierDashboard extends AppCompatActivity
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+        startActivity(intent);
+        finish();
+        System.exit(0);
+        super.onBackPressed();
+    }
 }

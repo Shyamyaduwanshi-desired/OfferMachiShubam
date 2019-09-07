@@ -48,7 +48,7 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
     private CustomerCategoryListPresenter presenter;
     private String idholder, followsatus, Catid;
     Switch smartswitch;
-    String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, ImageHolder, SmartShoppingHolder;
+    String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, ImageHolder, SmartShoppingHolder,SoundHolder;
 
     public SmartShoppingFragment() {
     }
@@ -72,8 +72,9 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
         GenderHolder = user.getGender();
         ImageHolder = user.getProfile();
         SmartShoppingHolder = user.getSmartShopping();
+        SoundHolder=user.getNotificationsound();
         product_recyclerview = (RecyclerView) view.findViewById(R.id.category_recycler_id);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         smartswitch = view.findViewById(R.id.smartswitch);
@@ -168,7 +169,8 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
                     AddressHolder,
                     GenderHolder,
                     ImageHolder,
-                    "1"
+                    "1",
+                    SoundHolder
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
         } else {
@@ -180,7 +182,8 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
                     AddressHolder,
                     GenderHolder,
                     ImageHolder,
-                    "0"
+                    "0",
+                    SoundHolder
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
           startActivity(new Intent(getActivity(),CategoryActivity.class));

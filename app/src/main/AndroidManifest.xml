@@ -18,22 +18,25 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".customer.view.activity.MapActivity"></activity>
+        <activity android:name=".retalier.view.activity.MobileVerifyActivity"></activity>
+        <activity android:name=".customer.view.activity.MapActivity" />
         <activity android:name=".retalier.view.activity.RetailerChangePasswordActivity" />
         <activity android:name=".retalier.view.activity.ResetPasswordActivity" />
         <activity android:name=".customer.view.activity.CustomerResetPasswordActivity" />
         <activity android:name=".customer.view.activity.NotificationActivity">
             <intent-filter>
                 <action android:name="customer" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!--
-           <uses-library
+
+        <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        -->
+
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -44,9 +47,11 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_key" />
+
         <activity
             android:name=".customer.view.activity.SplashActivity"
             android:screenOrientation="portrait">
@@ -187,9 +192,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".retalier.view.activity.RetalierNotificationActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="retailer" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

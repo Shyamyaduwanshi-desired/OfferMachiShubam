@@ -27,6 +27,7 @@ import java.util.Map;
 public class CustomerNotificationPresenter {
     private Context context;
     private NotificationList notificationList;
+    private ProgressDialog progress;
 
     public CustomerNotificationPresenter(Context context, NotificationList notificationList) {
         this.context = context;
@@ -41,15 +42,20 @@ public class CustomerNotificationPresenter {
     }
 
     public void sentRequest(final String userid) {
-        final ProgressDialog progress = new ProgressDialog(context);
-        progress.setMessage("Please Wait..");
-        progress.setCancelable(false);
-        progress.show();
+        if(!((Activity) context).isFinishing())
+        {
+            progress = new ProgressDialog(context);
+            progress.setMessage("Please Wait..");
+            progress.setCancelable(false);
+            showpDialog();
+        }
         final ArrayList<NotificationModel> list = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_all_push_notifications_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progress.dismiss();
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
                 try {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
@@ -78,7 +84,9 @@ public class CustomerNotificationPresenter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
                 notificationList.fail("Server Error.\n Please try after some time.");
             }
         }
@@ -94,5 +102,14 @@ public class CustomerNotificationPresenter {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
+    }
+    private void showpDialog() {
+        if (!progress.isShowing())
+            progress.show();
+    }
+
+    private void hidepDialog() {
+        if (progress.isShowing())
+            progress.dismiss();
     }
 }

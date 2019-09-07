@@ -2,6 +2,7 @@ package com.desired.offermachi.retalier.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
     private static final String ROOT_URL = "http://offermachi.in/api/help_faq_data";
     private ArrayList<FAQ> faqList;
     TextView txtphone,txtemail;
+    ImageView imgNotiBell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,12 +68,16 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
         }else {
             Toast.makeText(this, "Please connect to internet", Toast.LENGTH_SHORT).show();
         }
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
     private void Fetchfaq() {

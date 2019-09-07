@@ -122,8 +122,7 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
-            RelativeLayout atoz=(RelativeLayout)dialog.findViewById(R.id.atoz_id);
-            RelativeLayout ztoa=(RelativeLayout)dialog.findViewById(R.id.ztoa_id);
+
             dialog.show();
         }else if (v==filtertext){
             Intent intent = new Intent(getContext(), FilterShowActivity.class);

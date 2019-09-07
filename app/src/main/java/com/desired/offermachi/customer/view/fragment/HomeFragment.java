@@ -20,24 +20,28 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.GetCouponPresenter;
 import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
+import com.desired.offermachi.customer.view.activity.SearchActivity;
 import com.desired.offermachi.customer.view.activity.ViewOfferTrendingActivity;
 import com.desired.offermachi.customer.view.activity.ViewStoreOfferActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
@@ -50,11 +54,12 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class HomeFragment extends Fragment implements View.OnClickListener, HomePresenter.HomeList, CompoundButton.OnCheckedChangeListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, HomePresenter.HomeList, CompoundButton.OnCheckedChangeListener/*, SearchView.OnQueryTextListener, android.widget.SearchView.OnQueryTextListener*/ {
 
     View view;
     RecyclerView categoryrecycle,trendingrecycle,storerecycle;
@@ -66,8 +71,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     String catid,catname,catofferimage,idholder;
     ImageView bannerimage;
     Switch smartswitch;
+    TextView searchView;
 
-    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder;
+    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder,SoundHolder;
+    hand handobj;
+    private ArrayList<SelectCategoryModel> selectCategoryModelList;
     public HomeFragment() {
 
     }
@@ -79,6 +87,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         return view;
     }
     private void initview(){
+        handobj = hand.getintance();
+        if (handobj.getCatid()!=null) {
+            catid=handobj.getCatid();
+            Log.e("home", "catid=="+catid );
+
+        }
+        if (handobj.getCatname()!=null) {
+            catname=handobj.getCatname();
+            Log.e("home", "catname=="+catname );
+
+        }
+
         User user = UserSharedPrefManager.getInstance(getContext()).getCustomer();
         idholder= user.getId();
 
@@ -89,12 +109,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         GenderHolder= user.getGender();
        ImageHolder=user.getProfile();
        SmartShoppingHolder=user.getSmartShopping();
+       SoundHolder=user.getNotificationsound();
 
+        selectCategoryModelList=new ArrayList<>();
         presenter = new HomePresenter(getActivity(), HomeFragment.this);
-        Intent intent=getActivity().getIntent();
+       /* Intent intent=getActivity().getIntent();
         catid=intent.getStringExtra("catid");
         catname=intent.getStringExtra("catname");
-        catofferimage=intent.getStringExtra("catofferimage");
+        catofferimage=intent.getStringExtra("catofferimage");*/
         TextView trendingdeals=(TextView)view.findViewById(R.id.dealsoftheday_text_id);
         Typeface content2= ResourcesCompat.getFont(getContext(), R.font.ralewaybold);
         trendingdeals.setTypeface(content2);
@@ -112,6 +134,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         categoryid =view.findViewById(R.id.selectcategoryname);
         categoryid.setText(catname);
         categoryid.setOnClickListener(this);
+        searchView = view.findViewById(R.id.search);
+        searchView.setOnClickListener(this);
         //categoryrecyle
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
@@ -130,11 +154,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         storerecycle.setItemAnimator(new DefaultItemAnimator());
         storerecycle.setNestedScrollingEnabled(false);
         bannerimage=view.findViewById(R.id.bannerimage);
-        if(catofferimage.equals("")){
+        if (handobj.getCatimage()!=null) {
+            catofferimage=handobj.getCatimage();
+            Log.e("home", "catofferimage=="+catofferimage );
+            Picasso.get().load(catofferimage).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(bannerimage);
+
+        }
+        /*if(catofferimage.equals("")){
         }else{
             Picasso.get().load(catofferimage).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(bannerimage);
-        }
+        }*/
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.GetAllList(catid, idholder);
@@ -201,6 +232,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             Intent intent = new Intent(getActivity(), CategoryActivity.class);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        }else if (v==searchView){
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
 
@@ -208,6 +243,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     public void categorysuccess(ArrayList<SelectCategoryModel> response) {
         customerTrendingAdapter= new CustomerTrendingAdapter(getContext(),response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
+        for (SelectCategoryModel onsale : response) {
+            selectCategoryModelList.add(onsale);
+        }
     }
 
     @Override
@@ -281,7 +319,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     AddressHolder,
                     GenderHolder,
                     ImageHolder,
-                    "1"
+                    "1",
+                    SoundHolder
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
           /*  Fragment fragment = new SmartShoppingFragment();
@@ -300,7 +339,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     AddressHolder,
                     GenderHolder,
                     ImageHolder,
-                    "0"
+                    "0",
+                    SoundHolder
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
            /* Fragment fragment = new HomeFragment();
@@ -308,6 +348,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();*/
         }
     }
+
+   /* @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        List<SelectCategoryModel> product = new ArrayList<>();
+        for (SelectCategoryModel onsale : selectCategoryModelList){
+            String productname = onsale.getOffername().toLowerCase().replace(" ", "");
+            String brandname = onsale.getOfferbrandname().toLowerCase().replace(" ", "");
+            if (productname.contains(s)||brandname.contains(s))
+                product.add(onsale);
+        }
+        customerTrendingAdapter.setfilter(product);
+        return true;
+    }*/
 
   /*  @Override
     public void couponsuccess(String response) {

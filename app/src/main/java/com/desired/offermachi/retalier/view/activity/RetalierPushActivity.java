@@ -63,6 +63,7 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
     private FollowerPresenter followerpresenter;
     private String idholder,PushOfferid;
     AlertDialog alertDialog;
+    ImageView imgNotiBell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,8 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
       }
       LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(pushReceiver,
               new IntentFilter("Push"));
+      imgNotiBell=findViewById(R.id.imgNotiBell);
+      imgNotiBell.setOnClickListener(this);
 
 
   }
@@ -108,6 +111,8 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
 

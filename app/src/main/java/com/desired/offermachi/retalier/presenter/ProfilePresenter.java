@@ -90,9 +90,9 @@ public class ProfilePresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id",userid);
-                params.put("username",username );
-                params.put("email_id",email );
-                params.put("mobile_no",mobile );
+                params.put("name",username );
+                params.put("email",email );
+                params.put("mobile",mobile );
                 params.put("gender",gender );
                 return params;
             }

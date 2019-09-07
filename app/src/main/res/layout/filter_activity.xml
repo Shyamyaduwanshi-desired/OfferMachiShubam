@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/white">
+   >
     <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -55,7 +55,7 @@
         android:textSize="20dp"
         />
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/filtershow_recycler_id"
+        android:id="@+id/category_recycler_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -70,6 +70,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/add_cart_button"
         android:text="Ok"
+         android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="17dp"
         android:textAllCaps="false"/>

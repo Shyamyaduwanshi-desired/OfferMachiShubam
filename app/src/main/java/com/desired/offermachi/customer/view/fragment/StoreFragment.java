@@ -18,9 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.StoreModel;
@@ -68,17 +68,28 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
         filtertext.setOnClickListener(this);
         sortbytext=(TextView)v.findViewById(R.id.sortby_text_id);
         sortbytext.setOnClickListener(this);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
         storerecycle.setItemAnimator(new DefaultItemAnimator());
-        if (isNetworkConnected()) {
-            presenter.ViewAllStore(idholder);
-        }  else {
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        if (getActivity()!=null) {
+            if (isNetworkConnected()) {
+                presenter.ViewAllStore(idholder);
+            } else {
+                showAlert("Please connect to internet.", R.style.DialogAnimation);
+            }
         }
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(StoreReceiver,
                 new IntentFilter("StoreFollow"));
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(CatReceiver,
+                new IntentFilter("Category"));
     }
+    public BroadcastReceiver CatReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String Catid = intent.getStringExtra("catid");
+            presenter.StoreFilter(idholder,Catid);
+        }
+    };
     public BroadcastReceiver StoreReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -97,21 +108,29 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
 
     @Override
     public void followsuccess(String response) {
-        if (isNetworkConnected()) {
-            presenter.ViewAllStore(idholder);
-        }  else {
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        if (getActivity()!=null) {
+            if (isNetworkConnected()) {
+                presenter.ViewAllStore(idholder);
+            } else {
+                showAlert("Please connect to internet.", R.style.DialogAnimation);
+            }
         }
     }
 
     @Override
     public void error(String response) {
-        showAlert(response, R.style.DialogAnimation);
+        if(getActivity() != null) {
+            showAlert(response, R.style.DialogAnimation);
+        }
+
     }
 
     @Override
     public void fail(String response) {
-        showAlert(response, R.style.DialogAnimation);
+        if(getActivity() != null) {
+            showAlert(response, R.style.DialogAnimation);
+        }
+
     }
     private void showAlert(String message, int animationSource){
         final PrettyDialog prettyDialog = new PrettyDialog(getActivity());
@@ -148,8 +167,46 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
-            RelativeLayout atoz=(RelativeLayout)dialog.findViewById(R.id.atoz_id);
-            RelativeLayout ztoa=(RelativeLayout)dialog.findViewById(R.id.ztoa_id);
+            RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
+            RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
+            RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
+            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
+            rdone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="1";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdtwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="2";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdthree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="3";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
+            rdfour.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="4";
+                    presenter.ShortBy(idholder,Status);
+
+                }
+            });
             dialog.show();
         }
     }

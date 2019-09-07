@@ -29,6 +29,7 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
     EditText etotp;
     TextView txtresendotp;
     private OtpPresenter presenter;
+    String OtpHolder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
     private void init(){
         Intent intent=getIntent();
         Idholder= intent.getStringExtra("userid");
-       // Otp=intent.getStringExtra("otp");
+        OtpHolder=intent.getStringExtra("otp");
         etotp=findViewById(R.id.etotp);
        // etotp.setText(Otp);
         txtresendotp=findViewById(R.id.resendotp);
@@ -58,6 +59,8 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
             if(TextUtils.isEmpty(Otp)){
                 etotp.requestFocus();
                 etotp.setError("Please enter otp");
+            }else if (!(OtpHolder.equals(Otp))){
+                Toast.makeText(this, "Enter Wrong Otp Please Try Again. ", Toast.LENGTH_SHORT).show();
             }else {
                 if(isNetworkConnected()){
                     presenter.verifyOtp(Idholder);
@@ -96,8 +99,7 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void successresend(String response) {
-        Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
-     //   etotp.setText(response);
+        OtpHolder=response;
     }
 
     @Override

@@ -25,6 +25,7 @@ public class RetalierCustomerSupportActivity extends AppCompatActivity implement
     ImageView imageViewback;
     EditText etname,etemail,etmessage,etmobile;
     private CustomerSupportPresenter presenter;
+    ImageView imgNotiBell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class RetalierCustomerSupportActivity extends AppCompatActivity implement
         submitbutton.setOnClickListener(this);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
     }
     private void validation() {
         String name = etname.getText().toString();
@@ -82,6 +85,8 @@ public class RetalierCustomerSupportActivity extends AppCompatActivity implement
             onBackPressed();
         }else if (v==submitbutton){
             validation();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
 
     }

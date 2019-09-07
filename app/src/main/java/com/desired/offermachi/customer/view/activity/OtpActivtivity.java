@@ -13,14 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.presenter.CustomerLoginPresenter;
 import com.desired.offermachi.customer.presenter.CustomerOtpPresenter;
-import com.desired.offermachi.retalier.presenter.OtpPresenter;
-import com.desired.offermachi.retalier.view.activity.RetalierOtpActivity;
-import com.desired.offermachi.retalier.view.activity.RetalierRegistration;
-import com.desired.offermachi.retalier.view.activity.RetalierVerifyActivity;
+
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -32,6 +27,7 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
     EditText etotp;
     TextView txtresendotp;
     private CustomerOtpPresenter presenter;
+    String Otpholder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +38,7 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
         presenter = new CustomerOtpPresenter(OtpActivtivity.this, OtpActivtivity.this);
         Intent intent=getIntent();
         Idholder= intent.getStringExtra("userid");
-      //  Otp=intent.getStringExtra("otp");
+        Otpholder=intent.getStringExtra("otp");
         etotp=findViewById(R.id.etotp);
        // etotp.setText(Otp);
         txtresendotp=findViewById(R.id.resendotp);
@@ -61,6 +57,8 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
             if(TextUtils.isEmpty(Otp)){
                 etotp.requestFocus();
                 etotp.setError("Please enter otp");
+            }else if (!(Otpholder.equals(Otp))){
+                Toast.makeText(this, "Enter Wrong Otp Please Try Again.", Toast.LENGTH_SHORT).show();
             }else {
                 if(isNetworkConnected()){
                     presenter.verifyOtp(Idholder);
@@ -99,7 +97,7 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void successresend(String response) {
-        Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
+      Otpholder=response;
     }
 
     @Override
@@ -134,7 +132,7 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(OtpActivtivity.this, RetalierRegistration.class));
+        startActivity(new Intent(OtpActivtivity.this, LoginActivity.class));
         finish();
     }
 

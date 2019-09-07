@@ -32,6 +32,9 @@ public class StoreDetailPresenter {
 
         void relatedsuccess(String response);
 
+
+        void followsuccess(String response);
+
         void error(String response);
 
         void fail(String response);
@@ -89,6 +92,46 @@ public class StoreDetailPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
+    public void AddStoreFollow(final String userid, final String retailerid,final String active) {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_add_follow_retailer", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if(status == 200){
+                        storeDetail.followsuccess(reader.getString("message"));
+
+                    }else if(status == 404){
+                        storeDetail.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    storeDetail.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                storeDetail.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                params.put("retailer_id", retailerid);
+                params.put("active", active);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

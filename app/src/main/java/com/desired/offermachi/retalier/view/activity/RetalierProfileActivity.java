@@ -61,6 +61,7 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
     String ImageHolder,idholder;
     private File file, compressedImage;
     private ProfileImagePresenter presenter;
+    ImageView imgNotiBell;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +83,8 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
         tabLayout.setOnTabSelectedListener(this);
         imageViewback.setOnClickListener(this);
         imagepicker.setOnClickListener(this);
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
         if (ImageHolder.equals("")||ImageHolder.equals("NA")){
 
         }else{
@@ -132,6 +135,8 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
             }
         }else if (v==imageViewback){
             onBackPressed();
+        }else  if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
 

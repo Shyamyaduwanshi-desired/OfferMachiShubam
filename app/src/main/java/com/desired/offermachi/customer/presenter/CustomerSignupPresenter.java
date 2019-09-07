@@ -55,10 +55,10 @@ public class CustomerSignupPresenter {
                         String result=reader.getString("result");
                         JSONObject jsonObject=new JSONObject(result);
                                 String userid=jsonObject.getString("user_id");
-                               // String otp=jsonObject.getString("otp");
+                                String otp=jsonObject.getString("otp");
                                 Intent intent = new Intent(context, OtpActivtivity.class);
                                 intent.putExtra("userid",userid);
-                               // intent.putExtra("otp",otp);
+                                intent.putExtra("otp",otp);
                                 context.startActivity(intent);
                                ((Activity)context).finish();
 

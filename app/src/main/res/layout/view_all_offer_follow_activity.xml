@@ -32,6 +32,7 @@
                 android:layout_marginTop="0dp" />
 
             <ImageView
+                android:id="@+id/btnnoti"
                 android:layout_width="20dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_notification_bell"
@@ -79,7 +80,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/blue"
-                    android:textSize="17dp" />
+                    android:textSize="14dp" />
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
@@ -87,14 +88,15 @@
             </LinearLayout>
             <ImageView
                 android:id="@+id/storelogo"
-                android:layout_width="150dp"
-                android:layout_height="130dp"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
                 android:src="@drawable/store"
                 android:layout_marginTop="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:scaleType="centerCrop"/>
             <TextView
+                android:id="@+id/btnfollow"
                 android:layout_width="70dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="20dp"
@@ -106,6 +108,7 @@
                 android:layout_toRightOf="@+id/storelogothumb"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:textSize="12dp" />
         </RelativeLayout>
 
@@ -124,7 +127,7 @@
                 android:textColor="@color/pink"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold"
-                android:textSize="19dp" />
+                android:textSize="16dp" />
                         <TextView
                             android:id="@+id/storedescription"
                             android:layout_width="wrap_content"
@@ -170,7 +173,8 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
+                                    android:id="@+id/contactdetail"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Contact Details"
                                     android:textColor="@color/black"
@@ -631,11 +635,11 @@
                        <!--</LinearLayout>-->
 
                        <android.support.v7.widget.RecyclerView
-                           android:id="@+id/related_store_recycler_id"
+                           android:id="@+id/storerecycleview"
                            android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:layout_marginBottom="70dp"
-                           android:layout_above="@+id/rl">
+                           android:layout_height="200dp"
+                           android:layout_marginTop="10dp"
+                           android:scrollbars="none">
                        </android.support.v7.widget.RecyclerView>
                    </LinearLayout>
         </LinearLayout>

@@ -94,7 +94,6 @@ EditText etname,etemail,etmobile,etgender;
                 editProfile();
                 editState = 1;
             }else{
-                txtedit.setText("Edit");
                 updateprofile();
                 editState = 0;
             }
@@ -111,10 +110,10 @@ EditText etname,etemail,etmobile,etgender;
         etgender.setEnabled(true);
     }
     private void updateprofile(){
-        etname.setEnabled(false);
+       /* etname.setEnabled(false);
         etmobile.setEnabled(false);
         etemail.setEnabled(false);
-        etgender.setEnabled(false);
+        etgender.setEnabled(false);*/
         nameholder = etname.getText().toString();
         phoneholder = etmobile.getText().toString().trim();
         emailholder = etemail.getText().toString();
@@ -156,6 +155,11 @@ EditText etname,etemail,etmobile,etgender;
     @Override
     public void success(String response) {
         Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
+        etname.setEnabled(false);
+        etmobile.setEnabled(false);
+        etemail.setEnabled(false);
+        etgender.setEnabled(false);
+        txtedit.setText("Edit");
     }
 
     @Override

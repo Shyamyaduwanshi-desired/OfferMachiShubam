@@ -47,6 +47,8 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
     private SmartShoppingNotificationDataPresenter presenter;
     String idholder;
+    TextView btnclearall;
+    ImageView imgNotiBell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,10 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         categoryrecycle.setLayoutManager(gridLayoutManager1);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+        btnclearall=findViewById(R.id.clearall);
+        btnclearall.setOnClickListener(this);
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
         if (isNetworkConnected()) {
             presenter.ViewAllSmartData(idholder);
         } else {
@@ -76,7 +82,17 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(CouponReceiver,
                 new IntentFilter("Refresh"));
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(RemoveReceiver,
+                new IntentFilter("Remove"));
     }
+    public BroadcastReceiver RemoveReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String offerid = intent.getStringExtra("offerid");
+            presenter.Remove(idholder,offerid);
+
+        }
+    };
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -100,6 +116,11 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     public void onClick(View v) {
         if (v == imageViewback) {
             onBackPressed();
+        }else if (v==btnclearall){
+            presenter.RemoveAll(idholder);
+
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
         }
     }
 

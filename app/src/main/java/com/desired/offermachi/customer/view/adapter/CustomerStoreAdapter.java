@@ -2,6 +2,7 @@ package com.desired.offermachi.customer.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,8 +52,12 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
         status=storeModel.getStoreFav();
         if (status.equals("1")){
             holder.btnfollow.setText("Unfollow");
+            holder.btnfollow.setBackground(ContextCompat.getDrawable(mContext,R.drawable.view_red_background));
+
         }else if (status.equals("0")){
             holder.btnfollow.setText("Follow");
+            holder.btnfollow.setBackground(ContextCompat.getDrawable(mContext,R.drawable.view_background));
+
         }
        holder.storeimage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,15 +17,17 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class RetalierInviteFriendActivity extends AppCompatActivity {
+public class RetalierInviteFriendActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageView imageViewback;
     ImageView facebook,Watsup,Twitter;
+    ImageView imgNotiBell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retalier_invite_activity);
-
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +129,13 @@ public class RetalierInviteFriendActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             Toast.makeText(RetalierInviteFriendActivity.this, ""+e, Toast.LENGTH_SHORT).show();
             return "";
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
 }

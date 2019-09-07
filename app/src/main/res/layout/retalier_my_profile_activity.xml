@@ -60,6 +60,7 @@
                             android:text="0"
                             android:textColor="@color/white"
                             android:textSize="6sp"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="@+id/imgNotiBell"
                             app:layout_constraintTop_toTopOf="@+id/imgNotiBell"
                             android:layout_marginLeft="330dp"

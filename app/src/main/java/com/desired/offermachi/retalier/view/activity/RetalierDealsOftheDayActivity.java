@@ -39,6 +39,7 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
     private DealsOfDayAdapter dealsOfDayAdapter;
     private DealsOftheDayPresenter presenter;
     private String idholder;
+    ImageView imgNotiBell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,8 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
         }  else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
     }
 
     @Override
@@ -73,6 +76,8 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
             finish();
         }else if (v==imageViewback){
             onBackPressed();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
 

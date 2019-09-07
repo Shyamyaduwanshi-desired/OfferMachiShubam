@@ -51,9 +51,6 @@ public class RetalierForgotPassword extends AppCompatActivity implements View.On
     public void onClick(View v) {
         if (v==btnsubmit){
             validation();
-            startActivity(new Intent(getApplicationContext(), CustomerResetPasswordActivity.class));
-            finish();
-            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
         }
     }

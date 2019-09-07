@@ -58,7 +58,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
           imageViewback = findViewById(R.id.imageback);
           imageViewback.setOnClickListener(this);
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
-          GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);
+          GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
           if (isNetworkConnected()) {
@@ -144,7 +144,12 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+        startActivity(intent);
         finish();
+        System.exit(0);
         super.onBackPressed();
     }
 

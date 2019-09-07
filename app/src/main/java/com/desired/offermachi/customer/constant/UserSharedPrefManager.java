@@ -19,6 +19,7 @@ public class UserSharedPrefManager {
     private static final  String KEY_GENDER="cusgender";
     private static final  String KEY_PROFILE="cusprofileimage";
     private static final  String KEY_SmartShopping="smartshopping";
+    private static final  String KEY_NotificationSound="notificationsound";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -42,6 +43,7 @@ public class UserSharedPrefManager {
         editor.putString(KEY_GENDER,user.getGender());
         editor.putString(KEY_PROFILE,user.getProfile());
         editor.putString(KEY_SmartShopping,user.getSmartShopping());
+        editor.putString(KEY_NotificationSound,user.getNotificationsound());
         editor.apply();
     }
 
@@ -63,7 +65,8 @@ public class UserSharedPrefManager {
                 sharedPreferences.getString(KEY_STOREADDRESS, "NA"),
                 sharedPreferences.getString(KEY_GENDER, "NA"),
                 sharedPreferences.getString(KEY_PROFILE, "NA"),
-                sharedPreferences.getString(KEY_SmartShopping, "NA")
+                sharedPreferences.getString(KEY_SmartShopping, "NA"),
+                sharedPreferences.getString(KEY_NotificationSound, "NA")
 
         );
     }

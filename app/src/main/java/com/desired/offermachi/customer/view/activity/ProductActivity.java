@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -29,6 +30,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
@@ -47,13 +49,16 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     Button coupon_button_apply_id;
     TextView btnok;
     TextView txtstorename,txtstoredescription,txtstorename2;
-    ImageView storeimage,storelogothumb;
+    ImageView storeimage;
+    CircleImageView storelogothumb;
     String Storeid;
     String offercategory;
     String fav,Favstatus;
     TextView btnfollow;
     String followstatus;
     String couponstatus;
+    ImageView imgNotiBell;
+    ImageView imgshare;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +77,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         imageViewback.setOnClickListener(this);
         couponbutton = (Button) findViewById(R.id.coupon_button_id);
         couponbutton.setOnClickListener(this);
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
+        imgshare=findViewById(R.id.imgshare);
+        imgshare.setOnClickListener(this);
+
        /* shareiconimge =findViewById(R.id.shareicon_image_id);
         shareiconimge.setOnClickListener(this);*/
         viewalloffer = findViewById(R.id.viewalloffer_id);
@@ -156,14 +166,23 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
 
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
+        }else if (v== imgshare){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, "OfferMachi");
+            String shareMessage= "\nGet regular updates on the best deals, cashback offers, and discount coupons across retail stores in your location. Get it for free at.\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + "com.desired.offermachi"  +"\n\n";
+            sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, "choose one"));
         }
 
     }
 
     @Override
     public void success(String response) {
-
-        //Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
         try {
             JSONObject object = new JSONObject(response);
             String id = object.getString("id");
@@ -207,14 +226,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             qrcodeimage = object.getString("qr_code_image");
             couponstatus = object.getString("coupon_code_status");
             if (couponstatus.equals("1")){
-                Toast.makeText(this, ""+couponstatus, Toast.LENGTH_SHORT).show();
                 couponbutton.setText("View Coupon Code");
             }else if (couponstatus.equals("2")){
-                Toast.makeText(this, ""+couponstatus, Toast.LENGTH_SHORT).show();
                 couponbutton.setText("Redeemed");
             }else if (couponstatus.equals("0")){
-                Toast.makeText(this, ""+couponstatus, Toast.LENGTH_SHORT).show();
-
                 couponbutton.setText("Get Coupon Code");
             }
 
@@ -252,8 +267,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
           followstatus=object.getString("favourite_status");
           if (followstatus.equals("1")){
               btnfollow.setText("Unfollow");
+              btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.view_red_background));
           }else if (followstatus.equals("0")){
             btnfollow.setText("Follow");
+              btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.view_background));
         }
 
         }

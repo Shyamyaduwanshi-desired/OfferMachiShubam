@@ -36,6 +36,7 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
     private ViewOfferDiscountAdapter viewOfferAdapter;
     private ViewOfferPresenter presenter;
     private String idholder;
+    ImageView imgNotiBell;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,13 +58,16 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         }  else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
     }
-
+        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
 

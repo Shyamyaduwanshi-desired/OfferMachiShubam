@@ -53,7 +53,7 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
         storerecycle=findViewById(R.id.storerecycleview);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
         storerecycle.setItemAnimator(new DefaultItemAnimator());
         if (isNetworkConnected()) {

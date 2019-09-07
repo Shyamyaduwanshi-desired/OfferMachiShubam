@@ -3,6 +3,7 @@ package com.desired.offermachi.customer.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
+import com.desired.offermachi.customer.view.activity.OtpActivtivity;
 import com.desired.offermachi.retalier.constant.AppData;
 
 import org.json.JSONArray;
@@ -35,7 +37,7 @@ public class SmartShoppingNotificationDataPresenter {
     public interface NotificationOfferDataList {
         void success(ArrayList<SelectCategoryModel> response);
 
-        void favsuccess(String  response);
+        void favsuccess(String response);
 
         void error(String response);
 
@@ -163,6 +165,94 @@ public class SmartShoppingNotificationDataPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+    public void Remove(final String userid,final String offerid) {
+      /*  final ProgressDialog progress = new ProgressDialog(context);
+        progress.setMessage("Please Wait..");
+        progress.setCancelable(false);
+        progress.show();*/
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "smart_shoping_remove_single_offer_data", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //progress.dismiss();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if(status == 200){
+                        notificationOfferDataList.favsuccess(reader.getString("message"));
+
+                    }else if(status == 404){
+                        notificationOfferDataList.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    notificationOfferDataList.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //progress.dismiss();
+                notificationOfferDataList.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                params.put("offer_id", offerid);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+    public void RemoveAll(final String userid) {
+       /* final ProgressDialog progress = new ProgressDialog(context);
+        progress.setMessage("Please Wait..");
+        progress.setCancelable(false);
+        progress.show();*/
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "smart_shoping_remove_all_offer_data", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               // progress.dismiss();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if(status == 200){
+                        notificationOfferDataList.favsuccess(reader.getString("message"));
+
+                    }else if(status == 404){
+                        notificationOfferDataList.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    notificationOfferDataList.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+              //  progress.dismiss();
+                notificationOfferDataList.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

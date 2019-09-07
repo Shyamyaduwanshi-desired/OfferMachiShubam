@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
 import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
@@ -67,6 +68,7 @@ public class DashBoardActivity extends AppCompatActivity
     String ImageHolder,username,useremail;
    User user;
    ImageView btnnotification;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

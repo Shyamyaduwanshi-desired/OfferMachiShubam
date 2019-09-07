@@ -41,6 +41,7 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
     private AddDealsofDayAdapter addDealsofDayAdapter;
     private DealsOftheDayPresenter presenter;
     private String idholder,Offerid;
+    ImageView imgNotiBell;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
          }
          LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(locationReceiver,
                  new IntentFilter("Offer"));
+         imgNotiBell=findViewById(R.id.imgNotiBell);
+         imgNotiBell.setOnClickListener(this);
     }
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
@@ -84,6 +87,8 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if (v==imgNotiBell){
+            startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
 
     }

@@ -12,6 +12,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.view.activity.NotificationActivity;
 import com.desired.offermachi.retalier.view.activity.RetalierNotificationActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -25,11 +27,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String CHANNEL_NAME="com.desired.offermachi.fcm_name";
     NotificationManager manager;
     String message,title,type;
+    String notificationstatus="0";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Log.e(TAG, "From: " + remoteMessage.getFrom());
+        Log.e(TAG, "From:" + remoteMessage.getFrom());
 
         if (remoteMessage == null) {
             Log.e(TAG, "Body: null");
@@ -55,13 +58,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             type = remoteMessage.getData().get("type");
         Intent intent = null;
             if (type.equals("customer")){
+                User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+                notificationstatus=user.getNotificationsound();
                 intent = new Intent(this, NotificationActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }else if (type.equals("retailer")){
                 intent = new Intent(this, RetalierNotificationActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
+        if (notificationstatus.equals("0")) {
             showNotification(title, message, intent);
+        }
 
     }
 
@@ -76,8 +83,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setChannelId(CHANNEL_ID)
                 .setSmallIcon(R.drawable.bell)
                 .setContentIntent(pendingIntent);
-        playNotificationSound();
-
+            playNotificationSound();
         manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         createNotificationChannel();
         manager.notify(0,builder.build());

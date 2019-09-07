@@ -3,6 +3,7 @@ package com.desired.offermachi.retalier.presenter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -126,9 +127,10 @@ public class OtpPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
-                       /* String result = reader.getString("result");
-                        JSONObject jsonObject = new JSONObject(result);*/
-                        otp.successresend(reader.getString("message"));
+                        Toast.makeText(context, ""+reader.getString("message"), Toast.LENGTH_SHORT).show();
+                        String result = reader.getString("result");
+                       /* JSONObject jsonObject = new JSONObject(result);*/
+                        otp.successresend(result);
                     } else if (status == 404) {
                         otp.errorresend(reader.getString("message"));
                     }

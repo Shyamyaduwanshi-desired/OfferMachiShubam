@@ -38,23 +38,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.FileUtil;
+import com.desired.offermachi.retalier.model.BrandModel;
+import com.desired.offermachi.retalier.model.CategoryModel;
+import com.desired.offermachi.retalier.model.OfferTypeModel;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
+import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
+import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
 import com.desired.offermachi.retalier.view.adapter.MultiAdapter;
 import com.desired.offermachi.service.GeocodingLocation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
@@ -62,7 +70,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 import static android.app.Activity.RESULT_OK;
 
-public class RegistrationStoreDetailsFrgment extends Fragment implements LocationListener, View.OnClickListener,SignupPresenter.SignUp  {
+public class RegistrationStoreDetailsFrgment extends Fragment implements LocationListener, View.OnClickListener,SignupPresenter.SignUp, TypeBrandCategoryPresenter.TypeBrandCategory {
     View view;
     String android_id;
     private SignupPresenter presenter;
@@ -92,12 +100,17 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
     LocationManager locationManager;
     String lati ;
     String longi ;
+    Spinner categoryspinner;
+    String categoryid;
+    private CategoryAdapter categoryAdapter;
+    private TypeBrandCategoryPresenter typeBrandCategoryPresenter;
     public RegistrationStoreDetailsFrgment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.retalier_store_activity, container, false);
+        typeBrandCategoryPresenter=new TypeBrandCategoryPresenter(getContext(),RegistrationStoreDetailsFrgment.this);
         presenter = new SignupPresenter(getContext(), RegistrationStoreDetailsFrgment.this);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationReceiver,
                 new IntentFilter("Data"));
@@ -119,8 +132,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
        /* android_id = Settings.Secure.getString(getContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);*/
         storename=(EditText)view.findViewById(R.id.store_name_edt_id);
-      /*  txtstorecategory=view.findViewById(R.id.store_category);
-        txtstorecategory.setOnClickListener(this);*/
+        categoryspinner = view.findViewById(R.id.categoryspinner);
         storecontact=(EditText)view.findViewById(R.id.store_contact_edt_id);
         storeaddress=(EditText)view.findViewById(R.id.store_address_edt_id);
         cityedt=(EditText)view.findViewById(R.id.city_edt_id);
@@ -199,9 +211,25 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         registerbutton.setOnClickListener(this);
         imagepick.setOnClickListener(this);
 
+        categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //   Select Provider
+                TextView txcategoryid = (TextView) view.findViewById(R.id.offerid);
+                categoryid = txcategoryid.getText().toString();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
 
+        if (isNetworkConnected()) {
+            typeBrandCategoryPresenter.sentRequest();
+        }  else {
+            Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
+        }
     }
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
@@ -387,6 +415,23 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
     public void success(String response) {
       //  Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
        // showDialog(response);
+    }
+
+    @Override
+    public void successtype(ArrayList<OfferTypeModel> response) {
+
+    }
+
+    @Override
+    public void successbrand(ArrayList<BrandModel> response) {
+
+    }
+
+    @Override
+    public void successcategory(ArrayList<CategoryModel> response) {
+        categoryAdapter = new CategoryAdapter(getContext(), response);
+        categoryspinner.setAdapter(categoryAdapter);
+
     }
 
     @Override
@@ -650,7 +695,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                     String lat = arr[0];
                     String lng = arr[1];
                     if (isNetworkConnected()) {
-                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lat,lng);
+                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lat,lng,categoryid);
                     }
                     break;
                 case 0:
@@ -658,7 +703,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                     // locationAddress = bundle1.getString("address");
                     //String arr[] = locationAddress.split(",");
                     if (isNetworkConnected()) {
-                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lati,longi);
+                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lati,longi,categoryid);
                     }
                     //locationAddress = null;
 

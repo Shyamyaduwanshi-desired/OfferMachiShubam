@@ -94,7 +94,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
+//        startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

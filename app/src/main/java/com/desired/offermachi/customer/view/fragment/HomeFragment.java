@@ -40,6 +40,8 @@ import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.GetCouponPresenter;
 import com.desired.offermachi.customer.presenter.HomePresenter;
+import com.desired.offermachi.customer.view.activity.ActDashboardCategory;
+import com.desired.offermachi.customer.view.activity.ActSearchNew;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.SearchActivity;
 import com.desired.offermachi.customer.view.activity.ViewOfferTrendingActivity;
@@ -49,6 +51,7 @@ import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.activity.CategoryActivity;
 import com.desired.offermachi.customer.view.activity.StoreCouponCodeActivity;
 import com.desired.offermachi.customer.view.activity.ViewOfferActivity;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -62,8 +65,10 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class HomeFragment extends Fragment implements View.OnClickListener, HomePresenter.HomeList, CompoundButton.OnCheckedChangeListener/*, SearchView.OnQueryTextListener, android.widget.SearchView.OnQueryTextListener*/ {
 
     View view;
-    RecyclerView categoryrecycle,trendingrecycle,storerecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+    RecyclerView /*categoryrecycle,*/trendingrecycle,storerecycle;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+//private ArrayList<SelectCategoryModel> selectCategoryModelList;
+    private CustomerTrendingAdapterNew customerTrendingAdapterNew;
     private CustomerStoreAdapter customerStoreAdapter;
     private HomePresenter presenter;
 
@@ -75,7 +80,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
     String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder,SoundHolder;
     hand handobj;
-    private ArrayList<SelectCategoryModel> selectCategoryModelList;
+
     public HomeFragment() {
 
     }
@@ -111,7 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
        SmartShoppingHolder=user.getSmartShopping();
        SoundHolder=user.getNotificationsound();
 
-        selectCategoryModelList=new ArrayList<>();
+//        selectCategoryModelList=new ArrayList<>();
         presenter = new HomePresenter(getActivity(), HomeFragment.this);
        /* Intent intent=getActivity().getIntent();
         catid=intent.getStringExtra("catid");
@@ -136,18 +141,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         categoryid.setOnClickListener(this);
         searchView = view.findViewById(R.id.search);
         searchView.setOnClickListener(this);
+
         //categoryrecyle
-        categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
-        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
-        categoryrecycle.setNestedScrollingEnabled(false);
+//        categoryrecycle=view.findViewById(R.id.categoryrecycleview);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
+
         //trendingrecycle
         trendingrecycle=view.findViewById(R.id.trendingrecycleview);
-        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        trendingrecycle.setLayoutManager(gridLayoutManager2);
+
+//        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+//        trendingrecycle.setLayoutManager(gridLayoutManager2);
+
+
+
+        trendingrecycle.setHasFixedSize(true);
+        trendingrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         trendingrecycle.setItemAnimator(new DefaultItemAnimator());
         trendingrecycle.setNestedScrollingEnabled(false);
+
         //storerecycle
         storerecycle=view.findViewById(R.id.storerecycleview);
         storerecycle.setLayoutManager((new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false)));
@@ -229,29 +243,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }else if (v==categoryid){
-            Intent intent = new Intent(getActivity(), CategoryActivity.class);
+//            Intent intent = new Intent(getActivity(), CategoryActivity.class);
+            Intent intent = new Intent(getActivity(), ActDashboardCategory.class);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }else if (v==searchView){
-            Intent intent = new Intent(getActivity(), SearchActivity.class);
+
+//            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            Intent intent = new Intent(getActivity(), ActSearchNew.class);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
         }
     }
 
     @Override
     public void categorysuccess(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter= new CustomerTrendingAdapter(getContext(),response);
-        categoryrecycle.setAdapter(customerTrendingAdapter);
-        for (SelectCategoryModel onsale : response) {
-            selectCategoryModelList.add(onsale);
-        }
+//        customerTrendingAdapter= new CustomerTrendingAdapter(getContext(),response);
+//        categoryrecycle.setAdapter(customerTrendingAdapter);
+//        for (SelectCategoryModel onsale : response) {
+//            selectCategoryModelList.add(onsale);
+//        }
     }
 
     @Override
     public void Offersuccess(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter= new CustomerTrendingAdapter(getContext(),response);
-        trendingrecycle.setAdapter(customerTrendingAdapter);
+        customerTrendingAdapterNew= new CustomerTrendingAdapterNew(getContext(),response);
+        trendingrecycle.setAdapter(customerTrendingAdapterNew);
     }
 
     @Override
@@ -283,24 +301,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         showAlert(response, R.style.DialogAnimation);
     }
     private void showAlert(String message, int animationSource){
-        final PrettyDialog prettyDialog = new PrettyDialog(getActivity());
-        prettyDialog.setCanceledOnTouchOutside(false);
-        TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
-        TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
-        title.setTextSize(15);
-        tvmessage.setTextSize(15);
-        prettyDialog.setIconTint(R.color.colorPrimary);
-        prettyDialog.setIcon(R.drawable.pdlg_icon_info);
-        prettyDialog.setTitle("");
-        prettyDialog.setMessage(message);
-        prettyDialog.setAnimationEnabled(false);
-        prettyDialog.getWindow().getAttributes().windowAnimations = animationSource;
-        prettyDialog.addButton("Ok", R.color.black, R.color.white, new PrettyDialogCallback() {
-            @Override
-            public void onClick() {
-                prettyDialog.dismiss();
-            }
-        }).show();
+
+        try {
+            final PrettyDialog prettyDialog = new PrettyDialog(getActivity());
+            prettyDialog.setCanceledOnTouchOutside(false);
+            TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
+            TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
+            title.setTextSize(15);
+            tvmessage.setTextSize(15);
+            prettyDialog.setIconTint(R.color.colorPrimary);
+            prettyDialog.setIcon(R.drawable.pdlg_icon_info);
+            prettyDialog.setTitle("");
+            prettyDialog.setMessage(message);
+            prettyDialog.setAnimationEnabled(false);
+            prettyDialog.getWindow().getAttributes().windowAnimations = animationSource;
+            prettyDialog.addButton("Ok", R.color.black, R.color.white, new PrettyDialogCallback() {
+                @Override
+                public void onClick() {
+                    prettyDialog.dismiss();
+                }
+            }).show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isNetworkConnected() {
@@ -320,7 +343,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     GenderHolder,
                     ImageHolder,
                     "1",
-                    SoundHolder
+                    SoundHolder,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
           /*  Fragment fragment = new SmartShoppingFragment();
@@ -340,7 +364,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     GenderHolder,
                     ImageHolder,
                     "0",
-                    SoundHolder
+                    SoundHolder,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
            /* Fragment fragment = new HomeFragment();

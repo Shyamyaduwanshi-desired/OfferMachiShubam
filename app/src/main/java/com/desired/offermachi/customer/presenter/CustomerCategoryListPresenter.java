@@ -69,16 +69,24 @@ public class CustomerCategoryListPresenter {
                         String result=reader.getString("result");
                         JSONArray jsonArray = new JSONArray(result);
                         JSONObject object;
+                        CategoryListModel categoryListModel;
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
-                            CategoryListModel categoryListModel=new CategoryListModel(
-                                    object.getString("id"),
-                                    object.getString("category_name"),
-                                    object.getString("category_image"),
-                                    object.getString("follow_status"),
-                                    object.getString("category_offer_image")
-
-                            );
+//                            CategoryListModel categoryListModel=new CategoryListModel(
+//                                    object.getString("id"),
+//                                    object.getString("category_name"),
+//                                    object.getString("category_image"),
+//                                    object.getString("follow_status"),
+//                                    object.getString("category_offer_image")
+//
+//                            );
+                            categoryListModel=new CategoryListModel();
+                            categoryListModel.setCatid(object.getString("id"));
+                            categoryListModel.setCatname(object.getString("category_name"));
+                            categoryListModel.setCatimage(object.getString("category_image"));
+                            categoryListModel.setFollowstatus(object.getString("follow_status"));
+                            categoryListModel.setBannerimage(object.getString("category_offer_image"));
+                            categoryListModel.setCheckStatus(false);
                             list.add(categoryListModel);
                         }
                         customerCategoryList.success(list);

@@ -27,11 +27,11 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retalier_registration_activity);
-        if (SharedPrefManagerLogin.getInstance(this).isLoggedIn()) {
-            finish();
-            startActivity(new Intent(this, RetalierDashboard.class));
-            return;
-        }
+//        if (SharedPrefManagerLogin.getInstance(this).isLoggedIn()) {
+//            finish();
+//            startActivity(new Intent(this, RetalierDashboard.class));
+//            return;
+//        }
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         tabLayout.setOnTabSelectedListener(RetalierRegistration.this);
@@ -108,7 +108,7 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), RetalierLogin.class));
+//        startActivity(new Intent(getApplicationContext(), RetalierLogin.class));
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

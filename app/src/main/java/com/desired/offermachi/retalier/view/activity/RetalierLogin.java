@@ -35,11 +35,11 @@ public class RetalierLogin extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.retalier_login);
-        if (SharedPrefManagerLogin.getInstance(this).isLoggedIn()) {
-            finish();
-            startActivity(new Intent(this, RetalierDashboard.class));
-            return;
-        }
+//        if (SharedPrefManagerLogin.getInstance(this).isLoggedIn()) {
+//            finish();
+//            startActivity(new Intent(this, RetalierDashboard.class));
+//            return;
+//        }
         presenter = new LoginPresenter(RetalierLogin.this, RetalierLogin.this);
         initView();
     }

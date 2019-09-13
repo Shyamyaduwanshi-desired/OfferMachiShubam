@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+   >
+
+   <!-- android:layout_marginTop="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginLeft="2dp"-->
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:outlineSpotShadowColor="@color/black"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+           <!-- android:background="@drawable/category_background"-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_image"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:outlineSpotShadowColor="@color/white"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="5dp"
+                android:layout_centerVertical="true"
+                app:cardElevation="5dp"
+               >
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/electronics" />
+            </android.support.v7.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/linear_category_id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/cv_image"
+                android:layout_marginLeft="5dp"
+                >
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                   >
+                <TextView
+                    android:id="@+id/tv_product_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:maxLength="13"
+                    android:text="Electronics"
+                    android:gravity="center_vertical"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_toLeftOf="@+id/rl_share"
+                    />
+                <RelativeLayout
+                    android:id="@+id/rl_share"
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/rl_like"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+
+                    >
+                    <ImageView
+                        android:id="@+id/iv_share"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/reply_right_arrow" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_like"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    >
+                   <!-- <com.jackandphantom.androidlikebutton.AndroidLikeButton
+                        android:id="@+id/bt_like"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        app:like_icon="@drawable/ic_like_new"
+                        app:unlike_icon="@drawable/heart"
+                        app:circle_startColor="#FC2949"
+                        app:circle_endColor="#F41B72"
+                        app:dot_color_1="#f5ce31"
+                        app:dot_color_2="#ed8128"
+                        />-->
+                    <!--app:like_icon="@drawable/ic_like"
+                    app:unlike_icon="@drawable/heart"-->
+
+                    <!--app:circle_startColor="#fcd229"
+                    app:circle_endColor="#f4ac1b"
+                    app:dot_color_1="#f5ce31"
+                    app:dot_color_2="#ed8128"-->
+                    <ImageView
+                        android:id="@+id/iv_like"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/heart" />
+
+                </RelativeLayout>
+                </RelativeLayout>
+                <TextView
+android:id="@+id/tv_prod_dsc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:maxLength="13"
+                    android:text="Electronics"
+                    android:gravity="center"
+                    android:textSize="13dp" />
+                <TextView
+android:id="@+id/tv_prod_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="Electronics"
+                    android:gravity="center"
+                    android:textSize="13dp" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+
+
+                    >
+                    <TextView
+                        android:id="@+id/tv_flat_diss"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:maxLength="13"
+                        android:text="Flat 20%"
+                        android:gravity="center_vertical"
+                        android:textSize="13dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/bt_get_a_code"
+                        />
+
+                    <Button
+                        android:id="@+id/bt_get_a_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:background="@drawable/coupon_bg"
+                        android:gravity="center"
+                        android:text="View Coupon Code"
+                        android:textSize="13dp"
+                        android:padding="10dp"
+                        android:textAllCaps="false"
+                        android:layout_alignParentRight="true"
+                       android:layout_marginBottom="5dp"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

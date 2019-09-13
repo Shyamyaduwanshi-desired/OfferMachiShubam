@@ -1,6 +1,8 @@
 package com.desired.offermachi.retalier.view.activity;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,8 +35,6 @@ public class RetalierDashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     FragmentManager FM;
     FragmentTransaction FT;
-    protected ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
     DrawerLayout drawer;
     private View navHeader;
     NavigationView navigationView;
@@ -105,8 +105,6 @@ public class RetalierDashboard extends AppCompatActivity
                 navigationView.getMenu().getItem(3).setVisible(false);
                 count=0;
             }
-
-
         }
         else if (id == R.id.navigation_sub_item_1) {
             drawer.closeDrawer(GravityCompat.START);
@@ -195,6 +193,7 @@ public class RetalierDashboard extends AppCompatActivity
         }else if (id == R.id.nav_logout) {
             drawer.closeDrawer(GravityCompat.START);
             SharedPrefManagerLogin.getInstance(getApplicationContext()).logout();
+            finish();
 
         }
         /*DrawerLayout drawer = findViewById(R.id.drawer_layout);*/
@@ -209,7 +208,7 @@ public class RetalierDashboard extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
     }
-    @Override
+ /*   @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
@@ -218,5 +217,44 @@ public class RetalierDashboard extends AppCompatActivity
         finish();
         System.exit(0);
         super.onBackPressed();
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+//            super.onBackPressed();
+
+            // FragmentManager fm = getSupportFragmentManager();
+            if (FM.getBackStackEntryCount() > 0) {
+                FM.popBackStack();
+            }
+            else
+            {
+                new AlertDialog.Builder(this)
+                        .setMessage("Are you sure you want to exit?")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_HOME);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                                System.exit(0);
+                            }
+                        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+            }
+        }
+
+
+
     }
 }

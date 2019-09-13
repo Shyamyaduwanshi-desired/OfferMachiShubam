@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -111,8 +112,12 @@ public class DashBoardActivity extends AppCompatActivity
             email.setText(useremail);
         }
         if (ImageHolder!= null){
-            Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
+            try {
+                Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         smartshopping=(LinearLayout)findViewById(R.id.homelinear);
@@ -171,7 +176,7 @@ public class DashBoardActivity extends AppCompatActivity
         smartshopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -184,10 +189,19 @@ public class DashBoardActivity extends AppCompatActivity
                 couponstext.setTextColor(getResources().getColor(R.color.yellow));
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+
                 if (user.getSmartShopping().equals("1")){
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.framelayout_id, new SmartShoppingFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else
+                {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.framelayout_id, new HomeFragment())
                             .addToBackStack(null)
                             .commit();
                 }
@@ -197,6 +211,7 @@ public class DashBoardActivity extends AppCompatActivity
         dealsoftheday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(DashBoardActivity.this, "Deal of the day", Toast.LENGTH_SHORT).show();
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -223,7 +238,7 @@ if (user.getSmartShopping().equals("0")){
         coupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//                Toast.makeText(DashBoardActivity.this, "Coupon", Toast.LENGTH_SHORT).show();
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
@@ -251,6 +266,7 @@ if (user.getSmartShopping().equals("0")){
         favourites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(DashBoardActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -274,6 +290,7 @@ if (user.getSmartShopping().equals("0")){
         ifollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(DashBoardActivity.this, "ifollow", Toast.LENGTH_SHORT).show();
 
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -508,7 +525,7 @@ if (user.getSmartShopping().equals("0")){
                     fragment = new SmartShoppingFragment();
                     UserSharedPrefManager.getInstance(getApplicationContext()).logout();
                 }
-
+//             finish();
                 break;
                 default:
                     fragment = new HomeFragment();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.desired.offermachi.customer.view.activity.LoginActivity;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierLogin;
 
@@ -24,8 +25,9 @@ public class SharedPrefManagerLogin {
     private static final  String KEY_GENDER="gender";
     private static final  String KEY_PROFILE="profileimage";
     private static final String KEY_IMAGE="storeimage";
+    private static final  String KEY_USER_TYPE="user_type";
 
-    private static SharedPrefManagerLogin mInstance;
+    private static SharedPrefManagerLogin mInstance;//retailer
     private static Context ctx;
     private SharedPrefManagerLogin(Context context) {
         ctx = context;
@@ -55,6 +57,7 @@ public class SharedPrefManagerLogin {
         editor.putString(KEY_GENDER,user.getGender());
         editor.putString(KEY_PROFILE,user.getProfile());
         editor.putString(KEY_IMAGE, user.getStoreimage());
+        editor.putString(KEY_USER_TYPE,user.getUsertype());
 
         editor.apply();
     }
@@ -84,7 +87,8 @@ public class SharedPrefManagerLogin {
                 sharedPreferences.getString(KEY_ABOUTSTORE, "NA"),
                 sharedPreferences.getString(KEY_GENDER, "NA"),
                 sharedPreferences.getString(KEY_PROFILE, "NA"),
-                sharedPreferences.getString(KEY_IMAGE, "NA")
+                sharedPreferences.getString(KEY_IMAGE, "NA"),
+                sharedPreferences.getString(KEY_USER_TYPE, "0")
         );
     }
     public void logout() {
@@ -92,8 +96,10 @@ public class SharedPrefManagerLogin {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        Intent intent=new Intent(ctx, RetalierLogin.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent=new Intent(ctx, LoginActivity.class);
+//        Intent intent=new Intent(ctx, RetalierLogin.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         ctx.startActivity(intent);
+
     }
 }

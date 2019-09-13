@@ -7,6 +7,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="profile">My Profile &amp; My Store</string>
+    <string name="user_profile">My Profile</string>
     <string name="feeds">Feeds</string>
     <string name="smartshopping">Smart Shopping</string>
     <string name="dealsday">Deals of the Day</string>
@@ -18,6 +19,7 @@
     <string name="help">Help &amp; Faqs</string>
     <string name="customer">Customer Support</string>
     <string name="notification">Notification</string>
+    <string name="do_not_dis">Do not disturb</string>
     <string name="terms">Terms &amp; Condition</string>
     <string name="logout">Log Out</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
@@ -59,5 +61,29 @@
     <string name="FCM_TOKEN" translatable="false">com.desired.offermachi.fcm_token</string>
     <string name="google_key" translatable="false">AIzaSyBY0qoVDPVESCj2rh6U-TlcHOQzq8q9Ky0</string>
 
+    <string-array name="status_item">
+        <item>1 Hours</item>
+        <item>2 Hours</item>
+        <item>5 Hours</item>
 
+    </string-array>
+
+    <string-array name="list_of_location">
+        <item>Vijay nagar</item>
+        <item>Vishanu puri</item>
+        <item>LIG</item>
+        <item>Palasiya</item>
+        <item>Geeta bhawan</item>
+        <item>Rasoma</item>
+        <item>Bhawarkua</item>
+        <item>Navalkha</item>
+
+    </string-array>
+   <!-- <item>12 Hours</item>
+    <item>1 Day</item>
+    <item>2 Day</item>
+    <item>5 Day</item>
+    <item>1 Month</item>
+    <item>2 Month</item>
+    <item>5 Month</item>-->
 </resources>

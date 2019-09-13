@@ -64,7 +64,8 @@ public class CustomerUpdateProfilePresenter {
                                 jsonObject.getString("gender"),
                                 jsonObject.getString("profile_image"),
                                 "0",
-                                "0"
+                                "0",
+                                "1"//shyam 11/9/19
                         );
                         UserSharedPrefManager.getInstance(context).userLogin(user);
 

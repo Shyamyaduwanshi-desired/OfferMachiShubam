@@ -1,5 +1,7 @@
 package com.desired.offermachi.customer.view.activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_activity);
+        InitDoNoDisturbData();
         init();
     }
     private void init(){
@@ -70,6 +73,23 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         if (isNetworkConnected()){
             presenter.sentRequest(idholder);
         }
+
+        simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(isChecked)
+               {
+                   ShowAlertStatusDlg();
+               }
+               else
+               {
+                   if(mDialog!=null)
+                   {
+                       mDialog.dismiss();
+                   }
+               }
+            }
+        });
+
     }
 
     @Override
@@ -93,6 +113,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                     ImageHolder,
                     SmartShoppingHolder,
                     "1"
+                    ,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
         }else{
@@ -106,6 +128,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                     ImageHolder,
                     SmartShoppingHolder,
                     "0"
+                    ,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
         }
@@ -151,5 +175,33 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+    String[] getStatus;
+    public void InitDoNoDisturbData()
+    {
+        getStatus= this.getResources().getStringArray(R.array.status_item);
+    }
+    int locPos=0;
+    String status="";
+    AlertDialog mDialog=null;
+    public  void ShowAlertStatusDlg()
+    {
+        if(mDialog!=null)
+        {
+            mDialog=null;
+        }
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setTitle("Select Time");
+        mBuilder.setSingleChoiceItems(getStatus, locPos, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                locPos=i;
+                status=getStatus[i];
+                dialogInterface.dismiss();
+            }
+        });
+
+         mDialog = mBuilder.create();
+         mDialog.show();
     }
 }

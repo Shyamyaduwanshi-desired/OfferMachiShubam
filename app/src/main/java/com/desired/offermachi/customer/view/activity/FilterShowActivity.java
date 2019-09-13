@@ -50,6 +50,7 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
         if (isNetworkConnected()) {
             presenter.GetCategoryList(idholder);
         }  else {

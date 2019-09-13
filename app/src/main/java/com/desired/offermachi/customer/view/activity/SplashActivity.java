@@ -17,6 +17,11 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.crashlytics.android.Crashlytics;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.view.activity.RetalierDashboard;
+
 import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends AppCompatActivity {
@@ -54,14 +59,50 @@ public class SplashActivity extends AppCompatActivity {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
-                public void run() {
-                    Intent intent = new Intent(SplashActivity.this, RegistraionAsActivity.class);
+                public void run() {// usertype=1(customer),usertype=2(retailer)
+//                    if ((UserSharedPrefManager.getInstance(SplashActivity.this).UserType().equals("0"))) {
+////
+//                    }
+//                    else
+//                    {
+//
+//                    }
+
+                    if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
+                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+                        if (user.getSmartShopping().equals("0")){
+                            startActivity(new Intent(SplashActivity.this, CategoryActivity.class));
+                            finish();
+                        }else{
+
+                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+                            finish();
+                        }
+                    }
+                    else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
+                        startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
+                        finish();
+
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+                    }
+
+                  /*  Intent intent = new Intent(SplashActivity.this, RegistraionAsActivity.class);
                     startActivity(intent);
                     finish();
+                      overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    */
                 }
             }, 1000);
         }
     }
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

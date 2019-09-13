@@ -68,6 +68,8 @@ public class ProfilePresenter {
                                 jsonObject.getString("gender"),
                                 jsonObject.getString("profile_image"),
                                 jsonObject.getString("shop_logo")
+                                ,
+                                "2"
                         );
                         SharedPrefManagerLogin.getInstance(context).userLogin(userModel);
                     }else if(status == 404){

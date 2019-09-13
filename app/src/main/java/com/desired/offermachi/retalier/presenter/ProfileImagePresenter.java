@@ -70,6 +70,8 @@ public class ProfileImagePresenter {
                                 jsonObject.getString("gender"),
                                 jsonObject.getString("profile_image"),
                                 jsonObject.getString("shop_logo")
+                                ,
+                                "2"
                         );
                         Log.e("profilepicture", "ImageHolder="+  jsonObject.getString("profile_image") );
                         SharedPrefManagerLogin.getInstance(context).userLogin(userModel);

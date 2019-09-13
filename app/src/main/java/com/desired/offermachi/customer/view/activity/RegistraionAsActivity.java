@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.view.activity.RetalierLogin;
+import com.desired.offermachi.retalier.view.activity.RetalierRegistration;
 
 public class RegistraionAsActivity extends AppCompatActivity implements LocationListener {
 
@@ -39,7 +40,8 @@ public class RegistraionAsActivity extends AppCompatActivity implements Location
         customerradiobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegistraionAsActivity.this, LoginActivity.class);
+//                Intent intent = new Intent(RegistraionAsActivity.this, LoginActivity.class);
+                Intent intent = new Intent(RegistraionAsActivity.this, RegisterActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -52,7 +54,8 @@ public class RegistraionAsActivity extends AppCompatActivity implements Location
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(RegistraionAsActivity.this, RetalierLogin.class);
+//                Intent intent = new Intent(RegistraionAsActivity.this, RetalierLogin.class);
+                Intent intent = new Intent(RegistraionAsActivity.this, RetalierRegistration.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
@@ -107,6 +110,13 @@ public class RegistraionAsActivity extends AppCompatActivity implements Location
         });
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 }
 

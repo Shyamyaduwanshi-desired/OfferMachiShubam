@@ -2,8 +2,8 @@ package com.desired.offermachi.customer.model;
 
 public class User {
     private String Id;
-    private String username,email,mobile,address,gender,profile,SmartShopping,Notificationsound;
-    public User(String  id, String name, String email, String mobile,String address,String gender,String profile,String smartShopping,String notificationsound) {
+    private String username,email,mobile,address,gender,profile,SmartShopping,Notificationsound,Usertype;
+    public User(String  id, String name, String email, String mobile,String address,String gender,String profile,String smartShopping,String notificationsound,String user_type) {
         this.Id = id;
         this.username = name;
         this.email = email;
@@ -13,7 +13,9 @@ public class User {
         this.profile=profile;
         this.SmartShopping=smartShopping;
         this.Notificationsound=notificationsound;
+        this.Usertype=user_type;
     }
+      /* this.Usertype=user_type;*/
 
     public String getId() {
         return Id;
@@ -49,5 +51,9 @@ public class User {
 
     public String getNotificationsound() {
         return Notificationsound;
+    }
+
+    public String getUsertype() {
+        return Usertype;
     }
 }

@@ -3,6 +3,7 @@ package com.desired.offermachi.customer.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -61,6 +62,7 @@ public class TrendingListPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
+                        Log.e("","all offer result= "+reader.toString());
                         String result = reader.getString("result");
                         JSONArray jsonArray = new JSONArray(result);
                         JSONObject object;
@@ -117,6 +119,7 @@ public class TrendingListPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
+                Log.e("","userid= "+userid);
                 return params;
             }
         };
@@ -163,6 +166,7 @@ public class TrendingListPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

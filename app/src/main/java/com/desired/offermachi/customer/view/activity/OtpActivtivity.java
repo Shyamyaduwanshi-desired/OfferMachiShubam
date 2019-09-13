@@ -61,7 +61,8 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "Enter Wrong Otp Please Try Again.", Toast.LENGTH_SHORT).show();
             }else {
                 if(isNetworkConnected()){
-                    presenter.verifyOtp(Idholder);
+//                    presenter.verifyOtp(Idholder);
+                    presenter.verifyOtpCommon(Idholder,Otpholder);
                 }else {
                     showAlert("Please connect to internet", R.style.DialogAnimation);
                 }

@@ -187,6 +187,7 @@ public class DealsOftheDayPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
     public void AddtoDeals(final String offer_id ) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Please Wait..");

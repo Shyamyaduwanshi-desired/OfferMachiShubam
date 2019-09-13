@@ -17,9 +17,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.NotificationModel;
 import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.presenter.CustomerNotificationPresenter;
-import com.desired.offermachi.customer.view.activity.DoNotDistrubActivity;
-import com.desired.offermachi.customer.view.activity.NotificationActivity;
+
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.retalier.presenter.RetailerNotificationPresenter;
 

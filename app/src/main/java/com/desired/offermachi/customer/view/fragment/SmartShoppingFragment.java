@@ -171,6 +171,8 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
                     ImageHolder,
                     "1",
                     SoundHolder
+                    ,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
         } else {
@@ -183,7 +185,8 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
                     GenderHolder,
                     ImageHolder,
                     "0",
-                    SoundHolder
+                    SoundHolder,
+                    "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
           startActivity(new Intent(getActivity(),CategoryActivity.class));

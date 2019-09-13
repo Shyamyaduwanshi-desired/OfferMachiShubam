@@ -48,9 +48,11 @@ public class CategortListAdapter extends RecyclerView.Adapter<CategortListAdapte
         holder.productname.setText(categoryListModel.getCatname());
         if(categoryListModel.getCatimage().equals("")){
         }else{
-            Picasso.get().load(categoryListModel.getCatimage()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+            Picasso.get().load(categoryListModel.getCatimage()).placeholder(R.drawable.ic_broken).into(holder.productimg);//.placeholder(R.drawable.ic_broken)
+            /*.networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE)*/
         }
+
         status=categoryListModel.getFollowstatus();
         if (status.equals("1")){
             holder.unfolltext.setText("Unfollow");
@@ -85,12 +87,14 @@ public class CategortListAdapter extends RecyclerView.Adapter<CategortListAdapte
                     Intent intent=new Intent("Follow");
                     intent.putExtra("catid",categoryListModel.getCatid());
                     intent.putExtra("followstatus",followstatus);
+                    intent.putExtra("pos",i);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if (status.equals("1")){
                     followstatus="0";
                     Intent intent=new Intent("Follow");
                     intent.putExtra("catid",categoryListModel.getCatid());
                     intent.putExtra("followstatus",followstatus);
+                    intent.putExtra("pos",i);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }
             }

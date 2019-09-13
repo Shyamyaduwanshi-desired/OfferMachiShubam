@@ -62,6 +62,7 @@
                     android:paddingTop="5dp"
                     android:text="Smart Shopping"/>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/category_linear_id"
                 android:layout_width="0dp"
@@ -86,6 +87,7 @@
                     android:text="Deals of the Day"
                     android:paddingTop="5dp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/account_linear_id"
                 android:layout_width="0dp"
@@ -112,6 +114,7 @@
                     android:textColor="@color/yellow"
                     android:textSize="10sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/cart_linear_id"
                 android:layout_width="0dp"
@@ -136,6 +139,7 @@
                     android:text="Favourites"
                     android:paddingTop="5dp"/>
             </LinearLayout>
+            
             <LinearLayout
                 android:id="@+id/more_linear_id"
                 android:layout_width="0dp"

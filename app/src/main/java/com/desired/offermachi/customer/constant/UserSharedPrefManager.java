@@ -9,6 +9,12 @@ import com.desired.offermachi.customer.view.activity.LoginActivity;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierLogin;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class UserSharedPrefManager {
     private static final  String SHARED_PREF_NAME = "Usersharedpref";
     private static final  String KEY_ID = "cusid";
@@ -20,6 +26,7 @@ public class UserSharedPrefManager {
     private static final  String KEY_PROFILE="cusprofileimage";
     private static final  String KEY_SmartShopping="smartshopping";
     private static final  String KEY_NotificationSound="notificationsound";
+    private static final  String KEY_USER_TYPE="user_type";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -44,6 +51,7 @@ public class UserSharedPrefManager {
         editor.putString(KEY_PROFILE,user.getProfile());
         editor.putString(KEY_SmartShopping,user.getSmartShopping());
         editor.putString(KEY_NotificationSound,user.getNotificationsound());
+        editor.putString(KEY_USER_TYPE,user.getUsertype());
         editor.apply();
     }
 
@@ -53,6 +61,17 @@ public class UserSharedPrefManager {
         return sharedPreferences.getString(KEY_PHONE, null) != null;
     }
 
+    //this method will checker whether user is already logged in or not
+    public String UserType() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_USER_TYPE, "0");
+        return value;
+    }
+    //this method will checker whether user is already logged in or not
+//    public void SetUserType() {
+//        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//        String value=sharedPreferences.getString(KEY_USER_TYPE, "0");
+//    }
     //this method will give the logged in user
     public User getCustomer() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -66,7 +85,8 @@ public class UserSharedPrefManager {
                 sharedPreferences.getString(KEY_GENDER, "NA"),
                 sharedPreferences.getString(KEY_PROFILE, "NA"),
                 sharedPreferences.getString(KEY_SmartShopping, "NA"),
-                sharedPreferences.getString(KEY_NotificationSound, "NA")
+                sharedPreferences.getString(KEY_NotificationSound, "NA"),
+                sharedPreferences.getString(KEY_USER_TYPE, "0")
 
         );
     }
@@ -82,4 +102,5 @@ public class UserSharedPrefManager {
         ctx.startActivity(intent);
 
     }
+
 }

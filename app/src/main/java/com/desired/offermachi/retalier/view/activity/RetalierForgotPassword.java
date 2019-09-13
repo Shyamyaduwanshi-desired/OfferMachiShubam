@@ -94,7 +94,7 @@ public class RetalierForgotPassword extends AppCompatActivity implements View.On
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(RetalierForgotPassword.this, RetalierLogin.class));
+//        startActivity(new Intent(RetalierForgotPassword.this, RetalierLogin.class));
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

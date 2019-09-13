@@ -12,11 +12,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -24,40 +25,36 @@ import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
-import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
-import com.desired.offermachi.retalier.model.DealsModel;
-import com.desired.offermachi.retalier.model.UserModel;
-import com.desired.offermachi.retalier.presenter.DealsOftheDayPresenter;
-import com.desired.offermachi.retalier.view.activity.RetalierAddDeals;
-import com.desired.offermachi.retalier.view.activity.RetalierDealsOftheDayActivity;
-import com.desired.offermachi.retalier.view.adapter.AddDealsofDayAdapter;
+import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class CategoryActivity extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList {
+public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
     ImageView imageViewback;
     RecyclerView product_recyclerview;
-    private CategortListAdapter categortListAdapter=null;
+    private MultiChoiceCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     int adptrPos=0;
+    Button btProceed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.category_activity);
+        setContentView(R.layout.act_dashboard_category);
         initview();
     }
 
       private void initview(){
-          presenter = new CustomerCategoryListPresenter(CategoryActivity.this, CategoryActivity.this);
+          presenter = new CustomerCategoryListPresenter(ActDashboardCategory.this, ActDashboardCategory.this);
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
           imageViewback = findViewById(R.id.imageback);
+          btProceed = findViewById(R.id.bt_proceed);
           imageViewback.setOnClickListener(this);
+          btProceed.setOnClickListener(this);
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -68,37 +65,52 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
               showAlert("Please connect to internet.", R.style.DialogAnimation);
           }
 
-          LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(followReceiver,
-                  new IntentFilter("Follow"));
+//          LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(followReceiver,
+//                  new IntentFilter("Follow"));
       }
 
-    public BroadcastReceiver followReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            followsatus = intent.getStringExtra("followstatus");
-            Catid = intent.getStringExtra("catid");
-            adptrPos = intent.getIntExtra("pos",0);
-
-            if (isNetworkConnected()) {
-                presenter.CategoryFollow(idholder,Catid,followsatus);
-            }  else {
-                showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
-
-        }
-    };
+//    public BroadcastReceiver followReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            followsatus = intent.getStringExtra("followstatus");
+//            Catid = intent.getStringExtra("catid");
+//            adptrPos = intent.getIntExtra("pos",0);
+//            if (isNetworkConnected()) {
+//                presenter.CategoryFollow(idholder,Catid,followsatus);
+//            }  else {
+//                showAlert("Please connect to internet.", R.style.DialogAnimation);
+//            }
+//        }
+//    };
 
     @Override
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
         }
+        else if (v==btProceed){
+            getAllSelectedId();
+        }
     }
-
+ String sAllCatId="";
+    public void getAllSelectedId()
+    {
+        sAllCatId="";
+        for(int i=0;i<arCatList.size();i++)
+        {
+            if(arCatList.get(i).isCheckStatus()) {
+                if (TextUtils.isEmpty(sAllCatId)) {
+                    sAllCatId = arCatList.get(i).getCatid();
+                } else {
+                    sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
+                }
+            }
+        }
+        Log.e("","sAllCatId= "+sAllCatId);
+        finish();
+    }
     @Override
     public void followsuccess(String response) {
-     /*   finish();
-        startActivity(getIntent());*/
 
         arCatList.get(adptrPos).setFollowstatus(followsatus);
         if (categortListAdapter != null)
@@ -106,37 +118,14 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
             categortListAdapter.notifyDataSetChanged();
         }
 
-//        if (isNetworkConnected()) {
-//            presenter.GetCategoryList(idholder);
-//        }  else {
-//            showAlert("Please connect to internet.", R.style.DialogAnimation);
-//        }
-
-
     }
     ArrayList<CategoryListModel> arCatList=new ArrayList<>();
     @Override
     public void success(ArrayList<CategoryListModel> response) {
         arCatList.clear();
         arCatList=response;
-
-        categortListAdapter = new CategortListAdapter(getApplicationContext(),arCatList);
+        categortListAdapter = new MultiChoiceCategortListAdapter(getApplicationContext(),arCatList,this);
         product_recyclerview.setAdapter(categortListAdapter);
-
-
-//        if(categortListAdapter==null)
-//        {
-//            categortListAdapter = new CategortListAdapter(getApplicationContext(),arCatList);
-//            product_recyclerview.setAdapter(categortListAdapter);
-//
-//        }
-//        else {
-//            categortListAdapter.notifyDataSetChanged();
-//        }
-
-//        categortListAdapter = new CategortListAdapter(getApplicationContext(),response);
-//        product_recyclerview.setAdapter(categortListAdapter);
-
     }
 
     @Override
@@ -176,18 +165,21 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-        startActivity(intent);
-        finish();
-        System.exit(0);
         super.onBackPressed();
+        finish();
     }
+//adapter click
+    @Override
+    public void onClick(int position) {
+        if(arCatList.get(position).isCheckStatus())
+        {
+            arCatList.get(position).setCheckStatus(false);
+        }
+        else
+        {
+            arCatList.get(position).setCheckStatus(true);
+        }
+        categortListAdapter.notifyDataSetChanged();
 
-   /* @Override
-    protected void onRestart() {
-        super.onRestart();
-        initview();
-    }*/
+    }
 }

@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registraion_activity);
-        if (UserSharedPrefManager.getInstance(this).isLoggedIn()) {
+      /*  if (UserSharedPrefManager.getInstance(this).isLoggedIn()) {
             User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
             if (user.getSmartShopping().equals("0")){
                 finish();
@@ -56,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, DashBoardActivity.class));
             }
             return;
-        }
+        }*/
         initview();
     }
     private void initview(){
@@ -94,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (v==loginrtext){
             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }else if (v==registerbutton){
             validation();
         }
@@ -150,7 +151,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+//        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
@@ -189,4 +190,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         }).show();
     }
+
+
 }

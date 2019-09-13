@@ -102,7 +102,8 @@ private CustomerForgotPasswordPresenter presenter;
     public void success(String response) {
         Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-        finish();
+//        finish();
+        finishAffinity();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
     }

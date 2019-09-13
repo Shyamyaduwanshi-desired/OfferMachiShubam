@@ -13,9 +13,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -30,20 +34,22 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class SearchActivity extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener {
+public class ActSearchNew extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener {
 
     ImageView cancle;
     RecyclerView categoryrecycle;
     private CustomerTrendingAdapter customerTrendingAdapter;
     private TrendingListPresenter presenter;
     String idholder;
-    android.widget.SearchView searchView;
+    SearchView searchView;
     private ArrayList<SelectCategoryModel> selectCategoryModelList;
+    private AutoCompleteTextView actv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_activity);
-
+        setContentView(R.layout.act_search_new);
+        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
         cancle=(ImageView)findViewById(R.id.cancle_img_id);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,13 +58,32 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
             }
         });
         initview();
+        setAutoCompleteAdpt();
     }
+    ArrayAdapter<String> adapter;
+public void setAutoCompleteAdpt()
+{
 
+    String[] countries = getResources().getStringArray(R.array.list_of_location);
+    adapter = new ArrayAdapter<String>
+            (this,android.R.layout.simple_list_item_1,countries);
+    actv.setAdapter(adapter);
+
+    actv.setOnItemClickListener(
+            new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+//                    selectedText.setText(autoSuggestAdapter.getObject(position));
+                    Toast.makeText(ActSearchNew.this, ""+adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                }
+            });
+}
     private void initview() {
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder = user.getId();
         selectCategoryModelList=new ArrayList<>();
-        presenter = new TrendingListPresenter(SearchActivity.this, SearchActivity.this);
+        presenter = new TrendingListPresenter(ActSearchNew.this, ActSearchNew.this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(gridLayoutManager1);
@@ -97,7 +122,7 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
     };
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter = new CustomerTrendingAdapter(SearchActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapter(ActSearchNew.this, response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
         for (SelectCategoryModel onsale : response) {
             selectCategoryModelList.add(onsale);

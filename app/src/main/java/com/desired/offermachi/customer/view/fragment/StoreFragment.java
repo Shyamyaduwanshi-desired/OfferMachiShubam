@@ -28,6 +28,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.StoreListPresenter;
 import com.desired.offermachi.customer.view.activity.StoreCouponCodeActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapterNew;
 import com.desired.offermachi.customer.view.adapter.StoreViewallAdapter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
@@ -41,7 +42,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class StoreFragment extends Fragment implements StoreListPresenter.StoreList, View.OnClickListener {
     View v;
     RecyclerView storerecycle;
-    private CustomerStoreAdapter customerStoreAdapter;
+    private CustomerStoreAdapterNew customerStoreAdapter;
     private StoreListPresenter presenter;
     String idholder;
     TextView filtertext,sortbytext;
@@ -102,7 +103,7 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
 
     @Override
     public void success(ArrayList<StoreModel> response) {
-        customerStoreAdapter=new CustomerStoreAdapter(getContext(),response);
+        customerStoreAdapter=new CustomerStoreAdapterNew(getContext(),response);
         storerecycle.setAdapter(customerStoreAdapter);
     }
 
@@ -161,7 +162,8 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
     @Override
     public void onClick(View v) {
         if (v==filtertext){
-            Intent intent = new Intent(getActivity(), FilterShowActivity.class);
+
+            Intent intent = new Intent(getActivity(), FilterShowActivity.class);//2
             startActivity(intent);
         }else if (v==sortbytext){
             final Dialog dialog = new Dialog(getContext());

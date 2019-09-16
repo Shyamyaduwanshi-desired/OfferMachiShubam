@@ -55,8 +55,8 @@ public class TypeBrandCategoryPresenter {
         progress.show();
         final ArrayList<OfferTypeModel> offertype= new ArrayList<OfferTypeModel>();
         final ArrayList<BrandModel> brandname= new ArrayList<BrandModel>();
-        final ArrayList<CategoryModel> category= new ArrayList<CategoryModel>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_all_offer_types", new Response.Listener<String>() {
+        final ArrayList<CategoryModel> category= new ArrayList<CategoryModel>();//select_all_offer_types(old )
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_all_offer_types_custom", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progress.dismiss();
@@ -89,7 +89,10 @@ public class TypeBrandCategoryPresenter {
                         String result = reader.getString("result");
                         JSONObject jsonObject = new JSONObject(result);
                         String offer_types=jsonObject.getString("offer_types");
-                        String offer_categories=jsonObject.getString("offer_categories");
+
+                        String offer_categories=jsonObject.getString("all_offer_main_categories");
+//                        String offer_categories=jsonObject.getString("offer_categories");
+
                         String offer_brands=jsonObject.getString("offer_brands");
                         Log.e("fetchdata", "offer_types ="+offer_types );
                         JSONArray jsonArray=new JSONArray(offer_types);
@@ -118,6 +121,8 @@ public class TypeBrandCategoryPresenter {
 
                         }
                         typeBrandCategory.successcategory(category);
+
+
                         JSONArray jsonArray3=new JSONArray(offer_brands);
                         JSONObject object3;
                         for (int count = 0; count < jsonArray3.length(); count++) {

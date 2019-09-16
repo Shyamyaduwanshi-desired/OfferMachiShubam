@@ -52,14 +52,17 @@ public class MultiChoiceCategortListAdapter extends RecyclerView.Adapter<MultiCh
                     .memoryPolicy(MemoryPolicy.NO_CACHE)*/
         }
 //        holder.catcheck.setEnabled(false);
-        holder.catcheck.setOnCheckedChangeListener(null);
+
+//        holder.catcheck.setOnCheckedChangeListener(null);
         if(categoryListModel.isCheckStatus())
         {
-         holder.catcheck.setChecked(true);
+//         holder.catcheck.setChecked(true);
+         holder.ivCheck.setImageResource(R.drawable.ic_check_box_40dp);
         }
         else
         {
-            holder.catcheck.setChecked(false);
+//            holder.catcheck.setChecked(false);
+            holder.ivCheck.setImageResource(R.drawable.ic_un_check_box_40dp);
         }
 
 //        status=categoryListModel.getFollowstatus();
@@ -103,14 +106,15 @@ public class MultiChoiceCategortListAdapter extends RecyclerView.Adapter<MultiCh
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout categorylinear;
-        ImageView productimg;
+        ImageView productimg,ivCheck;
         TextView productname/*,unfolltext*/;
-        CheckBox catcheck;
+//        CheckBox catcheck;
         public MyViewHolder(View itemView) {
             super(itemView);
             productimg = itemView.findViewById(R.id.category_image);
+            ivCheck = itemView.findViewById(R.id.iv_check);
             productname = itemView.findViewById(R.id.category_name);
-            catcheck=itemView.findViewById(R.id.catcheck);
+//            catcheck=itemView.findViewById(R.id.catcheck);
             categorylinear= itemView.findViewById(R.id.linear_category_id);
         }
     }

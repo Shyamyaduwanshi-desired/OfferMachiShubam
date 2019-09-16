@@ -1,13 +1,17 @@
 package com.desired.offermachi.customer.view.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsMessage;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -141,6 +145,59 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+
+    //for auto fatch OTP
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter("android.provider.Telephony" +
+                ".SMS_RECEIVED"));
+    }
+
+    BroadcastReceiver receiver= new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            {
+                final Bundle bundle = intent.getExtras();
+                try {
+                    if (bundle != null) {
+                        final Object[] pdusObj = (Object[]) bundle.get("pdus");
+                        for (int i = 0; i < pdusObj.length; i++) {
+                            SmsMessage currentMessage = SmsMessage.createFromPdu((byte[])
+                                    pdusObj[i]);
+                            String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+                            String senderNum = phoneNumber;
+
+                            String msg=currentMessage.getDisplayMessageBody();
+                            String getotp=msg.substring((msg.length()-4),msg.length());
+
+                            Log.e("","getotp= "+getotp);
+                            etotp.setText(getotp.trim());
+                            if (etotp.getText().toString().equals(Otpholder)) {
+                                if(isNetworkConnected()){
+                                    presenter.verifyOtpCommon(Idholder,Otpholder);
+                                }else {
+                                    showAlert("Please connect to internet", R.style.DialogAnimation);
+                                }
+
+                            }
+
+                        }
+                    }
+
+                } catch (Exception e) {
+
+
+                }
+            }
+        }
+    };
 }
 
 

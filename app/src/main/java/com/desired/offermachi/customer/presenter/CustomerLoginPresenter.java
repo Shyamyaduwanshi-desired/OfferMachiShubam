@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -150,55 +151,14 @@ public class CustomerLoginPresenter {
                 return params;
             }
         };
-
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
+
     }
 
-  /*  public void signInThroughSocialMedia(final String username, final String email, final String token) {
-        final ProgressDialog progress = new ProgressDialog(context);
-        progress.setMessage("Login Please Wait..");
-        progress.setCancelable(false);
-        progress.show();
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "signInThroughSocialMediaUser", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progress.dismiss();
-                try {
-                    JSONObject reader = new JSONObject(response);
-                    int status = reader.getInt("status");
-                    if(status == 1){
-                        appData.setUserID(reader.getString("user_id"));
-                        login.success(reader.getString("message"));
-                    }else if(status == 0){
-                       login.error(reader.getString("message"));
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    login.fail("Something went wrong. Please try after some time.");
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
-                login.fail("Server Error.\n Please try after some time.");
-            }
-        }
-        ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", username);
-                params.put("email_id", email);
-                params.put("id", token);
-
-                return params;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-        queue.add(postRequest);
-    }*/
 }

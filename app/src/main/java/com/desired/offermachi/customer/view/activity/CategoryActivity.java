@@ -63,7 +63,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
           product_recyclerview.setLayoutManager(gridLayoutManager);
           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
           if (isNetworkConnected()) {
-              presenter.GetCategoryList(idholder);
+              presenter.GetCategoryList(idholder);//for show all category
           }  else {
               showAlert("Please connect to internet.", R.style.DialogAnimation);
           }

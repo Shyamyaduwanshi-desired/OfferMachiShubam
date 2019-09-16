@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -205,7 +206,15 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             String time = object.getString("alltime");
             txttime.setText(time);
             String description = object.getString("description");
-            txtofferdescription.setText(description);
+
+            if(TextUtils.isEmpty(description))
+            {
+                txtofferdescription.setText("");
+            }
+            else {
+                txtofferdescription.setText(description);
+            }
+
             couponcode = object.getString("coupon_code");
             String postby = object.getString("posted_by");
             String status = object.getString("status");

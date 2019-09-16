@@ -97,6 +97,7 @@ public class CustomerFeedsPresenter {
 
                     } else if (status == 404) {
                         feedsList.error(reader.getString("message"));
+                        hidepDialog();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

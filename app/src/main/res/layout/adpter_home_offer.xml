@@ -128,9 +128,9 @@ android:id="@+id/tv_prod_dsc"
 
                     android:layout_marginTop="5dp"
                     android:ellipsize="middle"
-                    android:singleLine="true"
-                    android:maxLength="13"
-                    android:text="Electronics"
+                    android:singleLine="false"
+
+                    android:text="Electronicssdfsdfsdfdsfsdfsdfdsfsdfsdfsdfsd"
                     android:gravity="center"
                     android:textSize="13dp" />
                 <TextView

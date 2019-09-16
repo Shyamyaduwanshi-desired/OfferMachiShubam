@@ -30,6 +30,8 @@ import com.desired.offermachi.customer.presenter.CustomerFeedsPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
+
 import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -37,7 +39,8 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class FeedsFragment extends Fragment implements View.OnClickListener, CustomerFeedsPresenter.FeedsList {
     View view;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerFeedsPresenter presenter;
     String idholder;
     TextView sortbytext,filtertext;
@@ -60,10 +63,16 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         filtertext=view.findViewById(R.id.filter_text_id);
         filtertext.setOnClickListener(this);
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
+
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.ViewAllFeeds(idholder);
@@ -153,15 +162,18 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
             });
             dialog.show();
         }else if (v==filtertext){
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);
+            Intent intent = new Intent(getContext(), FilterShowActivity.class);//6
             startActivity(intent);
         }
 
     }
-
+//feeds success
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+//        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+//        categoryrecycle.setAdapter(customerTrendingAdapter);
+
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

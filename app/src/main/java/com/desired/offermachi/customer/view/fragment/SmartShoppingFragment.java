@@ -15,12 +15,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -28,7 +32,9 @@ import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
 import com.desired.offermachi.customer.view.activity.CategoryActivity;
+import com.desired.offermachi.customer.view.activity.MapActivity;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
+import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
 import com.desired.offermachi.customer.view.adapter.SmartShoppingAdapter;
 import com.desired.offermachi.customer.model.smart_shopping_model;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
@@ -41,7 +47,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 
-public class SmartShoppingFragment extends Fragment implements CustomerCategoryListPresenter.CustomerCategoryList, CompoundButton.OnCheckedChangeListener {
+public class SmartShoppingFragment extends Fragment implements View.OnClickListener,CustomerCategoryListPresenter.CustomerCategoryList, CompoundButton.OnCheckedChangeListener,MultiChoiceCategortListAdapter.AdapterClick {
     View view;
     RecyclerView product_recyclerview;
     private SmartShoppingCategoryListAdapter smartShoppingCategoryListAdapter;
@@ -49,7 +55,8 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
     private String idholder, followsatus, Catid;
     Switch smartswitch;
     String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, ImageHolder, SmartShoppingHolder,SoundHolder;
-
+Context context;
+    Button btProceed;
     public SmartShoppingFragment() {
     }
 
@@ -57,11 +64,13 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.smart_shopping_fragment, container, false);
         ((DashBoardActivity) getActivity()).setToolTittle("Smart Shopping", 2);
+        context=getActivity();
         initview();
         return view;
     }
 
     private void initview() {
+        btProceed = view.findViewById(R.id.bt_proceed);
         presenter = new CustomerCategoryListPresenter(getContext(), SmartShoppingFragment.this);
         User user = UserSharedPrefManager.getInstance(getContext()).getCustomer();
         idholder = user.getId();
@@ -79,11 +88,12 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         smartswitch = view.findViewById(R.id.smartswitch);
         smartswitch.setOnCheckedChangeListener(this);
+        btProceed.setOnClickListener(this);
         if (SmartShoppingHolder.equals("1")) {
             smartswitch.setChecked(true);
         }
         if (isNetworkConnected()) {
-            presenter.GetCategoryList(idholder);
+            presenter.GetCategoryList(idholder);//for show all category
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
@@ -110,17 +120,13 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
      /*   finish();
         startActivity(getIntent());*/
         if (isNetworkConnected()) {
-            presenter.GetCategoryList(idholder);
+            presenter.GetCategoryList(idholder);//for show all category
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
     }
 
-    @Override
-    public void success(ArrayList<CategoryListModel> response) {
-        smartShoppingCategoryListAdapter = new SmartShoppingCategoryListAdapter(getActivity(), response);
-        product_recyclerview.setAdapter(smartShoppingCategoryListAdapter);
-    }
+
 
     @Override
     public void error(String response) {
@@ -192,6 +198,88 @@ public class SmartShoppingFragment extends Fragment implements CustomerCategoryL
           startActivity(new Intent(getActivity(),CategoryActivity.class));
 
           getActivity().finish();
+        }
+    }
+    ArrayList<CategoryListModel> arCatList=new ArrayList<>();
+    private MultiChoiceCategortListAdapter categortListAdapter=null;
+    @Override
+    public void success(ArrayList<CategoryListModel> response) {
+//        smartShoppingCategoryListAdapter = new SmartShoppingCategoryListAdapter(getActivity(), response);
+//        product_recyclerview.setAdapter(smartShoppingCategoryListAdapter);
+
+        arCatList.clear();
+        arCatList=response;
+        categortListAdapter = new MultiChoiceCategortListAdapter(context,arCatList,this);
+        product_recyclerview.setAdapter(categortListAdapter);
+
+
+    }
+    //adapter click
+    @Override
+    public void onClick(int position) {
+        if(arCatList.get(position).isCheckStatus())
+        {
+            arCatList.get(position).setCheckStatus(false);
+        }
+        else
+        {
+            arCatList.get(position).setCheckStatus(true);
+        }
+        categortListAdapter.notifyDataSetChanged();
+
+    }
+//view click listern
+    @Override
+    public void onClick(View v) {
+
+        if (v==btProceed){
+            getAllSelectedId();
+        }
+    }
+    String sAllCatId="",sSingleCateId;
+    String sAllCatNm="",sSingleCateNm;
+    String sAllCatBannerimage="",sSingleCateBannerimage;
+
+    public void getAllSelectedId()
+    {
+        sAllCatId="";
+        sAllCatNm="";
+        sAllCatBannerimage="";
+
+        sSingleCateId="";
+        sSingleCateNm="";
+        sSingleCateBannerimage="";
+
+        for(int i=0;i<arCatList.size();i++)
+        {
+            if(arCatList.get(i).isCheckStatus()) {
+                if (TextUtils.isEmpty(sAllCatId)) {
+                    sAllCatId = arCatList.get(i).getCatid();
+                    sAllCatNm = arCatList.get(i).getCatname();
+                    sAllCatBannerimage = arCatList.get(i).getBannerimage();
+
+                    sSingleCateId = arCatList.get(i).getCatid();
+                    sSingleCateNm= arCatList.get(i).getCatname();
+                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
+
+                } else {
+                    sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
+                    sAllCatNm = sAllCatNm + "," + arCatList.get(i).getCatname();
+                    sAllCatBannerimage = sAllCatBannerimage + "," + arCatList.get(i).getBannerimage();
+                }
+            }
+        }
+        Log.e("","sAllCatId= "+sAllCatId);
+
+        if(TextUtils.isEmpty(sAllCatId))
+        {
+            Toast.makeText(getActivity(), "please select a category", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent myIntent = new Intent(getActivity(), MapActivity.class);
+            myIntent.putExtra("catid",sSingleCateId);
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(myIntent);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.desired.offermachi.customer.view.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,8 +22,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,10 +51,8 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
-
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     FragmentManager FM;
     FragmentTransaction FT;
     LinearLayout smartshopping,dealsoftheday,coupons,favourites,ifollow;
@@ -111,7 +112,8 @@ public class DashBoardActivity extends AppCompatActivity
         }else{
             email.setText(useremail);
         }
-        if (ImageHolder!= null){
+        if (ImageHolder!= null)
+        {
             try {
                 Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
                         .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
@@ -126,13 +128,11 @@ public class DashBoardActivity extends AppCompatActivity
         favourites=(LinearLayout)findViewById(R.id.cart_linear_id);
         ifollow=(LinearLayout)findViewById(R.id.more_linear_id);
 
-
         smartshoppingimg=(ImageView)findViewById(R.id.home_img);
         dealsofthedayimg=(ImageView)findViewById(R.id.categoryimg_id);
         couponsimg=(ImageView)findViewById(R.id.account_img);
         favouritesimg=(ImageView)findViewById(R.id.cart_img);
         ifollowimg=(ImageView)findViewById(R.id.more_img);
-
 
         smartshoppingtext=(TextView) findViewById(R.id.hometext_id);
         dealsofthedaytext=(TextView)findViewById(R.id.categorytext_id);
@@ -148,6 +148,7 @@ public class DashBoardActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
         btnnotification=findViewById(R.id.btnnotification);
         btnnotification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,40 +172,44 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-
-
         smartshopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
-                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
-                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
-                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
-                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
-                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
-
-                smartshoppingtext.setTextColor(getResources().getColor(R.color.white));
-                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
-                couponstext.setTextColor(getResources().getColor(R.color.yellow));
-                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
-                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-
-                if (user.getSmartShopping().equals("1")){
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.framelayout_id, new SmartShoppingFragment())
-                            .addToBackStack(null)
-                            .commit();
+                if (user.getSmartShopping().equals("0")){
+                    showdialog();
                 }
-                else
-                {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.framelayout_id, new HomeFragment())
-                            .addToBackStack(null)
-                            .commit();
-                }
+//
+//
+////                Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
+//                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
+//                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+//                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+//                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+//                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+//
+//
+//                smartshoppingtext.setTextColor(getResources().getColor(R.color.white));
+//                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+//                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+//                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+//                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+//
+//                if (user.getSmartShopping().equals("1")){
+//                    getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .replace(R.id.framelayout_id, new SmartShoppingFragment())
+//                            .addToBackStack(null)
+//                            .commit();
+//                }
+//                else
+//                {
+//                    getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .replace(R.id.framelayout_id, new HomeFragment())
+//                            .addToBackStack(null)
+//                            .commit();
+//                }
                 }
         });
 
@@ -212,25 +217,25 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this, "Deal of the day", Toast.LENGTH_SHORT).show();
+                if (user.getSmartShopping().equals("0")){
+
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
                 favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
                 ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
-
-
                 smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
                 dealsofthedaytext.setTextColor(getResources().getColor(R.color.white));
                 couponstext.setTextColor(getResources().getColor(R.color.yellow));
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-if (user.getSmartShopping().equals("0")){
+
     getSupportFragmentManager()
             .beginTransaction()
             .replace(R.id.framelayout_id, new DealsoftheDayFragment())
             .addToBackStack(null)
             .commit();
-}
+            }
                  }
         });
 
@@ -239,19 +244,18 @@ if (user.getSmartShopping().equals("0")){
             @Override
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this, "Coupon", Toast.LENGTH_SHORT).show();
+                if (user.getSmartShopping().equals("0")){
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
                 favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
                 ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
-
-
                 smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
                 dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
                 couponstext.setTextColor(getResources().getColor(R.color.white));
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-                if (user.getSmartShopping().equals("0")){
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.framelayout_id, new MycouponsFragment())
@@ -267,6 +271,7 @@ if (user.getSmartShopping().equals("0")){
             @Override
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this, "Favourite", Toast.LENGTH_SHORT).show();
+                if (user.getSmartShopping().equals("0")){
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -278,7 +283,7 @@ if (user.getSmartShopping().equals("0")){
                 couponstext.setTextColor(getResources().getColor(R.color.yellow));
                 favouritestext.setTextColor(getResources().getColor(R.color.white));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-                if (user.getSmartShopping().equals("0")){
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.framelayout_id, new FavouritesFragment())
@@ -291,20 +296,18 @@ if (user.getSmartShopping().equals("0")){
             @Override
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this, "ifollow", Toast.LENGTH_SHORT).show();
-
+                if (user.getSmartShopping().equals("0")){
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
                 couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
                 favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
                 ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefollow));
-
                 smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
                 dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
                 couponstext.setTextColor(getResources().getColor(R.color.yellow));
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.white));
 
-                if (user.getSmartShopping().equals("0")){
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.framelayout_id, new FollowFragment())
@@ -354,6 +357,7 @@ if (user.getSmartShopping().equals("0")){
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                     UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this,"");//only for not show privious selected category
                                 Intent intent = new Intent(Intent.ACTION_MAIN);
                                 intent.addCategory(Intent.CATEGORY_HOME);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
@@ -382,84 +386,109 @@ if (user.getSmartShopping().equals("0")){
 
             case R.id.nav_home:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new HomeFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
                 //toolbar.setTitle("");
                 break;
                 case R.id.nav_profile:
                     if (user.getSmartShopping().equals("0")){
+                        UserSharedPrefManager.SaveStoreFilter(this,"");
                         fragment = new ProfileFragment();
-                    }else{
-                        fragment = new SmartShoppingFragment();
                     }
+//                    else{
+//                        fragment = new SmartShoppingFragment();
+//                    }
 
 
                    // toolbar.setTitle("My Profile");
                 break;
             case R.id.nav_feeds:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new FeedsFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_smartshopping:
+
+                if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                    showdialog();
+                }
+              /*
                 if (user.getSmartShopping().equals("0")){
                     fragment = new HomeFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+                else{
+                    fragment = new SmartShoppingFragment();
+                }*/
 
                 break;
             case  R.id.nav_store:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new StoreFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_dealsday:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new DealsoftheDayFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case  R.id.nav_exclusive:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new ExclusiveFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_mycoupons:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new MycouponsFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_follow:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new FollowFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_fav:
                 if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new FavouritesFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_rate:
@@ -478,44 +507,52 @@ if (user.getSmartShopping().equals("0")){
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
                     }
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
             case R.id.nav_invite:
                 if (user.getSmartShopping().equals("0")){
                     fragment = new InviteFriendFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
 
             case R.id.nav_help:
                 if (user.getSmartShopping().equals("0")){
                     fragment = new HelpFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
 
             case R.id.nav_customer:
                 if (user.getSmartShopping().equals("0")){
                     fragment = new CustomerSupportFragment();
-                }else{
-                    fragment = new SmartShoppingFragment();
                 }
+//                else{
+//                    fragment = new SmartShoppingFragment();
+//                }
 
                 break;
 
             case R.id.nav_notification:
-                fragment = new HomeFragment();
-                startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+//                fragment = new HomeFragment();
+                if (user.getSmartShopping().equals("0")) {
+                    startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+                }
                 break;
             case R.id.nav_terms:
-                fragment = new TermConditionFragment();
+                if (user.getSmartShopping().equals("0")) {
+                    fragment = new TermConditionFragment();
+                }
                 break;
             case R.id.nav_logout:
                 if (user.getSmartShopping().equals("0")) {
@@ -538,20 +575,23 @@ if (user.getSmartShopping().equals("0")){
             e.printStackTrace();
         }*/
 
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
-
-
-        drawer.closeDrawer(GravityCompat.START);
+       if(fragment==null)//only for not refresh
+       {
+           DrawerLayout drawer = findViewById(R.id.drawer_layout);
+           drawer.closeDrawer(GravityCompat.START);
+       }
+       else {
+           // Insert the fragment by replacing any existing fragment
+           FragmentManager fragmentManager = getSupportFragmentManager();
+           fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();
+           // Highlight the selected item has been done by NavigationView
+           menuItem.setChecked(true);
+           // Set action bar title
+           setTitle(menuItem.getTitle());
+           // Close the navigation drawer
+           DrawerLayout drawer = findViewById(R.id.drawer_layout);
+           drawer.closeDrawer(GravityCompat.START);
+       }
         return true;
     }
     public  void setToolTittle(String tittle,int diff)
@@ -575,5 +615,121 @@ if (user.getSmartShopping().equals("0")){
 
         }
         tvMainTitle.setText(tittle);
+    }
+
+    private void showdialog(){
+
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.switch_layout);
+        dialog.setTitle("Smart shopping Dialog");
+        Switch Switch =(Switch) dialog.findViewById(R.id.smartswitch);
+        Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+
+
+                // Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
+                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
+                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+
+                smartshoppingtext.setTextColor(getResources().getColor(R.color.white));
+                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+                couponstext.setTextColor(getResources().getColor(R.color.yellow));
+                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+
+
+                if (user.getSmartShopping().equals("1")) {
+
+                    info.setVisibility(View.INVISIBLE);
+                    btnnotification.setVisibility(View.INVISIBLE);
+
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.framelayout_id, new SmartShoppingFragment())
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    info.setVisibility(View.VISIBLE);
+                    btnnotification.setVisibility(View.VISIBLE);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.framelayout_id, new HomeFragment())
+                            .addToBackStack(null)
+                            .commit();
+                }
+
+                String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder,SoundHolder,idholder;
+                User user = UserSharedPrefManager.getInstance(DashBoardActivity.this).getCustomer();
+                idholder= user.getId();
+
+                Nameholder= user.getUsername();
+                EmailHolder=user.getEmail();
+                PhoneHolder= user.getMobile();
+                AddressHolder= user.getAddress();
+                GenderHolder= user.getGender();
+                ImageHolder=user.getProfile();
+                SmartShoppingHolder=user.getSmartShopping();
+                SoundHolder=user.getNotificationsound();
+
+
+                if (isChecked){
+                    User user1 = new User(
+                            idholder,
+                            Nameholder,
+                            EmailHolder,
+                            PhoneHolder,
+                            AddressHolder,
+                            GenderHolder,
+                            ImageHolder,
+                            "1",
+                            SoundHolder,
+                            "1"//shyam 11/9/19
+                    );
+                    UserSharedPrefManager.getInstance(DashBoardActivity.this).userLogin(user1);
+
+                    startActivity(new Intent(DashBoardActivity.this,DashBoardActivity.class));
+                    finish();
+
+                }
+                dialog.dismiss();
+
+            }
+
+        });
+
+        dialog.show();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (user.getSmartShopping().equals("1")) {
+            info.setVisibility(View.INVISIBLE);
+            btnnotification.setVisibility(View.INVISIBLE);
+
+            smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
+            dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+            couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+            favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+            ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+
+            smartshoppingtext.setTextColor(getResources().getColor(R.color.white));
+            dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+            couponstext.setTextColor(getResources().getColor(R.color.yellow));
+            favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+            ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+        }
+        else
+        {
+            info.setVisibility(View.VISIBLE);
+            btnnotification.setVisibility(View.VISIBLE);
+        }
     }
 }

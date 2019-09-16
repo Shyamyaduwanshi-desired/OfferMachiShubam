@@ -93,7 +93,6 @@ public class FilterListAdapter  extends RecyclerView.Adapter<FilterListAdapter.M
                 else
                     lastChecked = null;
 
-
               //  fonts.get(clickedPos).setSelected(cb.isChecked);
 
             }

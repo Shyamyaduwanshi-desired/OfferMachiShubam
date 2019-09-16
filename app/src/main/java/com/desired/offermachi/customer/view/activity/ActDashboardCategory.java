@@ -18,9 +18,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
@@ -40,14 +42,22 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
     private String idholder,followsatus,Catid;
     int adptrPos=0;
     Button btProceed;
+    hand handobj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_dashboard_category);
+        handobj = hand.getintance();
+//        GetIntentData();
         initview();
-    }
 
-      private void initview(){
+    }
+//String diff="";
+//    private void GetIntentData() {
+//        diff=getIntent().getStringExtra("diff_");
+//    }
+
+    private void initview(){
           presenter = new CustomerCategoryListPresenter(ActDashboardCategory.this, ActDashboardCategory.this);
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
@@ -60,7 +70,7 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
           product_recyclerview.setLayoutManager(gridLayoutManager);
           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
           if (isNetworkConnected()) {
-              presenter.GetCategoryList(idholder);
+              presenter.GetCategoryList(idholder);//for all category
           }  else {
               showAlert("Please connect to internet.", R.style.DialogAnimation);
           }
@@ -92,22 +102,58 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             getAllSelectedId();
         }
     }
- String sAllCatId="";
+ String sAllCatId=""/*,sSingleCateId*/;
+ String sAllCatNm=""/*,sSingleCateNm*/;
+ String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
+
     public void getAllSelectedId()
     {
         sAllCatId="";
+        sAllCatNm="";
+        sAllCatBannerimage="";
+
+//        sSingleCateId="";
+//        sSingleCateNm="";
+//        sSingleCateBannerimage="";
+
         for(int i=0;i<arCatList.size();i++)
         {
             if(arCatList.get(i).isCheckStatus()) {
                 if (TextUtils.isEmpty(sAllCatId)) {
                     sAllCatId = arCatList.get(i).getCatid();
+                    sAllCatNm = arCatList.get(i).getCatname();
+                    sAllCatBannerimage = arCatList.get(i).getBannerimage();
+
+//                    sSingleCateId = arCatList.get(i).getCatid();
+//                    sSingleCateNm= arCatList.get(i).getCatname();
+//                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
+
                 } else {
                     sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
+                    sAllCatNm = sAllCatNm + "," + arCatList.get(i).getCatname();
+                    sAllCatBannerimage = sAllCatBannerimage + "," + arCatList.get(i).getBannerimage();
                 }
             }
         }
         Log.e("","sAllCatId= "+sAllCatId);
-        finish();
+
+        if(TextUtils.isEmpty(sAllCatId))
+        {
+            Toast.makeText(this, "please select a category", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            handobj.setCatid(sAllCatId/*sSingleCateId*/);//sAllCatId
+            handobj.setCatname(sAllCatNm/*sSingleCateNm*/);//sAllCatNm
+            handobj.setCatimage(sAllCatBannerimage/*sSingleCateBannerimage*/);//sAllCatBannerimage
+
+            Intent myIntent = new Intent(this, DashBoardActivity.class);
+              /*  myIntent.putExtra("catid",categoryListModel.getCatid());
+                myIntent.putExtra("catname",categoryListModel.getCatname());
+                myIntent.putExtra("catofferimage",categoryListModel.getBannerimage());*/
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(myIntent);
+            finish();
+        }
     }
     @Override
     public void followsuccess(String response) {

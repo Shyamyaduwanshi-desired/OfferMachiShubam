@@ -160,8 +160,12 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
             });
             dialog.show();
         }else if (v==filtertext){
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);
+
+            Intent intent = new Intent(getContext(), FilterShowActivity.class);//3
             startActivity(intent);
+
+
+
         }
 
     }

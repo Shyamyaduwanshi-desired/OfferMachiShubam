@@ -114,7 +114,7 @@ public class ExclusiveFragment extends Fragment implements View.OnClickListener,
 
             dialog.show();
         }else if (v==filtertext){
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);
+            Intent intent = new Intent(getContext(), FilterShowActivity.class);//4
             startActivity(intent);
         }
 

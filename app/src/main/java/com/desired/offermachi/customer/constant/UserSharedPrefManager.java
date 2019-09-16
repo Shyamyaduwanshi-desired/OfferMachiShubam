@@ -27,6 +27,7 @@ public class UserSharedPrefManager {
     private static final  String KEY_SmartShopping="smartshopping";
     private static final  String KEY_NotificationSound="notificationsound";
     private static final  String KEY_USER_TYPE="user_type";
+    private static final  String KEY_CAT_FILTER="user_cat_filter";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -101,6 +102,18 @@ public class UserSharedPrefManager {
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(intent);
 
+    }
+
+    public static String GetStoredFilter(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_CAT_FILTER, "");
+        return value;
+    }
+    public static void SaveStoreFilter(Context context,String allSelectedCategory) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_CAT_FILTER, allSelectedCategory);
+        editor.apply();
     }
 
 }

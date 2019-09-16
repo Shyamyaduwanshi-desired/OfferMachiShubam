@@ -107,7 +107,7 @@ public class FavouritesFragment extends Fragment implements View.OnClickListener
             dialog.setTitle("Custom Dialog");
             dialog.show();
         }else if (v==filtertext){
-            Intent intent = new Intent(getActivity(), FilterShowActivity.class);
+            Intent intent = new Intent(getActivity(), FilterShowActivity.class);//5
             startActivity(intent);
         }
     }

@@ -39,7 +39,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     String idholder;
     String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder;
     String SoundHolder;
-
+TextView tvDONodist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +60,19 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         SmartShoppingHolder=user.getSmartShopping();
         SoundHolder=user.getNotificationsound();
         imageViewback=findViewById(R.id.imageback);
-        imageViewback.setOnClickListener(this);
         simpleSwitch =findViewById(R.id.donotswitch);
+        tvDONodist =findViewById(R.id.tv_disturb);
+        categoryrecycle = findViewById(R.id.categoryrecycleview);
+
+
+        imageViewback.setOnClickListener(this);
+        tvDONodist.setOnClickListener(this);
+
         simpleSwitch.setOnCheckedChangeListener(this);
         if (SoundHolder.equals("1")){
             simpleSwitch.setChecked(true);
         }
-        categoryrecycle = findViewById(R.id.categoryrecycleview);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(linearLayoutManager);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
@@ -95,7 +101,12 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (v==imageViewback){
-            onBackPressed();
+//            onBackPressed();
+            finish();
+        }
+        else if (v==tvDONodist){
+startActivity(new Intent(this,ActDoNotDisturbSetting.class));
+//
         }
 
     }

@@ -125,7 +125,7 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
 
             dialog.show();
         }else if (v==filtertext){
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);
+            Intent intent = new Intent(getContext(), FilterShowActivity.class);//7
             startActivity(intent);
         }
 

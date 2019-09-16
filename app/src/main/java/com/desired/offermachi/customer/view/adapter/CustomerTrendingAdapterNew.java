@@ -142,7 +142,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-
                         }
 
                     });
@@ -162,8 +161,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                 if (fav.equals("0")) {
                     Favstatus="1";
                     holder.likeimg.setImageResource(R.drawable.ic_like);
-//                    holder.ivLikeBtn.setLikeIcon(R.drawable.ic_like);
-//                    holder.ivLikeBtn.setCurrentlyLiked(true);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
                     intent.putExtra("offerid", selectCategoryModel.getId());
@@ -171,9 +168,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                 }else if(fav.equals("1")) {
                     Favstatus="0";
                     holder.likeimg.setImageResource(R.drawable.heart);
-//                    holder.ivLikeBtn.setUnlikeIcon(R.drawable.heart);
-
-//                    holder.ivLikeBtn.setCurrentlyLiked(false);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
                     intent.putExtra("offerid", selectCategoryModel.getId());

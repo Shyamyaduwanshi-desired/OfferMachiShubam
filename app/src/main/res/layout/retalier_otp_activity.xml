@@ -89,7 +89,8 @@
                         android:hint="Enter OTP"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
-                        android:inputType="textCapSentences"
+                        android:inputType="number"
+                        android:maxLength="6"
                         android:imeOptions="actionGo"/>
                 </LinearLayout>
                 <Button

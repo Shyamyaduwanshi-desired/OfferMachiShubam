@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -59,7 +60,16 @@ public class ActSearchNew extends AppCompatActivity implements TrendingListPrese
         });
         initview();
         setAutoCompleteAdpt();
+        GetIntentData();
     }
+String sSearchCatId,sSearchNm;
+    private void GetIntentData() {
+        sSearchCatId=getIntent().getStringExtra("cat_id");
+        sSearchNm=getIntent().getStringExtra("cat_name");
+        Log.e("","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm);
+    }
+
+
     ArrayAdapter<String> adapter;
 public void setAutoCompleteAdpt()
 {

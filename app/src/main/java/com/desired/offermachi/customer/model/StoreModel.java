@@ -1,7 +1,7 @@
 package com.desired.offermachi.customer.model;
 
 public class StoreModel {
-    private String Id,Storename,Storeimage,StoreCategory,StoreFav;
+    private String Id,Storename,Storeimage,StoreCategory,StoreFav/*,address*/;
 
     public StoreModel(String id,String storename,String storeimage,String storeCategory,String storeFav) {
         this.Id = id;
@@ -9,6 +9,7 @@ public class StoreModel {
         this.Storeimage=storeimage;
         this.StoreCategory=storeCategory;
         this.StoreFav=storeFav;
+//        this.address=storeFav;
     }
 
     public String getId() {

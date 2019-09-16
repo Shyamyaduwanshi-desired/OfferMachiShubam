@@ -25,10 +25,12 @@ import java.util.Map;
 public class CustomerOtpPresenter {
     private Context context;
     private CustomerOtp customerotp;
+//    AppData appData;
 
     public CustomerOtpPresenter(Context context, CustomerOtp customerotp) {
         this.context = context;
         this.customerotp = customerotp;
+//        appData=new AppData();
     }
 
     public interface CustomerOtp {
@@ -110,6 +112,7 @@ public class CustomerOtpPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
 //    http://offermachi.in/api/common_login_moblie_otp_verfiy
     public void verifyOtpCommon(final String userid,final String otp) {
         final ProgressDialog progress = new ProgressDialog(context);
@@ -127,10 +130,11 @@ public class CustomerOtpPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
-                        customerotp.success(reader.getString("message"));
+
                         String result = reader.getString("result");
                         JSONObject jsonObject = new JSONObject(result);//
 //                        String usertype="1";
+                        Log.e("","json data= "+jsonObject.toString());
                         String group=jsonObject.getString("group");
                         if(group=="customer"||group.equals("customer")) {
                             User user = new User(
@@ -171,6 +175,7 @@ public class CustomerOtpPresenter {
                             );
                             SharedPrefManagerLogin.getInstance(context).userLogin(userModel);
                         }
+                        customerotp.success(reader.getString("message"));
                     } else if (status == 404) {
                         customerotp.error(reader.getString("message"));
                     }
@@ -192,6 +197,7 @@ public class CustomerOtpPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("otp", otp);
+                Log.e("","input param= "+params.toString());
                 return params;
             }
         };
@@ -199,6 +205,8 @@ public class CustomerOtpPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
+
     public void resentOtp(final String userid) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Resend OTP please Wait..");

@@ -27,25 +27,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="5 Kilometer"/>
+                android:text="1 Kilometer"/>
             <RadioButton
                 android:id="@+id/rd2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="10 Kilometer"/>
+                android:text="3 Kilometer"/>
             <RadioButton
                 android:id="@+id/rd3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="15 Kilometer"/>
+                android:text="5 Kilometer"/>
             <RadioButton
                 android:id="@+id/rd4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="20 Kilometer"/>
+                android:text="10 Kilometer"/>
         </RadioGroup>
 
     </LinearLayout>

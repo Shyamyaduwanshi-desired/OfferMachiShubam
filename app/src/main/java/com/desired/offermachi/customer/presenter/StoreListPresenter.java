@@ -215,8 +215,8 @@ public class StoreListPresenter {
             progress.setCancelable(false);
             showpDialog();
         }*/
-        final ArrayList<StoreModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_retailer_all_data_by_filter", new Response.Listener<String>() {
+        final ArrayList<StoreModel> list = new ArrayList<>();//select_retailer_all_data_by_filter
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_retailer_all_data_by_filter_category", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
               //  hidepDialog();

@@ -68,11 +68,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".customer.view.activity.ActDoNotDisturb"
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".customer.view.activity.ActInterestCategory"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".customer.view.activity.ActInterestCategoryNew"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+
         <activity
             android:name=".customer.view.activity.ActDoNotDisturbSetting"
             android:screenOrientation="portrait">

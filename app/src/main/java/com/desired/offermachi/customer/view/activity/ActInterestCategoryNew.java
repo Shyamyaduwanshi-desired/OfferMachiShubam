@@ -13,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,66 +26,73 @@ import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
-import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
+import com.desired.offermachi.customer.view.adapter.InterestCategortListAdapter;
 
 import java.util.ArrayList;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
+public class ActInterestCategoryNew extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList {
     ImageView imageViewback;
     RecyclerView product_recyclerview;
-    private MultiChoiceCategortListAdapter categortListAdapter=null;
+    private InterestCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     int adptrPos=0;
     Button btProceed;
+    TextView tvTitle;
     hand handobj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_dashboard_category);
+        setContentView(R.layout.act_interest_category);
         handobj = hand.getintance();
         initview();
-
     }
 
-    private void initview(){
-          presenter = new CustomerCategoryListPresenter(ActDashboardCategory.this, ActDashboardCategory.this);
+      private void initview(){
+          presenter = new CustomerCategoryListPresenter(ActInterestCategoryNew.this, ActInterestCategoryNew.this);
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
           imageViewback = findViewById(R.id.imageback);
           btProceed = findViewById(R.id.bt_proceed);
-          imageViewback.setOnClickListener(this);
+          tvTitle = findViewById(R.id.tv_title_main);
+
           btProceed.setOnClickListener(this);
+          imageViewback.setOnClickListener(this);
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
           if (isNetworkConnected()) {
-              presenter.GetCategoryList(idholder);//for all category
+              presenter.GetCategoryList(idholder);//for show all category
           }  else {
               showAlert("Please connect to internet.", R.style.DialogAnimation);
           }
 
-//          LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(followReceiver,
-//                  new IntentFilter("Follow"));
+          LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(followReceiver,
+                  new IntentFilter("Follow"));
       }
 
-//    public BroadcastReceiver followReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            followsatus = intent.getStringExtra("followstatus");
-//            Catid = intent.getStringExtra("catid");
-//            adptrPos = intent.getIntExtra("pos",0);
-//            if (isNetworkConnected()) {
-//                presenter.CategoryFollow(idholder,Catid,followsatus);
-//            }  else {
-//                showAlert("Please connect to internet.", R.style.DialogAnimation);
-//            }
-//        }
-//    };
+    public BroadcastReceiver followReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            followsatus = intent.getStringExtra("followstatus");
+            Catid = intent.getStringExtra("catid");
+            adptrPos = intent.getIntExtra("pos",0);
+
+            if (isNetworkConnected()) {
+                presenter.CategoryFollow(idholder,Catid,followsatus);
+            }  else {
+                showAlert("Please connect to internet.", R.style.DialogAnimation);
+            }
+
+        }
+    };
+    String sAllCatId="";
+    String sAllCatNm="";
+    String sAllCatBannerimage="";
 
     @Override
     public void onClick(View v) {
@@ -94,61 +100,50 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             onBackPressed();
         }
         else if (v==btProceed){
-            getAllSelectedId();
-        }
-    }
- String sAllCatId=""/*,sSingleCateId*/;
- String sAllCatNm=""/*,sSingleCateNm*/;
- String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
 
-    public void getAllSelectedId()
-    {
-        sAllCatId="";
-        sAllCatNm="";
-        sAllCatBannerimage="";
 
-//        sSingleCateId="";
-//        sSingleCateNm="";
-//        sSingleCateBannerimage="";
+            for(int i=0;i<arCatList.size();i++)
+            {
+                if(arCatList.get(i).getFollowstatus().equals("1")) {
+                    if (TextUtils.isEmpty(sAllCatId)) {
+                        sAllCatId = arCatList.get(i).getCatid();
+                        sAllCatNm = arCatList.get(i).getCatname();
+                        sAllCatBannerimage = arCatList.get(i).getBannerimage();
 
-        for(int i=0;i<arCatList.size();i++)
-        {
-            if(arCatList.get(i).isCheckStatus()) {
-                if (TextUtils.isEmpty(sAllCatId)) {
-                    sAllCatId = arCatList.get(i).getCatid();
-                    sAllCatNm = arCatList.get(i).getCatname();
-                    sAllCatBannerimage = arCatList.get(i).getBannerimage();
 
-//                    sSingleCateId = arCatList.get(i).getCatid();
-//                    sSingleCateNm= arCatList.get(i).getCatname();
-//                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
-
-                } else {
-                    sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
-                    sAllCatNm = sAllCatNm + "," + arCatList.get(i).getCatname();
-                    sAllCatBannerimage = sAllCatBannerimage + "," + arCatList.get(i).getBannerimage();
+                    } else {
+                        sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
+                        sAllCatNm = sAllCatNm + "," + arCatList.get(i).getCatname();
+                        sAllCatBannerimage = sAllCatBannerimage + "," + arCatList.get(i).getBannerimage();
+                    }
                 }
             }
-        }
-        Log.e("","sAllCatId= "+sAllCatId);
 
-        if(TextUtils.isEmpty(sAllCatId))
-        {
-            Toast.makeText(this, "please select a category", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            handobj.setCatid(sAllCatId/*sSingleCateId*/);//sAllCatId
-            handobj.setCatname(sAllCatNm/*sSingleCateNm*/);//sAllCatNm
-            handobj.setCatimage(sAllCatBannerimage/*sSingleCateBannerimage*/);//sAllCatBannerimage
+            if(TextUtils.isEmpty(sAllCatId))
+            {
+                Toast.makeText(this, "please select at least one category for your interest", Toast.LENGTH_SHORT).show();
+            }
+            else {
+//                SaveInterestCat();
+                handobj.setCatid(sAllCatId);
+                handobj.setCatname(sAllCatNm);
+                handobj.setCatimage(sAllCatBannerimage);
 
-            Intent myIntent = new Intent(this, DashBoardActivity.class);
-            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(myIntent);
-            finish();
+//                handobj.setCatid("");
+//                handobj.setCatname("");
+//                handobj.setCatimage("");
+
+                Intent myIntent = new Intent(this, DashBoardActivity.class);
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(myIntent);
+                finish();
+            }
         }
     }
+
     @Override
     public void followsuccess(String response) {
+
 
         arCatList.get(adptrPos).setFollowstatus(followsatus);
         if (categortListAdapter != null)
@@ -156,16 +151,50 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             categortListAdapter.notifyDataSetChanged();
         }
 
+        SetCountinuButton();
+
     }
     ArrayList<CategoryListModel> arCatList=new ArrayList<>();
     @Override
     public void success(ArrayList<CategoryListModel> response) {
         arCatList.clear();
         arCatList=response;
-        categortListAdapter = new MultiChoiceCategortListAdapter(getApplicationContext(),arCatList,this);
+
+        categortListAdapter = new InterestCategortListAdapter(getApplicationContext(),arCatList);
         product_recyclerview.setAdapter(categortListAdapter);
+
+        SetCountinuButton();
+//        if(categortListAdapter==null)
+//        {
+//            categortListAdapter = new CategortListAdapter(getApplicationContext(),arCatList);
+//            product_recyclerview.setAdapter(categortListAdapter);
+//
+//        }
+//        else {
+//            categortListAdapter.notifyDataSetChanged();
+//        }
+
+//        categortListAdapter = new CategortListAdapter(getApplicationContext(),response);
+//        product_recyclerview.setAdapter(categortListAdapter);
+
+    }
+public void SetCountinuButton()
+{
+    boolean checkFlag=false;
+    for(int i=0;i<arCatList.size();i++) {
+        if (arCatList.get(i).getFollowstatus().equals("1")) {
+            checkFlag=true;
+        }
     }
 
+    if(checkFlag) {
+        btProceed.setVisibility(View.VISIBLE);
+    }
+    else
+    {
+        btProceed.setVisibility(View.GONE);
+    }
+}
     @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);
@@ -203,21 +232,18 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+        startActivity(intent);
         finish();
+        System.exit(0);
+        super.onBackPressed();
     }
-//adapter click
-    @Override
-    public void onClick(int position) {
-        if(arCatList.get(position).isCheckStatus())
-        {
-            arCatList.get(position).setCheckStatus(false);
-        }
-        else
-        {
-            arCatList.get(position).setCheckStatus(true);
-        }
-        categortListAdapter.notifyDataSetChanged();
 
-    }
+   /* @Override
+    protected void onRestart() {
+        super.onRestart();
+        initview();
+    }*/
 }

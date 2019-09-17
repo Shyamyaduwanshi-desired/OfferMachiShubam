@@ -66,13 +66,9 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     private DaysDistrubAdapter daysDistrubAdapter;
     private List<hours_model> hoursdata = new ArrayList<>();
     private List<days_model> daysdata = new ArrayList<>();
-//    String userid= "1";
-    String dndid = "";//2
-//    private static final String ROOT_URL = "http://offermachi.in/api/common_dnd_services";
-//    private static final String ROOT_URL1 = "http://offermachi.in/api/common_dnd_services_start";
+    String dndid = "";
     ImageView imageViewback;
     private DonoDisturbPresenter presenter;
-//    AppData appData;
     String idholder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +94,8 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
                case 2:
                    if(Valid())
                    {
-                       Toast.makeText(context, "dndid= "+dndid+"idholder= "+idholder, Toast.LENGTH_SHORT).show();
-//                       presenter.SubmitDoNoDisData(idholder,dndid);
+//                       Toast.makeText(context, "dndid= "+dndid+" idholder= "+idholder, Toast.LENGTH_SHORT).show();
+                       presenter.SubmitDoNoDisData(idholder,dndid);
                    }
 
                     break;
@@ -130,7 +126,6 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                SubmitButtonData();
                 CallAPi(2);
             }
         });
@@ -159,6 +154,7 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     private void displayDatasecond() {
         daysDistrubAdapter = new DaysDistrubAdapter(ActDoNotDisturbSetting.this, (ArrayList<days_model>) daysdata,this);
         days_recyclerview.setAdapter(daysDistrubAdapter);
+
         if (daysDistrubAdapter.getItemCount() == 0) {
             Toast.makeText(getApplicationContext(), "No Data", Toast.LENGTH_SHORT).show();
         } else {
@@ -175,54 +171,6 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
 
         }
     }
-
-   /* private void SubmitButtonData() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ROOT_URL1,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("Button", "onResponse: " + response);
-                        JSONObject obj = null;
-                        try {
-                            obj = new JSONObject(response);
-                            String status=obj.getString("status");
-                            String message=obj.getString("message");
-                            if (status.equals("200")){
-//                                String result=obj.getString("result");
-//                                Intent intent =new Intent(getApplicationContext(),SecondMainActivity.class);
-//                                startActivity(intent);
-                                Toast.makeText(context, ""+message, Toast.LENGTH_SHORT).show();
-                                finish();
-
-                            }else {
-                                Toast.makeText(ActDoNotDisturbSetting.this, "Success"+message, Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("error", "onErrorResponse: " + error);
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("userid", userid);
-                params.put("dndid", dndid);
-                Log.e("surbhi", "params" + params);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(ActDoNotDisturbSetting.this);
-        requestQueue.add(stringRequest);
-
-    }*/
 //call get data
     @Override
     public void success(ArrayList<days_model> dayResponse, ArrayList<hours_model> hoursResponse, String status) {
@@ -259,39 +207,24 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     @Override
     public void onDaysClick(int position) {
         dndid = daysdata.get(position).getId();
+        Log.e("","position= "+position);
         for(int i=0;i<daysdata.size();i++)
         {
             if(i==position)
             {
-                daysdata.get(position).setSelected(true);
+                daysdata.get(i).setSelected(true);
             }
             else {
-                daysdata.get(position).setSelected(false);
+                daysdata.get(i).setSelected(false);
             }
         }
         daysDistrubAdapter.notifyDataSetChanged();
 
-//        if((daysdata.size()-1)!=position) {
-//
-//        }
-//        else
-//        {
-//            dndid="";
-//        }
-        Toast.makeText(context, "dndid= "+dndid, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "dndid= "+dndid, Toast.LENGTH_SHORT).show();
     }
 
 
     public class HoursDistrubAdapter extends RecyclerView.Adapter<HoursDistrubAdapter.MyViewHolder> {
-
-        private  Context mContext;
-        private Object ProductDetailsActivity;
-        LinearLayout second_linear_visible ;
-        RadioGroup radioGroup;
-        RadioButton radioButton;
-        private Context context;
-        private Object ArrayList;
-        private Object first_model;
 
         private ArrayList<hours_model> hoursdata = new ArrayList<hours_model>();
 
@@ -372,7 +305,7 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
         if(pos==(hoursdata.size()-1))
         {
             linear_visible.setVisibility(View.VISIBLE);
-
+            dndid = "";
         }
         else
         {
@@ -411,90 +344,4 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
         return cm.getActiveNetworkInfo() != null;
     }
 
-
-    /*public class DaysDistrubAdapter extends RecyclerView.Adapter<DaysDistrubAdapter.MyViewHolder> {
-
-        private ArrayList<days_model> daysdata;
-        private final Context mContext;
-        private CheckBox lastChecked = null;
-        private  int lastCheckedPos = 0;
-
-
-        public DaysDistrubAdapter(Context context, ArrayList<days_model> data){
-            this.daysdata = data;
-            this.mContext = context;
-//            this.itemClick = cateClick;
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                               int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.adptr_disturb_second_layout, parent, false);
-
-            MyViewHolder myViewHolder = new MyViewHolder(view);
-            return myViewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
-
-            TextView textView = holder.textView;
-            CheckBox checkBox = holder.checkBox;
-
-            textView.setText(daysdata.get(listPosition).getTittle());
-            holder.checkBox.setChecked(daysdata.get(listPosition).isSelected());
-            holder.checkBox.setTag(new Integer(listPosition));
-
-            if(listPosition == 0 && daysdata.get(0).isSelected() && holder.checkBox.isChecked())
-            {
-                lastChecked = holder.checkBox;
-                lastCheckedPos = 0;
-            }
-
-            holder.checkBox.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    CheckBox cb = (CheckBox)v;
-                    int clickedPos = ((Integer)cb.getTag()).intValue();
-
-                    if(cb.isChecked())
-                    {
-                        if(lastChecked != null)
-                        {
-                            lastChecked.setChecked(false);
-                            daysdata.get(lastCheckedPos).setSelected(false);
-                        }
-
-                        lastChecked = cb;
-                        lastCheckedPos = clickedPos;
-                    }
-                    else
-                        lastChecked = null;
-                    daysdata.get(clickedPos).setSelected(cb.isChecked());
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return daysdata.size();
-        }
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-
-            CheckBox checkBox;
-            TextView textView;
-
-            public MyViewHolder(View itemView) {
-
-                super(itemView);
-                this.checkBox=(CheckBox)itemView.findViewById(R.id.days_check_box_id);
-                this.textView =(TextView)itemView.findViewById(R.id.days_textview_id);
-            }
-        }
-
-    }*/
 }

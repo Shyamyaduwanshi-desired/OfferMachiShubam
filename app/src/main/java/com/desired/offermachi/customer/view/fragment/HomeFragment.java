@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         handobj = hand.getintance();
         if (handobj.getCatid()!=null) {
             catid=handobj.getCatid();
+
             Log.e("home", "catid=="+catid );
 
         }
@@ -231,6 +232,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
+                if(TextUtils.isEmpty(catid))//only for null
+                {
+                    catid="";
+                }
                 presenter.GetAllMultipleCateList(catid, idholder);
                 searchPresenter.GetSearchList("", "");//for all searchable list data
             } else {

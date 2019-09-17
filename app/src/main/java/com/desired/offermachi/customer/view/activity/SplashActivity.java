@@ -69,15 +69,19 @@ public class SplashActivity extends AppCompatActivity {
 //                    }
 
                     if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
-                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-                        if (user.getSmartShopping().equals("0")){
-                            startActivity(new Intent(SplashActivity.this, CategoryActivity.class));
-                            finish();
-                        }else{
+//                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+                        startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+                        finish();
 
-                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-                            finish();
-                        }
+//                        if (user.getSmartShopping().equals("0")){
+////                            startActivity(new Intent(SplashActivity.this, ActInterestCategory.class));
+////                            startActivity(new Intent(SplashActivity.this, ActInterestCategoryNew.class));
+//                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+//                            finish();
+//                        }else{
+//                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+//                            finish();
+//                        }
                     }
                     else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
                         startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));

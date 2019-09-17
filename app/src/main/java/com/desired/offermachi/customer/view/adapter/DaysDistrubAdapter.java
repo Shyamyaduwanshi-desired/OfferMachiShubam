@@ -43,10 +43,7 @@ public class DaysDistrubAdapter extends RecyclerView.Adapter<DaysDistrubAdapter.
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
         TextView textView = holder.textView;
-//        CheckBox checkBox = holder.checkBox;
-
         textView.setText(daysdata.get(listPosition).getTittle());
-
         if(daysdata.get(listPosition).isSelected())
         {
             holder.ivCheck.setImageResource(R.drawable.ic_check_box_40dp);
@@ -61,40 +58,6 @@ public class DaysDistrubAdapter extends RecyclerView.Adapter<DaysDistrubAdapter.
                 itemClick.onDaysClick(listPosition);
             }
         });
-
-//        holder.checkBox.setChecked(daysdata.get(listPosition).isSelected());
-//        holder.checkBox.setTag(new Integer(listPosition));
-
-//        if(listPosition == 0 && daysdata.get(0).isSelected() && holder.checkBox.isChecked())
-//        {
-//            lastChecked = holder.checkBox;
-//            lastCheckedPos = 0;
-//        }
-
-      /*  holder.checkBox.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                CheckBox cb = (CheckBox)v;
-                int clickedPos = ((Integer)cb.getTag()).intValue();
-
-                if(cb.isChecked())
-                {
-                    if(lastChecked != null)
-                    {
-                        lastChecked.setChecked(false);
-                        daysdata.get(lastCheckedPos).setSelected(false);
-                    }
-
-                    lastChecked = cb;
-                    lastCheckedPos = clickedPos;
-                }
-                else
-                    lastChecked = null;
-                daysdata.get(clickedPos).setSelected(cb.isChecked());
-            }
-        });*/
     }
 
     @Override

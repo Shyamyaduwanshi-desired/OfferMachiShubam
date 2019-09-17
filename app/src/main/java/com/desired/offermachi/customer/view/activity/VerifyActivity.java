@@ -36,7 +36,8 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
         if (v==continuebutton){
 
             if (UserSharedPrefManager.getInstance(VerifyActivity.this).isLoggedIn()) {//for customer
-                Intent intent = new Intent(VerifyActivity.this, CategoryActivity.class);
+//                Intent intent = new Intent(VerifyActivity.this, CategoryActivity.class);
+                Intent intent = new Intent(VerifyActivity.this, ActInterestCategoryNew.class);
                 startActivity(intent);
                 finish();
             }

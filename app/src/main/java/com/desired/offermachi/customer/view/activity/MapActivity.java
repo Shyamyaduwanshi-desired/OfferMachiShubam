@@ -287,9 +287,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                txtselectkilometer.setText("5 Km");
+                txtselectkilometer.setText("1 Km");
                 if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"5");
+                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"1");
                 }else{
                     showAlert("Please connect to internet.",R.style.DialogAnimation);
                 }
@@ -301,9 +301,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                txtselectkilometer.setText("10 Km");
+                txtselectkilometer.setText("3 Km");
                 if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"10");
+                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"3");
                 }else{
                     showAlert("Please connect to internet.",R.style.DialogAnimation);
                 }
@@ -314,9 +314,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                txtselectkilometer.setText("15 Km");
+                txtselectkilometer.setText("5 Km");
                 if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"15");
+                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"5");
                 }else{
                     showAlert("Please connect to internet.",R.style.DialogAnimation);
                 }
@@ -326,9 +326,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                txtselectkilometer.setText("20 Km");
+                txtselectkilometer.setText("10 Km");
                 if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"20");
+                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"10");
                 }else{
                     showAlert("Please connect to internet.",R.style.DialogAnimation);
                 }

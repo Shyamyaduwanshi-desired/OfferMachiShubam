@@ -150,18 +150,18 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         }
         categortListAdapter.notifyDataSetChanged();
     }
-    String sAllCatId="",sSingleCateId;
-    String sAllCatNm="",sSingleCateNm;
-    String sAllCatBannerimage="",sSingleCateBannerimage;
+    String sAllCatId=""/*,sSingleCateId*/;
+    String sAllCatNm=""/*,sSingleCateNm*/;
+    String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
     public void getAllSelectedId()
     {
         sAllCatId="";
         sAllCatNm="";
         sAllCatBannerimage="";
 
-        sSingleCateId="";
+       /* sSingleCateId="";
         sSingleCateNm="";
-        sSingleCateBannerimage="";
+        sSingleCateBannerimage="";*/
 
         for(int i=0;i<arCatList.size();i++)
         {
@@ -171,9 +171,9 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
                     sAllCatNm = arCatList.get(i).getCatname();
                     sAllCatBannerimage = arCatList.get(i).getBannerimage();
 
-                    sSingleCateId = arCatList.get(i).getCatid();
-                    sSingleCateNm= arCatList.get(i).getCatname();
-                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
+//                    sSingleCateId = arCatList.get(i).getCatid();
+//                    sSingleCateNm= arCatList.get(i).getCatname();
+//                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
 
                 } else {
                     sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
@@ -191,7 +191,7 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         else {
             UserSharedPrefManager.SaveStoreFilter(this,sAllCatId);
             Intent intent=new Intent("Category");
-            intent.putExtra("catid",sSingleCateId);
+            intent.putExtra("catid",sAllCatId);
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
             finish();
 

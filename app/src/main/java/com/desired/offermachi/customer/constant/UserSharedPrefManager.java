@@ -28,6 +28,7 @@ public class UserSharedPrefManager {
     private static final  String KEY_NotificationSound="notificationsound";
     private static final  String KEY_USER_TYPE="user_type";
     private static final  String KEY_CAT_FILTER="user_cat_filter";
+    private static final  String KEY_CAT_INTEREST="user_cat_interest";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -113,6 +114,18 @@ public class UserSharedPrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_CAT_FILTER, allSelectedCategory);
+        editor.apply();
+    }
+
+    public static String GetInterestCat(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_CAT_INTEREST, "");
+        return value;
+    }
+    public static void SaveInterestCat(Context context,String allSelectedCategory) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_CAT_INTEREST, allSelectedCategory);
         editor.apply();
     }
 

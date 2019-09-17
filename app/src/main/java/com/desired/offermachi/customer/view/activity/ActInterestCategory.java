@@ -1,12 +1,9 @@
 package com.desired.offermachi.customer.view.activity;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -26,7 +23,6 @@ import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
-import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
 import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
 
 import java.util.ArrayList;
@@ -34,8 +30,9 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
+public class ActInterestCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
     ImageView imageViewback;
+    TextView tvTitle;
     RecyclerView product_recyclerview;
     private MultiChoiceCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
@@ -53,13 +50,17 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
     }
 
     private void initview(){
-          presenter = new CustomerCategoryListPresenter(ActDashboardCategory.this, ActDashboardCategory.this);
+
+          presenter = new CustomerCategoryListPresenter(ActInterestCategory.this, ActInterestCategory.this);
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
+          tvTitle = findViewById(R.id.tv_title);
           imageViewback = findViewById(R.id.imageback);
           btProceed = findViewById(R.id.bt_proceed);
           imageViewback.setOnClickListener(this);
           btProceed.setOnClickListener(this);
+          tvTitle.setVisibility(View.VISIBLE);
+
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -97,19 +98,15 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             getAllSelectedId();
         }
     }
- String sAllCatId=""/*,sSingleCateId*/;
- String sAllCatNm=""/*,sSingleCateNm*/;
- String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
+ String sAllCatId="";
+ String sAllCatNm="";
+ String sAllCatBannerimage="";
 
     public void getAllSelectedId()
     {
         sAllCatId="";
         sAllCatNm="";
         sAllCatBannerimage="";
-
-//        sSingleCateId="";
-//        sSingleCateNm="";
-//        sSingleCateBannerimage="";
 
         for(int i=0;i<arCatList.size();i++)
         {
@@ -118,10 +115,6 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
                     sAllCatId = arCatList.get(i).getCatid();
                     sAllCatNm = arCatList.get(i).getCatname();
                     sAllCatBannerimage = arCatList.get(i).getBannerimage();
-
-//                    sSingleCateId = arCatList.get(i).getCatid();
-//                    sSingleCateNm= arCatList.get(i).getCatname();
-//                    sSingleCateBannerimage= arCatList.get(i).getBannerimage();
 
                 } else {
                     sAllCatId = sAllCatId + "," + arCatList.get(i).getCatid();
@@ -141,10 +134,11 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             handobj.setCatname(sAllCatNm/*sSingleCateNm*/);//sAllCatNm
             handobj.setCatimage(sAllCatBannerimage/*sSingleCateBannerimage*/);//sAllCatBannerimage
 
-            Intent myIntent = new Intent(this, DashBoardActivity.class);
+           /* Intent myIntent = new Intent(this, DashBoardActivity.class);
+
             myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(myIntent);
-            finish();
+            finish();*/
         }
     }
     @Override

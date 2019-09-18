@@ -66,7 +66,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
    TextView txtmail,txtphone,txtaddress;
    Button btnok;
     String storeaddress,storeemail,storemobile;
-    ImageView imageviewback;
+    ImageView imageviewback,info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +102,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         txtcontactdetail.setOnClickListener(this);
         imageviewback=findViewById(R.id.imageviewback);
         imageviewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
        /* btnfollow=findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);*/
         /*Toast.makeText(this, ""+followstatus, Toast.LENGTH_SHORT).show();*/
@@ -148,6 +150,9 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
         }else if (v==imageviewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(ViewAllOfferFollowActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
 
 

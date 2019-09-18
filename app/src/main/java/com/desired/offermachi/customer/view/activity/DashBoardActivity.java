@@ -728,7 +728,7 @@ public class DashBoardActivity extends AppCompatActivity
         }
         else
         {
-            info.setVisibility(View.VISIBLE);
+            info.setVisibility(View.GONE);
             btnnotification.setVisibility(View.VISIBLE);
         }
     }

@@ -18,6 +18,8 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.NotificationModel;
 import com.desired.offermachi.customer.model.User;
 
+import com.desired.offermachi.customer.view.activity.InfoActivity;
+import com.desired.offermachi.customer.view.activity.SmartShoppingRemoveActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.retalier.presenter.RetailerNotificationPresenter;
 
@@ -28,7 +30,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierNotificationActivity extends AppCompatActivity implements View.OnClickListener, RetailerNotificationPresenter.RetailerNotificationList {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     private CustomerNotificationAdapter customerNotificationAdapter;
     private RetailerNotificationPresenter presenter;
     RecyclerView categoryrecycle;
@@ -46,6 +48,8 @@ public class RetalierNotificationActivity extends AppCompatActivity implements V
         idholder=user.getId();
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(linearLayoutManager);
@@ -59,6 +63,9 @@ public class RetalierNotificationActivity extends AppCompatActivity implements V
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(RetalierNotificationActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
 
     }

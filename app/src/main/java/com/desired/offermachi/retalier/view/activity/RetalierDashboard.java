@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.RetailerNotificationPresenter;
@@ -42,7 +43,7 @@ public class RetalierDashboard extends AppCompatActivity
     TextView name,email;
     ImageView imageView;
     String ImageHolder,username,useremail;
-    ImageView imgNotiBell;
+    ImageView imgNotiBell,info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,8 @@ public class RetalierDashboard extends AppCompatActivity
         }
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
 
     }
 
@@ -206,6 +209,9 @@ public class RetalierDashboard extends AppCompatActivity
     public void onClick(View v) {
         if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierDashboard.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
  /*   @Override

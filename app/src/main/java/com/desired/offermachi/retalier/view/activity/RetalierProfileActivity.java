@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -54,7 +55,7 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
     public TabLayout tabLayout;
     RetalierTabLayoutAdapter adapter;
     private ViewPager viewPager1;
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     CircleImageView imgProfileAvatar;
     LinearLayout imagepicker;
     private String picture = "";
@@ -76,6 +77,7 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
         ImageHolder=user.getProfile();
         Log.e("profilepicture", "ImageHolder="+ImageHolder );
         imageViewback=findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         imgProfileAvatar=findViewById(R.id.imgProfileAvatar);
@@ -83,6 +85,7 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
         tabLayout.setOnTabSelectedListener(this);
         imageViewback.setOnClickListener(this);
         imagepicker.setOnClickListener(this);
+        info.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
         if (ImageHolder.equals("")||ImageHolder.equals("NA")){
@@ -137,7 +140,11 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
             onBackPressed();
         }else  if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierProfileActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
+
     }
 
     @Override

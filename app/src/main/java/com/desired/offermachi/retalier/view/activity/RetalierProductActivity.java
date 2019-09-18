@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
@@ -40,7 +41,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierProductActivity extends AppCompatActivity implements View.OnClickListener, ViewOfferDetailPresenter.OfferDiscount {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     Button couponbutton;
     String offerid;
     private ViewOfferDetailPresenter presenter;
@@ -62,6 +63,7 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         Intent intent=getIntent();
         offerid=intent.getStringExtra("offerid");
         imageViewback=findViewById(R.id.imageviewback);
+        info=findViewById(R.id.info_id);
         viewPager_product=findViewById(R.id.viewPager_product);
         txtoffername=findViewById(R.id.offername);
         txtoffertypename=findViewById(R.id.offertypename);
@@ -71,6 +73,7 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         txtbrandname=findViewById(R.id.brandname);
         couponbutton =(Button)findViewById(R.id.coupon_button_id);
         imageViewback.setOnClickListener(this);
+        info.setOnClickListener(this);
         couponbutton.setOnClickListener(this);
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(offerid);
@@ -86,6 +89,9 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
             onBackPressed();
         }else if (v==couponbutton){
             showdialog(qrcodeimage,couponcode);
+        }else if(v==info){
+            Intent intent = new Intent(RetalierProductActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
     private void showdialog(String image,String code) {

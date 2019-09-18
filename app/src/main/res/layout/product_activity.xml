@@ -29,14 +29,37 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp" />
-            <ImageView
-                android:id="@+id/imgNotiBell"
-                android:layout_width="39dp"
-                android:layout_height="32dp"
-                android:padding="5dp"
-                android:layout_marginLeft="310dp"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/ic_notification_bell" />
+            <RelativeLayout
+                android:layout_toRightOf="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="60dp">
+
+                <ImageView
+                    android:id="@+id/info_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/btnnotification"
+                    app:srcCompat="@drawable/ic_info"
+
+
+                    />
+                <ImageView
+                    android:id="@+id/imgNotiBell"
+                    android:layout_width="29dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="true"
+                    app:srcCompat="@drawable/ic_notification_bell"
+                     />
+            </RelativeLayout>
           <!--  <TextView
                 android:id="@+id/txtMessageCount"
                 android:layout_width="19dp"

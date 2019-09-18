@@ -41,7 +41,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class SmartShoppingRemoveActivity  extends AppCompatActivity implements View.OnClickListener, SmartShoppingNotificationDataPresenter.NotificationOfferDataList {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView categoryrecycle;
     String result;
     private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
@@ -63,6 +63,8 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         idholder=user.getId();
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(gridLayoutManager1);
@@ -121,6 +123,9 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
 
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(SmartShoppingRemoveActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
 

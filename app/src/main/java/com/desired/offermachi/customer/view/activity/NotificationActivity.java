@@ -24,6 +24,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerNotificationPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.retalier.view.activity.RetalierPushActivity;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, CustomerNotificationPresenter.NotificationList {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     Switch simpleSwitch;
     private CustomerNotificationAdapter customerNotificationAdapter;
     private CustomerNotificationPresenter presenter;
@@ -60,12 +61,14 @@ TextView tvDONodist;
         SmartShoppingHolder=user.getSmartShopping();
         SoundHolder=user.getNotificationsound();
         imageViewback=findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
         simpleSwitch =findViewById(R.id.donotswitch);
         tvDONodist =findViewById(R.id.tv_disturb);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
 
 
         imageViewback.setOnClickListener(this);
+        info.setOnClickListener(this);
         tvDONodist.setOnClickListener(this);
 
         simpleSwitch.setOnCheckedChangeListener(this);
@@ -103,6 +106,9 @@ TextView tvDONodist;
         if (v==imageViewback){
 //            onBackPressed();
             finish();
+        }else if(v==info){
+            Intent intent = new Intent(NotificationActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
         else if (v==tvDONodist){
 startActivity(new Intent(this,ActDoNotDisturbSetting.class));

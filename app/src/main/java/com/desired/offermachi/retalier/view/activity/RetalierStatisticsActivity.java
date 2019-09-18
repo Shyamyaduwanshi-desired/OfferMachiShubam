@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.StaticsPresenter;
@@ -18,7 +19,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierStatisticsActivity  extends AppCompatActivity implements View.OnClickListener, StaticsPresenter.Statics {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     TextView gotthecoupontext,redeemthecoupontext,Offerdiscounttext;
     private StaticsPresenter presenter;
     String idholder;
@@ -41,6 +42,8 @@ public class RetalierStatisticsActivity  extends AppCompatActivity implements Vi
         Offerdiscounttext.setOnClickListener(this);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         if (isNetworkConnected()){
             presenter.sentRequest(idholder);
         }else{
@@ -54,6 +57,10 @@ public class RetalierStatisticsActivity  extends AppCompatActivity implements Vi
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }
+        else if(v==info){
+            Intent intent = new Intent(RetalierStatisticsActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
         else if (v==gotthecoupontext){
             Intent intent = new Intent(RetalierStatisticsActivity.this, RetalierListPeopleActivity.class);

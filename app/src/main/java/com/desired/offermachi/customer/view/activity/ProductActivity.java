@@ -24,6 +24,7 @@ import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
+import com.desired.offermachi.retalier.view.activity.RetalierPushActivity;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -36,7 +37,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ProductActivity extends AppCompatActivity implements View.OnClickListener, CustomerOfferDetailPresenter.OfferDetail {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     Button couponbutton;
     LinearLayout shareiconimge, viewalloffer;
     ImageView likeimg;
@@ -76,6 +77,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         idholder = user.getId();
         imageViewback = findViewById(R.id.imageviewback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         couponbutton = (Button) findViewById(R.id.coupon_button_id);
         couponbutton.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
@@ -115,7 +118,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == imageViewback) {
             onBackPressed();
-        } else if (v == couponbutton) {
+        } else if(v==info){
+            Intent intent = new Intent(ProductActivity.this, InfoActivity.class);
+            startActivity(intent);
+        }else if (v == couponbutton) {
             if (couponstatus.equals("0")){
                 couponstatus="1";
                 presenter.GetCoupons(idholder, offerid,couponstatus);

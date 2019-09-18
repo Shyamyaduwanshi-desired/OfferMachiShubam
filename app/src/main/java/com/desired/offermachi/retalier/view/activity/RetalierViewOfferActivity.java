@@ -1,6 +1,7 @@
 package com.desired.offermachi.retalier.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.view.adapter.ViewOfferDiscountAdapter;
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class RetalierViewOfferActivity extends AppCompatActivity {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private ViewOfferDiscountAdapter viewOfferAdapter;
     private List<ViewOfferModel> viewcategorylistdataset = new ArrayList<>();
@@ -38,6 +40,17 @@ public class RetalierViewOfferActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(RetalierViewOfferActivity.this, InfoActivity.class);
+                    startActivity(intent);
+            }
+        });
+
+
 
         product_recyclerview = (RecyclerView)findViewById(R.id.viewalloffer_recycler_id);
         viewOfferAdapter = new ViewOfferDiscountAdapter(getApplicationContext(), (ArrayList<ViewOfferModel>) viewcategorylistdataset);

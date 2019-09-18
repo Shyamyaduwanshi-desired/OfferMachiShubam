@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class RetalierInviteFriendActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     ImageView facebook,Watsup,Twitter;
     ImageView imgNotiBell;
     @Override
@@ -33,6 +34,16 @@ public class RetalierInviteFriendActivity extends AppCompatActivity implements V
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent = new Intent(RetalierInviteFriendActivity.this, InfoActivity.class);
+                    startActivity(intent);
+
             }
         });
         Watsup=findViewById(R.id.watsup_id);

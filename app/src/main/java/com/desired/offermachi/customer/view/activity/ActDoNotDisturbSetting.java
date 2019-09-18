@@ -67,7 +67,7 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     private List<hours_model> hoursdata = new ArrayList<>();
     private List<days_model> daysdata = new ArrayList<>();
     String dndid = "";
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     private DonoDisturbPresenter presenter;
     String idholder;
     @Override
@@ -135,10 +135,20 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
                 onBackPressed();
             }
         });
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent = new Intent(ActDoNotDisturbSetting.this, InfoActivity.class);
+                    startActivity(intent);
+
+            }
+        });
     }
 
     private void InitCompo() {
         imageViewback = findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
         hours_recyclerview = (RecyclerView)findViewById(R.id.hours_recyclerview_id);
         hours_recyclerview.setHasFixedSize(true);
         hours_recyclerview.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
@@ -31,7 +32,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierViewOfferDiscount extends AppCompatActivity implements View.OnClickListener, ViewOfferPresenter.OfferDiscount {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private ViewOfferDiscountAdapter viewOfferAdapter;
     private ViewOfferPresenter presenter;
@@ -49,6 +50,8 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         idholder= user.getId();
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         product_recyclerview = (RecyclerView)findViewById(R.id.view_opffer_discount_recycler_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -68,7 +71,11 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
             onBackPressed();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierViewOfferDiscount.this, InfoActivity.class);
+            startActivity(intent);
         }
+
     }
 
     @Override

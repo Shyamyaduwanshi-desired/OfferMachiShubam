@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -34,7 +35,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class RetalierDealsOftheDayActivity extends AppCompatActivity implements View.OnClickListener, DealsOftheDayPresenter.DealsOftheDay {
 
     Button addnewdeals;
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private DealsOfDayAdapter dealsOfDayAdapter;
     private DealsOftheDayPresenter presenter;
@@ -53,6 +54,8 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
         idholder= user.getId();
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         addnewdeals=findViewById(R.id.addnewdeals_id);
         addnewdeals.setOnClickListener(this);
         product_recyclerview =findViewById(R.id.dealsoftheday_recycler_id);
@@ -78,7 +81,11 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
             onBackPressed();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierDealsOftheDayActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
+
     }
 
     @Override

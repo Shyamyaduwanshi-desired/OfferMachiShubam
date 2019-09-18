@@ -69,7 +69,6 @@ public class HomePresenter {
                 {
                     hidepDialog();
                 }
-
                 try {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");

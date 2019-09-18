@@ -34,7 +34,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class StoreCouponCodeActivity extends AppCompatActivity implements View.OnClickListener, StoreListPresenter.StoreList {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView storerecycle;
     private CustomerStoreAdapter customerStoreAdapter;
     private StoreListPresenter presenter;
@@ -52,6 +52,8 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
         presenter = new StoreListPresenter(StoreCouponCodeActivity.this, StoreCouponCodeActivity.this);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         storerecycle=findViewById(R.id.storerecycleview);
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
@@ -76,6 +78,9 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(StoreCouponCodeActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
 

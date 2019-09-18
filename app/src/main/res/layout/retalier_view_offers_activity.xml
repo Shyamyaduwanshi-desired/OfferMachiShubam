@@ -38,28 +38,51 @@
                 android:layout_marginLeft="280dp"
                 android:layout_marginTop="10dp"
                 app:srcCompat="@drawable/ic_search_magnifier_interface_symbol" />
-            <ImageView
-                android:id="@+id/imgNotiBell"
-                android:layout_width="39dp"
-                android:layout_height="32dp"
-                android:padding="5dp"
-                android:layout_marginLeft="320dp"
-                android:layout_marginTop="10dp"
-                app:srcCompat="@drawable/ic_notification_bell" />
-            <TextView
-                android:id="@+id/txtMessageCount"
-                android:layout_width="19dp"
-                android:layout_height="19dp"
-                android:background="@drawable/circle_background"
-                android:gravity="center"
-                android:text="0"
-                android:visibility="gone"
-                android:textColor="@color/white"
-                android:textSize="6sp"
-                app:layout_constraintEnd_toEndOf="@+id/imgNotiBell"
-                app:layout_constraintTop_toTopOf="@+id/imgNotiBell"
-                android:layout_marginLeft="340dp"
-                android:layout_marginTop="8dp"/>
+            <RelativeLayout
+                android:layout_toRightOf="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="60dp">
+                <ImageView
+                    android:id="@+id/info_id"
+                    android:layout_width="27dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/btnnotification"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/ic_info"
+
+
+                    />
+                <ImageView
+                    android:id="@+id/imgNotiBell"
+                    android:layout_width="29dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_alignParentRight="true"
+                    app:srcCompat="@drawable/ic_notification_bell"
+                    />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txtMessageCount"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:background="@drawable/circle_background"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="6sp"
+                    app:layout_constraintEnd_toEndOf="@+id/imgNotiBell"
+                    app:layout_constraintTop_toTopOf="@+id/imgNotiBell"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="8dp"/>
+            </RelativeLayout>
+
 
 
 

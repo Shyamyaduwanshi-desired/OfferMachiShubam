@@ -194,7 +194,6 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
 
                 } catch (Exception e) {
 
-
                 }
             }
         }

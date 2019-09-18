@@ -24,6 +24,7 @@ import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
 import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
+import com.desired.offermachi.retalier.view.activity.RetalierDashboard;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActInterestCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     TextView tvTitle;
     RecyclerView product_recyclerview;
     private MultiChoiceCategortListAdapter categortListAdapter=null;
@@ -56,6 +57,8 @@ public class ActInterestCategory extends AppCompatActivity implements View.OnCli
           idholder= user.getId();
           tvTitle = findViewById(R.id.tv_title);
           imageViewback = findViewById(R.id.imageback);
+          info=findViewById(R.id.info_id);
+          info.setOnClickListener(this);
           btProceed = findViewById(R.id.bt_proceed);
           imageViewback.setOnClickListener(this);
           btProceed.setOnClickListener(this);
@@ -96,6 +99,9 @@ public class ActInterestCategory extends AppCompatActivity implements View.OnCli
         }
         else if (v==btProceed){
             getAllSelectedId();
+        }else if(v==info){
+            Intent intent = new Intent(ActInterestCategory.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
  String sAllCatId="";

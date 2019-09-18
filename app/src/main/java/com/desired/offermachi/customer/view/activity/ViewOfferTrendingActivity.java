@@ -31,7 +31,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView categoryrecycle;
     private CustomerTrendingAdapter customerTrendingAdapter;
     private TrendingListPresenter presenter;
@@ -54,6 +54,8 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         presenter = new TrendingListPresenter(ViewOfferTrendingActivity.this, ViewOfferTrendingActivity.this);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(gridLayoutManager1);
@@ -92,7 +94,11 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
     public void onClick(View v) {
         if (v == imageViewback) {
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(ViewOfferTrendingActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
+
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.presenter.CustomerSupportPresenter;
 import com.desired.offermachi.retalier.presenter.LoginPresenter;
 
@@ -22,7 +23,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class RetalierCustomerSupportActivity extends AppCompatActivity implements View.OnClickListener, CustomerSupportPresenter.CustomerSupport {
 
     Button submitbutton;
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     EditText etname,etemail,etmessage,etmobile;
     private CustomerSupportPresenter presenter;
     ImageView imgNotiBell;
@@ -43,6 +44,8 @@ public class RetalierCustomerSupportActivity extends AppCompatActivity implement
         submitbutton.setOnClickListener(this);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
     }
@@ -87,6 +90,9 @@ public class RetalierCustomerSupportActivity extends AppCompatActivity implement
             validation();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierCustomerSupportActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
 
     }

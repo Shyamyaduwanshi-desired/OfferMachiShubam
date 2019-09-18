@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.PeopleModel;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -33,7 +34,7 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
 
     RecyclerView recyclerView;
     String idholder;
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     private PeopleListAdapter peopleListAdapter;
     private RetailerPeopleListPresenter presenter;
     String status;
@@ -45,6 +46,7 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
         init();
 
     }
+
     private void init(){
         Intent intent=getIntent();
         status=intent.getStringExtra("status");
@@ -53,6 +55,8 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
         idholder= user.getId();
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info= findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         recyclerView=findViewById(R.id.recyclelist);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -68,6 +72,9 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(RetalierListPeopleActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
 

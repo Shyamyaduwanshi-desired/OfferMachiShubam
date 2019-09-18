@@ -176,7 +176,6 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
 
                             String msg=currentMessage.getDisplayMessageBody();
                             String getotp=msg.substring((msg.length()-4),msg.length());
-
                             Log.e("","getotp= "+getotp);
                             etotp.setText(getotp.trim());
                             if (etotp.getText().toString().equals(Otpholder)) {

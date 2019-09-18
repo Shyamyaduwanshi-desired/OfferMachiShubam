@@ -8,9 +8,10 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 
 public class RetalierTermsConditionActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView imageViewback ;
+    ImageView imageViewback,info;
     ImageView imgNotiBell;
 
     @Override
@@ -23,6 +24,17 @@ public class RetalierTermsConditionActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent = new Intent(RetalierTermsConditionActivity.this, InfoActivity.class);
+                    startActivity(intent);
+
             }
         });
         WebView mywebview = (WebView)findViewById(R.id.webView1);

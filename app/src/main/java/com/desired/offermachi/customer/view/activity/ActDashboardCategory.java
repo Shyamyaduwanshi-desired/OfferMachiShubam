@@ -35,7 +35,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private MultiChoiceCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
@@ -57,8 +57,10 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
           imageViewback = findViewById(R.id.imageback);
+          info=findViewById(R.id.info_id);
           btProceed = findViewById(R.id.bt_proceed);
           imageViewback.setOnClickListener(this);
+          info.setOnClickListener(this);
           btProceed.setOnClickListener(this);
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
@@ -95,6 +97,9 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
         }
         else if (v==btProceed){
             getAllSelectedId();
+        }else if(v==info){
+            Intent intent = new Intent(ActDashboardCategory.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
  String sAllCatId=""/*,sSingleCateId*/;

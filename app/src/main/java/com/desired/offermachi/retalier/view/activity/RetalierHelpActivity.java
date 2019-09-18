@@ -25,6 +25,7 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.model.FAQ;
 import com.desired.offermachi.retalier.view.adapter.FaqAdapter;
 
@@ -38,7 +39,7 @@ import java.util.Map;
 
 public class RetalierHelpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView recyclerView;
     private ProgressDialog pDialog;
     private static final String ROOT_URL = "http://offermachi.in/api/help_faq_data";
@@ -60,6 +61,8 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
         txtphone=findViewById(R.id.phonenumber);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         recyclerView=(RecyclerView)findViewById(R.id.liveshiplist);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(RetalierHelpActivity.this));
@@ -78,6 +81,9 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
             onBackPressed();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
+        }else if(v==info){
+            Intent intent = new Intent(RetalierHelpActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
     private void Fetchfaq() {

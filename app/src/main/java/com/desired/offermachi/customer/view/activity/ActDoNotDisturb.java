@@ -2,6 +2,7 @@ package com.desired.offermachi.customer.view.activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActDoNotDisturb extends AppCompatActivity implements View.OnClickListener {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     String idholder;
     ListView listView;
 
@@ -71,6 +72,8 @@ public void SetView(int pos)
 }
     private void init(){
         listView = findViewById(R.id.rv_do_not_disturb);
+        imageViewback= findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
 
     }
     ArrayList<String>list=new ArrayList();
@@ -92,6 +95,9 @@ public void SetView(int pos)
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(ActDoNotDisturb.this, InfoActivity.class);
+            startActivity(intent);
         }
 
     }

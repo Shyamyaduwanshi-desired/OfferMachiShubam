@@ -86,7 +86,7 @@
                         android:id="@+id/iv_share"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/reply_right_arrow" />
+                        android:src="@drawable/shareicon" />
                 </RelativeLayout>
                 <RelativeLayout
                     android:id="@+id/rl_like"

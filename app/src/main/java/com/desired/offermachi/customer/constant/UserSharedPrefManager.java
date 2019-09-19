@@ -87,7 +87,7 @@ public class UserSharedPrefManager {
                 sharedPreferences.getString(KEY_PHONE, "NA"),
                 sharedPreferences.getString(KEY_STOREADDRESS, "NA"),
                 sharedPreferences.getString(KEY_GENDER, "NA"),
-                sharedPreferences.getString(KEY_DOB,"NA"),
+                sharedPreferences.getString(KEY_DOB,""),
                 sharedPreferences.getString(KEY_PROFILE,  "NA"),
                 sharedPreferences.getString(KEY_SmartShopping, "NA"),
                 sharedPreferences.getString(KEY_NotificationSound, "NA"),

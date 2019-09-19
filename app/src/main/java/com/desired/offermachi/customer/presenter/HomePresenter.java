@@ -375,7 +375,6 @@ public class HomePresenter {
         queue.add(postRequest);
     }
 
-
     public void AddStoreFollow(final String userid, final String retailerid,final String active) {
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_add_follow_retailer", new Response.Listener<String>() {
             @Override
@@ -414,6 +413,9 @@ public class HomePresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
+
+
 
     private void showpDialog() {
         if (!progress.isShowing())

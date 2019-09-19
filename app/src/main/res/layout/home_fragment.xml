@@ -70,8 +70,10 @@
         android:background="@null"
         android:paddingLeft="10dp"
         android:textSize="14dp"
-        android:hint="Type a store name or your location"
+        android:hint="Type a store name, offer name, location"
         />
+    <!--    android:hint="Type a store name or your location"
+        android:hint="Type a store name, offer name, location"-->
     </RelativeLayout>
 </RelativeLayout>
         <TextView

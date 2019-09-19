@@ -128,6 +128,108 @@ public class TrendingListPresenter {
         queue.add(postRequest);
     }
 
+    public void SearchAllTrending(final String Userid,final String id,final String type) {
+        if(!((Activity) context).isFinishing())
+        {
+            progress = new ProgressDialog(context);
+            progress.setMessage("Please Wait..");
+            progress.setCancelable(false);
+            showpDialog();
+        }
+        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "common_index_master_serach_offer", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if (status == 200) {
+                        Log.e("", "filter offer result= " + reader.toString());
+                        String result = reader.getString("result");
+                        Log.e("",""+result);
+                        JSONObject jsonObj = new JSONObject(result);
+                        if(jsonObj!=null)
+                        {
+                            String offerdata = jsonObj.getString("offer_data");
+                        JSONArray jsonArray = new JSONArray(offerdata);
+                        Log.e("",""+jsonArray.toString());
+                        if(jsonArray!=null&&jsonArray.length()>0)
+                        {
+                        JSONObject object;
+                        for (int count = 0; count < jsonArray.length(); count++) {
+                            object = jsonArray.getJSONObject(count);
+                            SelectCategoryModel selectCategoryModel = new SelectCategoryModel(
+                                    object.getString("id"),
+                                    object.getString("offer_id"),
+                                    object.getString("offer_title"),
+                                    object.getString("offer_category"),
+                                    object.getString("sub_category"),
+                                    object.getString("offer_type"),
+                                    object.getString("offer_type_name"),
+                                    object.getString("offer_value"),
+                                    object.getString("offer_details"),
+                                    object.getString("start_date"),
+                                    object.getString("end_date"),
+                                    object.getString("alltime"),
+                                    object.getString("description"),
+                                    object.getString("coupon_code"),
+                                    object.getString("posted_by"),
+                                    object.getString("status"),
+                                    object.getString("offer_brand_name"),
+                                    object.getString("favourite_status"),
+                                    object.getString("offer_image"),
+                                    object.getString("qr_code_image"),
+                                    object.getString("coupon_code_status")
+
+                            );
+                            list.add(selectCategoryModel);
+                        }
+                            trendingList.success(list);
+                        }
+                        else
+                        {
+                            trendingList.error("No found any data");
+                        }
+
+
+                    }
+
+                    } else if (status == 404) {
+                        trendingList.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    trendingList.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
+                trendingList.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                params.put("type", type);
+                params.put("user_id", Userid);
+                Log.e("","input params= "+params.toString());
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
     public void AddFavourite(final String userid, final String offerid,final String active) {
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_add_favourite_offer", new Response.Listener<String>() {
             @Override

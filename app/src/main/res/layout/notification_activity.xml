@@ -95,6 +95,7 @@
                 android:layout_gravity="right"
                 android:layout_marginLeft="5dp"
                 android:textOff="OFF"
+                android:visibility="gone"
                 android:textOn="ON"/>
         </LinearLayout>
         <android.support.v7.widget.RecyclerView

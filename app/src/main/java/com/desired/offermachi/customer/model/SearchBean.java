@@ -1,7 +1,7 @@
 package com.desired.offermachi.customer.model;
 
 public class SearchBean {
-    String id,name;
+    String id,name,type;
 
     public String getId() {
         return id;
@@ -17,5 +17,13 @@ public class SearchBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -183,48 +183,53 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
     }
     @Override
     public void followersuccess(ArrayList<FollowerModel> followerModels) {
-        LayoutInflater li = LayoutInflater.from(ActRetalierPushOffer.this);
-        View confirmDialog = li.inflate(R.layout.dialog_followers, null);
-        RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
-        Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        multiAdapter = new MultiAdapter(getApplicationContext(),followerModels);
-        recyclerView.setAdapter(multiAdapter);
-        AlertDialog.Builder alert = new AlertDialog.Builder(ActRetalierPushOffer.this);
-        alert.setView(confirmDialog);
-        alertDialog = alert.create();
-        WindowManager.LayoutParams wmlp =  alertDialog.getWindow().getAttributes();
-        wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wmlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        alertDialog.getWindow().setAttributes(wmlp);
-        alertDialog.show();
-        btnsend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (multiAdapter.getSelected().size() > 0) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (int i = 0; i < multiAdapter.getSelected().size(); i++) {
-                        stringBuilder.append(multiAdapter.getSelected().get(i).getId());
-                        stringBuilder.append(",");
-                    }
-                    String followerid=stringBuilder.toString();
-                    if (isNetworkConnected()) {
-                        followerpresenter.SendOffer(idholder,PushOfferid,followerid);
-                      //  Toast.makeText(RetalierPushActivity.this, ""+followerid, Toast.LENGTH_SHORT).show();
-                        alertDialog.dismiss();
-                    }  else {
-                        alertDialog.dismiss();
-                        showAlert("Please connect to internet.", R.style.DialogAnimation);
-                    }
+        try {
+            LayoutInflater li = LayoutInflater.from(ActRetalierPushOffer.this);
+            View confirmDialog = li.inflate(R.layout.dialog_followers, null);
+            RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
+            Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            multiAdapter = new MultiAdapter(getApplicationContext(),followerModels);
+            recyclerView.setAdapter(multiAdapter);
 
-                } else {
-                    Toast.makeText(ActRetalierPushOffer.this, "No Selection", Toast.LENGTH_SHORT).show();
-                    alertDialog.dismiss();
+            AlertDialog.Builder alert = new AlertDialog.Builder(ActRetalierPushOffer.this);
+            alert.setView(confirmDialog);
+            alertDialog = alert.create();
+            WindowManager.LayoutParams wmlp =  alertDialog.getWindow().getAttributes();
+            wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+            wmlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            alertDialog.getWindow().setAttributes(wmlp);
+            alertDialog.show();
+            btnsend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (multiAdapter.getSelected().size() > 0) {
+                        StringBuilder stringBuilder = new StringBuilder();
+                        for (int i = 0; i < multiAdapter.getSelected().size(); i++) {
+                            stringBuilder.append(multiAdapter.getSelected().get(i).getId());
+                            stringBuilder.append(",");
+                        }
+                        String followerid=stringBuilder.toString();
+                        if (isNetworkConnected()) {
+                            followerpresenter.SendOffer(idholder,PushOfferid,followerid);
+                          //  Toast.makeText(RetalierPushActivity.this, ""+followerid, Toast.LENGTH_SHORT).show();
+                            alertDialog.dismiss();
+                        }  else {
+                            alertDialog.dismiss();
+                            showAlert("Please connect to internet.", R.style.DialogAnimation);
+                        }
+
+                    } else {
+                        Toast.makeText(ActRetalierPushOffer.this, "No Selection", Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

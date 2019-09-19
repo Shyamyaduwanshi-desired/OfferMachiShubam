@@ -35,7 +35,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class FilterShowActivity extends AppCompatActivity implements CustomerCategoryListPresenter.CustomerCategoryList, View.OnClickListener,MultiChoiceCategortListAdapter.AdapterClick {
 
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     RecyclerView product_recyclerview;
 //    private FilterListAdapter filterListAdapter;
     private MultiChoiceCategortListAdapter categortListAdapter=null;
@@ -54,8 +54,10 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder= user.getId();
         imageViewback = findViewById(R.id.imageback);
+        info = findViewById(R.id.info_id);
         imageViewback.setOnClickListener(this);
         btProceed.setOnClickListener(this);
+        info.setOnClickListener(this);
         product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -75,6 +77,9 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         }
         else if (v==btProceed){
             getAllSelectedId();
+        } else if (v==info){
+            Intent intent = new Intent(this, InfoActivity.class);
+            startActivity(intent);
         }
     }
     @Override

@@ -52,9 +52,9 @@ public class SearchPresenter {
             progress.setCancelable(false);
             showpDialog();
         }
-        final ArrayList<SearchBean> list = new ArrayList<>();
-//        final ArrayList<SearchBean> listByOffer = new ArrayList<>();
-//        final ArrayList<SearchBean> listByLocation = new ArrayList<>();
+        final ArrayList<SearchBean> listStoreName = new ArrayList<>();
+        final ArrayList<SearchBean> listByOffer = new ArrayList<>();
+        final ArrayList<SearchBean> listByLocation = new ArrayList<>();
         final ArrayList<String> alllistNm = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "common_index_search_list", new Response.Listener<String>() {
             @Override
@@ -67,7 +67,7 @@ public class SearchPresenter {
                     int status = reader.getInt("status");
                     String message = reader.getString("message");
                     if (status == 200) {
-                        list.clear();
+                        listStoreName.clear();
 //                        listByOffer.clear();
 //                        listByLocation.clear();
                         String result=reader.getString("result");
@@ -87,7 +87,8 @@ public class SearchPresenter {
                             searchBean=new SearchBean();
                             searchBean.setId(object.getString("id"));
                             searchBean.setName(object.getString("shop_name"));
-                            list.add(searchBean);
+                            searchBean.setType(object.getString("type"));
+                            listStoreName.add(searchBean);
                             alllistNm.add(object.getString("shop_name"));
                         }
 
@@ -98,8 +99,9 @@ public class SearchPresenter {
                             searchBean=new SearchBean();
                             searchBean.setId(objectByOffer.getString("id"));
                             searchBean.setName(objectByOffer.getString("offer_title_slug"));
+                            searchBean.setType(objectByOffer.getString("type"));
 //                            listByOffer.add(searchBean);
-                            list.add(searchBean);
+                            listByOffer.add(searchBean);
 
                             alllistNm.add(objectByOffer.getString("offer_title_slug"));
                         }
@@ -110,11 +112,13 @@ public class SearchPresenter {
                             searchBean=new SearchBean();
                             searchBean.setId(objectBylocation.getString("id"));
                             searchBean.setName(objectBylocation.getString("locality_name"));
+                            searchBean.setType(objectBylocation.getString("type"));
 //                            listByLocation.add(searchBean);
-                            list.add(searchBean);
+                            listByLocation.add(searchBean);
                             alllistNm.add(objectBylocation.getString("locality_name"));
                         }
-                        searchList.successSearch(list,null,null,alllistNm,"");
+
+                        searchList.successSearch(listStoreName,listByOffer,listByLocation,alllistNm,"");
 //                        searchList.successSearch(list,listByOffer,listByLocation,alllistNm,"");
                     } else if (status == 404) {
                         searchList.error(reader.getString("message"));

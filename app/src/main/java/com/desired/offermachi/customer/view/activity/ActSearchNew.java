@@ -24,10 +24,13 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.SearchBean;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.SearchPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.fragment.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +38,7 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActSearchNew extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener {
+public class ActSearchNew extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener, SearchPresenter.SearchListInfo {
 
     ImageView cancle;
     RecyclerView categoryrecycle;
@@ -43,6 +46,7 @@ public class ActSearchNew extends AppCompatActivity implements TrendingListPrese
     private TrendingListPresenter presenter;
     String idholder;
     SearchView searchView;
+    private SearchPresenter searchPresenter;
     private ArrayList<SelectCategoryModel> selectCategoryModelList;
     private AutoCompleteTextView actv;
 
@@ -50,46 +54,80 @@ public class ActSearchNew extends AppCompatActivity implements TrendingListPrese
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_search_new);
-        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
-        cancle=(ImageView)findViewById(R.id.cancle_img_id);
+        searchPresenter = new SearchPresenter(this, this);
+        GetIntentData();
+        initview();
+        Listener();
+        CallAPI(1);
+
+    }
+
+    private void CallAPI(int i) {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1:
+                    searchPresenter.GetSearchList("", "");//for all searchable list data
+                    break;
+               case 2:
+                   Log.e("","sSearchCatId= "+sSearchCatId+" sSearType= "+sSearType);
+                   presenter.SearchAllTrending(idholder,sSearchCatId,sSearType);
+
+                    break;
+            }
+        } else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+
+    private void Listener() {
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        initview();
-        setAutoCompleteAdpt();
-        GetIntentData();
+        actv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+//                        FindMoreData(adapter.getItem(position));
+//                        Toast.makeText(ActSearchNew.this, ""+adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                        FindMoreData(adapter.getItem(position));
+                    }
+                });
     }
-String sSearchCatId,sSearchNm;
+
+    String sSearchCatId,sSearchNm,sSearType;
     private void GetIntentData() {
         sSearchCatId=getIntent().getStringExtra("cat_id");
         sSearchNm=getIntent().getStringExtra("cat_name");
-        Log.e("","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm);
+        sSearType=getIntent().getStringExtra("cat_type");
+        Log.e("","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm+" sSearType= "+sSearType);
     }
 
 
     ArrayAdapter<String> adapter;
-public void setAutoCompleteAdpt()
+    ArrayList<String>arrayAutoCompleteText=new ArrayList<>();
+public void SetAutoAdapter()
 {
+    try {
+        adapter = new ArrayAdapter<String>
+                (this,android.R.layout.simple_list_item_1,arrayAutoCompleteText);
+        actv.setAdapter(adapter);
 
-    String[] countries = getResources().getStringArray(R.array.list_of_location);
-    adapter = new ArrayAdapter<String>
-            (this,android.R.layout.simple_list_item_1,countries);
-    actv.setAdapter(adapter);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 
-    actv.setOnItemClickListener(
-            new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view,
-                                        int position, long id) {
-//                    selectedText.setText(autoSuggestAdapter.getObject(position));
-                    Toast.makeText(ActSearchNew.this, ""+adapter.getItem(position), Toast.LENGTH_SHORT).show();
-                }
-            });
 }
     private void initview() {
+        actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView1);
+        cancle=(ImageView)findViewById(R.id.cancle_img_id);
+        actv.setThreshold(1);
+
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder = user.getId();
         selectCategoryModelList=new ArrayList<>();
@@ -101,11 +139,11 @@ public void setAutoCompleteAdpt()
         categoryrecycle.setNestedScrollingEnabled(false);
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(this);
-        if (isNetworkConnected()) {
-            presenter.ViewAllTrending(idholder);
-        } else {
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
-        }
+//        if (isNetworkConnected()) {
+//            presenter.SearchAllTrending(idholder);
+//        } else {
+//            showAlert("Please connect to internet.", R.style.DialogAnimation);
+//        }
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(locationReceiver,
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(CouponReceiver,
@@ -122,11 +160,12 @@ public void setAutoCompleteAdpt()
     public BroadcastReceiver CouponReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent2) {
-            if (isNetworkConnected()) {
+          /*  if (isNetworkConnected()) {
                 presenter.ViewAllTrending(idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
+            }*/
+          CallAPI(2);
 
         }
     };
@@ -141,21 +180,24 @@ public void setAutoCompleteAdpt()
 
     @Override
     public void favsuccess(String response) {
-        if (isNetworkConnected()) {
+        CallAPI(2);
+       /* if (isNetworkConnected()) {
             presenter.ViewAllTrending(idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
-        }
+        }*/
     }
 
     @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);
+//        CallAPI(2);
     }
 
     @Override
     public void fail(String response) {
         showAlert(response, R.style.DialogAnimation);
+//        CallAPI(2);
     }
 
     private void showAlert(String message, int animationSource) {
@@ -201,4 +243,59 @@ public void setAutoCompleteAdpt()
         customerTrendingAdapter.setfilter(product);
         return true;
     }
+    ArrayList<SearchBean> AllSearchData=new ArrayList<>();
+    @Override
+    public void successSearch(ArrayList<SearchBean> responseByStore, ArrayList<SearchBean> responseByOffer, ArrayList<SearchBean> responseByLocation, ArrayList<String> response, String status) {
+        AllSearchData.clear();
+
+        for (SearchBean bean : responseByStore)
+        {
+            AllSearchData.add(bean);
+        }
+        for (SearchBean bean : responseByOffer)
+        {
+            AllSearchData.add(bean);
+        }
+        for (SearchBean bean : responseByLocation)
+        {
+            AllSearchData.add(bean);
+        }
+
+        CallAPI(2);
+
+        arrayAutoCompleteText.clear();
+        arrayAutoCompleteText=response;
+        SetAutoAdapter();
+    }
+
+    private void FindMoreData(String name) {
+
+//        String sFindCatId=""/*,catName=""*/,sType="";
+
+        try {
+            Log.e("","name= "+name);
+
+            for(int i=0;i<AllSearchData.size();i++)
+            {
+                if(AllSearchData.get(i).getName().equals(name))
+                {
+                    sSearchCatId=AllSearchData.get(i).getId();
+                    sSearType=AllSearchData.get(i).getType();
+                    sSearchNm=AllSearchData.get(i).getName();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        CallAPI(2);
+//        Intent intent = new Intent(getActivity(), ActSearchNew.class);
+//        intent.putExtra("cat_id",sFindCatId);
+//        intent.putExtra("cat_name",name);
+//        intent.putExtra("cat_type",sType);
+//        startActivity(intent);
+//        getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
 }

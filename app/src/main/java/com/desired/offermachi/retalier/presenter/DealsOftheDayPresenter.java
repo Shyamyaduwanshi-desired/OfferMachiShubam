@@ -39,8 +39,8 @@ public class DealsOftheDayPresenter {
         progress.setMessage("Get Deals of the Days Please Wait..");
         progress.setCancelable(false);
         progress.show();
-        final ArrayList<DealsModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "retailer_deals_of_the_day", new Response.Listener<String>() {
+        final ArrayList<DealsModel> list = new ArrayList<>();//old retailer_deals_of_the_day
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_deals_of_the_day_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progress.dismiss();

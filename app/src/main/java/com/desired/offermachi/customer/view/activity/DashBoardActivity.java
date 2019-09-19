@@ -70,12 +70,13 @@ public class DashBoardActivity extends AppCompatActivity
     String ImageHolder,username,useremail;
    User user;
    ImageView btnnotification;
+    hand handobj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
+        handobj = hand.getintance();
          toolbar = findViewById(R.id.toolbar);
         ivTitleLogo=toolbar.findViewById(R.id.logo);
         tvMainTitle=toolbar.findViewById(R.id.tv_title);
@@ -387,6 +388,9 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_home:
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
+                    handobj.setCatid("");
+                    handobj.setCatname("");
+                    handobj.setCatimage("");
                     fragment = new HomeFragment();
                 }
 //                else{

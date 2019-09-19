@@ -43,18 +43,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-//        if (UserSharedPrefManager.getInstance(this).isLoggedIn()) {
-//            User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-//           if (user.getSmartShopping().equals("0")){
-//               finish();
-//               startActivity(new Intent(this, CategoryActivity.class));
-//           }else{
-//               finish();
-//               startActivity(new Intent(this, DashBoardActivity.class));
-//           }
-//
-//            return;
-//        }
         initview();
     }
     private void initview(){
@@ -76,17 +64,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v==registertext){
-
-//            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-
             startActivity(new Intent(LoginActivity.this, RegistraionAsActivity.class));
-//            finish();
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }else if (v==loginnbutton){
             loginvalid();
         }else if (v==forgotpassword){
             startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-//            finish();
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
 
@@ -151,7 +134,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        startActivity(new Intent(LoginActivity.this, RegistraionAsActivity.class));
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }

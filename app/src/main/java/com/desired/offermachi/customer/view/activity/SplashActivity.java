@@ -70,6 +70,7 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
 //                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+
                         startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
                         finish();
 

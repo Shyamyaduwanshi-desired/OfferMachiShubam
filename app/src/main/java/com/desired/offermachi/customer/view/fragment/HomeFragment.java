@@ -48,6 +48,7 @@ import com.desired.offermachi.customer.presenter.GetCouponPresenter;
 import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.presenter.SearchPresenter;
 import com.desired.offermachi.customer.view.activity.ActDashboardCategory;
+import com.desired.offermachi.customer.view.activity.ActDashboardCategoryNew;
 import com.desired.offermachi.customer.view.activity.ActSearchNew;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.SearchActivity;
@@ -329,7 +330,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         }else if (v==rlCategory)//categoryid
         {
 //            Intent intent = new Intent(getActivity(), CategoryActivity.class);
-            Intent intent = new Intent(getActivity(), ActDashboardCategory.class);
+            Intent intent = new Intent(getActivity(), ActDashboardCategoryNew.class);
             intent.putExtra("diff_","1");
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

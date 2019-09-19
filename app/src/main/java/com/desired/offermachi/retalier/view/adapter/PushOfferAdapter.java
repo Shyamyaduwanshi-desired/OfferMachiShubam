@@ -48,7 +48,16 @@ public class PushOfferAdapter extends RecyclerView.Adapter<PushOfferAdapter.MyVi
     @Override
     public void onBindViewHolder(final PushOfferAdapter.MyViewHolder holder, final int i) {
         final ViewOfferModel viewOfferModel = viewOfferModelArrayList.get(i);
-        holder.productname.setText(viewOfferModel.getOffername());
+
+        if(viewOfferModel.getOffername().length()>15)
+        {
+            holder.productname.setText(viewOfferModel.getOffername().substring(0,15)+"...");
+        }
+        else
+        {
+            holder.productname.setText(viewOfferModel.getOffername());
+        }
+
         holder.productdate.setText(viewOfferModel.getOfferenddate());
         holder.offertypename.setText(viewOfferModel.getOffertypename()+" Off "+viewOfferModel.getOffervalue());
         if(viewOfferModel.getOfferImage().equals("")){

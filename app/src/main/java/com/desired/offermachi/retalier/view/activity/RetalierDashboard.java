@@ -19,14 +19,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.desired.offermachi.R;
 
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
-import com.desired.offermachi.retalier.presenter.RetailerNotificationPresenter;
 import com.desired.offermachi.retalier.view.fragment.ReatalierHomeFragment;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -111,7 +109,7 @@ public class RetalierDashboard extends AppCompatActivity
         }
         else if (id == R.id.navigation_sub_item_1) {
             drawer.closeDrawer(GravityCompat.START);
-            startActivity(new Intent(getApplicationContext(), RetalierDashboard.class));
+//            startActivity(new Intent(getApplicationContext(), RetalierDashboard.class));
 
         }
         else if (id == R.id.navigation_sub_item_2) {
@@ -124,7 +122,8 @@ public class RetalierDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_pushoffer) {
             drawer.closeDrawer(GravityCompat.START);
-            startActivity(new Intent(getApplicationContext(), RetalierPushActivity.class));
+            startActivity(new Intent(getApplicationContext(), ActRetalierPushOffer.class));
+//            startActivity(new Intent(getApplicationContext(), RetalierPushActivity.class));
 
         } else if (id == R.id.nav_redeemcode) {
             if (count==0){

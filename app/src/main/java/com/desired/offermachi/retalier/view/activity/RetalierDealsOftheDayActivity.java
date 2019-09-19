@@ -19,15 +19,10 @@ import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
 import com.desired.offermachi.retalier.model.UserModel;
-import com.desired.offermachi.retalier.model.ViewOfferModel;
-import com.desired.offermachi.retalier.model.retalier_category_model;
 import com.desired.offermachi.retalier.presenter.DealsOftheDayPresenter;
-import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
 import com.desired.offermachi.retalier.view.adapter.DealsOfDayAdapter;
-import com.desired.offermachi.retalier.view.adapter.ViewOfferDiscountAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -62,21 +57,39 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
-        if (isNetworkConnected()) {
-            presenter.getRetailerDealsOftheDay(idholder);
-        }  else {
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
-        }
+
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        CallAPI(1);
+    }
+
+    private void CallAPI(int i) {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1:
+                    presenter.getRetailerDealsOftheDay(idholder);
+                    break;
+                case 2:
+//                            presenter.getPushedOffer(idholder);
+                    break;
+            }
+        }  else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         if (v==addnewdeals){
-            Intent intent = new Intent(RetalierDealsOftheDayActivity.this, RetalierAddDeals.class);
+            Intent intent = new Intent(RetalierDealsOftheDayActivity.this, ActAddDealsOftheDay.class);
+//            Intent intent = new Intent(RetalierDealsOftheDayActivity.this, RetalierAddDeals.class);
             startActivity(intent);
-            finish();
         }else if (v==imageViewback){
             onBackPressed();
         }else if (v==imgNotiBell){
@@ -128,7 +141,6 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
             }
         }).show();
     }
-
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;

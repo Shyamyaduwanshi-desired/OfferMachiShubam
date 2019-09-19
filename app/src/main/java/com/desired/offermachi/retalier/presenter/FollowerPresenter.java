@@ -26,7 +26,7 @@ import java.util.Map;
 public class FollowerPresenter {
     private Context context;
     private Follower follower;
-
+    ProgressDialog progress=null;
     public FollowerPresenter(Context context, Follower follower) {
         this.context = context;
         this.follower = follower;
@@ -44,15 +44,30 @@ public class FollowerPresenter {
     }
 
     public void sentRequest(final String userid) {
-        final ProgressDialog progress = new ProgressDialog(context);
-        progress.setMessage("Get Followers Please Wait..");
-        progress.setCancelable(false);
-        progress.show();
-       final ArrayList<FollowerModel> followerModels = new ArrayList<>();
+        try {
+            if(progress!=null)
+            {
+                progress.dismiss();
+                progress=null;
+            }
+            progress = new ProgressDialog(context);
+            progress.setMessage("Get Followers Please Wait..");
+            progress.setCancelable(false);
+            progress.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        final ArrayList<FollowerModel> followerModels = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "retailer_select_all_followers", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progress.dismiss();
+                if(progress!=null)
+                {
+                    progress.dismiss();
+                }
+
                 try {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
@@ -85,7 +100,10 @@ public class FollowerPresenter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
+                if(progress!=null)
+                {
+                    progress.dismiss();
+                }
                 follower.followerfail("Server Error.\n Please try after some time.");
             }
         }
@@ -106,14 +124,22 @@ public class FollowerPresenter {
 
 
     public void SendOffer(final String userid,final String offerid,final String followerid) {
-        final ProgressDialog progress = new ProgressDialog(context);
+        if(progress!=null)
+        {
+            progress.dismiss();
+            progress=null;
+        }
+       progress = new ProgressDialog(context);
         progress.setMessage("Send Offer Please Wait..");
         progress.setCancelable(false);
         progress.show();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "retailer_send_push_offers", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progress.dismiss();
+                if(progress!=null)
+                {
+                    progress.dismiss();
+                }
                 try {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
@@ -130,7 +156,10 @@ public class FollowerPresenter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
+                if(progress!=null)
+                {
+                    progress.dismiss();
+                }
                 follower.followerfail("Server Error.\n Please try after some time.");
             }
         }

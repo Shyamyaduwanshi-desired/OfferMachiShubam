@@ -3,7 +3,6 @@ package com.desired.offermachi.retalier.view.activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -15,7 +14,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,15 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.FollowerModel;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -42,21 +32,14 @@ import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
 import com.desired.offermachi.retalier.view.adapter.MultiAdapter;
 import com.desired.offermachi.retalier.view.adapter.PushOfferAdapter;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierPushActivity extends AppCompatActivity implements View.OnClickListener ,ViewOfferPresenter.OfferDiscount, FollowerPresenter.Follower {
+public class ActRetalierPushOffer extends AppCompatActivity implements View.OnClickListener ,ViewOfferPresenter.OfferDiscount, FollowerPresenter.Follower {
 
-    ImageView imageViewback,info;
+    ImageView imageViewback;
     RecyclerView product_recyclerview;
     private PushOfferAdapter pushOfferAdapter;
     private MultiAdapter multiAdapter;
@@ -65,38 +48,67 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
     private String idholder,PushOfferid;
     AlertDialog alertDialog;
     ImageView imgNotiBell;
+    Button btAddPushOffer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reatalier_push_offer_activity);
+        setContentView(R.layout.act_reatalier_push_offer);
         init();
     }
 
   private void init(){
-      presenter = new ViewOfferPresenter(this, RetalierPushActivity.this);
-      followerpresenter = new FollowerPresenter(this, RetalierPushActivity.this);
+      presenter = new ViewOfferPresenter(this, ActRetalierPushOffer.this);
+      followerpresenter = new FollowerPresenter(this, ActRetalierPushOffer.this);
       UserModel user = SharedPrefManagerLogin.getInstance(getApplicationContext()).getUser();
       idholder= user.getId();
+      btAddPushOffer = findViewById(R.id.bt_add_push_offfer);
       imageViewback = findViewById(R.id.imageback);
-      imageViewback.setOnClickListener(this);
-      info= findViewById(R.id.info_id);
-      info.setOnClickListener(this);
       product_recyclerview = findViewById(R.id.pushoffer_recycler_id);
+
       GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
       product_recyclerview.setLayoutManager(gridLayoutManager);
       product_recyclerview.setItemAnimator(new DefaultItemAnimator());
-      if (isNetworkConnected()) {
+
+   /*   if (isNetworkConnected()) {
           presenter.getOfferDiscount(idholder);
       }  else {
           showAlert("Please connect to internet.", R.style.DialogAnimation);
-      }
+      }*/
+
       LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(pushReceiver,
               new IntentFilter("Push"));
       imgNotiBell=findViewById(R.id.imgNotiBell);
+
       imgNotiBell.setOnClickListener(this);
+      imageViewback.setOnClickListener(this);
+      btAddPushOffer.setOnClickListener(this);
 
 
   }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CallAPI(1);
+    }
+
+    private void CallAPI(int i) {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1:
+                    presenter.getPushedOffer(idholder);
+                    break;
+                case 2:
+//                            presenter.getPushedOffer(idholder);
+                    break;
+            }
+        }  else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+
     public BroadcastReceiver pushReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -116,11 +128,11 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
             onBackPressed();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
-        }else if(v==info){
-            Intent intent = new Intent(RetalierPushActivity.this, InfoActivity.class);
-            startActivity(intent);
+        }else if (v==btAddPushOffer){
+            startActivity(new Intent(getApplicationContext(), ActAddPushOffer.class));
         }
     }
+
     @Override
     public void success(ArrayList<ViewOfferModel> response) {
         pushOfferAdapter = new PushOfferAdapter(getApplicationContext(),response);
@@ -165,13 +177,13 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(),RetalierDashboard.class));
+//        startActivity(new Intent(getApplicationContext(),RetalierDashboard.class));
         finish();
-        super.onBackPressed();
+//        super.onBackPressed();
     }
     @Override
     public void followersuccess(ArrayList<FollowerModel> followerModels) {
-        LayoutInflater li = LayoutInflater.from(RetalierPushActivity.this);
+        LayoutInflater li = LayoutInflater.from(ActRetalierPushOffer.this);
         View confirmDialog = li.inflate(R.layout.dialog_followers, null);
         RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
         Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
@@ -180,7 +192,7 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         multiAdapter = new MultiAdapter(getApplicationContext(),followerModels);
         recyclerView.setAdapter(multiAdapter);
-        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(RetalierPushActivity.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(ActRetalierPushOffer.this);
         alert.setView(confirmDialog);
         alertDialog = alert.create();
         WindowManager.LayoutParams wmlp =  alertDialog.getWindow().getAttributes();
@@ -208,7 +220,7 @@ public class RetalierPushActivity extends AppCompatActivity implements View.OnCl
                     }
 
                 } else {
-                    Toast.makeText(RetalierPushActivity.this, "No Selection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActRetalierPushOffer.this, "No Selection", Toast.LENGTH_SHORT).show();
                     alertDialog.dismiss();
                 }
             }

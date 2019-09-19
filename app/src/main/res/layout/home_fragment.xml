@@ -86,6 +86,7 @@
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
             android:textColor="@color/white"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/tv_txt"

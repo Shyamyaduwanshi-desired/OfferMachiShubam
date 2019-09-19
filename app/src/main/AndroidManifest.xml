@@ -76,7 +76,7 @@
 
         </activity>
         <activity
-            android:name=".customer.view.activity.ActInterestCategory"
+            android:name=".customer.view.activity.ActDashboardCategoryNew"
             android:screenOrientation="portrait">
 
         </activity>
@@ -85,6 +85,22 @@
             android:screenOrientation="portrait">
 
         </activity>
+        <activity
+            android:name=".retalier.view.activity.ActAddDealsOftheDay"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".retalier.view.activity.ActRetalierPushOffer"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".retalier.view.activity.ActAddPushOffer"
+            android:screenOrientation="portrait">
+
+        </activity>
+
 
 
         <activity
@@ -228,9 +244,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".retalier.view.activity.RetalierViewOfferDiscount"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".retalier.view.activity.RetalierPushActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".retalier.view.activity.RetalierStatisticsActivity"

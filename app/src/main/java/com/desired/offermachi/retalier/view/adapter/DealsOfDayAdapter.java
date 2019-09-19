@@ -46,7 +46,17 @@ public class DealsOfDayAdapter extends RecyclerView.Adapter<DealsOfDayAdapter.My
     public void onBindViewHolder(final DealsOfDayAdapter.MyViewHolder holder, final int i) {
 
         final DealsModel dealsModel = dealsModelArrayList.get(i);
-        holder.productname.setText(dealsModel.getOffername());
+
+        if(dealsModel.getOffername().length()>15)
+        {
+            holder.productname.setText(dealsModel.getOffername().substring(0,15)+"...");
+        }
+        else
+        {
+            holder.productname.setText(dealsModel.getOffername());
+        }
+
+//        holder.productname.setText(dealsModel.getOffername());
         holder.productdate.setText(dealsModel.getOfferenddate());
         holder.offertypename.setText(dealsModel.getOffertypename()+" Off "+dealsModel.getOffervalue());
         if(dealsModel.getOfferImage().equals("")){

@@ -24,7 +24,7 @@ import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
-import com.desired.offermachi.retalier.view.activity.RetalierPushActivity;
+
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;

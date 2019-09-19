@@ -24,7 +24,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerNotificationPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
-import com.desired.offermachi.retalier.view.activity.RetalierPushActivity;
+
 
 import java.util.ArrayList;
 

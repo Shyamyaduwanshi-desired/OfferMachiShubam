@@ -40,24 +40,22 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_toLeftOf="@+id/btnnotification"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginRight="40dp"
                         android:src="@drawable/ic_info"
                         tools:ignore="VectorDrawableCompat"
-                        android:layout_toRightOf="@+id/logo"
-                        android:layout_marginLeft="150dp"
+                        android:layout_alignParentRight="true"
                         />
-
 
                     <ImageView
                         android:id="@+id/imgNotiBell"
-                        android:layout_width="25dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="23dp"
                         android:src="@drawable/ic_notification_bell"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_alignParentRight="true"
                         android:layout_gravity="center"
                         android:layout_marginTop="0dp"
-                        android:layout_toRightOf="@+id/info_id"
+                        android:layout_marginRight="10dp"
                         tools:ignore="VectorDrawableCompat" />
 
                 </RelativeLayout>

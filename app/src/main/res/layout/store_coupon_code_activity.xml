@@ -48,10 +48,11 @@
                             <ImageView
                                 android:id="@+id/filter"
                                 android:layout_width="39dp"
-                                android:layout_height="35dp"
+                                android:layout_height="34dp"
                                 android:padding="5dp"
-                                android:layout_marginLeft="300dp"
+                                android:layout_alignParentRight="true"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginRight="60dp"
                                 app:srcCompat="@drawable/ic_filter" />
                             <RelativeLayout
                                 android:layout_width="wrap_content"
@@ -65,7 +66,6 @@
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
                                     android:layout_toLeftOf="@+id/btnnotification"
-                                    android:layout_marginRight="1dp"
                                     tools:srcCompat="@drawable/ic_info"
                                     />
                                 <ImageView
@@ -75,7 +75,6 @@
                                     android:layout_height="20dp"
                                     android:layout_centerVertical="true"
                                     android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
                                     android:layout_marginRight="5dp"
                                     android:layout_alignParentRight="true"
                                     tools:srcCompat="@drawable/ic_notification_bell"

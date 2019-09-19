@@ -2,14 +2,16 @@ package com.desired.offermachi.customer.model;
 
 public class User {
     private String Id;
-    private String username,email,mobile,address,gender,profile,SmartShopping,Notificationsound,Usertype;
-    public User(String  id, String name, String email, String mobile,String address,String gender,String profile,String smartShopping,String notificationsound,String user_type) {
+    private String username,email,mobile,address,gender,dob,profile,SmartShopping,Notificationsound,Usertype;
+
+    public User(String  id, String name, String email, String mobile, String address, String gender, String dob, String profile, String smartShopping, String notificationsound, String user_type) {
         this.Id = id;
         this.username = name;
         this.email = email;
         this.mobile = mobile;
         this.address = address;
         this.gender=gender;
+        this.dob=dob;
         this.profile=profile;
         this.SmartShopping=smartShopping;
         this.Notificationsound=notificationsound;
@@ -55,5 +57,12 @@ public class User {
 
     public String getUsertype() {
         return Usertype;
+    }
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

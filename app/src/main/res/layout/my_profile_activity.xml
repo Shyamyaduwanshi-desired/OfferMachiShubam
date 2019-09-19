@@ -43,7 +43,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="100dp">
 
                         <RelativeLayout
                             android:layout_below="@+id/cv"
@@ -101,8 +102,6 @@
                                 </LinearLayout>-->
                             </RelativeLayout>
                         </RelativeLayout>
-
-
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
@@ -112,7 +111,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/viewrelative_id"
-                                android:layout_marginVertical="40dp">
+                                android:layout_marginVertical="40dp"
+                               android:paddingBottom="100dp">
 
                                 <EditText
                                     android:id="@+id/name"
@@ -124,7 +124,7 @@
                                     android:editable="false"
                                     android:hint="Name"
                                     android:paddingLeft="30dp"
-                                    android:textColor="#013896" />
+                                    android:textColor="@color/purple" />
 
                                 <EditText
                                     android:id="@+id/gender"
@@ -138,8 +138,7 @@
                                     android:background="@drawable/edit_background"
                                     android:hint="Gender"
                                     android:paddingLeft="30dp"
-                                    android:textColor="#013896" />
-
+                                    android:textColor="@color/purple" />
 
                                 <EditText
                                     android:id="@+id/email"
@@ -147,13 +146,13 @@
                                     android:layout_height="40dp"
                                     android:layout_below="@+id/gender"
                                     android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="20dp"
                                     android:layout_marginRight="20dp"
                                     android:background="@drawable/edit_background"
                                     android:hint="Email"
                                     android:editable="false"
                                     android:paddingLeft="30dp"
-                                    android:textColor="#013896"
-                                    android:layout_marginTop="20dp"/>
+                                    android:textColor="@color/purple"/>
 
                                 <EditText
                                     android:id="@+id/mobile"
@@ -167,21 +166,39 @@
                                     android:background="@drawable/edit_background"
                                     android:hint="Mobile Number "
                                     android:paddingLeft="30dp"
-                                    android:textColor="#013896"
+                                    android:textColor="@color/purple"
                                     />
-                                <EditText
-                                    android:id="@+id/address"
+                                <TextView
+                                    android:id="@+id/dob_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
                                     android:layout_below="@+id/mobile"
+                                    android:layout_marginVertical="0dp"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginRight="20dp"
                                     android:editable="false"
                                     android:background="@drawable/edit_background"
+                                    android:hint="Dob "
+                                    android:paddingLeft="30dp"
+                                    android:textColor="@color/purple"
+                                    android:textSize="18dp"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <EditText
+                                    android:id="@+id/address"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_below="@+id/dob_id"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:editable="false"
+                                    android:layout_marginVertical="20dp"
+                                    android:background="@drawable/edit_background"
                                     android:hint="Address"
                                     android:paddingLeft="30dp"
-                                    android:textColor="#013896"
-                                    android:layout_marginBottom="50dp"/>
+                                    android:textColor="@color/purple"
+                                    android:layout_marginBottom="100dp"/>
                             </RelativeLayout>
                         </RelativeLayout>
                     </LinearLayout>

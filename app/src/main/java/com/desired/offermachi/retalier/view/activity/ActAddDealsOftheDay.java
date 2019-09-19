@@ -35,6 +35,8 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.ActDashboardCategory;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.BrandModel;
@@ -58,7 +60,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount  {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     DatePickerDialog picker;
     TextView etstartdate,etenddate,start_Time,end_Time;
     Button submitbutton;
@@ -117,6 +119,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         idholder= user.getId();
         etoffertitle=findViewById(R.id.offertitle);
         imageViewback = findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
         etoffervalue=findViewById(R.id.offervalue);
         etofferdescription=findViewById(R.id.offerdescription);
         txtoffercouponcode=findViewById(R.id.offercouponcode);
@@ -140,6 +143,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
 
         btngenerate.setOnClickListener(this);
         imageViewback.setOnClickListener(this);
+        info.setOnClickListener(this);
         imagepickerly.setOnClickListener(this);
         end_Time.setOnClickListener(this);
         start_Time.setOnClickListener(this);
@@ -278,6 +282,9 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(ActAddDealsOftheDay.this, InfoActivity.class);
+            startActivity(intent);
         }else if (v==submitbutton){
             PostOfferValidation2();
         }

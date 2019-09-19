@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 //    TextView searchView;
     RelativeLayout rlCategory;
 
-    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder,SoundHolder;
+    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,Dobholder,ImageHolder,SmartShoppingHolder,SoundHolder;
     hand handobj;
     ArrayAdapter<String> adapter;
     private AutoCompleteTextView actv;
@@ -450,6 +450,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     "1",
                     SoundHolder,
@@ -471,6 +472,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     "0",
                     SoundHolder,

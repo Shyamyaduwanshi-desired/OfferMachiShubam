@@ -38,7 +38,7 @@ public class CustomerUpdateProfilePresenter {
         void fail(String response);
     }
 
-    public void UpdateCustomerProfile(final String userid,final String name,final String email,final String mobile,final String gender, final String address,final String image) {
+    public void UpdateCustomerProfile(final String userid,final String name,final String email,final String mobile,final String gender,final String dob, final String address,final String image) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Profile Update Please Wait..");
         progress.setCancelable(false);
@@ -56,12 +56,14 @@ public class CustomerUpdateProfilePresenter {
                         String result = reader.getString("result");
                         JSONObject jsonObject = new JSONObject(result);
                         User user = new User(
+
                                 jsonObject.getString("id"),
                                 jsonObject.getString("username"),
                                 jsonObject.getString("email"),
                                 jsonObject.getString("mobile"),
                                 jsonObject.getString("address"),
                                 jsonObject.getString("gender"),
+                                jsonObject.getString("dob"),
                                 jsonObject.getString("profile_image"),
                                 "0",
                                 "0",
@@ -93,6 +95,7 @@ public class CustomerUpdateProfilePresenter {
                 params.put("name",name);
                 params.put("email",email);
                 params.put("gender",gender);
+                params.put("dob",dob);
                 params.put("mobile",mobile);
                 params.put("address",address);
                 params.put("profile_image",image);

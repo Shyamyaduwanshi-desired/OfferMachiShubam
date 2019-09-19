@@ -68,10 +68,9 @@
             android:layout_marginTop="20dp">
             <android.support.v7.widget.CardView
                 android:id="@+id/card_view"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                card_view:cardBackgroundColor="#fff"
+                app:cardBackgroundColor="#fff"
                 android:layout_margin="10dp">
                 <ScrollView
                     android:layout_width="match_parent"
@@ -339,7 +338,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:visibility="gone"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp">
@@ -354,15 +352,16 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"
                                         android:weightSum="2">
+
                                         <TextView
                                             android:id="@+id/editText1"
                                             android:layout_width="0dp"
-                                            android:layout_height="40dp"
-                                            android:gravity="center"
-                                            android:layout_weight="1"
+                                            android:layout_height="match_parent"
                                             android:layout_marginRight="5dp"
-                                            android:ems="10"
+                                            android:layout_weight="1"
                                             android:background="@drawable/edit_background"
+                                            android:ems="10"
+                                            android:gravity="center"
                                             android:hint="Start Date" />
                                         <TextView
                                             android:id="@+id/editexpirydate"

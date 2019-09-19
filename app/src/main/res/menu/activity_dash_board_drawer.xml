@@ -10,9 +10,30 @@
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_profile"
+            android:id="@+id/nav_account"
             android:icon="@drawable/ic_avatar"
+            android:title="@string/user_account" />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_man_user"
             android:title="@string/user_profile" />
+
+        <item
+            android:id="@+id/nav_mycoupons"
+            android:icon="@drawable/ic_coupon"
+            android:title="@string/mycoupons" />
+
+        <item
+            android:id="@+id/nav_follow"
+            android:icon="@drawable/ic_follower"
+            android:title="@string/follow" />
+        <item
+            android:id="@+id/nav_fav"
+            android:icon="@drawable/ic_heart"
+            android:title="@string/fav" />
+
+
         <item
             android:id="@+id/nav_feeds"
             android:icon="@drawable/ic_rss"
@@ -36,19 +57,6 @@
             android:icon="@drawable/couponpurple"
             android:title="Exclusive Offers" />
 
-        <item
-            android:id="@+id/nav_mycoupons"
-            android:icon="@drawable/couponpurple"
-            android:title="@string/mycoupons" />
-
-        <item
-            android:id="@+id/nav_follow"
-            android:icon="@drawable/followpurple"
-            android:title="@string/follow" />
-        <item
-            android:id="@+id/nav_fav"
-            android:icon="@drawable/favoritepurple"
-            android:title="@string/fav" />
         <item
             android:id="@+id/nav_rate"
             android:icon="@drawable/ic_rating"

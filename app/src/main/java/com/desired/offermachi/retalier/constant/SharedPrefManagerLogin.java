@@ -58,7 +58,6 @@ public class SharedPrefManagerLogin {
         editor.putString(KEY_PROFILE,user.getProfile());
         editor.putString(KEY_IMAGE, user.getStoreimage());
         editor.putString(KEY_USER_TYPE,user.getUsertype());
-
         editor.apply();
     }
 

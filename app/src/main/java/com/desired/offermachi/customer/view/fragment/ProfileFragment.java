@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
@@ -26,6 +28,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     EditText etname,etgender,etemail,etmobile,etaddress;
     CircleImageView imgProfileAvatar;
     View view;
+    TextView editdob;
 
     public ProfileFragment() {
     }
@@ -33,7 +36,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.my_profile_activity, container, false);
-       ((DashBoardActivity)getActivity()).setToolTittle("My Profile",2);
+       ((DashBoardActivity)getActivity()).setToolTittle("My Account",2);
         initview();
         return  view;
     }
@@ -43,6 +46,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         etgender=view.findViewById(R.id.gender);
         etemail=view.findViewById(R.id.email);
         etmobile=view.findViewById(R.id.mobile);
+        editdob=view.findViewById(R.id.dob_id);
         etaddress=view.findViewById(R.id.address);
         imgProfileAvatar=view.findViewById(R.id.imgProfileAvatar);
         if (user.getUsername().equals("null")){
@@ -65,6 +69,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }else{
             etmobile.setText(user.getMobile());
         }
+
+        if (user.getDob().equals("null")){
+            editdob.setText("");
+        }else{
+            editdob.setText(user.getDob());
+        }
+
+
+
         if (user.getAddress().equals("null")){
             etaddress.setText("");
         }else{

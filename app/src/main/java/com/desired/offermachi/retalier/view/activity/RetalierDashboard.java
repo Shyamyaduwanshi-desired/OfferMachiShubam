@@ -80,6 +80,7 @@ public class RetalierDashboard extends AppCompatActivity
             Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
         }
+
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
         info=findViewById(R.id.info_id);

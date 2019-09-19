@@ -1,6 +1,7 @@
 package com.desired.offermachi.customer.view.activity;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,8 +18,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,6 +39,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import id.zelory.compressor.Compressor;
@@ -45,13 +49,16 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, CustomerUpdateProfilePresenter.UpdateProfile {
     private CustomerUpdateProfilePresenter presenter;
     LinearLayout male,female;
-    ImageView  imageViewback;
-    TextView changepasswordtext;
+    ImageView  imageViewback,info;
+    TextView changepasswordtext,editdob;
     EditText etname,etgender,etemail,etmobile,etaddress;
     CircleImageView imgProfileAvatar;
     LinearLayout imagepicker;
-    String nameholder,emailholder,phoneholder,genderholder,addressholder,idholder;
+    String nameholder,emailholder,phoneholder,genderholder,addressholder,idholder,dobholder;
     Button btnsave;
+    DatePickerDialog picker;
+    String datepick ;
+
     private String picture = "";
     private File file, compressedImage;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -73,6 +80,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         imgProfileAvatar=findViewById(R.id.imgProfileAvatar);
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         male=findViewById(R.id.lymale);
         male.setOnClickListener(this);
         female=findViewById(R.id.lyfemale);
@@ -81,6 +90,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         changepasswordtext.setOnClickListener(this);
         imagepicker=findViewById(R.id.imagepicker);
         imagepicker.setOnClickListener(this);
+        editdob=findViewById(R.id.dateofbirth);
+        editdob.setOnClickListener(this);
+
+
+
         if (user.getUsername().equals("null")){
             etname.setText("");
         }else{
@@ -97,10 +111,21 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             etemail.setText(user.getEmail());
         }
         if (user.getMobile().equals("null")){
+
             etmobile.setText("");
+
         }else{
             etmobile.setText(user.getMobile());
         }
+
+        Log.e("","user.getDob()= "+user.getDob());
+        if (user.getDob().equals("")){
+            editdob.setText("");
+
+        }else{
+            editdob.setText(user.getDob());
+        }
+
         if (user.getAddress().equals("null")){
             etaddress.setText("");
         }else{
@@ -138,7 +163,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
-        }else if (v==male){
+        }if(v==info){
+            Intent intent = new Intent(EditProfileActivity.this, InfoActivity.class);
+            startActivity(intent);
+        }if(v==editdob){
+            datepick="0";
+            datepicker();
+        } else if (v==male){
             genderholder ="male";
             male.setBackgroundResource(R.drawable.maleblue);
             female.setBackgroundResource(R.drawable.signupbutton);
@@ -168,12 +199,31 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void datepicker() {
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        // date picker dialog
+        picker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                if (datepick.equals("0")){
+                    editdob.setText(dayOfMonth + "-" + (month + 1) + "-" +year );
+                }
+            }
+        }, year, month, day);
+        picker.show();
+
+    }
+
     private void validation() {
         nameholder = etname.getText().toString();
         emailholder = etemail.getText().toString();
         phoneholder = etmobile.getText().toString().trim();
         genderholder = etgender.getText().toString();
         addressholder=etaddress.getText().toString();
+        dobholder=editdob.getText().toString();
         if (TextUtils.isEmpty(nameholder)){
             Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
         }
@@ -190,14 +240,19 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, "Please enter valid email id", Toast.LENGTH_SHORT).show();
         }
         else if (!isValidMobile(phoneholder)){
+
             Toast.makeText(this, "Please enter valid mobile number", Toast.LENGTH_SHORT).show();
+
+        }else if (TextUtils.isEmpty(dobholder)){
+
+            Toast.makeText(this, "Please enter Date of Birth", Toast.LENGTH_SHORT).show();
         }
         else if (phoneholder.length() < 10){
             Toast.makeText(this, "Please enter 10 digit mobile number", Toast.LENGTH_SHORT).show();
         }
         else {
             if (isNetworkConnected()) {
-                presenter.UpdateCustomerProfile(idholder,nameholder,emailholder,phoneholder,genderholder,addressholder,picture);
+                presenter.UpdateCustomerProfile(idholder,nameholder,emailholder,phoneholder,genderholder,dobholder,addressholder,picture);
             }
         }
 
@@ -279,7 +334,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             e.printStackTrace();
         }
     }
-
     /*encode compress image into base64*/
     private String getEncoded64(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -290,10 +344,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         return imgString;
     }
-
-
-
-
     private boolean isValidMobile(String phone) {
         return android.util.Patterns.PHONE.matcher(phone).matches();
     }
@@ -307,7 +357,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void showError(String errorMessage) {
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
-
     @Override
     public void success(String response) {
         Toast.makeText(getApplicationContext(), ""+response, Toast.LENGTH_SHORT).show();
@@ -315,7 +364,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
         finish();
     }
-
     @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);

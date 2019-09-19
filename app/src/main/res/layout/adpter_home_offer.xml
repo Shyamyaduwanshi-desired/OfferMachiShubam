@@ -134,7 +134,7 @@ android:id="@+id/tv_prod_dsc"
                     android:gravity="center"
                     android:textSize="13dp" />
                 <TextView
-android:id="@+id/tv_prod_date"
+                    android:id="@+id/tv_prod_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 

@@ -35,6 +35,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.BrandModel;
@@ -58,7 +59,7 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActAddPushOffer extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount  {
-    ImageView imageViewback;
+    ImageView imageViewback,info;
     DatePickerDialog picker;
     TextView etstartdate,etenddate,start_Time,end_Time;
     Button submitbutton;
@@ -115,6 +116,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         UserModel user = SharedPrefManagerLogin.getInstance(this).getUser();
         idholder= user.getId();
         imageViewback = findViewById(R.id.imageback);
+        info=findViewById(R.id.info_id);
         etoffertitle=findViewById(R.id.offertitle);
         etoffervalue=findViewById(R.id.offervalue);
         etofferdescription=findViewById(R.id.offerdescription);
@@ -137,6 +139,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 
         btngenerate.setOnClickListener(this);
         imageViewback.setOnClickListener(this);
+        info.setOnClickListener(this);
         imagepickerly.setOnClickListener(this);
         end_Time.setOnClickListener(this);
         start_Time.setOnClickListener(this);
@@ -277,7 +280,10 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 
         if (v==imageViewback){
             onBackPressed();
-        }else if (v==submitbutton){
+        }else if(v==info){
+            Intent intent = new Intent(ActAddPushOffer.this, InfoActivity.class);
+            startActivity(intent);
+        } else if (v==submitbutton){
             PostOfferValidation2();
         }
         else if (v==nextbutton){

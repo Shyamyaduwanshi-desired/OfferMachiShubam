@@ -45,9 +45,9 @@
                                 android:layout_height="20dp"
                                 android:layout_centerVertical="true"
                                 android:layout_gravity="center"
-                                android:layout_toLeftOf="@+id/btnnotification"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginRight="40dp"
                                 tools:srcCompat="@drawable/ic_info"
+                                android:layout_alignParentRight="true"
                                 />
                             <ImageView
                                 android:id="@+id/imgNotiBell"

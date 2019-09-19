@@ -38,7 +38,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private CustomerNotificationPresenter presenter;
     RecyclerView categoryrecycle;
     String idholder;
-    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder;
+    String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,Dobholder,ImageHolder,SmartShoppingHolder;
     String SoundHolder;
 TextView tvDONodist;
     @Override
@@ -127,6 +127,7 @@ startActivity(new Intent(this,ActDoNotDisturbSetting.class));
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     SmartShoppingHolder,
                     "1"
@@ -142,6 +143,7 @@ startActivity(new Intent(this,ActDoNotDisturbSetting.class));
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     SmartShoppingHolder,
                     "0"

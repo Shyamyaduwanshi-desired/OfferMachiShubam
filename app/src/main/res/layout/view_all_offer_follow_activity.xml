@@ -34,9 +34,7 @@
              <RelativeLayout
             android:layout_toRightOf="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="80dp">
+            android:layout_height="fill_parent">
             <ImageView
                 android:id="@+id/info_id"
                 android:layout_width="27dp"
@@ -44,10 +42,10 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_toLeftOf="@+id/btnnotification"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:src="@drawable/ic_info"
                 tools:ignore="VectorDrawableCompat"
-
+                android:layout_alignParentRight="true"
                 />
             <ImageView
                 android:id="@+id/btnnoti"

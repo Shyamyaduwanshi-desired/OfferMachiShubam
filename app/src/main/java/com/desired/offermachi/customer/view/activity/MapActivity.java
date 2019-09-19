@@ -31,6 +31,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
+import com.desired.offermachi.retalier.view.activity.ActAddPushOffer;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -65,7 +66,7 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
     TextView txtselectkilometer;
     EditText edtlocation;
     ImageView imgNotiBell;
-    ImageView imageViewback;
+    ImageView imageViewback ,info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         imgNotiBell.setOnClickListener(this);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
+        info=findViewById(R.id.info_id);
+        info.setOnClickListener(this);
         edtlocation=findViewById(R.id.etlocation);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -346,6 +349,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
         }else if (v == imageViewback) {
             onBackPressed();
+        }else if(v==info){
+            Intent intent = new Intent(MapActivity.this, InfoActivity.class);
+            startActivity(intent);
         }
     }
 }

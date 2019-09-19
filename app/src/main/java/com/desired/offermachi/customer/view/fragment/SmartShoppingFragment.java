@@ -54,7 +54,7 @@ public class SmartShoppingFragment extends Fragment implements View.OnClickListe
     private CustomerCategoryListPresenter presenter;
     private String idholder, followsatus, Catid;
     Switch smartswitch;
-    String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, ImageHolder, SmartShoppingHolder,SoundHolder;
+    String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, Dobholder, ImageHolder, SmartShoppingHolder,SoundHolder;
 Context context;
     Button btProceed;
     public SmartShoppingFragment() {
@@ -174,6 +174,7 @@ Context context;
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     "1",
                     SoundHolder
@@ -189,6 +190,7 @@ Context context;
                     PhoneHolder,
                     AddressHolder,
                     GenderHolder,
+                    Dobholder,
                     ImageHolder,
                     "0",
                     SoundHolder,

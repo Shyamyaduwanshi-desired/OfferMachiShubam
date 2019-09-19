@@ -6,7 +6,7 @@ public class UserModel {
     private String Id;
     private String username, email,mobile,store_name,store_contact_number,store_address,store_city,store_day,store_opentime,store_closetime,about_store,gender,profile,storeimage,Usertype;
 
-    public UserModel(String  id, String name, String email, String mobile, String store_name, String store_contact_number, String store_address, String store_city, String store_day,String store_opentime,String store_closetime,String about_store,String gender,String profile,String storeimage,String user_type) {
+    public UserModel(String  id, String name, String email, String mobile, String store_name, String store_contact_number, String store_address, String store_city, String store_day, String store_opentime, String store_closetime, String about_store, String gender, String profile, String storeimage, String user_type) {
         this.Id = id;
         this.username = name;
         this.email = email;
@@ -23,7 +23,6 @@ public class UserModel {
         this.profile=profile;
         this.storeimage = storeimage;
         this.Usertype=user_type;
-
     }
 
     public String getId() {
@@ -89,4 +88,5 @@ public class UserModel {
     public String getUsertype() {
         return Usertype;
     }
+
 }

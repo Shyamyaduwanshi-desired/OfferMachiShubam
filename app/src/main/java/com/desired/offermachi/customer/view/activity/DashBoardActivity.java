@@ -70,13 +70,13 @@ public class DashBoardActivity extends AppCompatActivity
     String ImageHolder,username,useremail;
    User user;
    ImageView btnnotification;
-    hand handobj;
+   int count=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        handobj = hand.getintance();
+
          toolbar = findViewById(R.id.toolbar);
         ivTitleLogo=toolbar.findViewById(R.id.logo);
         tvMainTitle=toolbar.findViewById(R.id.tv_title);
@@ -95,6 +95,12 @@ public class DashBoardActivity extends AppCompatActivity
 
         navigationView = findViewById(R.id.nav_view);
         navHeader = navigationView.getHeaderView(0);
+        navigationView.getMenu().getItem(1).setActionView(R.layout.menu_image);
+        navigationView.getMenu().getItem(2).setVisible(false);
+        navigationView.getMenu().getItem(3).setVisible(false);
+        navigationView.getMenu().getItem(4).setVisible(false);
+        navigationView.getMenu().getItem(5).setVisible(false);
+
         name = (TextView) navHeader.findViewById(R.id.navname);
         email = (TextView) navHeader.findViewById(R.id.navemail);
         imageView = (ImageView) navHeader.findViewById(R.id.imageView);
@@ -374,9 +380,6 @@ public class DashBoardActivity extends AppCompatActivity
                 }).show();
             }
         }
-
-
-
     }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -388,21 +391,33 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_home:
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
-                    handobj.setCatid("");
-                    handobj.setCatname("");
-                    handobj.setCatimage("");
                     fragment = new HomeFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
 //                }
                 //toolbar.setTitle("");
                 break;
-                case R.id.nav_profile:
-                    if (user.getSmartShopping().equals("0")){
-                        UserSharedPrefManager.SaveStoreFilter(this,"");
-                        fragment = new ProfileFragment();
+                case R.id.nav_account:
+                    if (count==0){
+                        navigationView.getMenu().getItem(2).setVisible(true);
+                        navigationView.getMenu().getItem(3).setVisible(true);
+                        navigationView.getMenu().getItem(4).setVisible(true);
+                        navigationView.getMenu().getItem(5).setVisible(true);
+                        count=1;
+                    }else{
+                        navigationView.getMenu().getItem(2).setVisible(false);
+                        navigationView.getMenu().getItem(3).setVisible(false);
+                        navigationView.getMenu().getItem(4).setVisible(false);
+                        navigationView.getMenu().getItem(5).setVisible(false);
+
+                        count=0;
                     }
+//                    if (user.getSmartShopping().equals("0")){
+//                        UserSharedPrefManager.SaveStoreFilter(this,"");
+//                        fragment = new ProfileFragment();
+//                    }
 //                    else{
 //                        fragment = new SmartShoppingFragment();
 //                    }
@@ -410,10 +425,20 @@ public class DashBoardActivity extends AppCompatActivity
 
                    // toolbar.setTitle("My Profile");
                 break;
+
+            case R.id.nav_profile:
+
+                if (user.getSmartShopping().equals("0")){
+                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                      fragment = new ProfileFragment();
+                     drawer.closeDrawer(GravityCompat.START);
+                  }
+                    break;
+
             case R.id.nav_feeds:
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
-                    fragment = new FeedsFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -425,6 +450,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     showdialog();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
               /*
                 if (user.getSmartShopping().equals("0")){
@@ -439,6 +465,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new StoreFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -449,6 +476,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new DealsoftheDayFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -459,6 +487,8 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new ExclusiveFragment();
+                    drawer.closeDrawer(GravityCompat.START);
+
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -469,6 +499,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new MycouponsFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -479,6 +510,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new FollowFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -489,6 +521,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
                     fragment = new FavouritesFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -511,6 +544,7 @@ public class DashBoardActivity extends AppCompatActivity
                         startActivity(new Intent(Intent.ACTION_VIEW,
                                 Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
                     }
+                    drawer.closeDrawer(GravityCompat.START);
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -519,7 +553,8 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
             case R.id.nav_invite:
                 if (user.getSmartShopping().equals("0")){
-                    fragment = new InviteFriendFragment();
+                    fragment = new InviteFriendFragment();  drawer.closeDrawer(GravityCompat.START);
+
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -530,6 +565,8 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_help:
                 if (user.getSmartShopping().equals("0")){
                     fragment = new HelpFragment();
+                    drawer.closeDrawer(GravityCompat.START);
+
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -540,6 +577,8 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_customer:
                 if (user.getSmartShopping().equals("0")){
                     fragment = new CustomerSupportFragment();
+                    drawer.closeDrawer(GravityCompat.START);
+
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();
@@ -551,11 +590,13 @@ public class DashBoardActivity extends AppCompatActivity
 //                fragment = new HomeFragment();
                 if (user.getSmartShopping().equals("0")) {
                     startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+                    drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
             case R.id.nav_terms:
                 if (user.getSmartShopping().equals("0")) {
                     fragment = new TermConditionFragment();
+                    drawer.closeDrawer(GravityCompat.START);
                 }
                 break;
             case R.id.nav_logout:
@@ -582,7 +623,7 @@ public class DashBoardActivity extends AppCompatActivity
        if(fragment==null)//only for not refresh
        {
            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-           drawer.closeDrawer(GravityCompat.START);
+//           drawer.closeDrawer(GravityCompat.START);
        }
        else {
            // Insert the fragment by replacing any existing fragment
@@ -668,7 +709,7 @@ public class DashBoardActivity extends AppCompatActivity
                             .commit();
                 }
 
-                String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,SmartShoppingHolder,SoundHolder,idholder;
+                String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,Dobholder,SmartShoppingHolder,SoundHolder,idholder;
                 User user = UserSharedPrefManager.getInstance(DashBoardActivity.this).getCustomer();
                 idholder= user.getId();
 
@@ -677,6 +718,7 @@ public class DashBoardActivity extends AppCompatActivity
                 PhoneHolder= user.getMobile();
                 AddressHolder= user.getAddress();
                 GenderHolder= user.getGender();
+                Dobholder=user.getDob();
                 ImageHolder=user.getProfile();
                 SmartShoppingHolder=user.getSmartShopping();
                 SoundHolder=user.getNotificationsound();
@@ -690,6 +732,7 @@ public class DashBoardActivity extends AppCompatActivity
                             PhoneHolder,
                             AddressHolder,
                             GenderHolder,
+                            Dobholder,
                             ImageHolder,
                             "1",
                             SoundHolder,

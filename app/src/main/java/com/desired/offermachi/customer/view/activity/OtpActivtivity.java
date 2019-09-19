@@ -192,7 +192,6 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
 
                 } catch (Exception e) {
 
-
                 }
             }
         }

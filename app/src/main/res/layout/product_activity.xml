@@ -42,21 +42,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:layout_toLeftOf="@+id/btnnotification"
+                    android:layout_marginRight="50dp"
+                    android:layout_alignParentRight="true"
                     app:srcCompat="@drawable/ic_info"
-
-
                     />
                 <ImageView
                     android:id="@+id/imgNotiBell"
-                    android:layout_width="29dp"
+                    android:layout_width="23dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="5dp"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     app:srcCompat="@drawable/ic_notification_bell"
                      />
             </RelativeLayout>

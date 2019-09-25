@@ -53,6 +53,7 @@ public class HelpFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.help_activity, container, false);
+        ((DashBoardActivity)getActivity()).setToolTittle("Help & Faqs",2);
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);

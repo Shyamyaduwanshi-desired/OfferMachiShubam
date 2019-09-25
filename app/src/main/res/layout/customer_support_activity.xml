@@ -21,7 +21,8 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_left_arrow"/>
+                android:src="@drawable/ic_left_arrow"
+                tools:ignore="VectorDrawableCompat" />
             <TextView
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
@@ -86,10 +87,11 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/circle_background"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="1dp"
+
                 android:gravity="center">
                 <ImageView
                     android:layout_width="30dp"
@@ -99,16 +101,18 @@
             </LinearLayout>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="Enter your name"
+                android:singleLine="true"
+                android:maxLength="30"
                 android:drawablePadding="20dp"
                 android:backgroundTint="#fff"
                 android:inputType="textCapSentences"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/purple"
                 />
         </LinearLayout>
@@ -122,10 +126,10 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="41dp"
                 android:background="@drawable/circle_background"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="1dp"
+                android:layout_gravity="center_vertical"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="30dp"
@@ -135,16 +139,17 @@
             </LinearLayout>
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="Enter your email"
                 android:drawablePadding="20dp"
                 android:backgroundTint="#fff"
                 android:inputType="textCapSentences"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="2dp"
+       android:gravity="center_vertical"
+                android:maxLength="30"
                 android:textColor="@color/purple"
                 />
         </LinearLayout>
@@ -154,8 +159,11 @@
             android:background="@drawable/simple_background"
             android:hint="Your Request..."
             android:textColor="#013893"
-            android:paddingLeft="20dp"
-            android:inputType="textCapSentences"
+            android:padding="10dp"
+            android:gravity="center_vertical|top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:maxLength="150"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_marginTop="20dp" />
@@ -168,6 +176,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
             android:text="SUBMIT"
             android:textSize="20dp"
             android:textAllCaps="false"

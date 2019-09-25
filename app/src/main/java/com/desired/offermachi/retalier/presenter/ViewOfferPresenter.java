@@ -82,7 +82,6 @@ public class ViewOfferPresenter {
                                   object.getString("offer_brand_name"),
                                   object.getString("offer_image"),
                                   object.getString("qr_code_image")
-
                           );
                             list.add(viewOfferModel);
 

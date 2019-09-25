@@ -30,6 +30,7 @@ public class CustomerSupportFragment extends Fragment implements View.OnClickLis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.customer_support_activity, container, false);
+        ((DashBoardActivity)getActivity()).setToolTittle("Customer Support",2);
        // init();
          return  view;
     }

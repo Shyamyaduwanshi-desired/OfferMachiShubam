@@ -92,6 +92,10 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
                 new IntentFilter("Follow"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(StoreReceiver,
                 new IntentFilter("StoreFollow"));
+
+        //shyam added 25/09/19
+//        LocalBroadcastManager.getInstance(getContext()).registerReceiver(FilterReceiver,
+//                new IntentFilter("Category"));
     }
     public BroadcastReceiver followReceiver = new BroadcastReceiver() {
         @Override
@@ -116,6 +120,13 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
             presenter.FollowStore(idholder,storeid,status);
         }
     };
+//    public BroadcastReceiver FilterReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String Catid = intent.getStringExtra("catid");
+//            presenter.DealFilter(idholder,Catid);
+//        }
+//    };
     @Override
     public void onClick(View v) {
         if (v==sortbytext){

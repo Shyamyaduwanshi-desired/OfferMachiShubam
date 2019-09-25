@@ -275,9 +275,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
-
-
-
     }
 
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {

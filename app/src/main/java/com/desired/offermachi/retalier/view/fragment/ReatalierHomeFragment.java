@@ -26,6 +26,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,7 +153,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         btngenerate=view.findViewById(R.id.btngenerate);
         btngenerate.setOnClickListener(this);
         if (isNetworkConnected()) {
-            presenter.sentRequest();
+            presenter.sentRequest(idholder);
         }  else {
             Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }
@@ -270,6 +271,9 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         }else{
             alltime= offerstarttime+"-"+offerendtime;
            if (isNetworkConnected()) {
+
+               Log.e("","categoryid= "+categoryid);
+
                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,1);
            }
        }

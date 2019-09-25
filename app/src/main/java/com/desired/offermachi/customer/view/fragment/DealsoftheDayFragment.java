@@ -14,9 +14,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.model.category_model;
 import com.desired.offermachi.customer.presenter.CustomerDealsOftheDaysPresenter;
 import com.desired.offermachi.customer.presenter.CustomerFeedsPresenter;
+import com.desired.offermachi.customer.view.activity.ActFeedsFilterShow;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
@@ -47,8 +51,10 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
     private CustomerTrendingAdapter customerTrendingAdapter;
     private CustomerDealsOftheDaysPresenter presenter;
     String idholder;
-    TextView sortbytext,filtertext;
+//    TextView sortbytext,filtertext;
 
+    RelativeLayout rlFilter,rlSortBy;
+    EditText edTxtSearch;
     public DealsoftheDayFragment() {
     }
     @Override
@@ -56,16 +62,48 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
         view = inflater.inflate(R.layout.deals_of_the_day_activity, container, false);
         ((DashBoardActivity)getActivity()).setToolTittle("Deals of the Day",2);
         initview();
+        Listner();
         return  view;
+    }
+    private void Listner() {
+
+        edTxtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchText = edTxtSearch.getText().toString().trim();
+                if(customerTrendingAdapter!=null)
+                    customerTrendingAdapter.filter(searchText);
+//                adpt.filter(searchText);
+            }
+        });
     }
     private void initview(){
         presenter = new CustomerDealsOftheDaysPresenter(getActivity(),DealsoftheDayFragment.this);
         User user = UserSharedPrefManager.getInstance(getActivity()).getCustomer();
         idholder= user.getId();
-        sortbytext=view.findViewById(R.id.sortby_text_id);
-        sortbytext.setOnClickListener(this);
-        filtertext=view.findViewById(R.id.filter_text_id);
-        filtertext.setOnClickListener(this);
+
+//        sortbytext=view.findViewById(R.id.sortby_text_id);
+//        sortbytext.setOnClickListener(this);
+//        filtertext=view.findViewById(R.id.filter_text_id);
+//        filtertext.setOnClickListener(this);
+
+        edTxtSearch=view.findViewById(R.id.et_search);
+        rlFilter=view.findViewById(R.id.rl_filter);
+        rlSortBy=view.findViewById(R.id.rl_shorted_by);
+
+        rlFilter.setOnClickListener(this);
+        rlSortBy.setOnClickListener(this);
+
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
         GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(gridLayoutManager1);
@@ -114,7 +152,8 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
     };
     @Override
     public void onClick(View v) {
-        if (v==sortbytext){
+        if (v==rlSortBy){//sortbytext
+            edTxtSearch.setText("");
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
@@ -159,9 +198,10 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
                 }
             });
             dialog.show();
-        }else if (v==filtertext){
-
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);//3
+        }else if (v==rlFilter){
+            edTxtSearch.setText("");
+            Intent intent = new Intent(getContext(), ActFeedsFilterShow.class);
+//            Intent intent = new Intent(getContext(), FilterShowActivity.class);
             startActivity(intent);
 
 

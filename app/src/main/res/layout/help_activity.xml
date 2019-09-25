@@ -59,9 +59,10 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="info@offermachi.com"
+                android:text="support@nearbuy.com"
                 android:textColor="@color/purple"
                 android:paddingLeft="10dp" />
+            <!--info@offermachi.com-->
         </LinearLayout>
 
         <LinearLayout

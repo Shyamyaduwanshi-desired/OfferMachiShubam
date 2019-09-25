@@ -438,7 +438,7 @@ public class DashBoardActivity extends AppCompatActivity
             case R.id.nav_feeds:
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
-                    drawer.closeDrawer(GravityCompat.START);
+                    fragment = new FeedsFragment();
                 }
 //                else{
 //                    fragment = new SmartShoppingFragment();

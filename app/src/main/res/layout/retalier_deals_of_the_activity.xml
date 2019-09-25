@@ -102,15 +102,30 @@
                     android:textAllCaps="false"
                    android:layout_alignParentRight="true"
                     android:layout_marginRight="5dp"
+                    android:visibility="invisible"
                     />
             </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dealsoftheday_recycler_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/rl_add">
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floting_add_botton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_add_white_20dp"
+        app:backgroundTint="@color/purple"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/margin_right"
+        tools:ignore="VectorDrawableCompat" />
 
 </RelativeLayout>

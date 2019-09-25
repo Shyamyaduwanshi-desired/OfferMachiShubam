@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.view.activity.ViewAllOfferFollowActivity;
 import com.desired.offermachi.customer.view.activity.ViewStoreOfferActivity;
@@ -20,10 +21,11 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreAdapterNew.MyViewHolder> {
 
-    private ArrayList<StoreModel> storeModelArrayList;
+    private ArrayList<StoreModel> storeModelArrayList,arSearchItem;
     private Context mContext;
     private String followstatus;
     String status;
@@ -31,6 +33,8 @@ public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreA
     public CustomerStoreAdapterNew(Context context, ArrayList<StoreModel> storeModelArrayList) {
         this.mContext = context;
         this.storeModelArrayList = storeModelArrayList;
+        this.arSearchItem = new ArrayList<>();
+        this.arSearchItem.addAll(storeModelArrayList);
 
     }
     @Override
@@ -118,5 +122,23 @@ public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreA
             btnviewall = (TextView) itemView.findViewById(R.id.btnviewall);
             //producttext=(LinearLayout)itemView.findViewById(R.id.product_linear_unfollow_text_id);
         }
+    }
+
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        storeModelArrayList.clear();
+        if (charText.length() == 0) {
+            storeModelArrayList.addAll(arSearchItem);
+        } else {
+            for (StoreModel wp : arSearchItem) {
+                if (wp.getStorename().toLowerCase(Locale.getDefault()).contains(charText))
+//                if (wp.getCatName().startsWith(charText))
+                {
+                    storeModelArrayList.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

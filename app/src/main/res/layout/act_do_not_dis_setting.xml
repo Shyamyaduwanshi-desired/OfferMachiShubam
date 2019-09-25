@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_above="@+id/submit_dayhours_button_id"
         >
     <!--tools:context=".MainActivity"-->
     <android.support.v7.widget.CardView
@@ -77,6 +78,17 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
+        <TextView
+            android:id="@+id/tv_preset_dnd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="test"
+            android:gravity="center"
+            android:visibility="gone"
+
+            />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hours_recyclerview_id"
         android:layout_width="match_parent"
@@ -109,10 +121,22 @@
         android:id="@+id/submit_dayhours_button_id"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="@drawable/login_button_background"
+        android:layout_margin="20dp"
+        android:text="submit"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white" />
+
+  <!--  <Button
+        android:id="@+id/submit_dayhours_button_id"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginTop="40dp"
         android:background="#00BCD4"
         android:text="submit"
         android:layout_margin="20dp"
         android:layout_alignParentBottom="true"
-        />
+        />-->
     </RelativeLayout>

@@ -3,6 +3,7 @@ package com.desired.offermachi.customer.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -207,7 +208,7 @@ public class StoreListPresenter {
         queue.add(postRequest);
     }
 
-    public void StoreFilter(final String userid,final String catid) {
+    public void StoreFilter(final String userid,final String catid) {//for multiple categories
       /*  if(!((Activity) context).isFinishing())
         {
             progress = new ProgressDialog(context);
@@ -226,20 +227,27 @@ public class StoreListPresenter {
                     if (status == 200) {
                         String result = reader.getString("result");
                         JSONArray jsonArray = new JSONArray(result);
-                        JSONObject object;
-                        for (int count = 0; count < jsonArray.length(); count++) {
-                            object = jsonArray.getJSONObject(count);
-                            StoreModel storeModel=new StoreModel(
-                                    object.getString("id"),
-                                    object.getString("shop_name"),
-                                    object.getString("shop_logo"),
-                                    object.getString("shop_category"),
-                                    object.getString("favourite_status")
+                        Log.e("",""+jsonArray.toString()+" result= "+result);
+                        if(jsonArray!=null&&jsonArray.length()>0) {
+                            JSONObject object;
+                            for (int count = 0; count < jsonArray.length(); count++) {
+                                object = jsonArray.getJSONObject(count);
+                                StoreModel storeModel = new StoreModel(
+                                        object.getString("id"),
+                                        object.getString("shop_name"),
+                                        object.getString("shop_logo"),
+                                        object.getString("shop_category"),
+                                        object.getString("favourite_status")
 
-                            );
-                            list.add(storeModel);
+                                );
+                                list.add(storeModel);
+                            }
+                            storelist.success(list);
                         }
-                        storelist.success(list);
+                        else
+                        {
+                            storelist.error("Data not found");
+                        }
 
 
                     } else if (status == 404) {
@@ -263,6 +271,7 @@ public class StoreListPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("category_id", catid);
+                Log.e("","Input param= "+params.toString());
                 return params;
             }
         };

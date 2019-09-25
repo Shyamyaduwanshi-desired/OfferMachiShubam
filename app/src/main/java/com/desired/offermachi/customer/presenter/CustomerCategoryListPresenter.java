@@ -46,6 +46,8 @@ public class CustomerCategoryListPresenter {
 
         void success(ArrayList<CategoryListModel> response);
 
+//        void feedSuccess(ArrayList<CategoryListModel> response,String status);
+
         void error(String response);
 
         void fail(String response);
@@ -162,7 +164,7 @@ public class CustomerCategoryListPresenter {
         queue.add(postRequest);
     }
 
-    /*public void GetCategoryList(final String userid,final String catId) {
+    public void GetFeedCategoryList(final String userid) {
         if(!((Activity) context).isFinishing())
         {
             progress = new ProgressDialog(context);
@@ -171,7 +173,7 @@ public class CustomerCategoryListPresenter {
             showpDialog();
         }
         final ArrayList<CategoryListModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_get_category_bycategoryid", new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_select_main_category_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(!((Activity) context).isFinishing()) {
@@ -186,24 +188,49 @@ public class CustomerCategoryListPresenter {
                         JSONArray jsonArray = new JSONArray(result);
                         JSONObject object;
                         CategoryListModel categoryListModel;
-                        for (int count = 0; count < jsonArray.length(); count++) {
+
+                        for (int count = 0; count < jsonArray.length(); count++)
+                        {
                             object = jsonArray.getJSONObject(count);
-//                            CategoryListModel categoryListModel=new CategoryListModel(
-//                                    object.getString("id"),
-//                                    object.getString("category_name"),
-//                                    object.getString("category_image"),
-//                                    object.getString("follow_status"),
-//                                    object.getString("category_offer_image")
-//
-//                            );
+
                             categoryListModel=new CategoryListModel();
                             categoryListModel.setCatid(object.getString("id"));
                             categoryListModel.setCatname(object.getString("category_name"));
                             categoryListModel.setCatimage(object.getString("category_image"));
                             categoryListModel.setFollowstatus(object.getString("follow_status"));
                             categoryListModel.setBannerimage(object.getString("category_offer_image"));
+
                             categoryListModel.setCheckStatus(false);
-                            list.add(categoryListModel);
+
+                            if(TextUtils.isEmpty(UserSharedPrefManager.GetStoredFilter(context)))
+                            {
+                                categoryListModel.setCheckStatus(false);
+                            }else
+                            {
+                                String allSelCat=UserSharedPrefManager.GetStoredFilter(context);
+                                String[] values = allSelCat.split(",");
+                                boolean checkflag=false;
+                                for(int ii=0;ii<values.length;ii++)
+                                {
+                                    if(values[ii].equals(object.getString("id")))
+                                    {
+                                        checkflag=true;
+                                    }
+                                }
+                                if(checkflag)
+                                {
+                                    categoryListModel.setCheckStatus(true);
+                                }
+                                else
+                                {
+                                    categoryListModel.setCheckStatus(false);
+                                }
+
+                            }
+
+                            if(object.getString("follow_status").equals("1")) {
+                                list.add(categoryListModel);
+                            }
                         }
                         customerCategoryList.success(list);
 
@@ -224,13 +251,12 @@ public class CustomerCategoryListPresenter {
                 customerCategoryList.fail("Server Error.\n Please try after some time.");
             }
         }
-        ) {
+        )
+        {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
-                params.put("categoty_ids", catId);
-                Log.e("","input param= "+params.toString());
                 return params;
             }
         };
@@ -240,7 +266,7 @@ public class CustomerCategoryListPresenter {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
-    }*/
+    }
 
     public void CategoryFollow(final String userid,final String catid,final String followstatus) {
 

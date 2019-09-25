@@ -45,7 +45,12 @@ public class SearchPresenter {
     }
 
     public void GetSearchList(final String catid,final String text) {
-        if(!((Activity) context).isFinishing())
+//        if(!((Activity) context).isFinishing())
+        if(progress!=null)
+        {
+            progress.dismiss();
+            progress=null;
+        }
         {
             progress = new ProgressDialog(context);
             progress.setMessage("Please Wait..");

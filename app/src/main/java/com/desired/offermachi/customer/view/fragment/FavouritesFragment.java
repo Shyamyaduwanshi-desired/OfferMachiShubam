@@ -66,6 +66,7 @@ public class FavouritesFragment extends Fragment implements View.OnClickListener
         categoryrecycle.setLayoutManager(gridLayoutManager1);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.ViewAllFavourties(idholder);

@@ -169,16 +169,85 @@ public class CustomerDealsOftheDaysPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
-    public void DealFilter(final String userid,final String catid) {
-       /* if(!((Activity) context).isFinishing())
-        {
-            progress = new ProgressDialog(context);
-            progress.setMessage("Please Wait..");
-            progress.setCancelable(false);
-            showpDialog();
-        }*/
+    public void DealFilterSingle(final String userid,final String catid) {
         final ArrayList<SelectCategoryModel> list = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_by_filter", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //  hidepDialog();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if (status == 200) {
+                        String result = reader.getString("result");
+                        JSONArray jsonArray = new JSONArray(result);
+                        JSONObject object;
+                        for (int count = 0; count < jsonArray.length(); count++) {
+                            object = jsonArray.getJSONObject(count);
+                            SelectCategoryModel selectCategoryModel=new SelectCategoryModel(
+                                    object.getString("id"),
+                                    object.getString("offer_id"),
+                                    object.getString("offer_title"),
+                                    object.getString("offer_category"),
+                                    object.getString("sub_category"),
+                                    object.getString("offer_type"),
+                                    object.getString("offer_type_name"),
+                                    object.getString("offer_value"),
+                                    object.getString("offer_details"),
+                                    object.getString("start_date"),
+                                    object.getString("end_date"),
+                                    object.getString("alltime"),
+                                    object.getString("description"),
+                                    object.getString("coupon_code"),
+                                    object.getString("posted_by"),
+                                    object.getString("status"),
+                                    object.getString("offer_brand_name"),
+                                    object.getString("favourite_status"),
+                                    object.getString("offer_image"),
+                                    object.getString("qr_code_image"),
+                                    object.getString("coupon_code_status")
+
+                            );
+                            list.add(selectCategoryModel);
+                        }
+                        dealsList.success(list);
+
+
+                    } else if (status == 404) {
+                        dealsList.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    dealsList.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // hidepDialog();
+                dealsList.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                params.put("category_id", catid);
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
+    public void DealFilter(final String userid,final String catid) {
+        final ArrayList<SelectCategoryModel> list = new ArrayList<>();//customer_deals_of_the_day_by_filter
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_by_filter_categories", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
               //  hidepDialog();
@@ -240,7 +309,7 @@ public class CustomerDealsOftheDaysPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
-                params.put("category_id", catid);
+                params.put("category_ids", catid);
                 return params;
             }
         };
@@ -251,6 +320,7 @@ public class CustomerDealsOftheDaysPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
     public void ShortBy(final String userid,final String status) {
        /* if(!((Activity) context).isFinishing())
         {

@@ -30,12 +30,13 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ActDashboardCategoryNew extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList {
-    ImageView imageViewback;
+    ImageView imageViewback,ivInfo;
     RecyclerView product_recyclerview;
     private DashboardCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     int adptrPos=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,8 @@ public class ActDashboardCategoryNew extends AppCompatActivity implements View.O
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
           idholder= user.getId();
           imageViewback = findViewById(R.id.imageback);
-          imageViewback.setOnClickListener(this);
+          ivInfo = findViewById(R.id.info_id);
+
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -61,6 +63,10 @@ public class ActDashboardCategoryNew extends AppCompatActivity implements View.O
 
           LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(followReceiver,
                   new IntentFilter("Follow"));
+
+
+          imageViewback.setOnClickListener(this);
+          ivInfo.setVisibility(View.GONE);
       }
 
     public BroadcastReceiver followReceiver = new BroadcastReceiver() {
@@ -75,7 +81,6 @@ public class ActDashboardCategoryNew extends AppCompatActivity implements View.O
             }  else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
-
         }
     };
 

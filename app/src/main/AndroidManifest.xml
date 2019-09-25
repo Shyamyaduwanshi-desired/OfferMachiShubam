@@ -71,12 +71,12 @@
 
 
         <activity
-            android:name=".customer.view.activity.ActDoNotDisturb"
+            android:name=".customer.view.activity.ActDashboardCategoryNew"
             android:screenOrientation="portrait">
 
         </activity>
         <activity
-            android:name=".customer.view.activity.ActDashboardCategoryNew"
+            android:name=".customer.view.activity.ActFeedsFilterShow"
             android:screenOrientation="portrait">
 
         </activity>

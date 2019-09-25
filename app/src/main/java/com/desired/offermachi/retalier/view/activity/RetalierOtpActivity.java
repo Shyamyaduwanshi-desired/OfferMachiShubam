@@ -172,11 +172,10 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
                         for (int i = 0; i < pdusObj.length; i++) {
                             SmsMessage currentMessage = SmsMessage.createFromPdu((byte[])
                                     pdusObj[i]);
-                            String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-                            String senderNum = phoneNumber;
-
                             String msg=currentMessage.getDisplayMessageBody();
-                            String getotp=msg.substring((msg.length()-4),msg.length());
+                            String arr[] = msg.split(" OTP ");
+                            String getotp = arr[1];
+//                            String getotp=msg.substring((msg.length()-4),msg.length());
 
                             Log.e("","getotp= "+getotp);
                             etotp.setText(getotp.trim());

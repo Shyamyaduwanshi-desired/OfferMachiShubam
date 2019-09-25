@@ -69,35 +69,53 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     String dndid = "";
     ImageView imageViewback,info;
     private DonoDisturbPresenter presenter;
-    String idholder;
+    String idholder,preSetDndId="",dndStatus="",dnd_start_time="",dnd_end_time="";;
+TextView tvPreSetDND;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_do_not_dis_setting);
         context=this;
 //        appData=new AppData();
+
+        preSetDndId=getIntent().getStringExtra("dnd_id");
+        dndStatus=getIntent().getStringExtra("dnd_status");
+        dnd_start_time=getIntent().getStringExtra("dnd_start_time");
+        dnd_end_time=getIntent().getStringExtra("dnd_end_time");
+
         presenter = new DonoDisturbPresenter(this, this);
         User user = UserSharedPrefManager.getInstance(this).getCustomer();
         idholder= user.getId();
         InitCompo();
         Listner();
         CallAPi(1);
+
+//        CallAPi(3);
     }
+
+
     public void CallAPi(int pos)
     {
         if (isNetworkConnected(ActDoNotDisturbSetting.this)) {
             switch (pos)
             {
                 case 1:
-                    presenter.GetDoNoDisDataList();
+                    if(TextUtils.isEmpty(preSetDndId))
+                    {
+                        preSetDndId="";
+                    }
+                    presenter.GetDoNoDisDataList(preSetDndId);
                     break;
                case 2:
                    if(Valid())
                    {
 //                       Toast.makeText(context, "dndid= "+dndid+" idholder= "+idholder, Toast.LENGTH_SHORT).show();
+
                        presenter.SubmitDoNoDisData(idholder,dndid);
                    }
-
+                    break;
+                case 3:
+                    presenter.GetDoNoDisStatus(idholder);
                     break;
             }
         } else {
@@ -147,6 +165,7 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
     }
 
     private void InitCompo() {
+        tvPreSetDND = findViewById(R.id.tv_preset_dnd);
         imageViewback = findViewById(R.id.imageback);
         info=findViewById(R.id.info_id);
         hours_recyclerview = (RecyclerView)findViewById(R.id.hours_recyclerview_id);
@@ -159,6 +178,16 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
 
         linear_visible = (LinearLayout)findViewById(R.id.linear_visible);
         submit_button = (Button)findViewById(R.id.submit_dayhours_button_id);
+
+        if(!TextUtils.isEmpty(preSetDndId))
+        {
+            tvPreSetDND.setVisibility(View.VISIBLE);
+            tvPreSetDND.setText("DND Start From= "+AppData.ConvertDate5(dnd_start_time)+" To= "+AppData.ConvertDate5(dnd_end_time));
+        }
+        else
+        {
+            tvPreSetDND.setVisibility(View.GONE);
+        }
     }
 
     private void displayDatasecond() {
@@ -201,6 +230,31 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
                 break;
 
         }
+
+    }
+//only for dnd get data
+//String dndStatus="0",dnd_start_time="",dnd_end_time="";
+    @Override
+    public void successDND(JSONObject objJson, String status) {
+//        tvPreSetDND.setVisibility(View.GONE);
+//        switch (status)
+//        {
+//            case "3":
+//                try {
+////                    JSONObject objJson =new JSONObject(status);
+//                    String id = objJson.getString("id");
+//                    String dnd_id = objJson.getString("dnd_id");
+//                    dnd_start_time = objJson.getString("dnd_start_time");
+//                    dnd_end_time = objJson.getString("dnd_end_time");
+//                    dndStatus = objJson.getString("status");
+//                    tvPreSetDND.setVisibility(View.VISIBLE);
+//                    tvPreSetDND.setText("From= "+dnd_start_time+" To="+dnd_end_time);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//        }
 
     }
 
@@ -320,7 +374,13 @@ public class ActDoNotDisturbSetting extends AppCompatActivity implements DonoDis
         else
         {
             linear_visible.setVisibility(View.GONE);
-//            dndid = "";
+
+            for(int i=0;i<daysdata.size();i++)
+            {
+                daysdata.get(i).setSelected(false);
+            }
+            daysDistrubAdapter.notifyDataSetChanged();
+
         }
 
     }

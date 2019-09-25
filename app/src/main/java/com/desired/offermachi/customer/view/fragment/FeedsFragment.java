@@ -14,9 +14,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,6 +30,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerFeedsPresenter;
+import com.desired.offermachi.customer.view.activity.ActFeedsFilterShow;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
@@ -39,30 +43,86 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class FeedsFragment extends Fragment implements View.OnClickListener, CustomerFeedsPresenter.FeedsList {
     View view;
     RecyclerView categoryrecycle;
-//    private CustomerTrendingAdapter customerTrendingAdapter;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerFeedsPresenter presenter;
     String idholder;
-    TextView sortbytext,filtertext;
-
+    TextView /*sortbytext,filtertext,*/tvLoadMore;
+// boolean checkFlag=false;
+    RelativeLayout rlFilter,rlSortBy;
+    EditText edTxtSearch;
+ int loadPos=0;
     public FeedsFragment() {
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.feeds_activity, container, false);
         ((DashBoardActivity)getActivity()).setToolTittle("Feeds",2);
+
         initview();
+        Listner();
         return  view;
     }
+
+    private void Listner() {
+
+        edTxtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchText = edTxtSearch.getText().toString().trim();
+                if(customerTrendingAdapter!=null)
+                customerTrendingAdapter.filter(searchText);
+//                adpt.filter(searchText);
+            }
+        });
+    }
+
+    public void CallAPI(int i)
+    {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1:
+                    presenter.ViewAllFeeds(idholder);//,loadPos
+                    break;
+                case 2:
+                    break;
+            }
+        } else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+
     private void initview(){
         presenter = new CustomerFeedsPresenter(getActivity(),FeedsFragment.this);
         User user = UserSharedPrefManager.getInstance(getActivity()).getCustomer();
         idholder= user.getId();
-        sortbytext=view.findViewById(R.id.sortby_text_id);
-        sortbytext.setOnClickListener(this);
-        filtertext=view.findViewById(R.id.filter_text_id);
-        filtertext.setOnClickListener(this);
+        tvLoadMore=view.findViewById(R.id.tv_load_more);
+        edTxtSearch=view.findViewById(R.id.et_search);
+        rlFilter=view.findViewById(R.id.rl_filter);
+        rlSortBy=view.findViewById(R.id.rl_shorted_by);
+
+        rlFilter.setOnClickListener(this);
+        rlSortBy.setOnClickListener(this);
+
+//        sortbytext=view.findViewById(R.id.sortby_text_id);
+//        sortbytext.setOnClickListener(this);
+//        filtertext=view.findViewById(R.id.filter_text_id);
+//        filtertext.setOnClickListener(this);
+
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
+
+
 //        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
 //        categoryrecycle.setLayoutManager(gridLayoutManager1);
 //        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
@@ -74,11 +134,14 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         categoryrecycle.setNestedScrollingEnabled(false);
 
         if (getActivity()!=null) {
-            if (isNetworkConnected()) {
-                presenter.ViewAllFeeds(idholder);
-            } else {
-                showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
+
+            CallAPI(1);
+
+//            if (isNetworkConnected()) {
+//                presenter.ViewAllFeeds(idholder);
+//            } else {
+//                showAlert("Please connect to internet.", R.style.DialogAnimation);
+//            }
         }
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(locationReceiver,
                 new IntentFilter("Favourite"));
@@ -86,6 +149,8 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 new IntentFilter("Refresh"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CatReceiver,
                 new IntentFilter("Category"));
+
+
     }
     public BroadcastReceiver CatReceiver = new BroadcastReceiver() {
         @Override
@@ -106,17 +171,22 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         @Override
         public void onReceive(Context context, Intent intent) {
             if (getActivity()!=null) {
-                if (isNetworkConnected()) {
-                    presenter.ViewAllFeeds(idholder);
-                } else {
-                    showAlert("Please connect to internet.", R.style.DialogAnimation);
-                }
+
+                CallAPI(1);
+
+//                if (isNetworkConnected()) {
+//                    presenter.ViewAllFeeds(idholder);
+//                } else {
+//                    showAlert("Please connect to internet.", R.style.DialogAnimation);
+//                }
             }
         }
     };
     @Override
     public void onClick(View v) {
-        if (v==sortbytext){
+        if (v==rlSortBy)
+        {
+            edTxtSearch.setText("");
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
@@ -161,31 +231,44 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 }
             });
             dialog.show();
-        }else if (v==filtertext){
-            Intent intent = new Intent(getContext(), FilterShowActivity.class);//6
+        }else if (v==rlFilter){
+            edTxtSearch.setText("");
+            Intent intent = new Intent(getContext(), ActFeedsFilterShow.class);
+//            Intent intent = new Intent(getContext(), FilterShowActivity.class);//6
             startActivity(intent);
         }
+//        else if (v==tvLoadMore){
+////           CallAPI(1);
+//        }
 
     }
+    ArrayList<SelectCategoryModel> arFeedList=new ArrayList<>();
 //feeds success
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
 //        categoryrecycle.setAdapter(customerTrendingAdapter);
+        arFeedList.clear();
+        arFeedList=response;
 
-        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),arFeedList);
         categoryrecycle.setAdapter(customerTrendingAdapter);
+//        SetLoadmore();
     }
+
 
     @Override
     public void favsuc(String response) {
         //Toast.makeText(getActivity(), ""+response, Toast.LENGTH_SHORT).show();
         if (getActivity()!=null) {
-            if (isNetworkConnected()) {
+
+            CallAPI(1);
+
+          /*  if (isNetworkConnected()) {
                 presenter.ViewAllFeeds(idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
+            }*/
         }
     }
 
@@ -193,18 +276,20 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
     public void getsuc(String response) {
 
         if (getActivity()!=null) {
-            if (isNetworkConnected()) {
-                presenter.ViewAllFeeds(idholder);
-            } else {
-                showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
+
+            CallAPI(1);
+
+//            if (isNetworkConnected()) {
+//                presenter.ViewAllFeeds(idholder);
+//            } else {
+//                showAlert("Please connect to internet.", R.style.DialogAnimation);
+//            }
         }
     }
 
     @Override
     public void error(String response) {
         if(getActivity() != null) {
-
             showAlert(response, R.style.DialogAnimation);
         }
     }
@@ -212,7 +297,6 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
     @Override
     public void fail(String response) {
         if(getActivity() != null) {
-
             showAlert(response, R.style.DialogAnimation);
         }
     }

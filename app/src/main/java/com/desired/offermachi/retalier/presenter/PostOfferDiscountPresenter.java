@@ -177,6 +177,7 @@ String methodNm="";
             public void onErrorResponse(VolleyError error) {
                 progress.dismiss();
                 postOfferDiscount.failoffer("Server Error.\n Please try after some time.");
+
             }
         }
         ) {

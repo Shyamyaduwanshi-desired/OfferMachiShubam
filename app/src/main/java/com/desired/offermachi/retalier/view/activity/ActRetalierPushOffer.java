@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,7 +49,8 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
     private String idholder,PushOfferid;
     AlertDialog alertDialog;
     ImageView imgNotiBell;
-    Button btAddPushOffer;
+//    Button btAddPushOffer;
+FloatingActionButton addPushOffer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,8 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
       followerpresenter = new FollowerPresenter(this, ActRetalierPushOffer.this);
       UserModel user = SharedPrefManagerLogin.getInstance(getApplicationContext()).getUser();
       idholder= user.getId();
-      btAddPushOffer = findViewById(R.id.bt_add_push_offfer);
+//      btAddPushOffer = findViewById(R.id.bt_add_push_offfer);
+      addPushOffer=findViewById(R.id.floting_add_botton);
       imageViewback = findViewById(R.id.imageback);
       product_recyclerview = findViewById(R.id.pushoffer_recycler_id);
 
@@ -81,7 +84,8 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
 
       imgNotiBell.setOnClickListener(this);
       imageViewback.setOnClickListener(this);
-      btAddPushOffer.setOnClickListener(this);
+      addPushOffer.setOnClickListener(this);
+//      btAddPushOffer.setOnClickListener(this);
 
 
   }
@@ -128,7 +132,7 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
             onBackPressed();
         }else if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
-        }else if (v==btAddPushOffer){
+        }else if (v==addPushOffer){
             startActivity(new Intent(getApplicationContext(), ActAddPushOffer.class));
         }
     }

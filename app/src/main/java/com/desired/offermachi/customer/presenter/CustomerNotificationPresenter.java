@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,6 +72,7 @@ public class CustomerNotificationPresenter {
                             );
                             list.add(notificationModel);
                         }
+                        Collections.reverse(list);
                         notificationList.success(list);
 
                     }else if(status == 404){
@@ -103,6 +105,9 @@ public class CustomerNotificationPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
+
+
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -29,13 +30,14 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class RetalierDealsOftheDayActivity extends AppCompatActivity implements View.OnClickListener, DealsOftheDayPresenter.DealsOftheDay {
 
-    Button addnewdeals;
+//    Button addnewdeals;
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private DealsOfDayAdapter dealsOfDayAdapter;
     private DealsOftheDayPresenter presenter;
     private String idholder;
     ImageView imgNotiBell;
+    FloatingActionButton addDealOftheDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,13 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
         imageViewback.setOnClickListener(this);
         info= findViewById(R.id.info_id);
         info.setOnClickListener(this);
-        addnewdeals=findViewById(R.id.addnewdeals_id);
-        addnewdeals.setOnClickListener(this);
+//        addnewdeals=findViewById(R.id.addnewdeals_id);
+//        addnewdeals.setOnClickListener(this);
+//
+        addDealOftheDay=findViewById(R.id.floting_add_botton);
+        addDealOftheDay.setOnClickListener(this);
+
+
         product_recyclerview =findViewById(R.id.dealsoftheday_recycler_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -86,7 +93,8 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
 
     @Override
     public void onClick(View v) {
-        if (v==addnewdeals){
+        if (v==addDealOftheDay)//addnewdeals
+        {
             Intent intent = new Intent(RetalierDealsOftheDayActivity.this, ActAddDealsOftheDay.class);
 //            Intent intent = new Intent(RetalierDealsOftheDayActivity.this, RetalierAddDeals.class);
             startActivity(intent);

@@ -68,9 +68,10 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="41dp"
                         android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
@@ -81,17 +82,18 @@
                     <EditText
                         android:id="@+id/etotp"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="5dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="fill_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
                         android:hint="Enter OTP"
-                        android:drawablePadding="20dp"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
                         android:backgroundTint="#fff"
                         android:inputType="number"
                         android:maxLength="8"
                         android:imeOptions="actionGo"
-                        android:layout_marginTop="2dp"
+
                         android:textColor="@color/purple"
                         />
                 </LinearLayout>

@@ -153,7 +153,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         submitbutton.setOnClickListener(this);
 
         if (isNetworkConnected()) {
-            presenter.sentRequest();
+            presenter.sentRequest(idholder);
         }  else {
             Toast.makeText(this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }

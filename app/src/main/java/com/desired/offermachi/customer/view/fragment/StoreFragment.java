@@ -14,9 +14,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -45,8 +48,9 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
     private CustomerStoreAdapterNew customerStoreAdapter;
     private StoreListPresenter presenter;
     String idholder;
-    TextView filtertext,sortbytext;
-
+//    TextView filtertext,sortbytext;
+RelativeLayout rlFilter,rlSortBy;
+    EditText edTxtSearch;
     public StoreFragment() {
         // Required empty public constructor
     }
@@ -57,7 +61,29 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
                              Bundle savedInstanceState) {
          v=inflater.inflate(R.layout.fragment_store, container, false);
         initview();
+        Listner();
         return v;
+    }
+    private void Listner() {
+
+        edTxtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchText = edTxtSearch.getText().toString().trim();
+                if(customerStoreAdapter!=null)
+                    customerStoreAdapter.filter(searchText);
+            }
+        });
     }
     private void initview(){
         ((DashBoardActivity)getActivity()).setToolTittle("Stores",2);
@@ -65,10 +91,19 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
         idholder= user.getId();
         presenter = new StoreListPresenter(getContext(), StoreFragment.this);
         storerecycle=v.findViewById(R.id.storerecycleview);
-        filtertext=(TextView)v.findViewById(R.id.filter_text_id);
-        filtertext.setOnClickListener(this);
-        sortbytext=(TextView)v.findViewById(R.id.sortby_text_id);
-        sortbytext.setOnClickListener(this);
+
+//        filtertext=(TextView)v.findViewById(R.id.filter_text_id);
+//        filtertext.setOnClickListener(this);
+//        sortbytext=(TextView)v.findViewById(R.id.sortby_text_id);
+//        sortbytext.setOnClickListener(this);
+
+        edTxtSearch=v.findViewById(R.id.et_search);
+        rlFilter=v.findViewById(R.id.rl_filter);
+        rlSortBy=v.findViewById(R.id.rl_shorted_by);
+
+        rlFilter.setOnClickListener(this);
+        rlSortBy.setOnClickListener(this);
+
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
         storerecycle.setItemAnimator(new DefaultItemAnimator());
@@ -161,11 +196,12 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
 
     @Override
     public void onClick(View v) {
-        if (v==filtertext){
-
+        if (v==rlFilter){//filtertext
+            edTxtSearch.setText("");
             Intent intent = new Intent(getActivity(), FilterShowActivity.class);//2
             startActivity(intent);
-        }else if (v==sortbytext){
+        }else if (v==rlSortBy){//sortbytext
+            edTxtSearch.setText("");
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");

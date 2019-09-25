@@ -150,7 +150,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 
 
         if (isNetworkConnected()) {
-            presenter.sentRequest();
+            presenter.sentRequest(idholder);
         }  else {
             Toast.makeText(this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }

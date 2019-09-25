@@ -54,7 +54,18 @@ public class SplashActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_PERMISSION);
-        }else{
+        }
+        else if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED)) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_SMS}, REQUEST_CODE_PERMISSION);
+
+        }else if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED)) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECEIVE_SMS}, REQUEST_CODE_PERMISSION);
+        }
+        else{
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {

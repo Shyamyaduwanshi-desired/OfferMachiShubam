@@ -207,7 +207,9 @@
                                     android:layout_weight="0.6"
                                     android:hint="Offer Value"
                                     android:textSize="14sp"
+                                    android:maxLength="5"
                                     android:paddingLeft="10dp"
+                                    android:inputType="number"
                                     android:background="@drawable/edit_background"/>
 
                             </LinearLayout>
@@ -337,6 +339,7 @@
                             android:id="@+id/second_home_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             android:orientation="vertical"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="10dp"

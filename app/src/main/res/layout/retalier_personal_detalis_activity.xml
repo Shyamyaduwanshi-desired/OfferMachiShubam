@@ -25,10 +25,10 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="41dp"
                         android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="1dp"
+                   android:layout_gravity="center_vertical"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
@@ -39,14 +39,18 @@
                     <EditText
                         android:id="@+id/name_edt_id"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="5dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="fill_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
                         android:hint="Name"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
-                        android:inputType="textCapSentences"
+                        android:inputType="text"
+
                         android:imeOptions="actionNext"
                         android:textColor="@color/purple"
                         />
@@ -61,10 +65,10 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="41dp"
                         android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
@@ -75,10 +79,13 @@
                     <EditText
                         android:id="@+id/mobile_edt_id"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="5dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="fill_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:maxLength="15"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
                         android:hint="Mobile"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
@@ -97,10 +104,10 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="41dp"
                         android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
@@ -111,10 +118,13 @@
                     <EditText
                         android:id="@+id/email_edt_id"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="5dp"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="fill_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
                         android:hint="Email"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"
@@ -133,10 +143,10 @@
                     android:orientation="horizontal">
                     <LinearLayout
                         android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_height="41dp"
                         android:background="@drawable/circle_background"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="2dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_gravity="center_vertical"
                         android:gravity="center">
                         <ImageView
                             android:layout_width="30dp"
@@ -147,10 +157,13 @@
                     <EditText
                         android:id="@+id/etpassword"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:paddingLeft="5dp"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_height="fill_parent"
+                        android:padding="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
+                        android:maxLength="30"
+                        android:singleLine="true"
+                        android:layout_gravity="center_vertical"
                         android:hint="Password"
                         android:drawablePadding="20dp"
                         android:backgroundTint="#fff"

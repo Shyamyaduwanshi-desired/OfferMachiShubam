@@ -283,6 +283,8 @@
                                     android:hint="Offer Value"
                                     android:textSize="14sp"
                                     android:paddingLeft="10dp"
+                                    android:inputType="number"
+                                    android:maxLength="5"
                                     android:background="@drawable/edit_background"/>
 
                             </LinearLayout>

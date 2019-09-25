@@ -194,13 +194,18 @@ public class HomePresenter {
     }
 
     public void GetAllMultipleCateList(final String catid,final String userid) {
-        if(!((Activity) context).isFinishing())
+//        if(!((Activity) context).isFinishing())
+        if(progress!=null)
         {
+            progress.dismiss();
+            progress=null;
+        }
+
             progress = new ProgressDialog(context);
             progress.setMessage("Please Wait..");
             progress.setCancelable(false);
             showpDialog();
-        }
+
         final ArrayList<SelectCategoryModel> list = new ArrayList<>();
         final ArrayList<SelectCategoryModel> list2 = new ArrayList<>();
         final ArrayList<StoreModel> list3 = new ArrayList<>();
@@ -337,6 +342,7 @@ public class HomePresenter {
         queue.add(postRequest);
     }
     public void AddFavourite(final String userid, final String offerid,final String active) {
+
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_add_favourite_offer", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

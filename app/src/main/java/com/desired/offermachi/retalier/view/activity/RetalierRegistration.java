@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.constant.TabLayoutUtils;
 import com.desired.offermachi.retalier.view.fragment.RegistrationProfileDetailsFragment;
 import com.desired.offermachi.retalier.view.fragment.RegistrationStoreDetailsFrgment;
 import com.desired.offermachi.retalier.view.adapter.RetalierTabLayoutAdapter;
@@ -33,8 +34,11 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
 //            return;
 //        }
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         tabLayout.setOnTabSelectedListener(RetalierRegistration.this);
+
+        TabLayoutUtils.enableTabs( tabLayout, false );
 
         viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -179,13 +179,13 @@ public class AppData {
         return formattedDate;
     }
 
-    // 2019-06-18 11:17:55  to  18 June 2019 11:17
-    public String ConvertDate5(String indate)
+    // 2019-06-18 11:17:55  to  18 June 2019 11:17 PM
+    public static String ConvertDate5(String indate)
     {
         String formattedDate = null;
         try {
             DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy hh:mm");
+            DateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm");//dd MMMM yyyy HH:mm a
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {

@@ -226,7 +226,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         });
 
         if (isNetworkConnected()) {
-            typeBrandCategoryPresenter.sentRequest();
+            typeBrandCategoryPresenter.sentRequestRegistration();
         }  else {
             Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }

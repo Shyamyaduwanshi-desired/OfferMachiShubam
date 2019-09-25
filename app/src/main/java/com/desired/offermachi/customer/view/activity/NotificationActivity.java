@@ -21,17 +21,23 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.NotificationModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.model.days_model;
+import com.desired.offermachi.customer.model.hours_model;
 import com.desired.offermachi.customer.presenter.CustomerNotificationPresenter;
+import com.desired.offermachi.customer.presenter.DonoDisturbPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class NotificationActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, CustomerNotificationPresenter.NotificationList {
+public class NotificationActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener, CustomerNotificationPresenter.NotificationList, DonoDisturbPresenter.DoNotDisInfo {
     ImageView imageViewback,info;
     Switch simpleSwitch;
     private CustomerNotificationAdapter customerNotificationAdapter;
@@ -41,6 +47,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,Dobholder,ImageHolder,SmartShoppingHolder;
     String SoundHolder;
 TextView tvDONodist;
+    private DonoDisturbPresenter dndPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +57,7 @@ TextView tvDONodist;
     }
     private void init(){
         presenter=new CustomerNotificationPresenter(NotificationActivity.this,NotificationActivity.this);
+        dndPresenter=new DonoDisturbPresenter(NotificationActivity.this,NotificationActivity.this);
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder=user.getId();
         Nameholder= user.getUsername();
@@ -81,13 +89,28 @@ TextView tvDONodist;
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         if (isNetworkConnected()){
             presenter.sentRequest(idholder);
+            dndPresenter.GetDoNoDisStatus(idholder);
+        } else {
+//            ShowAlert(this, "Please connect to internet.");
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
 
         simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                if(isChecked)
                {
-                   ShowAlertStatusDlg();
+//                   ShowAlertStatusDlg();
+                   if(dndStatus.equals("1"))
+                   {
+                       Toast.makeText(NotificationActivity.this, "You have already set DND setting Start date from"+dnd_start_time+" to "+dnd_end_time, Toast.LENGTH_SHORT).show();
+                   }
+                   Intent intent=new Intent(NotificationActivity.this,ActDoNotDisturbSetting.class);
+                   intent.putExtra("dnd_id",dndId);//dndStatus="0",dnd_start_time="",dnd_end_time="",dndId=""
+                   intent.putExtra("dnd_status",dndStatus);
+                   intent.putExtra("dnd_start_time",dnd_start_time);
+                   intent.putExtra("dnd_end_time",dnd_end_time);
+
+                   startActivity(intent);
                }
                else
                {
@@ -111,8 +134,8 @@ TextView tvDONodist;
             startActivity(intent);
         }
         else if (v==tvDONodist){
-startActivity(new Intent(this,ActDoNotDisturbSetting.class));
-//
+//startActivity(new Intent(this,ActDoNotDisturbSetting.class));
+
         }
 
     }
@@ -159,6 +182,7 @@ startActivity(new Intent(this,ActDoNotDisturbSetting.class));
         customerNotificationAdapter = new CustomerNotificationAdapter(response,NotificationActivity.this );
         categoryrecycle.setAdapter(customerNotificationAdapter);
     }
+
 
     @Override
     public void error(String response) {
@@ -223,4 +247,30 @@ startActivity(new Intent(this,ActDoNotDisturbSetting.class));
          mDialog = mBuilder.create();
          mDialog.show();
     }
+    ///////////////////////only for get dnd data///////////////////////
+    @Override
+    public void success(ArrayList<days_model> dayResponse, ArrayList<hours_model> hoursResponse, String status) {
+
+    }
+    String dndStatus="0",dnd_start_time="",dnd_end_time="",dndId="";
+    @Override
+    public void successDND(JSONObject objJson, String status) {
+        switch (status)
+        {
+            case "3":
+                try {
+//                    JSONObject objJson =new JSONObject(status);
+                        String id = objJson.getString("id");
+                         dndId = objJson.getString("dnd_id");
+                         dnd_start_time = objJson.getString("dnd_start_time");
+                         dnd_end_time = objJson.getString("dnd_end_time");
+                    dndStatus = objJson.getString("status");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                break;
+        }
+
+    }
+    //////////////////////////////////////////////////
 }

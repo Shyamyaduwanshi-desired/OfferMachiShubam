@@ -45,10 +45,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendingAdapter.MyViewHolder>{
-    private ArrayList<SelectCategoryModel> selectCategoryModelArrayList;
+    private ArrayList<SelectCategoryModel> selectCategoryModelArrayList,arSearchItem;
     private Context mContext;
     private String Favstatus;
     private String idholder;
@@ -57,6 +58,8 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
     public CustomerTrendingAdapter(Context context, ArrayList<SelectCategoryModel> selectCategoryModelArrayList) {
         this.selectCategoryModelArrayList = selectCategoryModelArrayList;
         this.mContext = context;
+        this.arSearchItem = new ArrayList<>();
+        this.arSearchItem.addAll(selectCategoryModelArrayList);
     }
 
     @Override
@@ -263,5 +266,23 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(postRequest);
+    }
+
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        selectCategoryModelArrayList.clear();
+        if (charText.length() == 0) {
+            selectCategoryModelArrayList.addAll(arSearchItem);
+        } else {
+            for (SelectCategoryModel wp : arSearchItem) {
+                if (wp.getOffername().toLowerCase(Locale.getDefault()).contains(charText))
+//                if (wp.getCatName().startsWith(charText))
+                {
+                    selectCategoryModelArrayList.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

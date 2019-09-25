@@ -39,10 +39,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTrendingAdapterNew.MyViewHolder>{
-    private ArrayList<SelectCategoryModel> selectCategoryModelArrayList;
+    private ArrayList<SelectCategoryModel> selectCategoryModelArrayList,arSearchItem;
     private Context mContext;
     private String Favstatus;
     private String idholder;
@@ -52,12 +53,14 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         this.selectCategoryModelArrayList = selectCategoryModelArrayList;
         this.mContext = context;
         appdata=new AppData();
+        this.arSearchItem = new ArrayList<SelectCategoryModel>();
+        this.arSearchItem.addAll(selectCategoryModelArrayList);
     }
 
     @Override
     public CustomerTrendingAdapterNew.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                       int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adpter_home_offer, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adpter_home_offer_new, parent, false);
         CustomerTrendingAdapterNew.MyViewHolder myViewHolder = new CustomerTrendingAdapterNew.MyViewHolder(view);
         return myViewHolder;
     }
@@ -66,8 +69,9 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     public void onBindViewHolder(final CustomerTrendingAdapterNew.MyViewHolder holder, final int i) {
         final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
-        holder.productdate.setText(appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
-        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
+        holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
+
+//        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
 
 //        String text = "<font color=#cc0029>First Color</font> <font color=#ffcc00>Second Color</font>";
 //        yourtextview.setText(Html.fromHtml(text));
@@ -98,11 +102,11 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 //            holder.ivLikeBtn.setCurrentlyLiked(false);
         }
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
-            holder.productbutton.setText("View Coupon Code");
+            holder.productbutton.setText("Coupon Code");//View Coupon Code
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
             holder.productbutton.setText("Redeemed");
         }else{
-            holder.productbutton.setText("Get Coupon Code");
+            holder.productbutton.setText("Coupon Code");//Get Coupon Code
         }
 
        holder.productname.setOnClickListener(new View.OnClickListener() {
@@ -206,7 +210,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
      //   public CardView categorylinear;
         ImageView productimg,likeimg;
-        TextView productname,productdate,offertype,tvDsc;
+        TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
         RelativeLayout rlShare,rlLike;
 //        AndroidLikeButton ivLikeBtn;
@@ -221,7 +225,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_a_code);
-            offertype=itemView.findViewById(R.id.tv_flat_diss);
+//            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);
 //            ivLikeBtn=itemView.findViewById(R.id.bt_like);
         }
@@ -270,5 +274,24 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
         RequestQueue queue = Volley.newRequestQueue(mContext);
         queue.add(postRequest);
+    }
+
+
+    // Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        selectCategoryModelArrayList.clear();
+        if (charText.length() == 0) {
+            selectCategoryModelArrayList.addAll(arSearchItem);
+        } else {
+            for (SelectCategoryModel wp : arSearchItem) {
+                if (wp.getOffername().toLowerCase(Locale.getDefault()).contains(charText))
+//                if (wp.getCatName().startsWith(charText))
+                {
+                    selectCategoryModelArrayList.add(wp);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

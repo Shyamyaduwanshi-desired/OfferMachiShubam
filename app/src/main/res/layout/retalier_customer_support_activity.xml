@@ -75,7 +75,9 @@
             android:textColor="@color/black"
             android:layout_marginLeft="20dp"
             />
-        <LinearLayout
+
+       <!-- <LinearLayout
+            android:id="@+id/mobilecategory_linear_id"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@drawable/edit_background"
@@ -85,10 +87,11 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="41dp"
+                android:layout_gravity="center_vertical"
                 android:background="@drawable/circle_background"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="1dp"
+
                 android:gravity="center">
                 <ImageView
                     android:layout_width="30dp"
@@ -97,18 +100,19 @@
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <EditText
-                android:id="@+id/etname"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="Enter your name"
+                android:singleLine="true"
+                android:maxLength="30"
                 android:drawablePadding="20dp"
                 android:backgroundTint="#fff"
                 android:inputType="textCapSentences"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="2dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/purple"
                 />
         </LinearLayout>
@@ -122,10 +126,105 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="41dp"
                 android:background="@drawable/circle_background"
+                android:layout_marginLeft="1dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/email"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginRight="15dp"
+                android:hint="Enter your email"
+                android:drawablePadding="20dp"
+                android:backgroundTint="#fff"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionNext"
+                android:gravity="center_vertical"
+                android:maxLength="30"
+                android:textColor="@color/purple"
+                />
+        </LinearLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/simple_background"
+            android:hint="Your Request..."
+            android:textColor="#013893"
+            android:padding="10dp"
+            android:gravity="center_vertical|top"
+            android:inputType="textCapSentences"
+            android:singleLine="false"
+            android:maxLength="150"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="20dp" />-->
+
+      <!--  <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/edit_background"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/edit_background"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="41dp"
+                android:background="@drawable/circle_background"
+                android:layout_marginLeft="1dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/user"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/etname"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
+                android:hint="Enter your name"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:backgroundTint="#fff"
+                android:inputType="textCapSentences"
+                android:imeOptions="actionNext"
+                android:textColor="@color/purple"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/edit_background"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="40dp"
+                android:layout_height="41dp"
+                android:background="@drawable/circle_background"
+                android:layout_marginLeft="1dp"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="30dp"
@@ -136,16 +235,16 @@
             <EditText
                 android:id="@+id/etemail"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="Enter your email"
-                android:drawablePadding="20dp"
                 android:backgroundTint="#fff"
-                android:inputType="textCapSentences"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:inputType="textEmailAddress"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="2dp"
                 android:textColor="@color/purple"
                 />
         </LinearLayout>
@@ -160,10 +259,9 @@
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_height="41dp"
                 android:background="@drawable/circle_background"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginLeft="1dp"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="30dp"
@@ -174,16 +272,16 @@
             <EditText
                 android:id="@+id/etmobile"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_height="fill_parent"
+                android:padding="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="Mobile"
-                android:drawablePadding="20dp"
+                android:singleLine="true"
+                android:maxLength="15"
                 android:backgroundTint="#fff"
                 android:inputType="number"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="2dp"
                 android:textColor="@color/purple"
                 />
         </LinearLayout>
@@ -195,7 +293,10 @@
             android:background="@drawable/simple_background"
             android:hint="Your Request..."
             android:textColor="#013893"
-            android:paddingLeft="20dp"
+            android:maxLength="150"
+            android:padding="10dp"
+            android:gravity="center_vertical|top"
+            android:inputType="textMultiLine"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp" />

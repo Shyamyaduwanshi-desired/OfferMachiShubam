@@ -58,7 +58,8 @@ public class RetailerNotificationPresenter {
                             object = jsonArray.getJSONObject(count);
                             NotificationModel notificationModel = new NotificationModel(
                                     object.getString("title"),
-                                    object.getString("description")
+                                    object.getString("description"),
+                                    object.getString("custom_offertype")
                             );
                             list.add(notificationModel);
                         }

@@ -77,20 +77,56 @@ public class DashBoardActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
 
-         toolbar = findViewById(R.id.toolbar);
-        ivTitleLogo=toolbar.findViewById(R.id.logo);
-        tvMainTitle=toolbar.findViewById(R.id.tv_title);
+        toolbar = findViewById(R.id.toolbar);
+        ivTitleLogo = toolbar.findViewById(R.id.logo);
+        tvMainTitle = toolbar.findViewById(R.id.tv_title);
 
-        setToolTittle("",1);
+        setToolTittle("", 1);
         user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-        if (user.getSmartShopping().equals("1")){
+       String pos= UserSharedPrefManager.GetClickNoti(this);
+        String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
+        if (pos.equals("1")) {
+
+
+            FM = getSupportFragmentManager();
+            FT = FM.beginTransaction();
+
+            switch (diffNavi)
+            {
+                case "0":
+                    FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
+                break;
+
+                case "1":
+//                    GoDealOfTheDay(1);
+                    FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
+                break;
+                case "2":
+                    FT.replace(R.id.framelayout_id, new ExclusiveFragment()).commit();
+                break;
+                default:
+                    FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
+                    break;
+            }
+//            FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
+
+
+            UserSharedPrefManager.SaveClickNoti(this,"0","");
+        }
+else{
+        if (user.getSmartShopping().equals("1")) {
             FM = getSupportFragmentManager();
             FT = FM.beginTransaction();
             FT.replace(R.id.framelayout_id, new SmartShoppingFragment()).commit();
-        }else if (user.getSmartShopping().equals("0")){
+        } else if (user.getSmartShopping().equals("0")) {
             FM = getSupportFragmentManager();
             FT = FM.beginTransaction();
             FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
+        }
+    }
+
+        if(user != null){
+            getNotiCount();
         }
 
         navigationView = findViewById(R.id.nav_view);
@@ -224,7 +260,9 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 //                Toast.makeText(DashBoardActivity.this, "Deal of the day", Toast.LENGTH_SHORT).show();
-                if (user.getSmartShopping().equals("0")){
+                GoDealOfTheDay(1);
+
+          /*      if (user.getSmartShopping().equals("0")){
 
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
@@ -242,7 +280,7 @@ public class DashBoardActivity extends AppCompatActivity
             .replace(R.id.framelayout_id, new DealsoftheDayFragment())
             .addToBackStack(null)
             .commit();
-            }
+            }*/
                  }
         });
 
@@ -335,6 +373,49 @@ public class DashBoardActivity extends AppCompatActivity
         toggle.syncState();
         drawer.closeDrawers();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void GoDealOfTheDay(int i) {
+        if(user==null)
+        { user = UserSharedPrefManager.getInstance(DashBoardActivity.this).getCustomer();
+        }
+
+        if (user.getSmartShopping().equals("0")){
+
+            smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+            dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
+            couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+            favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+            ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+            smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+            dealsofthedaytext.setTextColor(getResources().getColor(R.color.white));
+            couponstext.setTextColor(getResources().getColor(R.color.yellow));
+            favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+            ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.framelayout_id, new DealsoftheDayFragment())
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
+
+    private void getNotiCount() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     private int dpToPx(Context applicationContext, int i) {

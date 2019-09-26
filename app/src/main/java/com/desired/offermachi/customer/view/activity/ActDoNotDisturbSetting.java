@@ -268,6 +268,9 @@ TextView tvPreSetDND;
 
     }
 //day adapter click
+
+
+
     @Override
     public void onDaysClick(int position) {
         dndid = daysdata.get(position).getId();

@@ -30,6 +30,8 @@ public class UserSharedPrefManager {
     private static final  String KEY_USER_TYPE="user_type";
     private static final  String KEY_CAT_FILTER="user_cat_filter";
     private static final  String KEY_CAT_INTEREST="user_cat_interest";
+    private static final  String KEY_NOTI_CLICK="user_noti_click";
+    private static final  String KEY_NOTI_CLICK_POS="user_noti_click_pos";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -130,6 +132,26 @@ public class UserSharedPrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_CAT_INTEREST, allSelectedCategory);
         editor.apply();
+    }
+
+    public static String GetClickNoti(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_NOTI_CLICK, "");
+        return value;
+    }
+
+    public static void SaveClickNoti(Context context,String noticlick,String pos) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_NOTI_CLICK, noticlick);
+        editor.putString(KEY_NOTI_CLICK_POS, pos);
+        editor.apply();
+    }
+
+    public static String GetClickNotiPos(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_NOTI_CLICK_POS, "");
+        return value;
     }
 
 }

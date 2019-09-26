@@ -3,6 +3,7 @@ package com.desired.offermachi.retalier.view.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,13 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final FaqAdapter.ViewHolder viewHolder, int i) {
         final FAQ faq = faqArrayList.get(i);
-        viewHolder.question.setText(faq.getQuestion());
-        viewHolder.ans.setText(faq.getAns());
-        viewHolder.arrow.setOnClickListener(new View.OnClickListener() {
+        viewHolder.post_title.setText(faq.getPost_title());
+//        viewHolder.post_body.setText(faq.getPost_body());
+//        String tittile = "<h2 style=\"color: #2e6c80;\">How to use the editor:</h2>\r\n<p>Paste your documents in the visual editor on the left or your HTML code in the source editor in the right. <br />Edit any of the two areas and see the other changing in real time.&nbsp;</p>";
+        viewHolder. post_body.setText(Html.fromHtml(faq.getPost_body()));
+//        faq.getPost_body();
+
+        viewHolder.questionlinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (count==0){
@@ -49,27 +54,26 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
                     viewHolder.linearLayout.setVisibility(View.GONE);
                     count=0;
                 }
-
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return faqArrayList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView question, ans,arrow;
-        LinearLayout linearLayout;
+        TextView post_title, post_body,arrow;
+        LinearLayout linearLayout,questionlinear;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            question = itemView.findViewById(R.id.ques);
-            ans = itemView.findViewById(R.id.ans);
+            post_title = itemView.findViewById(R.id.ques);
+            post_body = itemView.findViewById(R.id.ans);
             arrow=itemView.findViewById(R.id.arrow);
             linearLayout=itemView.findViewById(R.id.ly);
-
+            questionlinear=itemView.findViewById(R.id.question_linear_id);
 
         }
     }

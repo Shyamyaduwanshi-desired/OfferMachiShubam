@@ -42,7 +42,7 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
     ImageView imageViewback,info;
     RecyclerView recyclerView;
     private ProgressDialog pDialog;
-    private static final String ROOT_URL = "http://offermachi.in/api/help_faq_data";
+    private static final String ROOT_URL = "http://offermachi.in/api/help_faq";
     private ArrayList<FAQ> faqList;
     TextView txtphone,txtemail;
     ImageView imgNotiBell;
@@ -107,23 +107,50 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
                                 String message=mainJson.getString("message");
                                 if (status.equals("200")) {
                                     String result = mainJson.getString("result");
-                                    JSONObject mainJson1 = new JSONObject(result);
-                                    String contact_number=mainJson1.getString("contact_number");
-                                    txtphone.setText(contact_number);
-                                    String contact_email= mainJson1.getString("contact_email");
-                                    txtemail.setText(contact_email);
-                                    String question_answer=mainJson1.getString("question_answer");
-                                    JSONArray jsonArray = new JSONArray(question_answer);
+//                                    JSONObject mainJson1 = new JSONObject(result);
+
+                                    JSONArray jsonArray = new JSONArray(result);
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject jobj = jsonArray.getJSONObject(i);
+
+//                                        String id = jobj.getString("id");
+                                        String post_type = jobj.getString("post_type");
+                                        String statuss = jobj.getString("status");
                                         FAQ faq = new FAQ(
-                                                jobj.getString("question"),
-                                                jobj.getString("answer")
+                                                jobj.getString("id"),
+                                                jobj.getString("post_title"),
+                                                jobj.getString("post_body")
 
                                         );
                                         faqList.add(faq);
-
                                     }
+
+
+
+
+
+
+
+
+//
+//                                    String contact_number=mainJson1.getString("contact_number");
+//                                    txtphone.setText(contact_number);
+//                                    String contact_email= mainJson1.getString("contact_email");
+//                                    txtemail.setText(contact_email);
+//                                    String question_answer=mainJson1.getString("question_answer");
+//                                    JSONArray jsonArray = new JSONArray(question_answer);
+//                                    for (int i = 0; i < jsonArray.length(); i++) {
+//                                        JSONObject jobj = jsonArray.getJSONObject(i);
+//                                        FAQ faq = new FAQ(
+//                                                jobj.getString("question"),
+//                                                jobj.getString("answer")
+//
+//                                        );
+//                                        faqList.add(faq);
+//
+//                                    }
+
+
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

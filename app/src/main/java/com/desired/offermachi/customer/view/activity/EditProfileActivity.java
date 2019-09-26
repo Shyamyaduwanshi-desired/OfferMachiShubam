@@ -58,7 +58,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     Button btnsave;
     DatePickerDialog picker;
     String datepick ;
-
     private String picture = "";
     private File file, compressedImage;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -92,9 +91,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         imagepicker.setOnClickListener(this);
         editdob=findViewById(R.id.dateofbirth);
         editdob.setOnClickListener(this);
-
-
-
         if (user.getUsername().equals("null")){
             etname.setText("");
         }else{
@@ -218,12 +214,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void validation() {
+
         nameholder = etname.getText().toString();
         emailholder = etemail.getText().toString();
         phoneholder = etmobile.getText().toString().trim();
         genderholder = etgender.getText().toString();
         addressholder=etaddress.getText().toString();
         dobholder=editdob.getText().toString();
+
         if (TextUtils.isEmpty(nameholder)){
             Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
         }

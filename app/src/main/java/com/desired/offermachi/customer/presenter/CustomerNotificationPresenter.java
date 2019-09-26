@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.customer.model.NotificationModel;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.view.activity.OtpActivtivity;
+import com.desired.offermachi.customer.view.activity.ViewOfferActivity;
 import com.desired.offermachi.retalier.constant.AppData;
 
 import org.json.JSONArray;
@@ -66,10 +67,14 @@ public class CustomerNotificationPresenter {
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
+                            String custom_offertype = object.getString("custom_offertype");
+
                             NotificationModel notificationModel = new NotificationModel(
                                     object.getString("title"),
-                                    object.getString("description")
+                                    object.getString("description"),
+                                    object.getString("custom_offertype")
                             );
+
                             list.add(notificationModel);
                         }
                         Collections.reverse(list);

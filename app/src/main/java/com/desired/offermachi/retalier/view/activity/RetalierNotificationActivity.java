@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -28,7 +29,8 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierNotificationActivity extends AppCompatActivity implements View.OnClickListener, RetailerNotificationPresenter.RetailerNotificationList {
+public class RetalierNotificationActivity extends AppCompatActivity implements View.OnClickListener,
+        RetailerNotificationPresenter.RetailerNotificationList,CustomerNotificationAdapter.NotiAdapterClick  {
 
     ImageView imageViewback,info;
     private CustomerNotificationAdapter customerNotificationAdapter;
@@ -54,6 +56,7 @@ public class RetalierNotificationActivity extends AppCompatActivity implements V
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(linearLayoutManager);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+
         if (isNetworkConnected()){
             presenter.sentRequest(idholder);
         }
@@ -72,7 +75,7 @@ public class RetalierNotificationActivity extends AppCompatActivity implements V
 
     @Override
     public void success(ArrayList<NotificationModel> response) {
-        customerNotificationAdapter = new CustomerNotificationAdapter(response,RetalierNotificationActivity.this );
+        customerNotificationAdapter = new CustomerNotificationAdapter(response,RetalierNotificationActivity.this,this);
         categoryrecycle.setAdapter(customerNotificationAdapter);
     }
 
@@ -110,5 +113,11 @@ public class RetalierNotificationActivity extends AppCompatActivity implements V
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    //adapter click
+    @Override
+    public void onNotiClick(int position) {
+        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
     }
 }

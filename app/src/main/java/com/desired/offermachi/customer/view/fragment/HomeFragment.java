@@ -249,7 +249,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                 new IntentFilter("StoreFollow"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CouponReceiver,
                 new IntentFilter("Refresh"));
-
     }
 
     private void FindMoreData(String name) {

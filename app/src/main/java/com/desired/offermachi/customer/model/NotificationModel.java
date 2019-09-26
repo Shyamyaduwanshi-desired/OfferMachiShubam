@@ -1,11 +1,20 @@
 package com.desired.offermachi.customer.model;
 
 public class NotificationModel {
-    String title,msg;
+    String title,msg ,custom_offertype;
 
-    public NotificationModel(String title, String msg) {
+    public String getCustom_offertype() {
+        return custom_offertype;
+    }
+
+    public void setCustom_offertype(String custom_offertype) {
+        this.custom_offertype = custom_offertype;
+    }
+
+    public NotificationModel(String title, String msg, String custom_offertype) {
         this.title = title;
         this.msg = msg;
+        this.custom_offertype=custom_offertype;
     }
 
     public String getTitle() {

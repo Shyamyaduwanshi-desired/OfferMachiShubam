@@ -67,6 +67,7 @@
                         android:layout_toRightOf="@+id/rl_title"
                         android:layout_marginLeft="30dp"
                         android:src="@drawable/ic_info" />
+
                     <ImageView
                         android:id="@+id/btnnotification"
                         android:layout_width="wrap_content"
@@ -76,7 +77,18 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/ic_notification_bell" />
-
+                    <TextView
+                        android:id="@+id/txtMessageCount"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:background="@drawable/circle_background"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="6sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="14dp"
+                        android:layout_marginTop="8dp"/>
                 </RelativeLayout>
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>

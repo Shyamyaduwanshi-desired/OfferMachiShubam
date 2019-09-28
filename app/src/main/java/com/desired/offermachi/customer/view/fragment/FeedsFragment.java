@@ -50,7 +50,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 // boolean checkFlag=false;
     RelativeLayout rlFilter,rlSortBy;
     EditText edTxtSearch;
- int loadPos=0;
+ int pagNo=1;
     public FeedsFragment() {
     }
     @Override
@@ -92,7 +92,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
             switch (i)
             {
                 case 1:
-                    presenter.ViewAllFeeds(idholder);//,loadPos
+                    presenter.ViewAllFeeds(idholder,pagNo);//,loadPos
                     break;
                 case 2:
                     break;
@@ -245,15 +245,21 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
     ArrayList<SelectCategoryModel> arFeedList=new ArrayList<>();
 //feeds success
     @Override
-    public void success(ArrayList<SelectCategoryModel> response) {
+    public void success(ArrayList<SelectCategoryModel> response,int totalRecords,int totalPages) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
 //        categoryrecycle.setAdapter(customerTrendingAdapter);
+
         arFeedList.clear();
         arFeedList=response;
+//        arFeedList.add(response)
 
         customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),arFeedList);
         categoryrecycle.setAdapter(customerTrendingAdapter);
-//        SetLoadmore();
+
+//      if(totalPages>1)
+//      {
+//          tvLoadMore.setVisibility(View.VISIBLE);
+//      }
     }
 
 

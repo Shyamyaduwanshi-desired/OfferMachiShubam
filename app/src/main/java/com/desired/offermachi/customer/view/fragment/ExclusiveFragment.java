@@ -29,6 +29,7 @@ import com.desired.offermachi.customer.presenter.MyCouponPresenter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
 
@@ -42,7 +43,8 @@ public class ExclusiveFragment extends Fragment implements View.OnClickListener,
 
     View view;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private ExclusiveOffersPresenter presenter;
     String idholder;
     TextView sortbytext,filtertext;
@@ -69,10 +71,18 @@ public class ExclusiveFragment extends Fragment implements View.OnClickListener,
         filtertext=view.findViewById(R.id.filter_text_id);
         filtertext.setOnClickListener(this);
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.ViewAllExclusive(idholder);
@@ -122,7 +132,8 @@ public class ExclusiveFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+//        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

@@ -59,7 +59,7 @@
                     android:background="@drawable/rectangle_white_bg"
                     android:paddingLeft="10dp"
                     android:textSize="14dp"
-                    android:hint="Type a store name"
+                    android:hint="Search "
                     android:layout_toLeftOf="@+id/rl_filter"
                     android:layout_marginRight="5dp"
 
@@ -125,12 +125,15 @@
             android:background="@drawable/filter_background"
             android:text="Sort By"/>-->
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoryrecycleview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_marginBottom="80dp"
         android:layout_marginTop="50dp"
-        android:layout_above="@+id/rl">
+        android:background="@color/lightcolour1"
+
+        >
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

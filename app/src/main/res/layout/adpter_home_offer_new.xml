@@ -70,20 +70,44 @@
                 android:layout_toRightOf="@+id/cv_image"
                 android:layout_marginLeft="5dp"
                 >
-                <TextView
-                    android:id="@+id/tv_product_name"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginTop="5dp"
-                    android:ellipsize="middle"
-                    android:singleLine="true"
-                    android:text="Electronics"
-                    android:gravity="center_vertical"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:text="Electronics"
+                        android:gravity="center_vertical"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
 
-                    />
+                        />
+                    <RelativeLayout
+                        android:id="@+id/rl_info"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:gravity="center_vertical"
+                        android:padding="5dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/colour_background"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
+                        >
+                        <ImageView
+                            android:id="@+id/iv_info"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/ic_info"
+                            android:layout_centerInParent="true"
+                            tools:ignore="VectorDrawableCompat"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
                 <TextView
 android:id="@+id/tv_prod_dsc"
                     android:layout_width="wrap_content"
@@ -137,7 +161,7 @@ android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/rl_icon"
                         android:layout_centerVertical="true"
                         >
-                    <RelativeLayout
+                   <!-- <RelativeLayout
                         android:id="@+id/rl_info"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
@@ -156,12 +180,12 @@ android:layout_centerVertical="true"
                             android:src="@drawable/ic_info"
                             android:layout_centerInParent="true"
                             tools:ignore="VectorDrawableCompat"/>
-                    </RelativeLayout>
+                    </RelativeLayout>-->
 
                         <RelativeLayout
                             android:id="@+id/rl_like"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="30dp"
+                            android:layout_height="35dp"
                             android:gravity="center_vertical"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/rl_share"
@@ -169,8 +193,8 @@ android:layout_centerVertical="true"
 
                             <ImageView
                                 android:id="@+id/iv_like"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginStart="0dp"
                                 android:src="@drawable/heart" />
@@ -179,8 +203,8 @@ android:layout_centerVertical="true"
 
                     <RelativeLayout
                         android:id="@+id/rl_share"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
                         android:layout_toLeftOf="@+id/rl_get_coupon"
                         android:gravity="center_vertical"
                         android:layout_marginRight="5dp"
@@ -189,8 +213,8 @@ android:layout_centerVertical="true"
 
                         <ImageView
                             android:id="@+id/iv_share"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
 
@@ -201,7 +225,7 @@ android:layout_centerVertical="true"
 
                     <RelativeLayout
                         android:id="@+id/rl_get_coupon"
-                        android:layout_width="120dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:layout_alignParentRight="true"
                         android:gravity="center_vertical"
@@ -217,6 +241,7 @@ android:layout_centerVertical="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
+                            android:visibility="gone"
 
                             />
                         <ImageView
@@ -226,7 +251,7 @@ android:layout_centerVertical="true"
                             android:src="@drawable/dot_line"
                    android:layout_toRightOf="@+id/iv_gift"
                             android:layout_toLeftOf="@+id/bt_get_a_code"
-
+                            android:visibility="gone"
                             />
                         <!--android:layout_toRightOf="@+id/iv_gift"-->
                         <Button
@@ -237,9 +262,12 @@ android:layout_centerVertical="true"
                             android:gravity="center"
                             android:text="Coupon Code"
                             android:textSize="13dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
                             android:textAllCaps="false"
-                            android:layout_alignParentRight="true"
+                          android:layout_centerInParent="true"
                             android:textColor="@color/white" />
+                       <!-- android:layout_alignParentRight="true"-->
                     </RelativeLayout>
                     </RelativeLayout>
 

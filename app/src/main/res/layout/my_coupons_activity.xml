@@ -3,8 +3,98 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/lightcolour1"
 
+    >
+    <LinearLayout
+        android:id="@+id/ly_filter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@drawable/filter_background"
+        >
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:ems="10"
+                android:layout_margin="5dp"
+                android:background="@drawable/rectangle_white_bg"
+                android:paddingLeft="10dp"
+                android:textSize="14dp"
+                android:hint="Search "
+                android:layout_toLeftOf="@+id/rl_filter"
+                android:layout_marginRight="5dp"
+
+                />
+            <RelativeLayout
+                android:id="@+id/rl_filter"
+                android:layout_width="40dp"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@+id/rl_shorted_by"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/feed_filter"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_shorted_by"
+                android:layout_width="40dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_alignParentRight="true"
+                >
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/feed_sort_by"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!--  <TextView
+              android:id="@+id/filter_text_id"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_weight="1.1"
+              android:textSize="20dp"
+              android:textColor="@color/white"
+              android:drawablePadding="10dp"
+              android:background="@drawable/filter_background"
+              android:gravity="center"
+              android:textStyle="bold"
+              android:text="Filter"/>
+          <View
+              android:layout_width="1dp"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+          </View>
+          <TextView
+              android:id="@+id/sortby_text_id"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:textSize="20dp"
+              android:textStyle="bold"
+              android:textColor="@color/white"
+              android:gravity="center"
+              android:background="@drawable/filter_background"
+              android:text="Sort By"/>-->
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/filterlayout"
         android:layout_width="match_parent"
@@ -44,8 +134,9 @@
         android:id="@+id/categoryrecycleview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/filterlayout"
+        android:layout_below="@+id/ly_filter"
         android:layout_marginBottom="70dp"
+        android:layout_marginTop="5dp"
 
         />
 </RelativeLayout>

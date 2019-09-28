@@ -107,6 +107,69 @@ public class StoreListPresenter {
         queue.add(postRequest);
     }
 
+    public void ViewAllStorePagination(final String userid) {
+        if(!((Activity) context).isFinishing())
+        {
+            progress = new ProgressDialog(context);
+            progress.setMessage("Please Wait..");
+            progress.setCancelable(false);
+            showpDialog();
+        }
+        final ArrayList<StoreModel> list = new ArrayList<>();
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_all_retailer_data", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               hidepDialog();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if (status == 200) {
+                        String result = reader.getString("result");
+                        JSONArray jsonArray = new JSONArray(result);
+                        JSONObject object;
+                        for (int count = 0; count < jsonArray.length(); count++) {
+                            object = jsonArray.getJSONObject(count);
+                            StoreModel storeModel=new StoreModel(
+                                    object.getString("id"),
+                                    object.getString("shop_name"),
+                                    object.getString("shop_logo"),
+                                    object.getString("shop_category"),
+                                    object.getString("favourite_status")
+
+                            );
+                            list.add(storeModel);
+                        }
+                        storelist.success(list);
+
+
+                    } else if (status == 404) {
+                        storelist.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    storelist.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+               hidepDialog();
+                storelist.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
     public void FollowStore(final String userid,final String retailerid,final String active) {
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_add_follow_retailer", new Response.Listener<String>() {
             @Override

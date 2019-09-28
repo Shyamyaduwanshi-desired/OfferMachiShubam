@@ -2,9 +2,15 @@ package com.desired.offermachi.customer.view.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +28,16 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.view.activity.RetalierDashboard;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 import io.fabric.sdk.android.Fabric;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements LocationListener {
     private static final int REQUEST_CODE_PERMISSION = 100;
     private static final int REQUEST_PERMISSION_SETTING = 101;
+    boolean checkFlag=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,56 +77,58 @@ public class SplashActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.RECEIVE_SMS}, REQUEST_CODE_PERMISSION);
         }
         else{
+            checkFlag=true;
+            getLocation();
 
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {// usertype=1(customer),usertype=2(retailer)
-//                    if ((UserSharedPrefManager.getInstance(SplashActivity.this).UserType().equals("0"))) {
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {// usertype=1(customer),usertype=2(retailer)
+////                    if ((UserSharedPrefManager.getInstance(SplashActivity.this).UserType().equals("0"))) {
+//////
+////                    }
+////                    else
+////                    {
 ////
+////                    }
+//
+//                    if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
+////                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+//
+//                        startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+//                        finish();
+//
+////                        if (user.getSmartShopping().equals("0")){
+//////                            startActivity(new Intent(SplashActivity.this, ActInterestCategory.class));
+//////                            startActivity(new Intent(SplashActivity.this, ActInterestCategoryNew.class));
+////                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+////                            finish();
+////                        }else{
+////                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+////                            finish();
+////                        }
+//                    }
+//                    else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
+//                        startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
+//                        finish();
+//
 //                    }
 //                    else
 //                    {
+//                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 //
 //                    }
-
-                    if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
-//                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-
-                        startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-                        finish();
-
-//                        if (user.getSmartShopping().equals("0")){
-////                            startActivity(new Intent(SplashActivity.this, ActInterestCategory.class));
-////                            startActivity(new Intent(SplashActivity.this, ActInterestCategoryNew.class));
-//                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-//                            finish();
-//                        }else{
-//                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-//                            finish();
-//                        }
-                    }
-                    else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
-                        startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
-                        finish();
-
-                    }
-                    else
-                    {
-                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-
-                    }
-
-                  /*  Intent intent = new Intent(SplashActivity.this, RegistraionAsActivity.class);
-                    startActivity(intent);
-                    finish();
-                      overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                    */
-                }
-            }, 1000);
+//
+//                  /*  Intent intent = new Intent(SplashActivity.this, RegistraionAsActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                      overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//                    */
+//                }
+//            }, 1000);
         }
     }
     @TargetApi(Build.VERSION_CODES.M)
@@ -197,6 +210,106 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
 
+    }
+//for get current location
+
+    String sCurrentLocation="";
+    LocationManager locationManager;
+    public String lati ;
+    public String longi,idholder ;
+    void getLocation() {
+        try {
+            locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, this);
+        }
+        catch(SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String address = addresses.get(0).getSubLocality();
+        String city = addresses.get(0).getLocality();
+        sCurrentLocation=address + ", " + city;
+//        tvLocation.setText(address + ", " + city);
+        lati= String.valueOf(location.getLatitude());
+        longi= String.valueOf(location.getLongitude());
+//        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
+       if(checkFlag) {
+           UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
+           Navigate();
+       }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
+    public void Navigate()
+    {
+        checkFlag=false;
+        if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
+            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+            finish();
+        }
+        else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
+            startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
+            finish();
+
+        }
+        else
+        {
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+        }
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {// usertype=1(customer),usertype=2(retailer)
+//            checkFlag=false;
+//                if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
+//                    startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
+//                    finish();
+//                }
+//                else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
+//                    startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
+//                    finish();
+//
+//                }
+//                else
+//                {
+//                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+//
+//                }
+//
+//            }
+//        }, 1000);
     }
 }
 

@@ -14,11 +14,16 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
@@ -30,6 +35,7 @@ import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.model.category_model;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +47,13 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class MycouponsFragment  extends Fragment implements View.OnClickListener, MyCouponPresenter.CouponList {
     View view;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private MyCouponPresenter presenter;
     String idholder;
-    TextView sortbytext,filtertext;
-
+//    TextView sortbytext,filtertext;
+    RelativeLayout rlFilter,rlSortBy;
+    EditText edTxtSearch;
     public MycouponsFragment() {
     }
 
@@ -54,21 +62,62 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         view = inflater.inflate(R.layout.my_coupons_activity, container, false);
         ((DashBoardActivity)getActivity()).setToolTittle("My Coupons",2);
         initview();
+        Listner();
         return  view;
+    }
+    private void Listner() {
+
+        edTxtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchText = edTxtSearch.getText().toString().trim();
+                if(customerTrendingAdapter!=null)
+                    customerTrendingAdapter.filter(searchText);
+//                adpt.filter(searchText);
+            }
+        });
     }
     private void initview(){
         presenter = new MyCouponPresenter(getActivity(),MycouponsFragment.this);
         User user = UserSharedPrefManager.getInstance(getActivity()).getCustomer();
         idholder= user.getId();
-        sortbytext=view.findViewById(R.id.sortby_text_id);
-        sortbytext.setOnClickListener(this);
-        filtertext=view.findViewById(R.id.filter_text_id);
-        filtertext.setOnClickListener(this);
+
+//        sortbytext=view.findViewById(R.id.sortby_text_id);
+//        sortbytext.setOnClickListener(this);
+//        filtertext=view.findViewById(R.id.filter_text_id);
+//        filtertext.setOnClickListener(this);
+
+        edTxtSearch=view.findViewById(R.id.et_search);
+        rlFilter=view.findViewById(R.id.rl_filter);
+        rlSortBy=view.findViewById(R.id.rl_shorted_by);
+
+        rlFilter.setOnClickListener(this);
+        rlSortBy.setOnClickListener(this);
+
+
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
+
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.ViewAllCoupons(idholder);
@@ -80,6 +129,9 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CouponReceiver,
                 new IntentFilter("Refresh"));
+
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(FilterReceiver,
+                new IntentFilter("Category"));
     }
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
@@ -101,15 +153,69 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
             }
         }
     };
+    public BroadcastReceiver FilterReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String Catid = intent.getStringExtra("catid");
+//            presenter.DealFilter(idholder,Catid);
+            Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+        }
+    };
     @Override
     public void onClick(View v) {
-        if (v==sortbytext){
+        if (v==rlSortBy){//sortbytext
+            edTxtSearch.setText("");
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
+            RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
+            RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
+            RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
+            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
+            rdone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="1";
+//                    presenter.ShortBy(idholder,Status);
+                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
+                }
+            });
+            rdtwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="2";
+//                    presenter.ShortBy(idholder,Status);
+                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            rdthree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="3";
+//                    presenter.ShortBy(idholder,Status);
+                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            rdfour.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    String Status="4";
+//                    presenter.ShortBy(idholder,Status);
+                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+
+                }
+            });
             dialog.show();
-        }else if (v==filtertext){
+
+        }else if (v==rlFilter){
+            edTxtSearch.setText("");
             Intent intent = new Intent(getContext(), FilterShowActivity.class);//8
             startActivity(intent);
         }
@@ -118,7 +224,9 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+
+//        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

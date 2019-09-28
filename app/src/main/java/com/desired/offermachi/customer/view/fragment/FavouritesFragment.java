@@ -30,6 +30,8 @@ import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
 import com.desired.offermachi.customer.view.activity.ViewOfferTrendingActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
+
 import java.util.ArrayList;
 import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
@@ -38,7 +40,8 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class FavouritesFragment extends Fragment implements View.OnClickListener, CustomerFavouritesPresenter.FavouritesList {
     View view;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerFavouritesPresenter presenter;
     String idholder;
     TextView filtertext,sortbytext;
@@ -62,8 +65,10 @@ public class FavouritesFragment extends Fragment implements View.OnClickListener
         filtertext=(TextView)view.findViewById(R.id.filter_text_id);
         filtertext.setOnClickListener(this);
         categoryrecycle = view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
 
@@ -115,7 +120,8 @@ public class FavouritesFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter = new CustomerTrendingAdapter(getActivity(), response);
+//        customerTrendingAdapter = new CustomerTrendingAdapter(getActivity(), response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(getActivity(), response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

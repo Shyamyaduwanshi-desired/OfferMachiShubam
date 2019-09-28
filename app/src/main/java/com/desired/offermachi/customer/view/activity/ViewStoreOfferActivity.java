@@ -26,6 +26,7 @@ import com.desired.offermachi.customer.presenter.CustomerSelectCategoryPresenter
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.ViewStoreOfferPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,8 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class ViewStoreOfferActivity extends AppCompatActivity implements View.OnClickListener, ViewStoreOfferPresenter.ViewOffer, NotificationCountPresenter.NotiUnReadCount{
     ImageView imageViewback;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private ViewStoreOfferPresenter presenter;
     String idholder,storeid;
     TextView tvNotiCount;
@@ -56,8 +58,10 @@ public class ViewStoreOfferActivity extends AppCompatActivity implements View.On
         imageViewback=findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
         categoryrecycle=findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
 
@@ -91,7 +95,8 @@ public class ViewStoreOfferActivity extends AppCompatActivity implements View.On
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(ViewStoreOfferActivity.this,response);
+//        customerTrendingAdapter=new CustomerTrendingAdapter(ViewStoreOfferActivity.this,response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewStoreOfferActivity.this,response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

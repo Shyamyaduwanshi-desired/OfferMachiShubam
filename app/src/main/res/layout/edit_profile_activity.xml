@@ -22,7 +22,8 @@
                             android:layout_height="25dp"
                             android:layout_marginLeft="15dp"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_left_arrow"/>
+                            android:src="@drawable/ic_left_arrow"
+                            tools:ignore="VectorDrawableCompat" />
                         <TextView
                             android:id="@+id/logo"
                             android:layout_width="wrap_content"
@@ -102,6 +103,7 @@
                             android:id="@+id/imgProfileAvatar"
                             android:src="@drawable/profile_user"
                             android:foregroundGravity="center"
+                            tools:ignore="VectorDrawableCompat"
                             />
                         <LinearLayout
                             android:id="@+id/imagepicker"
@@ -115,7 +117,9 @@
                                 android:layout_width="20dp"
                                 android:layout_height="30dp"
                                 android:layout_marginLeft="5dp"
-                                android:src="@drawable/ic_photo_camera"/>
+                                android:src="@drawable/ic_photo_camera"
+                                tools:ignore="VectorDrawableCompat"
+                                />
                         </LinearLayout>
 
 
@@ -244,7 +248,116 @@
                         android:textColor="@color/purple"
                         android:layout_marginTop="20dp"/>
 
-                    <TextView
+<RelativeLayout
+    android:id="@+id/rl_dob"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_below="@+id/mobile"
+    android:background="@drawable/phoneborder"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        >
+    <RelativeLayout
+        android:id="@+id/rl_year"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/tv_year_txt"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:text="Year"
+            android:textColor="@color/purple"
+            android:imeOptions="actionGo"
+
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/tv_year_txt"
+            android:hint="Year"
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_month"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        >
+        <TextView
+            android:id="@+id/tv_month_txt"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:hint="Month"
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/tv_month_txt"
+            android:hint="month"
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+            android:paddingLeft="5dp"
+
+            android:gravity="center_vertical"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_day"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@+id/rl_month"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:id="@+id/tv_day_txt"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:hint="Day"
+
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@+id/tv_day_txt"
+            android:hint="day"
+
+            android:textColor="@color/purple"
+            android:textColorHint="@color/purple"
+            android:paddingLeft="5dp"
+            android:gravity="center_vertical"/>
+
+    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+                   <!-- <TextView
                         android:id="@+id/dateofbirth"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -252,6 +365,7 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/phoneborder"
+
                         android:hint="DOB"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
@@ -259,13 +373,13 @@
                         android:textColor="@color/purple"
                         android:layout_marginTop="20dp"
                         android:textSize="17dp"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"/>-->
 
                     <EditText
                         android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_below="@+id/dateofbirth"
+                        android:layout_below="@+id/rl_dob"
                         android:layout_marginVertical="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"

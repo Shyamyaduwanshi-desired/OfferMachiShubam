@@ -76,8 +76,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             editdob.setText(user.getDob());
         }
 
-
-
         if (user.getAddress().equals("null")){
             etaddress.setText("");
         }else{

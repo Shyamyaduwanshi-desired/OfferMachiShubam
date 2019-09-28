@@ -58,7 +58,7 @@
                 android:background="@drawable/rectangle_white_bg"
                 android:paddingLeft="10dp"
                 android:textSize="14dp"
-                android:hint="Type a store name"
+                android:hint="Search "
                 android:layout_toLeftOf="@+id/rl_filter"
                 android:layout_marginRight="5dp"
 

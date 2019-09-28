@@ -2,6 +2,7 @@ package com.desired.offermachi.customer.view.activity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,13 +27,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerUpdateProfilePresenter;
-import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.presenter.ProfileImagePresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierProfileActivity;
@@ -47,11 +49,11 @@ import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, CustomerUpdateProfilePresenter.UpdateProfile, NotificationCountPresenter.NotiUnReadCount {
+public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, CustomerUpdateProfilePresenter.UpdateProfile {
     private CustomerUpdateProfilePresenter presenter;
     LinearLayout male,female;
     ImageView  imageViewback,info;
-    TextView changepasswordtext,editdob;
+    TextView changepasswordtext,tvYear,tvMonth,tvDay/*,editdob*/;
     EditText etname,etgender,etemail,etmobile,etaddress;
     CircleImageView imgProfileAvatar;
     LinearLayout imagepicker;
@@ -59,24 +61,48 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     Button btnsave;
     DatePickerDialog picker;
     String datepick ;
+
     private String picture = "";
     private File file, compressedImage;
-    TextView tvNotiCount;
-    private NotificationCountPresenter notiCount;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    int month = Calendar.getInstance().get(Calendar.MONTH);
+    int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+//    Button btYear,btMonth,btDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile_activity);
         initview();
+        Listener();
     }
+
+    private void Listener() {
+
+    }
+
+    //    DatePicker dpDate;
     private void initview(){
         presenter=new CustomerUpdateProfilePresenter(EditProfileActivity.this,EditProfileActivity.this);
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder=user.getId();
+//        dpDate = (DatePicker)findViewById(R.id.dpDate);
+
+        tvYear=findViewById(R.id.tv_year);
+        tvMonth=findViewById(R.id.tv_month);
+        tvDay=findViewById(R.id.tv_day);
+
+//        btYear=findViewById(R.id.tv_year);
+//        tvDay=findViewById(R.id.tv_month);
+//        tvDay=findViewById(R.id.tv_day);
+
+
         etname=findViewById(R.id.name);
         etgender=findViewById(R.id.gender);
         etemail=findViewById(R.id.email);
+
         etmobile=findViewById(R.id.mobile);
         etaddress=findViewById(R.id.address);
         imgProfileAvatar=findViewById(R.id.imgProfileAvatar);
@@ -92,12 +118,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         changepasswordtext.setOnClickListener(this);
         imagepicker=findViewById(R.id.imagepicker);
         imagepicker.setOnClickListener(this);
-        editdob=findViewById(R.id.dateofbirth);
-        editdob.setOnClickListener(this);
+//        editdob=findViewById(R.id.dateofbirth);
+//        editdob.setOnClickListener(this);
 
-        notiCount = new NotificationCountPresenter(this,this);
-        tvNotiCount = findViewById(R.id.txtMessageCount);
-        notiCount.NotificationUnreadCount(idholder);
 
 
         if (user.getUsername().equals("null")){
@@ -124,12 +147,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
         Log.e("","user.getDob()= "+user.getDob());
-        if (user.getDob().equals("")){
-            editdob.setText("");
-
-        }else{
-            editdob.setText(user.getDob());
-        }
+//        if (user.getDob().equals("")){
+//            editdob.setText("");
+//
+//        }else{
+//            editdob.setText(user.getDob());
+//        }
 
         if (user.getAddress().equals("null")){
             etaddress.setText("");
@@ -148,6 +171,42 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
         btnsave=findViewById(R.id.btnsave);
         btnsave.setOnClickListener(this);
+        if (user.getDob().equals("")){
+
+        tvYear.setText(""+year);
+        tvMonth.setText(""+month);
+        tvDay.setText(""+day);
+
+        }else{
+//            editdob.setText(user.getDob());
+
+            String arr[] = user.getDob().split("-");//25-9-2019
+            String sDay = arr[0];//day
+            String sMonth = arr[1];//month
+            String sYear = arr[2];//Year
+
+            year=Integer.parseInt(sYear);
+            month=Integer.parseInt(sMonth);
+            day=Integer.parseInt(sDay);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR,year);
+            calendar.set(Calendar.MONTH,month-1);
+            daysQty = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+            tvYear.setText(""+year);
+            tvMonth.setText(""+month);
+            tvDay.setText(""+day);
+
+//            tvYear.setText(sYear);
+//            tvMonth.setText(sMonth);
+//            tvDay.setText(sDay);
+
+        }
+        tvYear.setOnClickListener(this);
+        tvMonth.setOnClickListener(this);
+        tvDay.setOnClickListener(this);
+
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean isStoragePermissionGranted() {
@@ -168,13 +227,28 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
-        }if(v==info){
+        }
+
+       else if(v==info){
             Intent intent = new Intent(EditProfileActivity.this, InfoActivity.class);
             startActivity(intent);
-        }if(v==editdob){
+        }
+        else if (v==tvYear){
+            showYearDialog();
+        }else if (v==tvMonth){
+            showMonthDialog();
+        }else if (v==tvDay){
+            showDaysDialog();
+        }
+
+       /* if(v==editdob){
             datepick="0";
-            datepicker();
-        } else if (v==male){
+//            datepicker();
+
+            DialogFragment newFragment = new DatePickerFragment();
+            newFragment.show(getSupportFragmentManager(), "datePicker");
+        }*/
+        else if (v==male){
             genderholder ="male";
             male.setBackgroundResource(R.drawable.maleblue);
             female.setBackgroundResource(R.drawable.signupbutton);
@@ -214,7 +288,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 if (datepick.equals("0")){
-                    editdob.setText(dayOfMonth + "-" + (month + 1) + "-" +year );
+//                    editdob.setText(dayOfMonth + "-" + (month + 1) + "-" +year );
                 }
             }
         }, year, month, day);
@@ -223,13 +297,16 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void validation() {
-
         nameholder = etname.getText().toString();
         emailholder = etemail.getText().toString();
         phoneholder = etmobile.getText().toString().trim();
         genderholder = etgender.getText().toString();
         addressholder=etaddress.getText().toString();
-        dobholder=editdob.getText().toString();
+//        dobholder=day+"-"+month+"-"+year;
+        dobholder=tvDay.getText().toString()+"-"+tvMonth.getText().toString()+"-"+tvYear.getText().toString();
+
+//        dobholder=editdob.getText().toString();//25-9-2019
+
 
         if (TextUtils.isEmpty(nameholder)){
             Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show();
@@ -401,27 +478,149 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }).show();
     }
 
-    @Override
-    public void successnoti(String response) {
-        if(TextUtils.isEmpty(response))
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
+        }
+    }
+
+
+    public void showYearDialog()
+    {
+
+        final Dialog d = new Dialog(this);
+        d.setTitle("Year Picker");
+        d.setContentView(R.layout.yeardialog);
+        Button set = (Button) d.findViewById(R.id.button1);
+        Button cancel = (Button) d.findViewById(R.id.button2);
+        TextView year_text=(TextView)d.findViewById(R.id.year_text);
+        year_text.setText(""+year);
+        final NumberPicker nopicker = (NumberPicker) d.findViewById(R.id.numberPicker1);
+
+        nopicker.setMaxValue(year+50);
+        nopicker.setMinValue(year-50);
+        nopicker.setWrapSelectorWheel(false);
+        nopicker.setValue(year);
+        nopicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+        set.setOnClickListener(new View.OnClickListener()
         {
-            tvNotiCount.setText("0");
-        }
-        else {
+            @Override
+            public void onClick(View v) {
+                tvYear.setText(String.valueOf(nopicker.getValue()));
+                d.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+        d.show();
 
-            tvNotiCount.setText(response);
-        }
+
+    }
+    int daysQty=0;
+    public void showMonthDialog()
+    {
+
+        final Dialog d = new Dialog(this);
+        d.setTitle("Month Picker");
+        d.setContentView(R.layout.yeardialog);
+        Button set = (Button) d.findViewById(R.id.button1);
+        Button cancel = (Button) d.findViewById(R.id.button2);
+        TextView year_text=(TextView)d.findViewById(R.id.year_text);
+        year_text.setText(""+month);
+        final NumberPicker nopicker = (NumberPicker) d.findViewById(R.id.numberPicker1);
+
+        nopicker.setMaxValue(12);
+        nopicker.setMinValue(1);
+        nopicker.setWrapSelectorWheel(false);
+        nopicker.setValue(month);
+        nopicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+        set.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                tvMonth.setText(String.valueOf(nopicker.getValue()));
+                tvDay.setText(""+1);
+                d.dismiss();
+
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR,year);
+                calendar.set(Calendar.MONTH,nopicker.getValue()-1);
+//                int daysQty = calendar.getDaysNumber();
+                daysQty = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+        d.show();
+
+
+    }
+    public void showDaysDialog()
+    {
+
+        final Dialog d = new Dialog(this);
+        d.setTitle("Day Picker");
+        d.setContentView(R.layout.yeardialog);
+        Button set = (Button) d.findViewById(R.id.button1);
+        Button cancel = (Button) d.findViewById(R.id.button2);
+        TextView year_text=(TextView)d.findViewById(R.id.year_text);
+        year_text.setText(""+day);
+        final NumberPicker nopicker = (NumberPicker) d.findViewById(R.id.numberPicker1);
+
+        nopicker.setMaxValue(daysQty);
+        nopicker.setMinValue(1);
+        nopicker.setWrapSelectorWheel(false);
+        nopicker.setValue(day);
+        nopicker.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+
+        set.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                tvDay.setText(String.valueOf(nopicker.getValue()));
+                d.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+        d.show();
+
+
     }
 
-    @Override
-    public void errornoti(String response) {
 
-    }
-
-    @Override
-    public void failnoti(String response) {
-
-    }
 }
 
   /*

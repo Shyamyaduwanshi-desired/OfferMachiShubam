@@ -197,7 +197,8 @@ Context context;
                     "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
-          startActivity(new Intent(getActivity(),CategoryActivity.class));
+          startActivity(new Intent(getActivity(),DashBoardActivity.class));
+//          startActivity(new Intent(getActivity(),CategoryActivity.class));
 
           getActivity().finish();
         }

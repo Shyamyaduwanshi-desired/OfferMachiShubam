@@ -19,7 +19,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,11 +94,28 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    object.getString("shop_logo")
 
                             );
                             list.add(selectCategoryModel);
                         }
+
+                        Collections.sort(list, new Comparator<SelectCategoryModel>() {//yyyy-MM-dd
+                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");//2019-09-26
+                            @Override
+                            public int compare(SelectCategoryModel lhs, SelectCategoryModel rhs) {
+                                try {
+                                    return f.parse(lhs.getOfferstartdate()).compareTo(f.parse(rhs.getOfferstartdate()));
+                                } catch (ParseException e) {
+                                    throw new IllegalArgumentException(e);
+                                }
+                            }
+                        });
+
+                        Collections.reverse(list);
+
+
                         dealsList.success(list);
 
 
@@ -205,7 +227,8 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    object.getString("shop_logo")
 
                             );
                             list.add(selectCategoryModel);
@@ -281,7 +304,8 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    object.getString("shop_logo")
 
                             );
                             list.add(selectCategoryModel);
@@ -364,7 +388,8 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    object.getString("shop_logo")
 
                             );
                             list.add(selectCategoryModel);

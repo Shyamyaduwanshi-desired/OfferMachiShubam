@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,6 +110,12 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             holder.productbutton.setText("Coupon Code");//Get Coupon Code
         }
 
+
+        if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
+        }else{
+            Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.pizza_logo).into(holder.ivStoreLogo);
+        }
        holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -209,7 +216,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
      //   public CardView categorylinear;
-        ImageView productimg,likeimg;
+        ImageView productimg,likeimg,ivStoreLogo;
         TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
         RelativeLayout rlShare,rlLike;
@@ -227,6 +234,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             productbutton=itemView.findViewById(R.id.bt_get_a_code);
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);
+            ivStoreLogo=itemView.findViewById(R.id.iv_icon);
 //            ivLikeBtn=itemView.findViewById(R.id.bt_like);
         }
     }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.view.activity.OtpActivtivity;
@@ -103,7 +105,8 @@ public class HomePresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    ""
 
                             );
                             list.add(selectCategoryModel);
@@ -135,7 +138,8 @@ public class HomePresenter {
                                     object2.getString("favourite_status"),
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
-                                    object2.getString("coupon_code_status")
+                                    object2.getString("coupon_code_status"),
+                                    ""
 
                             );
                             list2.add(selectCategoryModel);
@@ -208,8 +212,8 @@ public class HomePresenter {
 
         final ArrayList<SelectCategoryModel> list = new ArrayList<>();
         final ArrayList<SelectCategoryModel> list2 = new ArrayList<>();
-        final ArrayList<StoreModel> list3 = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_home_page_offers_data_bycategoryid", new Response.Listener<String>() {
+        final ArrayList<StoreModel> list3 = new ArrayList<>();//customer_home_page_offers_data_bycategoryid,customer_home_page_offers_data_bycategoryid2
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_home_page_offers_data_bycategoryid2", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(!((Activity) context).isFinishing())
@@ -285,7 +289,8 @@ public class HomePresenter {
                                     object2.getString("favourite_status"),
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
-                                    object2.getString("coupon_code_status")
+                                    object2.getString("coupon_code_status"),
+                                    ""
 
                             );
                             list2.add(selectCategoryModel);
@@ -334,6 +339,10 @@ public class HomePresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("category_ids", catid);
                 params.put("user_id", userid);
+                params.put("latitude", UserSharedPrefManager.GetLat(context));
+                params.put("longitude", UserSharedPrefManager.GetLong(context));
+                params.put("dist", "500");
+                Log.e("","Input param= "+params.toString());
                 return params;
             }
         };

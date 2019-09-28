@@ -2,11 +2,11 @@ package com.desired.offermachi.customer.model;
 
 public class SelectCategoryModel {
     private String id,Offerid,Offername,OfferCategory,OfferSubCategory,Offertype,Offertypename,Offervalue,OfferDetail,Offerstartdate,
-            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,Offerfav,OfferImage,Offerqrcodeimage,OfferCouponCodeStatus;
+            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,Offerfav,OfferImage,Offerqrcodeimage,OfferCouponCodeStatus,storeLogo;
 
     public SelectCategoryModel(String id,String offerid,String offername,String offerCategory,String offerSubCategory,
                           String offertype,String offertypename,String offervalue,String offerDetail,String offerstartdate,String offerenddate,String offertime,
-                          String offerdescription,String coupon_code,String posted_by,String offerstatus,String offerbrandname,String offerfav,String offerImage,String offerqrcodeimage,String offerCouponCodeStatus) {
+                          String offerdescription,String coupon_code,String posted_by,String offerstatus,String offerbrandname,String offerfav,String offerImage,String offerqrcodeimage,String offerCouponCodeStatus,String storeLogo) {
         this.id = id;
         this.Offerid = offerid;
         this.Offername = offername;
@@ -28,6 +28,7 @@ public class SelectCategoryModel {
         this.OfferImage=offerImage;
         this.Offerqrcodeimage=offerqrcodeimage;
         this.OfferCouponCodeStatus=offerCouponCodeStatus;
+        this.storeLogo=storeLogo;
     }
 
     public String getId() {
@@ -112,5 +113,9 @@ public class SelectCategoryModel {
 
     public String getOfferCouponCodeStatus() {
         return OfferCouponCodeStatus;
+    }
+
+    public String getStoreLogo() {
+        return storeLogo;
     }
 }

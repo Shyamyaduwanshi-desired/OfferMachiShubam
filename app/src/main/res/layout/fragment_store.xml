@@ -35,7 +35,7 @@
                             android:background="@drawable/rectangle_white_bg"
                             android:paddingLeft="10dp"
                             android:textSize="14dp"
-                            android:hint="Type a store name"
+                            android:hint="Search"
                             android:layout_toLeftOf="@+id/rl_filter"
                             android:layout_marginRight="5dp"
 
@@ -133,6 +133,19 @@
                         android:background="@drawable/filter_background"
                         android:text="Sort By"/>
                 </LinearLayout>-->
+                <TextView
+                    android:id="@+id/tv_load_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/filter_background"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/ly_filter"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    android:text="Load more"/>
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/storerecycleview"
                     android:layout_width="match_parent"

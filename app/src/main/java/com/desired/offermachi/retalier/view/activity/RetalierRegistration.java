@@ -38,7 +38,7 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         tabLayout.setOnTabSelectedListener(RetalierRegistration.this);
 
-        TabLayoutUtils.enableTabs( tabLayout, false );
+//        TabLayoutUtils.enableTabs( tabLayout, false );
 
         viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

@@ -20,6 +20,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerOfferDetailPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
@@ -36,7 +37,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ProductActivity extends AppCompatActivity implements View.OnClickListener, CustomerOfferDetailPresenter.OfferDetail {
+public class ProductActivity extends AppCompatActivity implements View.OnClickListener, CustomerOfferDetailPresenter.OfferDetail, NotificationCountPresenter.NotiUnReadCount {
     ImageView imageViewback,info;
     Button couponbutton;
     LinearLayout shareiconimge, viewalloffer;
@@ -49,7 +50,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     ImageView qr_code_img_id;
     String couponcode, qrcodeimage;
     Button coupon_button_apply_id;
-    TextView btnok;
+    TextView btnok,tvNotiCount;
     TextView txtstorename,txtstoredescription,txtstorename2;
     ImageView storeimage;
     CircleImageView storelogothumb;
@@ -61,6 +62,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     String couponstatus;
     ImageView imgNotiBell;
     ImageView imgshare;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +88,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         imgshare=findViewById(R.id.imgshare);
         imgshare.setOnClickListener(this);
 
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
        /* shareiconimge =findViewById(R.id.shareicon_image_id);
         shareiconimge.setOnClickListener(this);*/
         viewalloffer = findViewById(R.id.viewalloffer_id);
@@ -370,6 +375,29 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         dialog.show();
+    }
+//notification count
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+//            tvNotiCount.setText(push_notifications_count);
+            tvNotiCount.setText(response);
+//            Log.e("","count= "+tvNotiCount);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 
      /*  private void Itemshardialog() {

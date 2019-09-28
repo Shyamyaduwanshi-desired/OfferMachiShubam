@@ -32,6 +32,10 @@ public class UserSharedPrefManager {
     private static final  String KEY_CAT_INTEREST="user_cat_interest";
     private static final  String KEY_NOTI_CLICK="user_noti_click";
     private static final  String KEY_NOTI_CLICK_POS="user_noti_click_pos";
+
+    private static final  String KEY_CUR_LAT="user_cur_lat";
+    private static final  String KEY_CUR_LONG="user_cur_long";
+    private static final  String KEY_CUR_LON_NM="user_cur_loc_nm";
     private static UserSharedPrefManager mInstance;
     private static Context ctx;
     private UserSharedPrefManager(Context context) {
@@ -151,6 +155,31 @@ public class UserSharedPrefManager {
     public static String GetClickNotiPos(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         String value=sharedPreferences.getString(KEY_NOTI_CLICK_POS, "");
+        return value;
+    }
+
+    public static void SaveCurrentLatLongAndLocNm(Context context,String lati,String longi,String locNm) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_CUR_LAT, lati);
+        editor.putString(KEY_CUR_LONG, longi);
+        editor.putString(KEY_CUR_LON_NM, locNm);
+        editor.apply();
+    }
+
+    public static String GetLat(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_CUR_LAT, "");
+        return value;
+    }
+    public static String GetLong(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_CUR_LONG, "");
+        return value;
+    }
+    public static String GetLocNm(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String value=sharedPreferences.getString(KEY_CUR_LON_NM, "");
         return value;
     }
 

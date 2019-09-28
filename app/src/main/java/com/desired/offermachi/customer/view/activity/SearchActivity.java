@@ -23,6 +23,7 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
 
     ImageView cancle;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
     private TrendingListPresenter presenter;
     String idholder;
     android.widget.SearchView searchView;
@@ -60,10 +62,17 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
         selectCategoryModelList=new ArrayList<>();
         presenter = new TrendingListPresenter(SearchActivity.this, SearchActivity.this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
+
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(this);
         if (isNetworkConnected()) {
@@ -97,8 +106,11 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
     };
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter = new CustomerTrendingAdapter(SearchActivity.this, response);
+
+//        customerTrendingAdapter = new CustomerTrendingAdapter(SearchActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(SearchActivity.this, response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
+
         for (SelectCategoryModel onsale : response) {
             selectCategoryModelList.add(onsale);
         }

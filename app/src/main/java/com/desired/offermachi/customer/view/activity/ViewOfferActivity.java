@@ -32,6 +32,7 @@ import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 import com.desired.offermachi.customer.view.fragment.HomeFragment;
 
 
@@ -41,11 +42,12 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewOfferActivity extends AppCompatActivity implements View.OnClickListener, CustomerSelectCategoryPresenter.CategoryList ,NotificationCountPresenter.NotiUnReadCount  {
+public class ViewOfferActivity extends AppCompatActivity implements View.OnClickListener, CustomerSelectCategoryPresenter.CategoryList,NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerSelectCategoryPresenter presenter;
     String idholder;
     String catid;
@@ -121,7 +123,9 @@ public class ViewOfferActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(ViewOfferActivity.this,response);
+
+//        customerTrendingAdapter=new CustomerTrendingAdapter(ViewOfferActivity.this,response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewOfferActivity.this,response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

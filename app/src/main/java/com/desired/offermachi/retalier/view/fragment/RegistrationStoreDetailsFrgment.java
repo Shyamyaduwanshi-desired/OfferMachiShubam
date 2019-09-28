@@ -20,15 +20,13 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -37,7 +35,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,14 +47,25 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.FileUtil;
+import com.desired.offermachi.retalier.model.AddStoreLocBean;
 import com.desired.offermachi.retalier.model.BrandModel;
 import com.desired.offermachi.retalier.model.CategoryModel;
+import com.desired.offermachi.retalier.model.CityBean;
+import com.desired.offermachi.retalier.model.ImageBean;
 import com.desired.offermachi.retalier.model.OfferTypeModel;
+import com.desired.offermachi.retalier.presenter.CityPresenter;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
+import com.desired.offermachi.retalier.view.adapter.CityAdapter;
+import com.desired.offermachi.retalier.view.adapter.LocationAdapter;
+import com.desired.offermachi.retalier.view.adapter.SelectedImageAdapter;
+import com.desired.offermachi.retalier.view.adapter.StoreLocationDetailsAdapter;
 import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
-import com.desired.offermachi.retalier.view.adapter.MultiAdapter;
 import com.desired.offermachi.service.GeocodingLocation;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -70,18 +78,18 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 import static android.app.Activity.RESULT_OK;
 
-public class RegistrationStoreDetailsFrgment extends Fragment implements LocationListener, View.OnClickListener,SignupPresenter.SignUp, TypeBrandCategoryPresenter.TypeBrandCategory {
+public class RegistrationStoreDetailsFrgment extends Fragment implements LocationListener, View.OnClickListener,SignupPresenter.SignUp, TypeBrandCategoryPresenter.TypeBrandCategory, StoreLocationDetailsAdapter.LocDetailClick, CityPresenter.CityInfo,SelectedImageAdapter.ImageClick {
     View view;
     String android_id;
     private SignupPresenter presenter;
-    EditText storename,storecontact,storeaddress,cityedt,aboutstore;
+    EditText storename,storecontact,storeaddress/*,cityedt*/,aboutstore;
     Button registerbutton;
-    String shop_name,shop_contact_number,address,city,about_store,shopopentime,shopclosetime;
+    String shop_name,shop_contact_number,address,city,sLocation,about_store,shopopentime,shopclosetime;
     String name,mobile,email,password;
-    private String picture = "";
+    private String picture = "",pictureLogo = "";
     private File file, compressedImage;
-    ImageView imagestore;
-    RelativeLayout imagepick;
+    ImageView imagestore,ivStoreLogo;
+    RelativeLayout imagepick,rlStoreLogo;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     private static int mrngtimeHour;
     private static int mrngtimeMinute;
@@ -100,10 +108,21 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
     LocationManager locationManager;
     String lati ;
     String longi ;
-    Spinner categoryspinner;
+    Spinner categoryspinner,spCity,spLocation;
     String categoryid;
     private CategoryAdapter categoryAdapter;
+    private CityAdapter cityAdapter;
+    private LocationAdapter locationAdapter;
     private TypeBrandCategoryPresenter typeBrandCategoryPresenter;
+    private CityPresenter cityPresenter;
+
+    RecyclerView rvLocationNm;
+//    RecyclerView rvImage;
+    private RecyclerView.Adapter mAdapter;
+    int diffLogoPicture=1;
+    ArrayList<ImageBean>arImageNm=new ArrayList<>();
+    RecyclerView rvImage;
+    String allImagNm="";
     public RegistrationStoreDetailsFrgment() {
     }
 
@@ -112,10 +131,12 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         view = inflater.inflate(R.layout.retalier_store_activity, container, false);
         typeBrandCategoryPresenter=new TypeBrandCategoryPresenter(getContext(),RegistrationStoreDetailsFrgment.this);
         presenter = new SignupPresenter(getContext(), RegistrationStoreDetailsFrgment.this);
+        cityPresenter = new CityPresenter(getContext(), RegistrationStoreDetailsFrgment.this);
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(locationReceiver,
                 new IntentFilter("Data"));
         getLocation();
         initView() ;
+        AddItem();
         return  view;
     }
 
@@ -133,9 +154,12 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                 Settings.Secure.ANDROID_ID);*/
         storename=(EditText)view.findViewById(R.id.store_name_edt_id);
         categoryspinner = view.findViewById(R.id.categoryspinner);
+        spCity = view.findViewById(R.id.sp_city);
+        spLocation = view.findViewById(R.id.sp_location);
         storecontact=(EditText)view.findViewById(R.id.store_contact_edt_id);
         storeaddress=(EditText)view.findViewById(R.id.store_address_edt_id);
-        cityedt=(EditText)view.findViewById(R.id.city_edt_id);
+//        cityedt=(EditText)view.findViewById(R.id.city_edt_id);
+
         //days
         etMonday=(EditText)view.findViewById(R.id.editmonday);
         etTuesday=(EditText)view.findViewById(R.id.edittuesday);
@@ -206,10 +230,26 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         saturplus.setOnClickListener(this);
         aboutstore=(EditText)view.findViewById(R.id.about_store_name_id);
         imagestore=view.findViewById(R.id.imagestore);
+        ivStoreLogo=view.findViewById(R.id.iv_store_logo);
         imagepick=view.findViewById(R.id.pickly);
+        rlStoreLogo=view.findViewById(R.id.rl_store_logo);
         registerbutton=(Button)view.findViewById(R.id.registerbutton_button_id);
         registerbutton.setOnClickListener(this);
         imagepick.setOnClickListener(this);
+        rlStoreLogo.setOnClickListener(this);
+
+        rvImage = view.findViewById(R.id.rv_image_list);
+        RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        rvImage.setLayoutManager(mLayoutManager1);
+        rvImage.setItemAnimator(new DefaultItemAnimator());
+        rvImage.setHasFixedSize(true);
+        rvImage.setNestedScrollingEnabled(true);
+
+
+        rvLocationNm = view.findViewById(R.id.rv_location_list);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        rvLocationNm.setLayoutManager(mLayoutManager);
+        rvLocationNm.setItemAnimator(new DefaultItemAnimator());
 
         categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -224,9 +264,41 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
 
             }
         });
+        spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //   Select Provider
+                TextView txCityid = (TextView) view.findViewById(R.id.offerid);
+                TextView txccityNm = (TextView) view.findViewById(R.id.offertype);
+                city = txccityNm.getText().toString();
+                String cityId=txCityid.getText().toString();
+                cityPresenter.GetLocationViaCity(cityId);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //   Select Provider
+                TextView txCityid = (TextView) view.findViewById(R.id.tv_loc_id);
+                TextView txccityNm = (TextView) view.findViewById(R.id.tv_loc_nm);
+                sLocation = txccityNm.getText().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         if (isNetworkConnected()) {
             typeBrandCategoryPresenter.sentRequestRegistration();
+            cityPresenter.GetAllCity();
         }  else {
             Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }
@@ -326,7 +398,8 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
             closetimeset="6";
             new TimePickerDialog(getContext(), mTimeSetListener1, mrngtoHour, mrngtoMinute, false).show();
         }
-        else if (v==imagepick){
+        else if (v==imagepick){//for banner
+            diffLogoPicture=2;
             if (Build.VERSION.SDK_INT >= 23) {
                 if (isStoragePermissionGranted()) {
                     openGallery();
@@ -336,7 +409,21 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
             } else {
                 openGallery();
             }
-        }/*else if (v==txtstorecategory){
+        }
+        else if (v==rlStoreLogo){//for logo
+            diffLogoPicture=1;
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (isStoragePermissionGranted()) {
+                    openGallery();
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
+                }
+            } else {
+                openGallery();
+            }
+        }
+
+        /*else if (v==txtstorecategory){
             selectcategory();
         }*/
 
@@ -348,7 +435,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         shop_name = storename.getText().toString();
         shop_contact_number = storecontact.getText().toString().trim();
         address = storeaddress.getText().toString();
-        city = cityedt.getText().toString();
+//        city = cityedt.getText().toString();
         about_store= aboutstore.getText().toString();
         shopopentime=Mondayopentime+","+Tuesdayopentime+","+Wednesdayopentime+","+Thursdayopentime+","+Fridayopentime+","+Saturdayopentime+","+Sundayopentime;
         shopclosetime=Mondayclosetime+","+Tuesdayclosetime+","+Wednesdayclosetime+","+Thursdayclosetime+","+Fridayclosetime+","+Saturdayclosetime+","+Sundayclosetime;
@@ -372,15 +459,20 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
             storeaddress.requestFocus();
             storeaddress.setError("Please enter your address");
         }
-        else if (TextUtils.isEmpty(city)) {
-            cityedt.requestFocus();
-            cityedt.setError("Please enter your city");
+        else if (TextUtils.isEmpty(city)||city.equals("Select City")) {
+//            cityedt.requestFocus();
+//            cityedt.setError("Please enter your city");
+            Toast.makeText(getActivity(), "Please select your city", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(about_store)) {
             aboutstore.requestFocus();
             aboutstore.setError("Please enter your About Store");
-        }else if (TextUtils.isEmpty(picture)){
+        }
+        else if (TextUtils.isEmpty(picture)){
             Toast.makeText(getContext(), "Please select store picture", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(pictureLogo)){
+            Toast.makeText(getContext(), "Please select store logo", Toast.LENGTH_SHORT).show();
         }
         else{
             if (isNetworkConnected()) {
@@ -431,6 +523,22 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
     public void successcategory(ArrayList<CategoryModel> response) {
         categoryAdapter = new CategoryAdapter(getContext(), response);
         categoryspinner.setAdapter(categoryAdapter);
+
+    }
+//city success;
+    @Override
+    public void success(ArrayList<CityBean> response,String status) {
+        switch (status)
+        {
+            case "1":
+                cityAdapter = new CityAdapter(getContext(), response);
+                spCity.setAdapter(cityAdapter);
+                break;
+           case "2":
+               locationAdapter = new LocationAdapter(getContext(),0, response);
+               spLocation.setAdapter(locationAdapter);
+                break;
+        }
 
     }
 
@@ -506,13 +614,47 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                     .compressToFile(file);
             String filePath = compressedImage.getPath();
             Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-            imagestore.setImageBitmap(bitmap);
-            picture = getEncoded64(bitmap);
+//            imagestore.setImageBitmap(bitmap);
+            switch (diffLogoPicture)
+            {
+                case 1://for store logo
+                    pictureLogo = getEncoded64(bitmap);
+                    ivStoreLogo.setImageBitmap(bitmap);
+                    break;
+                case 2://for store banner
+                    picture = getEncoded64(bitmap);
+                    imagestore.setImageBitmap(bitmap);
+                    String fileNm = file.getName();
+                    if(arImageNm.size()<5) {
+//                       arImage.add(filePath);
+
+                        ImageBean bean=new ImageBean();
+                        bean.setData(picture);
+                        bean.setName(fileNm);
+                        bean.setImagePath(filePath);
+                        arImageNm.add(bean);
+
+                        SetImageAdapter();
+                    }
+
+                    break;
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    SelectedImageAdapter mImgAdapter;
+    public void SetImageAdapter()
+    {
+        int size=arImageNm.size();
+        Log.e("","size= "+size);
+        mImgAdapter = new SelectedImageAdapter(getActivity(),arImageNm,this);
+        rvImage.setAdapter(mImgAdapter);
 
+    }
     /*encode compress image into base64*/
     private String getEncoded64(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -683,6 +825,19 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
             e.printStackTrace();
         }
     }
+
+//    locatation adprer click
+    @Override
+    public void onClick(int position, int diff) {
+        switch (diff)
+        {
+            case 1:
+                AddItem();
+                break;
+        }
+    }
+
+
     private class GeocoderHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
@@ -702,15 +857,79 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                     // Bundle bundle1 = message.getData();
                     // locationAddress = bundle1.getString("address");
                     //String arr[] = locationAddress.split(",");
-                    if (isNetworkConnected()) {
+
+                    JSONArray jsonArrayImage = new JSONArray();
+                    for(int i=0;i<arImageNm.size();i++) {
+                        JSONObject locObj = new JSONObject();
+                        try {
+                            locObj.put("data", arImageNm.get(i).getData());
+                            locObj.put("name", arImageNm.get(i).getName());
+
+                            jsonArrayImage.put(locObj);
+
+                            if(TextUtils.isEmpty(allImagNm))
+                            {
+                                allImagNm=arImageNm.get(i).getName();
+                            }
+                            else
+                            {
+                                allImagNm=allImagNm+","+arImageNm.get(i).getName();
+                            }
+
+                        } catch (JSONException e) {
+
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (isNetworkConnected()) {//for register
                         presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lati,longi,categoryid);
                     }
-                    //locationAddress = null;
-
             }
 
         }
     }
+
+    ArrayList<AddStoreLocBean> arLocDetail=new ArrayList<>();
+    public void AddItem()
+    {
+        if(arLocDetail.size()<5)
+        {
+            AddStoreLocBean bean = new AddStoreLocBean();
+            bean.setsLocNm("");//Compaign Location name
+            bean.setsLocLat("22.71246");
+            bean.setsLocLong("75.86491");
+            bean.setAddress("");
+            bean.setPhoneNumber("");
+            arLocDetail.add(bean);
+        }
+        else
+        {
+            Toast.makeText(getActivity(), "Your max number of cab filled", Toast.LENGTH_SHORT).show();
+        }
+
+        SetAdapter();
+    }
+    public void SetAdapter()
+    {
+        int size=arLocDetail.size();
+        Log.e("","size= "+size);
+        mAdapter = new StoreLocationDetailsAdapter(getActivity(),arLocDetail,this);
+        rvLocationNm.setAdapter(mAdapter);
+    }
+
+    //multiple image click listner
+    @Override
+    public void PhotonClick(int position, int diff) {
+
+
+    }
+
+//    String uploadBase64="";
+//    String fileNm="";
+    //    ArrayList<String>arImage=new ArrayList<>();
+
+
 
    /* private void selectcategory (){
         LayoutInflater li = LayoutInflater.from(getContext());

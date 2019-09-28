@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/splash">
+            <ImageView
+                android:id="@+id/imageback"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_left_arrow"
+                tools:ignore="VectorDrawableCompat" />
+            <TextView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Test date"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/black"
+                android:textSize="19dp"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="39dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_marginLeft="260dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_search_magnifier_interface_symbol" />
+            <ImageView
+                android:id="@+id/imgNotiBell"
+                android:layout_width="39dp"
+                android:layout_height="32dp"
+                android:padding="5dp"
+                android:layout_marginLeft="320dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_notification_bell" />
+            <TextView
+                android:id="@+id/txtMessageCount"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="@drawable/circle_background"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="6sp"
+                app:layout_constraintEnd_toEndOf="@+id/imgNotiBell"
+                app:layout_constraintTop_toTopOf="@+id/imgNotiBell"
+                android:layout_marginLeft="340dp"
+                android:layout_marginTop="8dp"/>
+
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <Button
+        android:id="@+id/year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+android:layout_below="@+id/cv"
+        android:layout_marginTop="20dp"
+        android:text="Year" />
+    <Button
+        android:id="@+id/month"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+android:layout_below="@+id/year"
+        android:layout_marginTop="20dp"
+        android:text="Month" />
+    <Button
+        android:id="@+id/day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+android:layout_below="@+id/month"
+        android:layout_marginTop="20dp"
+        android:text="Days" />
+</RelativeLayout>

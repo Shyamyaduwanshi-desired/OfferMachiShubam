@@ -51,6 +51,7 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
 //    TextView filtertext,sortbytext;
 RelativeLayout rlFilter,rlSortBy;
     EditText edTxtSearch;
+    TextView tvLoadMore;
     public StoreFragment() {
         // Required empty public constructor
     }
@@ -91,7 +92,7 @@ RelativeLayout rlFilter,rlSortBy;
         idholder= user.getId();
         presenter = new StoreListPresenter(getContext(), StoreFragment.this);
         storerecycle=v.findViewById(R.id.storerecycleview);
-
+        tvLoadMore=v.findViewById(R.id.tv_load_more);
 //        filtertext=(TextView)v.findViewById(R.id.filter_text_id);
 //        filtertext.setOnClickListener(this);
 //        sortbytext=(TextView)v.findViewById(R.id.sortby_text_id);

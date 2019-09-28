@@ -8,6 +8,11 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -64,8 +69,10 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -94,6 +101,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     private AutoCompleteTextView actv;
 //    String[] arrayAutoCompleteText;
     ArrayList<String>arrayAutoCompleteText=new ArrayList<>();
+    public String lati ;
+    public String longi ;
+    LocationManager locationManager;
     public HomeFragment() {
 
     }
@@ -101,7 +111,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_fragment, container, false);
         ((DashBoardActivity)getActivity()).setToolTittle("",1);
+//        getLocation();
         initview();
+
         return view;
     }
     private void initview(){
@@ -237,6 +249,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                 {
                     catid="";
                 }
+                String lati= UserSharedPrefManager.GetLat(getActivity());
+                String longi= UserSharedPrefManager.GetLong(getActivity());
+                String locnm= UserSharedPrefManager.GetLocNm(getActivity());
+                Log.e("","lati= "+lati+" logi= "+longi+" locnm= "+locnm);
                 presenter.GetAllMultipleCateList(catid, idholder);
                 searchPresenter.GetSearchList("", "");//for all searchable list data
             } else {
@@ -480,6 +496,50 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();*/
         }
     }
+//    //for current location
+//    void getLocation() {
+//        try {
+//            locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, this);
+//        }
+//        catch(SecurityException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    String sCurrentLocation="";
+//    @Override
+//    public void onLocationChanged(Location location) {
+//
+//        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+//        List<Address> addresses = null;
+//        try {
+//            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String address = addresses.get(0).getSubLocality();
+//        String city = addresses.get(0).getLocality();
+//        sCurrentLocation=address + ", " + city;
+////        tvLocation.setText(address + ", " + city);
+//        lati= String.valueOf(location.getLatitude());
+//        longi= String.valueOf(location.getLongitude());
+//        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
+//    }
+
+//    @Override
+//    public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderEnabled(String provider) {
+//
+//    }
+//
+//    @Override
+//    public void onProviderDisabled(String provider) {
+//
+//    }
 
    /* @Override
     public boolean onQueryTextSubmit(String s) {

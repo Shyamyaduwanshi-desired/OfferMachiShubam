@@ -37,6 +37,7 @@ import com.desired.offermachi.customer.view.activity.ActFeedsFilterShow;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 
 import java.util.ArrayList;
@@ -48,7 +49,8 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class DealsoftheDayFragment extends Fragment implements View.OnClickListener, CustomerDealsOftheDaysPresenter.DealsList {
     View view;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerDealsOftheDaysPresenter presenter;
     String idholder;
 //    TextView sortbytext,filtertext;
@@ -105,10 +107,17 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
         rlSortBy.setOnClickListener(this);
 
         categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+//        categoryrecycle.setNestedScrollingEnabled(false);
+
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.ViewAllDeals(idholder);
@@ -212,7 +221,8 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+//        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

@@ -60,7 +60,9 @@ dependencies {
     //circleimage
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     //volley
-    implementation 'com.mcxiaoke.volley:library:1.0.18'
+//    implementation 'com.mcxiaoke.volley:library:1.0.18'
+    implementation 'com.android.volley:volley:1.1.1'
+
 //barcode
     implementation 'com.github.KingsMentor:MobileVisionBarcodeScanner:2.0.0'
 //dailog
@@ -74,6 +76,16 @@ dependencies {
 //multidexapi
     implementation 'com.android.support:multidex:1.0.3'
 
+    //    for google autosearch
+    implementation 'com.google.android.libraries.places:places:1.0.0'
+//    implementation 'com.google.android.libraries.places:places:2.0.0'
+//    implementation 'com.google.android.libraries.places:places:16.0.0'
+//    implementation 'com.google.android.libraries.places:places:1.1.0'
+//    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+//    implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+//    com.google.android.gms:play-services-places:16.0.0
+//    implementation 'com.google.android.gms:play-services-places:16.0.0'
 //notification
     implementation 'com.google.android.gms:play-services-vision:17.0.2'
 
@@ -95,5 +107,10 @@ dependencies {
 
     //for like animation
     implementation 'com.jackandphantom.android:androidlikebutton:1.2.0'
+
+//    for image library
+//    implementation 'com.github.bumptech.glide:glide:4.3.1'
+//    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
 
 }

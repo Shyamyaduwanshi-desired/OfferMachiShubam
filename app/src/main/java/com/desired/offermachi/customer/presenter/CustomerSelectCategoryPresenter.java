@@ -86,7 +86,8 @@ public class CustomerSelectCategoryPresenter {
                                     object.getString("favourite_status"),
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status")
+                                    object.getString("coupon_code_status"),
+                                    ""
 
                             );
                             list.add(selectCategoryModel);

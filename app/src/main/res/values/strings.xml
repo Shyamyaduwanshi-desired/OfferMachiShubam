@@ -80,6 +80,9 @@
         <item>Navalkha</item>
 
     </string-array>
+
+    <!--<string name="google_api_key1">AIzaSyCVBn21qaBTnSmxNUYDE3obEKqalu2NeEg</string>-->
+    <string name="google_api_key1">AIzaSyDn-Ld3q3Ohl2e26niTSX5VPyjhjdmsMO4</string>
    <!-- <item>12 Hours</item>
     <item>1 Day</item>
     <item>2 Day</item>

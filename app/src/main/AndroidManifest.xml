@@ -11,12 +11,15 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
   <!-- for OTP read-->
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
 
+<!--for location-->
+
+    <uses-feature android:name="android.hardware.location.gps" />
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -26,7 +29,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        >
+        <!--
+        tools:replace="android:appComponentFactory"-->
         <activity android:name=".retalier.view.activity.MobileVerifyActivity"></activity>
         <activity android:name=".customer.view.activity.MapActivity" />
         <activity android:name=".retalier.view.activity.RetailerChangePasswordActivity" />
@@ -67,6 +73,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".customer.view.activity.ActTestDate"
+            android:screenOrientation="portrait">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
 
 
@@ -264,6 +279,12 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fdd36ffe60573d427fe3cf7a20600dc8d14270a0" />
+
+
+     <!--   <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />-->
+
     </application>
 
 </manifest>

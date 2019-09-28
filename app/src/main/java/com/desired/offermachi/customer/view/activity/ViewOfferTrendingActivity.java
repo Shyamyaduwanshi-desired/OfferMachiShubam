@@ -25,6 +25,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,8 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
 
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
-    private CustomerTrendingAdapter customerTrendingAdapter;
+//    private CustomerTrendingAdapter customerTrendingAdapter;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
     private TrendingListPresenter presenter;
     String idholder;
     String catid;
@@ -61,8 +63,12 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         info=findViewById(R.id.info_id);
         info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+//
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
 
@@ -112,7 +118,8 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter = new CustomerTrendingAdapter(ViewOfferTrendingActivity.this, response);
+//        customerTrendingAdapter = new CustomerTrendingAdapter(ViewOfferTrendingActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewOfferTrendingActivity.this, response);
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

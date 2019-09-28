@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
@@ -39,7 +43,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierProductActivity extends AppCompatActivity implements View.OnClickListener, ViewOfferDetailPresenter.OfferDiscount {
+public class RetalierProductActivity extends AppCompatActivity implements View.OnClickListener, ViewOfferDetailPresenter.OfferDiscount, NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     Button couponbutton;
@@ -51,6 +55,10 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
     Button coupon_button_apply_id;
     String couponcode,qrcodeimage;
     TextView btnok;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
+    private String idholder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +83,12 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
         couponbutton.setOnClickListener(this);
+        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+        idholder= user.getId();
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(offerid);
         }  else {
@@ -193,6 +207,28 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }
 

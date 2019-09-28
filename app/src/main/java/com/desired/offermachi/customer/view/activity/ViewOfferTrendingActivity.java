@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList {
+public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList, NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
@@ -37,6 +39,8 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
     private TrendingListPresenter presenter;
     String idholder;
     String catid;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,11 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         categoryrecycle.setLayoutManager(gridLayoutManager1);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (isNetworkConnected()) {
             presenter.ViewAllTrending(idholder);
         } else {
@@ -150,5 +159,27 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

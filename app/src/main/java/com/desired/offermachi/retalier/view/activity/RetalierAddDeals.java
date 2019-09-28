@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
@@ -36,13 +38,15 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierAddDeals extends AppCompatActivity implements View.OnClickListener , DealsOftheDayPresenter.DealsOftheDay {
+public class RetalierAddDeals extends AppCompatActivity implements View.OnClickListener , DealsOftheDayPresenter.DealsOftheDay , NotificationCountPresenter.NotiUnReadCount {
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private AddDealsofDayAdapter addDealsofDayAdapter;
     private DealsOftheDayPresenter presenter;
     private String idholder,Offerid;
     ImageView imgNotiBell;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,10 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
             GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
             product_recyclerview.setLayoutManager(gridLayoutManager);
             product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+            notiCount = new NotificationCountPresenter(this,this);
+            tvNotiCount = findViewById(R.id.txtMessageCount);
+            notiCount.NotificationUnreadCount(idholder);
+
          if (isNetworkConnected()) {
              presenter.getDealsOftheDay(idholder);
          }  else {
@@ -148,5 +156,28 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
         startActivity(new Intent(getApplicationContext(),RetalierDealsOftheDayActivity.class));
         finish();
         super.onBackPressed();
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

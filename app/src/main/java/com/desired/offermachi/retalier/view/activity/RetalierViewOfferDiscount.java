@@ -12,12 +12,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierViewOfferDiscount extends AppCompatActivity implements View.OnClickListener, ViewOfferPresenter.OfferDiscount {
+public class RetalierViewOfferDiscount extends AppCompatActivity implements View.OnClickListener, ViewOfferPresenter.OfferDiscount, NotificationCountPresenter.NotiUnReadCount{
 
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
@@ -38,6 +40,8 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
     private ViewOfferPresenter presenter;
     private String idholder;
     ImageView imgNotiBell;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,11 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(idholder);
         }  else {
@@ -128,6 +137,28 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         startActivity(new Intent(getApplicationContext(),RetalierDashboard.class));
         finish();
         super.onBackPressed();
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }
 

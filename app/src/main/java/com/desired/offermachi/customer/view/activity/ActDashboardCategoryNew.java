@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
 import com.desired.offermachi.customer.view.adapter.DashboardCategortListAdapter;
 
@@ -29,14 +31,15 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActDashboardCategoryNew extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList {
+public class ActDashboardCategoryNew extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,NotificationCountPresenter.NotiUnReadCount  {
     ImageView imageViewback,ivInfo;
     RecyclerView product_recyclerview;
     private DashboardCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     int adptrPos=0;
-
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,10 @@ public class ActDashboardCategoryNew extends AppCompatActivity implements View.O
           idholder= user.getId();
           imageViewback = findViewById(R.id.imageback);
           ivInfo = findViewById(R.id.info_id);
+
+          notiCount = new NotificationCountPresenter(this,this);
+          tvNotiCount = findViewById(R.id.txtMessageCount);
+          notiCount.NotificationUnreadCount(idholder);
 
           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
@@ -150,4 +157,25 @@ public class ActDashboardCategoryNew extends AppCompatActivity implements View.O
         finish();
     }
 
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
 }

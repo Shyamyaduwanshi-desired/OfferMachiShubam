@@ -57,8 +57,8 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
         init();
     }
     private void init(){
-        txtemail=findViewById(R.id.email);
-        txtphone=findViewById(R.id.phonenumber);
+//        txtemail=findViewById(R.id.email);
+//        txtphone=findViewById(R.id.phonenumber);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
         info=findViewById(R.id.info_id);
@@ -107,50 +107,21 @@ public class RetalierHelpActivity extends AppCompatActivity implements View.OnCl
                                 String message=mainJson.getString("message");
                                 if (status.equals("200")) {
                                     String result = mainJson.getString("result");
-//                                    JSONObject mainJson1 = new JSONObject(result);
 
                                     JSONArray jsonArray = new JSONArray(result);
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject jobj = jsonArray.getJSONObject(i);
-
-//                                        String id = jobj.getString("id");
+                                        String id = jobj.getString("id");
+                                        String post_title = jobj.getString("post_title");
+                                        String post_body = jobj.getString("post_body");
                                         String post_type = jobj.getString("post_type");
                                         String statuss = jobj.getString("status");
                                         FAQ faq = new FAQ(
-                                                jobj.getString("id"),
-                                                jobj.getString("post_title"),
-                                                jobj.getString("post_body")
-
+                                                id,post_title, post_body
                                         );
+
                                         faqList.add(faq);
                                     }
-
-
-
-
-
-
-
-
-//
-//                                    String contact_number=mainJson1.getString("contact_number");
-//                                    txtphone.setText(contact_number);
-//                                    String contact_email= mainJson1.getString("contact_email");
-//                                    txtemail.setText(contact_email);
-//                                    String question_answer=mainJson1.getString("question_answer");
-//                                    JSONArray jsonArray = new JSONArray(question_answer);
-//                                    for (int i = 0; i < jsonArray.length(); i++) {
-//                                        JSONObject jobj = jsonArray.getJSONObject(i);
-//                                        FAQ faq = new FAQ(
-//                                                jobj.getString("question"),
-//                                                jobj.getString("answer")
-//
-//                                        );
-//                                        faqList.add(faq);
-//
-//                                    }
-
-
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

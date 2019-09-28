@@ -15,6 +15,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.FollowerModel;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -38,7 +40,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActRetalierPushOffer extends AppCompatActivity implements View.OnClickListener ,ViewOfferPresenter.OfferDiscount, FollowerPresenter.Follower {
+public class ActRetalierPushOffer extends AppCompatActivity implements View.OnClickListener ,ViewOfferPresenter.OfferDiscount, FollowerPresenter.Follower, NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback;
     RecyclerView product_recyclerview;
@@ -50,7 +52,9 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
     AlertDialog alertDialog;
     ImageView imgNotiBell;
 //    Button btAddPushOffer;
-FloatingActionButton addPushOffer;
+    FloatingActionButton addPushOffer;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,10 @@ FloatingActionButton addPushOffer;
       addPushOffer=findViewById(R.id.floting_add_botton);
       imageViewback = findViewById(R.id.imageback);
       product_recyclerview = findViewById(R.id.pushoffer_recycler_id);
+
+      notiCount = new NotificationCountPresenter(this,this);
+      tvNotiCount = findViewById(R.id.txtMessageCount);
+      notiCount.NotificationUnreadCount(idholder);
 
       GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
       product_recyclerview.setLayoutManager(gridLayoutManager);
@@ -252,6 +260,27 @@ FloatingActionButton addPushOffer;
         showAlert(response, R.style.DialogAnimation);
     }
 
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
 }
 
 

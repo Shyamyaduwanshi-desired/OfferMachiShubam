@@ -98,14 +98,6 @@ public class HelpFragment extends Fragment {
                                 String message=mainJson.getString("message");
                                 if (status.equals("200")) {
                                     String result = mainJson.getString("result");
-//                                    JSONObject mainJson1 = new JSONObject(result);
-//                                    String contact_number=mainJson1.getString("contact_number");
-//                                    txtphone.setText(contact_number);
-//                                    String contact_email= mainJson1.getString("contact_email");
-//                                    txtemail.setText(contact_email);
-
-
-//                                    String question_answer=mainJson1.getString("question_answer");
 
                                     JSONArray jsonArray = new JSONArray(result);
                                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -157,7 +149,7 @@ public class HelpFragment extends Fragment {
         if (faqAdapter.getItemCount() == 0) {
             Toast.makeText(getContext(), "No surbhi", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();
+
         }
 
     }

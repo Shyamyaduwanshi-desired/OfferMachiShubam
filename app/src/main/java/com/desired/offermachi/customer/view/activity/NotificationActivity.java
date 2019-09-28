@@ -17,6 +17,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.StringRequest;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.NotificationModel;
@@ -25,31 +35,41 @@ import com.desired.offermachi.customer.model.days_model;
 import com.desired.offermachi.customer.model.hours_model;
 import com.desired.offermachi.customer.presenter.CustomerNotificationPresenter;
 import com.desired.offermachi.customer.presenter.DonoDisturbPresenter;
+import com.desired.offermachi.customer.presenter.NotiFicationOpenPresenter;
+
 import com.desired.offermachi.customer.view.adapter.CustomerNotificationAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
+import com.desired.offermachi.retalier.model.FAQ;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class NotificationActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
-        CustomerNotificationPresenter.NotificationList, DonoDisturbPresenter.DoNotDisInfo,CustomerNotificationAdapter.NotiAdapterClick {
+        CustomerNotificationPresenter.NotificationList ,DonoDisturbPresenter.DoNotDisInfo,CustomerNotificationAdapter.NotiAdapterClick
+, NotiFicationOpenPresenter.OpenNotificationInfo
+{
     ImageView imageViewback,info;
     Switch simpleSwitch;
     private CustomerNotificationAdapter customerNotificationAdapter;
     private CustomerNotificationPresenter presenter;
     RecyclerView categoryrecycle;
-    String idholder;
+    String idholder ,push_notification_id,type;
     String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,Dobholder,ImageHolder,SmartShoppingHolder;
     String SoundHolder;
-TextView tvDONodist;
+    TextView tvDONodist;
+    String push_notifications_count;
     private DonoDisturbPresenter dndPresenter;
+    private NotiFicationOpenPresenter notiRead;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +80,8 @@ TextView tvDONodist;
     private void init(){
         presenter=new CustomerNotificationPresenter(NotificationActivity.this,NotificationActivity.this);
         dndPresenter=new DonoDisturbPresenter(NotificationActivity.this,NotificationActivity.this);
+//        notificationCountPresenter = new NotificationCountPresenter(NotificationActivity.this,NotificationActivity.this);
+        notiRead = new NotiFicationOpenPresenter(NotificationActivity.this,NotificationActivity.this);
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder=user.getId();
         Nameholder= user.getUsername();
@@ -70,6 +92,8 @@ TextView tvDONodist;
         ImageHolder=user.getProfile();
         SmartShoppingHolder=user.getSmartShopping();
         SoundHolder=user.getNotificationsound();
+        push_notification_id=user.getPush_notification_id();
+        type=user.getUsertype();
         imageViewback=findViewById(R.id.imageback);
         info=findViewById(R.id.info_id);
         simpleSwitch =findViewById(R.id.donotswitch);
@@ -155,8 +179,7 @@ TextView tvDONodist;
                     Dobholder,
                     ImageHolder,
                     SmartShoppingHolder,
-                    "1"
-                    ,
+                    "1",
                     "1"//shyam 11/9/19
             );
             UserSharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
@@ -185,6 +208,7 @@ TextView tvDONodist;
         arNoti=response;
         customerNotificationAdapter = new CustomerNotificationAdapter(response,NotificationActivity.this,this);
         categoryrecycle.setAdapter(customerNotificationAdapter);
+
     }
 
 
@@ -276,20 +300,23 @@ TextView tvDONodist;
         }
 
     }
+    int ClickPos=0;
 //adapter click
     @Override
     public void onNotiClick(int position) {
+        ClickPos=position;
+        String offerId=arNoti.get(position).getNotiId();
+        notiRead.ReadNotification(idholder,offerId);
 
-       String Custom_offertype=arNoti.get(position).getCustom_offertype();
 
-        UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
+//        String Custom_offertype=arNoti.get(position).getCustom_offertype();
+//        UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
+//        Intent myIntent = new Intent(this, DashBoardActivity.class);
+//        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(myIntent);
+//        finish();
 
-        Intent myIntent = new Intent(this, DashBoardActivity.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(myIntent);
-        finish();
-
-//        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
 //        DashBoardActivity dash=new DashBoardActivity();
 //        dash.GoDealOfTheDay(1);
 
@@ -297,5 +324,37 @@ TextView tvDONodist;
 //                replace(R.id.root_layout, new DealsoftheDayFragment()).commit();
 
     }
-    //////////////////////////////////////////////////
+
+//    @Override
+//    public void successnoti(String push_notifications_count) {
+//        presenter.sentRequest(idholder);
+//    }
+
+
+    //read success
+    @Override
+    public void successReadNoti(String response) {
+
+        String Custom_offertype=arNoti.get(ClickPos).getCustom_offertype();
+        UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
+        Intent myIntent = new Intent(this, DashBoardActivity.class);
+        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(myIntent);
+        finish();
+    }
+
+    @Override
+    public void errornoti(String response) {
+        showAlert(response, R.style.DialogAnimation);
+    }
+
+    @Override
+    public void failnoti(String response) {
+        showAlert(response, R.style.DialogAnimation);
+    }
+
+
+
 }
+    //////////////////////////////////////////////////
+

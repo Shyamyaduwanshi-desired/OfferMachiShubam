@@ -25,6 +25,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.adapter.FilterListAdapter;
 import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
 
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class FilterShowActivity extends AppCompatActivity implements CustomerCategoryListPresenter.CustomerCategoryList, View.OnClickListener,MultiChoiceCategortListAdapter.AdapterClick {
+public class FilterShowActivity extends AppCompatActivity implements CustomerCategoryListPresenter.CustomerCategoryList, View.OnClickListener,MultiChoiceCategortListAdapter.AdapterClick , NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
@@ -42,6 +43,8 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     Button btProceed;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,10 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
         product_recyclerview.setLayoutManager(gridLayoutManager);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
 
         if (isNetworkConnected()) {
             presenter.GetCategoryList(idholder);//for show all category
@@ -212,5 +219,28 @@ public class FilterShowActivity extends AppCompatActivity implements CustomerCat
 //            startActivity(myIntent);
 //            finish();
         }
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

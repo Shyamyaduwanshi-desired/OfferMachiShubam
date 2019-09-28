@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
@@ -38,13 +40,15 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class CategoryActivity extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList {
+public class CategoryActivity extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList , NotificationCountPresenter.NotiUnReadCount {
     ImageView imageViewback;
     RecyclerView product_recyclerview;
     private CategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
     private String idholder,followsatus,Catid;
     int adptrPos=0;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,12 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
           product_recyclerview.setLayoutManager(gridLayoutManager);
           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+
+          notiCount = new NotificationCountPresenter(this,this);
+          tvNotiCount = findViewById(R.id.txtMessageCount);
+          notiCount.NotificationUnreadCount(idholder);
+
+
           if (isNetworkConnected()) {
               presenter.GetCategoryList(idholder);//for show all category
           }  else {
@@ -183,6 +193,28 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         finish();
         System.exit(0);
         super.onBackPressed();
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 
    /* @Override

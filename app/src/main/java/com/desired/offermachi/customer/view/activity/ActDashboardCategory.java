@@ -26,6 +26,7 @@ import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.adapter.CategortListAdapter;
 import com.desired.offermachi.customer.view.adapter.MultiChoiceCategortListAdapter;
 
@@ -34,24 +35,25 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick {
+public class ActDashboardCategory extends AppCompatActivity implements View.OnClickListener, CustomerCategoryListPresenter.CustomerCategoryList,MultiChoiceCategortListAdapter.AdapterClick,NotificationCountPresenter.NotiUnReadCount {
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
     private MultiChoiceCategortListAdapter categortListAdapter=null;
     private CustomerCategoryListPresenter presenter;
-    private String idholder,followsatus,Catid;
+    private String idholder,followsatus,Catid,id;
     int adptrPos=0;
     Button btProceed;
     hand handobj;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_dashboard_category);
         handobj = hand.getintance();
         initview();
-
+        notiCount = new NotificationCountPresenter(this,this);
     }
-
     private void initview(){
           presenter = new CustomerCategoryListPresenter(ActDashboardCategory.this, ActDashboardCategory.this);
           User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
@@ -62,20 +64,25 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
           imageViewback.setOnClickListener(this);
           info.setOnClickListener(this);
           btProceed.setOnClickListener(this);
-          product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
-          GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
-          product_recyclerview.setLayoutManager(gridLayoutManager);
-          product_recyclerview.setItemAnimator(new DefaultItemAnimator());
-          if (isNetworkConnected()) {
-              presenter.GetCategoryList(idholder);//for all category
-          }  else {
+
+
+           tvNotiCount = findViewById(R.id.txtMessageCount_id);
+           notiCount.NotificationUnreadCount(idholder);
+
+           product_recyclerview = (RecyclerView) findViewById(R.id.category_recycler_id);
+           GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4, LinearLayoutManager.VERTICAL, false);
+           product_recyclerview.setLayoutManager(gridLayoutManager);
+           product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+           if (isNetworkConnected()) {
+              presenter.GetCategoryList(idholder);
+
+              //for all category
+           }  else {
               showAlert("Please connect to internet.", R.style.DialogAnimation);
           }
+    }
 
-      }
-
-
-    @Override
+      @Override
     public void onClick(View v) {
         if (v==imageViewback){
             onBackPressed();
@@ -86,16 +93,19 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             Intent intent = new Intent(ActDashboardCategory.this, InfoActivity.class);
             startActivity(intent);
         }
+
     }
- String sAllCatId=""/*,sSingleCateId*/;
- String sAllCatNm=""/*,sSingleCateNm*/;
- String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
+     String sAllCatId=""/*,sSingleCateId*/;
+     String sAllCatNm=""/*,sSingleCateNm*/;
+     String sAllCatBannerimage=""/*,sSingleCateBannerimage*/;
+
 
     public void getAllSelectedId()
     {
         sAllCatId="";
         sAllCatNm="";
         sAllCatBannerimage="";
+
 
 //        sSingleCateId="";
 //        sSingleCateNm="";
@@ -137,6 +147,8 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             finish();
         }
     }
+
+    //show notification unread message c
     @Override
     public void followsuccess(String response) {
 
@@ -154,6 +166,7 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
         arCatList=response;
         categortListAdapter = new MultiChoiceCategortListAdapter(getApplicationContext(),arCatList,this);
         product_recyclerview.setAdapter(categortListAdapter);
+
     }
 
     @Override
@@ -187,6 +200,7 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
     }
 
     private boolean isNetworkConnected() {
+//
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
@@ -199,6 +213,7 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
 //adapter click
     @Override
     public void onClick(int position) {
+
         if(arCatList.get(position).isCheckStatus())
         {
             arCatList.get(position).setCheckStatus(false);
@@ -208,6 +223,30 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
             arCatList.get(position).setCheckStatus(true);
         }
         categortListAdapter.notifyDataSetChanged();
+
+
+    }
+
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
 
     }
 }

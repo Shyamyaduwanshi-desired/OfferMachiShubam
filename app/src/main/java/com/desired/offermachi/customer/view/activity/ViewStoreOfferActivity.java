@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.model.category_model;
 import com.desired.offermachi.customer.presenter.CustomerSelectCategoryPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.ViewStoreOfferPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 
@@ -31,12 +33,14 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewStoreOfferActivity extends AppCompatActivity implements View.OnClickListener, ViewStoreOfferPresenter.ViewOffer {
+public class ViewStoreOfferActivity extends AppCompatActivity implements View.OnClickListener, ViewStoreOfferPresenter.ViewOffer, NotificationCountPresenter.NotiUnReadCount{
     ImageView imageViewback;
     RecyclerView categoryrecycle;
     private CustomerTrendingAdapter customerTrendingAdapter;
     private ViewStoreOfferPresenter presenter;
     String idholder,storeid;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,12 @@ public class ViewStoreOfferActivity extends AppCompatActivity implements View.On
         categoryrecycle.setLayoutManager(gridLayoutManager1);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
+
         if (isNetworkConnected()) {
             presenter.ViewAllStoreOffer(idholder,storeid);
         }  else {
@@ -129,4 +139,25 @@ public class ViewStoreOfferActivity extends AppCompatActivity implements View.On
         return cm.getActiveNetworkInfo() != null;
     }
 
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
 }

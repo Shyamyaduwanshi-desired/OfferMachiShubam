@@ -3,8 +3,6 @@ package com.desired.offermachi.customer.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,11 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.customer.model.NotificationModel;
-import com.desired.offermachi.customer.model.SelectCategoryModel;
-import com.desired.offermachi.customer.view.activity.OtpActivtivity;
-import com.desired.offermachi.customer.view.activity.ViewOfferActivity;
 import com.desired.offermachi.retalier.constant.AppData;
-import com.desired.offermachi.retalier.model.FAQ;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,25 +22,22 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomerNotificationPresenter {
+public class NotificationCountPresenter {
     private Context context;
-    private NotificationList notificationList;
     private ProgressDialog progress;
-    String idholder;
-
-    public CustomerNotificationPresenter(Context context, NotificationList notificationList) {
+    public NotiUnReadCount notiUnreadCount;
+    public NotificationCountPresenter(Context context, NotiUnReadCount notiUnreadCount) {
         this.context = context;
-        this.notificationList = notificationList;
-
+        this.notiUnreadCount = notiUnreadCount;
     }
 
-    public interface NotificationList{
-        void success(ArrayList<NotificationModel> response);
-        void error(String response);
-        void fail(String response);
+    public interface NotiUnReadCount{
+        void successnoti(String response);
+        void errornoti(String response);
+        void failnoti(String response);
     }
 
-    public void sentRequest(final String userid) {
+    public void NotificationUnreadCount(final String userid) {
 
         if(!((Activity) context).isFinishing())
         {
@@ -55,42 +46,29 @@ public class CustomerNotificationPresenter {
             progress.setCancelable(false);
             showpDialog();
         }
-        final ArrayList<NotificationModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "select_all_push_notifications_data", new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_unread_push_notifications_count_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if(!((Activity) context).isFinishing()) {
                     hidepDialog();
                 }
+
                 try {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
+                    String  message = reader.getString("message");
                     if(status == 200){
                         String result=reader.getString("result");
-                        JSONArray jsonArray = new JSONArray(result);
-                        JSONObject object;
-                        for (int count = 0; count < jsonArray.length(); count++) {
-                            object = jsonArray.getJSONObject(count);
-                            String custom_offertype = object.getString("custom_offertype");
+                        JSONObject readerresult= new JSONObject(result);
+//                        String push_notifications_count= readerresult.getString("push_notifications_count");
+                        notiUnreadCount.successnoti(readerresult.getString("push_notifications_unread_count"));
 
-                            NotificationModel notificationModel = new NotificationModel(
-                                    object.getString("id"),
-                                    object.getString("title"),
-                                    object.getString("description"),
-                                    object.getString("is_open"),
-                                    object.getString("custom_offertype")
-                            );
-
-                            list.add(notificationModel);
-                        }
-                        Collections.reverse(list);
-                        notificationList.success(list);
-                    }else if(status == 404){
-                        notificationList.error(reader.getString("message"));
+                    }else {
+                        notiUnreadCount.errornoti(reader.getString("message"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    notificationList.fail("Something went wrong. Please try after some time.");
+                    notiUnreadCount.failnoti("Something went wrong. Please try after some time.");
                 }
             }
         }, new Response.ErrorListener() {
@@ -99,7 +77,7 @@ public class CustomerNotificationPresenter {
                 if(!((Activity) context).isFinishing()) {
                     hidepDialog();
                 }
-                notificationList.fail("Server Error.\n Please try after some time.");
+                notiUnreadCount.failnoti("Server Error.\n Please try after some time.");
             }
         }
         ) {
@@ -114,12 +92,12 @@ public class CustomerNotificationPresenter {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
-
     }
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();
     }
+
     private void hidepDialog() {
         if (progress.isShowing())
             progress.dismiss();

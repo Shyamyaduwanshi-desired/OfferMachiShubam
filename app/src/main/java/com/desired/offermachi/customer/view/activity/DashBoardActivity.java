@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
 import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
 import com.desired.offermachi.customer.view.fragment.ExclusiveFragment;
@@ -52,7 +54,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NotificationCountPresenter.NotiUnReadCount {
     FragmentManager FM;
     FragmentTransaction FT;
     LinearLayout smartshopping,dealsoftheday,coupons,favourites,ifollow;
@@ -67,11 +69,12 @@ public class DashBoardActivity extends AppCompatActivity
     NavigationView navigationView;
     TextView name,email;
     ImageView imageView;
-    String ImageHolder,username,useremail;
-   User user;
+    String ImageHolder,username,useremail,idholder;
+    User user;
    ImageView btnnotification;
    int count=0;
-
+   TextView tvNotiCount;
+   private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,23 +83,23 @@ public class DashBoardActivity extends AppCompatActivity
         toolbar = findViewById(R.id.toolbar);
         ivTitleLogo = toolbar.findViewById(R.id.logo);
         tvMainTitle = toolbar.findViewById(R.id.tv_title);
+        tvNotiCount = toolbar.findViewById(R.id.txtMessageCount);
+        notiCount = new NotificationCountPresenter(this,this);
 
         setToolTittle("", 1);
         user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-       String pos= UserSharedPrefManager.GetClickNoti(this);
+        String pos= UserSharedPrefManager.GetClickNoti(this);
         String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
         if (pos.equals("1")) {
 
-
             FM = getSupportFragmentManager();
             FT = FM.beginTransaction();
-
             switch (diffNavi)
+
             {
                 case "0":
                     FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
                 break;
-
                 case "1":
 //                    GoDealOfTheDay(1);
                     FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
@@ -110,10 +113,9 @@ public class DashBoardActivity extends AppCompatActivity
             }
 //            FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
 
-
             UserSharedPrefManager.SaveClickNoti(this,"0","");
         }
-else{
+  else{
         if (user.getSmartShopping().equals("1")) {
             FM = getSupportFragmentManager();
             FT = FM.beginTransaction();
@@ -124,10 +126,6 @@ else{
             FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
         }
     }
-
-        if(user != null){
-            getNotiCount();
-        }
 
         navigationView = findViewById(R.id.nav_view);
         navHeader = navigationView.getHeaderView(0);
@@ -141,10 +139,13 @@ else{
         email = (TextView) navHeader.findViewById(R.id.navemail);
         imageView = (ImageView) navHeader.findViewById(R.id.imageView);
 
+        idholder=user.getId();
+//        username = user.getUsername();
         username = user.getUsername();
         useremail = user.getEmail();
         ImageHolder = user.getProfile();
         Log.e("main", "ImageHolder=="+ImageHolder );
+
         if (username.equals("null")){
 
         }else{
@@ -200,7 +201,6 @@ else{
                 startActivity(intent);
             }
         });
-
 
         FloatingActionButton fab = findViewById(R.id.floting_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -362,9 +362,7 @@ else{
                 }
         });
 
-
         setSupportActionBar(toolbar);
-
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -373,7 +371,10 @@ else{
         toggle.syncState();
         drawer.closeDrawers();
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
+
 
     public void GoDealOfTheDay(int i) {
         if(user==null)
@@ -401,22 +402,6 @@ else{
         }
     }
 
-    private void getNotiCount() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
 
     private int dpToPx(Context applicationContext, int i) {
         return 0;
@@ -753,9 +738,6 @@ else{
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-
-
-
                 // Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -769,11 +751,10 @@ else{
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
-
                 if (user.getSmartShopping().equals("1")) {
 
-                    info.setVisibility(View.INVISIBLE);
-                    btnnotification.setVisibility(View.INVISIBLE);
+                    info.setVisibility(View.GONE);
+                    btnnotification.setVisibility(View.VISIBLE);
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -781,7 +762,7 @@ else{
                             .addToBackStack(null)
                             .commit();
                 } else {
-                    info.setVisibility(View.VISIBLE);
+                    info.setVisibility(View.GONE);
                     btnnotification.setVisibility(View.VISIBLE);
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -793,7 +774,6 @@ else{
                 String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,Dobholder,SmartShoppingHolder,SoundHolder,idholder;
                 User user = UserSharedPrefManager.getInstance(DashBoardActivity.this).getCustomer();
                 idholder= user.getId();
-
                 Nameholder= user.getUsername();
                 EmailHolder=user.getEmail();
                 PhoneHolder= user.getMobile();
@@ -839,8 +819,8 @@ else{
     protected void onResume() {
         super.onResume();
         if (user.getSmartShopping().equals("1")) {
-            info.setVisibility(View.INVISIBLE);
-            btnnotification.setVisibility(View.INVISIBLE);
+            info.setVisibility(View.GONE);
+            btnnotification.setVisibility(View.VISIBLE);
 
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -859,5 +839,33 @@ else{
             info.setVisibility(View.GONE);
             btnnotification.setVisibility(View.VISIBLE);
         }
+
+        notiCount.NotificationUnreadCount(idholder);
+
+    }
+//show notification unread message count
+
+    @Override
+    public void successnoti(String response) {
+
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+//            tvNotiCount.setText(push_notifications_count);
+            tvNotiCount.setText(response);
+//            Log.e("","count= "+tvNotiCount);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

@@ -31,6 +31,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerUpdateProfilePresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.presenter.ProfileImagePresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierProfileActivity;
@@ -46,7 +47,7 @@ import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, CustomerUpdateProfilePresenter.UpdateProfile {
+public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener, CustomerUpdateProfilePresenter.UpdateProfile, NotificationCountPresenter.NotiUnReadCount {
     private CustomerUpdateProfilePresenter presenter;
     LinearLayout male,female;
     ImageView  imageViewback,info;
@@ -60,6 +61,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     String datepick ;
     private String picture = "";
     private File file, compressedImage;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         imagepicker.setOnClickListener(this);
         editdob=findViewById(R.id.dateofbirth);
         editdob.setOnClickListener(this);
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
+
         if (user.getUsername().equals("null")){
             etname.setText("");
         }else{
@@ -390,6 +399,28 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 prettyDialog.dismiss();
             }
         }).show();
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }
 

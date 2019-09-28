@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
 import com.desired.offermachi.retalier.view.activity.ActAddPushOffer;
 import com.google.android.gms.common.ConnectionResult;
@@ -53,7 +55,7 @@ import java.util.Locale;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class MapActivity extends AppCompatActivity implements LocationObserver, Runnable, LocationListener,OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, SmartShoppingOfferPresenter.NotificationOfferList, View.OnClickListener {
+public class MapActivity extends AppCompatActivity implements LocationObserver, Runnable, LocationListener,OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, SmartShoppingOfferPresenter.NotificationOfferList, View.OnClickListener , NotificationCountPresenter.NotiUnReadCount {
     SupportMapFragment mapFragment;
     protected GoogleApiClient mGoogleApiClient;
     private GoogleMap mMapSession;
@@ -67,6 +69,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
     EditText edtlocation;
     ImageView imgNotiBell;
     ImageView imageViewback ,info;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         info=findViewById(R.id.info_id);
         info.setOnClickListener(this);
         edtlocation=findViewById(R.id.etlocation);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount = new NotificationCountPresenter(this,this);
+        notiCount.NotificationUnreadCount(idholder);
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -223,6 +230,7 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         }
     }
 
+
     @Override
     public void run() {
         Log.e("","run");
@@ -353,5 +361,30 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             Intent intent = new Intent(MapActivity.this, InfoActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+//            tvNotiCount.setText(push_notifications_count);
+            tvNotiCount.setText(response);
+//            Log.e("","count= "+tvNotiCount);
+        }
+
+
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

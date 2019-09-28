@@ -39,11 +39,8 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull final FaqAdapter.ViewHolder viewHolder, int i) {
         final FAQ faq = faqArrayList.get(i);
         viewHolder.post_title.setText(faq.getPost_title());
-//        viewHolder.post_body.setText(faq.getPost_body());
-//        String tittile = "<h2 style=\"color: #2e6c80;\">How to use the editor:</h2>\r\n<p>Paste your documents in the visual editor on the left or your HTML code in the source editor in the right. <br />Edit any of the two areas and see the other changing in real time.&nbsp;</p>";
         viewHolder. post_body.setText(Html.fromHtml(faq.getPost_body()));
 //        faq.getPost_body();
-
         viewHolder.questionlinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +54,7 @@ public class FaqAdapter extends RecyclerView.Adapter<FaqAdapter.ViewHolder> {
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return faqArrayList.size();

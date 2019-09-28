@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerOfferDetailPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.StoreDetailPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
@@ -45,7 +47,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewAllOfferFollowActivity extends AppCompatActivity implements View.OnClickListener, StoreDetailPresenter.StoreDetail {
+public class ViewAllOfferFollowActivity extends AppCompatActivity implements View.OnClickListener, StoreDetailPresenter.StoreDetail, NotificationCountPresenter.NotiUnReadCount{
     ImageView storelogo;
     CircleImageView storelogothumb;
     private StoreDetailPresenter presenter;
@@ -67,6 +69,9 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
    Button btnok;
     String storeaddress,storeemail,storemobile;
     ImageView imageviewback,info;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +109,14 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         imageviewback.setOnClickListener(this);
         info=findViewById(R.id.info_id);
         info.setOnClickListener(this);
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
+
+
+
        /* btnfollow=findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);*/
         /*Toast.makeText(this, ""+followstatus, Toast.LENGTH_SHORT).show();*/
@@ -348,5 +361,28 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+//            tvNotiCount.setText(push_notifications_count);
+            tvNotiCount.setText(response);
+//            Log.e("","count= "+tvNotiCount);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

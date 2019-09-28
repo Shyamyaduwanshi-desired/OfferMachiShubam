@@ -57,10 +57,13 @@ public class RetailerNotificationPresenter {
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
                             NotificationModel notificationModel = new NotificationModel(
+                                    object.getString("id"),
                                     object.getString("title"),
                                     object.getString("description"),
+                                    object.getString("is_open"),
                                     object.getString("custom_offertype")
                             );
+
                             list.add(notificationModel);
                         }
                         retailerNotificationList.success(list);

@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
@@ -17,13 +19,15 @@ import org.json.JSONObject;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierStatisticsActivity  extends AppCompatActivity implements View.OnClickListener, StaticsPresenter.Statics {
+public class RetalierStatisticsActivity  extends AppCompatActivity implements View.OnClickListener, StaticsPresenter.Statics, NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     TextView gotthecoupontext,redeemthecoupontext,Offerdiscounttext;
     private StaticsPresenter presenter;
     String idholder;
     ImageView imgNotiBell;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,11 @@ public class RetalierStatisticsActivity  extends AppCompatActivity implements Vi
         imageViewback.setOnClickListener(this);
         info=findViewById(R.id.info_id);
         info.setOnClickListener(this);
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (isNetworkConnected()){
             presenter.sentRequest(idholder);
         }else{
@@ -134,5 +143,27 @@ public class RetalierStatisticsActivity  extends AppCompatActivity implements Vi
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

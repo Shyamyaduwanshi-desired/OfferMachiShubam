@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.HomePresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.StoreListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
 import com.desired.offermachi.customer.view.adapter.StoreViewallAdapter;
@@ -32,13 +34,14 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class StoreCouponCodeActivity extends AppCompatActivity implements View.OnClickListener, StoreListPresenter.StoreList {
+public class StoreCouponCodeActivity extends AppCompatActivity implements View.OnClickListener, StoreListPresenter.StoreList , NotificationCountPresenter.NotiUnReadCount {
 
     ImageView imageViewback,info;
     RecyclerView storerecycle;
     private CustomerStoreAdapter customerStoreAdapter;
     private StoreListPresenter presenter;
-    String idholder;
+    String idholder;TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,9 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
         storerecycle.setItemAnimator(new DefaultItemAnimator());
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
         if (isNetworkConnected()) {
             presenter.ViewAllStore(idholder);
         }  else {
@@ -134,5 +140,27 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
         return cm.getActiveNetworkInfo() != null;
     }
 
+    @Override
+    public void successnoti(String response) {
+
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
 }
 

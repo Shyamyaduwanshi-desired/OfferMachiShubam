@@ -10,12 +10,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.PeopleModel;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierListPeopleActivity  extends AppCompatActivity implements View.OnClickListener, RetailerPeopleListPresenter.PeopleList {
+public class RetalierListPeopleActivity  extends AppCompatActivity implements View.OnClickListener, RetailerPeopleListPresenter.PeopleList, NotificationCountPresenter.NotiUnReadCount {
 
     RecyclerView recyclerView;
     String idholder;
@@ -38,6 +40,8 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
     private PeopleListAdapter peopleListAdapter;
     private RetailerPeopleListPresenter presenter;
     String status;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,11 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (isNetworkConnected()){
             presenter.GetPeopleList(idholder,status);
 
@@ -129,4 +138,26 @@ public class RetalierListPeopleActivity  extends AppCompatActivity implements Vi
     }
 
 
+    @Override
+    public void successnoti(String response) {
+
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
 }

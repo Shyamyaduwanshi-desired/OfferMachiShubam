@@ -1,7 +1,7 @@
 package com.desired.offermachi.customer.model;
 
 public class NotificationModel {
-    String title,msg ,custom_offertype;
+    String title,msg ,is_open,custom_offertype ,notiId;
 
     public String getCustom_offertype() {
         return custom_offertype;
@@ -11,9 +11,19 @@ public class NotificationModel {
         this.custom_offertype = custom_offertype;
     }
 
-    public NotificationModel(String title, String msg, String custom_offertype) {
+    public String getIs_open() {
+        return is_open;
+    }
+
+    public void setIs_open(String is_open) {
+        this.is_open = is_open;
+    }
+
+    public NotificationModel(String id,String title, String msg, String is_open, String custom_offertype) {
+        this.notiId = id;
         this.title = title;
         this.msg = msg;
+        this.is_open=is_open;
         this.custom_offertype=custom_offertype;
     }
 
@@ -31,5 +41,13 @@ public class NotificationModel {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getNotiId() {
+        return notiId;
+    }
+
+    public void setNotiId(String notiId) {
+        this.notiId = notiId;
     }
 }

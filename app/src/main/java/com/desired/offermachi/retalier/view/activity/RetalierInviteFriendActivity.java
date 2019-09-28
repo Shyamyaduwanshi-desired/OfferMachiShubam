@@ -7,22 +7,30 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class RetalierInviteFriendActivity extends AppCompatActivity implements View.OnClickListener {
+public class RetalierInviteFriendActivity extends AppCompatActivity implements View.OnClickListener, NotificationCountPresenter.NotiUnReadCount  {
 
     ImageView imageViewback,info;
     ImageView facebook,Watsup,Twitter;
     ImageView imgNotiBell;
+    TextView tvNotiCount;
+    private String idholder;
+    private NotificationCountPresenter notiCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +38,14 @@ public class RetalierInviteFriendActivity extends AppCompatActivity implements V
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
         imageViewback=findViewById(R.id.imageback);
+
+        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+        idholder= user.getId();
+
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         imageViewback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,5 +164,27 @@ public class RetalierInviteFriendActivity extends AppCompatActivity implements V
         if (v==imgNotiBell){
             startActivity(new Intent(getApplicationContext(), RetalierNotificationActivity.class));
         }
+    }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
     }
 }

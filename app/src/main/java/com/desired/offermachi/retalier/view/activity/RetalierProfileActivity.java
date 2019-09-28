@@ -21,6 +21,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
@@ -50,7 +52,7 @@ import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class RetalierProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener, ProfileImagePresenter.ProfileImage {
+public class RetalierProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, View.OnClickListener, ProfileImagePresenter.ProfileImage,NotificationCountPresenter.NotiUnReadCount  {
 
     public TabLayout tabLayout;
     RetalierTabLayoutAdapter adapter;
@@ -63,6 +65,8 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
     private File file, compressedImage;
     private ProfileImagePresenter presenter;
     ImageView imgNotiBell;
+    TextView tvNotiCount;
+    private NotificationCountPresenter notiCount;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,10 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
         info.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
+        notiCount = new NotificationCountPresenter(this,this);
+        tvNotiCount = findViewById(R.id.txtMessageCount);
+        notiCount.NotificationUnreadCount(idholder);
+
         if (ImageHolder.equals("")||ImageHolder.equals("NA")){
 
         }else{
@@ -278,6 +286,29 @@ public class RetalierProfileActivity extends AppCompatActivity implements TabLay
             }
         }).show();
     }
+
+    @Override
+    public void successnoti(String response) {
+        if(TextUtils.isEmpty(response))
+        {
+            tvNotiCount.setText("0");
+        }
+        else {
+
+            tvNotiCount.setText(response);
+        }
+    }
+
+    @Override
+    public void errornoti(String response) {
+
+    }
+
+    @Override
+    public void failnoti(String response) {
+
+    }
+
     //tablayout
     public class Pager extends FragmentStatePagerAdapter {
 

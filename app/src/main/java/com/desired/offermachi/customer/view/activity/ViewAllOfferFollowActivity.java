@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,17 +18,23 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.model.slider_viewpager_model;
 import com.desired.offermachi.customer.presenter.CustomerOfferDetailPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.StoreDetailPresenter;
+import com.desired.offermachi.customer.presenter.ViewStoreOfferPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
+import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.squareup.picasso.MemoryPolicy;
@@ -47,11 +54,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewAllOfferFollowActivity extends AppCompatActivity implements View.OnClickListener, StoreDetailPresenter.StoreDetail, NotificationCountPresenter.NotiUnReadCount{
-    ImageView storelogo;
-    CircleImageView storelogothumb;
+public class ViewAllOfferFollowActivity extends AppCompatActivity implements View.OnClickListener, StoreDetailPresenter.StoreDetail, NotificationCountPresenter.NotiUnReadCount , ViewStoreOfferPresenter.ViewOffer{
+    ImageView storelogoid;
+    ImageView storelogothumb;
     private StoreDetailPresenter presenter;
-    TextView txtstorename,txtstorenem2,txtstoredescription;
+    TextView txtstorename/*,txtstorenem2*/,txtstoredescription;
     TextView txtmondayopen,txttuesdayopen,txtwednesdayopen,txtthursdayopen,txtfridayopen,txtsaturdayopen,txtsundayopen;
     String Mondayopentime,Tuesdayopentime,Wednesdayopentime,Thursdayopentime,Fridayopentime,Saturdayopentime,Sundayopentime;
     String Mondayclosetime,Tuesdayclosetime,Wednesdayclosetime,Thursdayclosetime,Fridayclosetime,Saturdayclosetime,Sundayclosetime;
@@ -71,7 +78,15 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     ImageView imageviewback,info;
     TextView tvNotiCount;
     private NotificationCountPresenter notiCount;
-
+    RecyclerView categoryrecycle;
+    private CustomerTrendingAdapterNew customerTrendingAdapter;
+    private ViewStoreOfferPresenter presenters;
+    TextView textview;
+//    ViewPager viewPager;
+    LinearLayout sliderDotspanel;
+    private int dotscount;
+    private ImageView[] dots;
+    ArrayList<slider_viewpager_model> arrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,24 +101,27 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         storelist=new ArrayList<>();
         retailer_id=intent.getStringExtra("retailer_id");
         category_id=intent.getStringExtra("category_id");
-        storelogo=findViewById(R.id.storelogo);
+        storelogoid=findViewById(R.id.iv_main);
+
         storelogothumb=findViewById(R.id.storelogothumb);
         txtstorename=findViewById(R.id.storename);
-        txtstorenem2=findViewById(R.id.storename2);
+//        txtstorenem2=findViewById(R.id.storename2);
         txtstoredescription=findViewById(R.id.storedescription);
-        txtmondayopen=findViewById(R.id.mondayopen);
-        txttuesdayopen=findViewById(R.id.tuesdayopen);
-        txtwednesdayopen=findViewById(R.id.wednesdayopen);
-        txtthursdayopen=findViewById(R.id.thursdayopen);
-        txtfridayopen=findViewById(R.id.fridayopen);
-        txtsaturdayopen=findViewById(R.id.saturdayopen);
-        txtsundayopen=findViewById(R.id.sundayopen);
+
+
+        //        txtmondayopen=findViewById(R.id.mondayopen);
+//        txttuesdayopen=findViewById(R.id.tuesdayopen);
+//        txtwednesdayopen=findViewById(R.id.wednesdayopen);
+//        txtthursdayopen=findViewById(R.id.thursdayopen);
+//        txtfridayopen=findViewById(R.id.fridayopen);
+//        txtsaturdayopen=findViewById(R.id.saturdayopen);
+//        txtsundayopen=findViewById(R.id.sundayopen);
         storerecycle=findViewById(R.id.storerecycleview);
-        viewalloffer=findViewById(R.id.viewalloffer_id);
-        viewalloffer.setOnClickListener(this);
+//        viewalloffer=findViewById(R.id.viewalloffer_id);
+//        viewalloffer.setOnClickListener(this);
         btnnoti=findViewById(R.id.btnnoti);
         btnnoti.setOnClickListener(this);
-        txtcontactdetail=findViewById(R.id.contactdetail);
+        txtcontactdetail=findViewById(R.id.contactdetails);
         txtcontactdetail.setOnClickListener(this);
         imageviewback=findViewById(R.id.imageviewback);
         imageviewback.setOnClickListener(this);
@@ -114,8 +132,15 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
 
-
-
+        presenters = new ViewStoreOfferPresenter(ViewAllOfferFollowActivity.this, ViewAllOfferFollowActivity.this);
+        categoryrecycle = findViewById(R.id.categoryrecycleview);
+//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+//        categoryrecycle.setLayoutManager(gridLayoutManager1);
+        categoryrecycle.setHasFixedSize(true);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
+        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
+        categoryrecycle.setNestedScrollingEnabled(false);
+        textview = findViewById(R.id.timmers_id);
 
        /* btnfollow=findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);*/
@@ -133,11 +158,15 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         storerecycle.setNestedScrollingEnabled(false);
         if (isNetworkConnected()) {
             presenter.StoreDetail(idholder, retailer_id,category_id);
+            presenters.ViewAllStoreOffer(idholder, retailer_id);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(StoreReceiver,
                 new IntentFilter("StoreFollow"));
+
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(locationReceiver,
+                new IntentFilter("Favourite"));
 
     }
     public BroadcastReceiver StoreReceiver = new BroadcastReceiver() {
@@ -148,15 +177,24 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             presenter.AddStoreFollow(idholder,storeid,status);
         }
     };
-
+    public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String fav = intent.getStringExtra("fav");
+            String offerid = intent.getStringExtra("offerid");
+            presenters.AddFavourite(idholder, offerid, fav);
+        }
+    };
     @Override
     public void onClick(View v) {
-        if (v==viewalloffer){
-            Intent myIntent = new Intent(getApplicationContext(), ViewStoreOfferActivity.class);
-            myIntent.putExtra("storeid",retailer_id);
-            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(myIntent);
-        }else if (v==btnnoti){
+//        if (v==viewalloffer){
+//            Intent myIntent = new Intent(getApplicationContext(), ViewStoreOfferActivity.class);
+//            myIntent.putExtra("storeid",retailer_id);
+//            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(myIntent);
+//        }else
+
+        if (v==btnnoti){
             startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
         }else if (v==txtcontactdetail){
             showdialog();
@@ -181,7 +219,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
 
         }*/
-
     }
 
     @Override
@@ -191,13 +228,13 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             Storeid=object.getString("id");
             String Shopname=object.getString("shop_name");
             txtstorename.setText(Shopname);
-            txtstorenem2.setText(Shopname);
+//            txtstorenem2.setText(Shopname);
 
             String Shoplogo=object.getString("shop_logo");
             if (Shoplogo.equals("")) {
             } else {
                 Picasso.get().load(Shoplogo).networkPolicy(NetworkPolicy.NO_CACHE)
-                        .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(storelogo);
+                        .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(storelogoid);
             }
             if (Shoplogo.equals("")) {
             } else {
@@ -232,27 +269,68 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
             }else{
                 StringTokenizer timeto = new StringTokenizer(storeclosetime, ",");
+                textview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Dialog dialog = new Dialog(ViewAllOfferFollowActivity.this);
+                        dialog.setContentView(R.layout.open_close_dialog);
+                        dialog.setTitle("Custom Dialog");
 
-                Mondayclosetime = timeto.nextToken();
-                txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);
+                        TextView  txtmondayopen=dialog.findViewById(R.id.mondayopen);
+                        TextView   txttuesdayopen=dialog.findViewById(R.id.tuesdayopen);
+                        TextView  txtwednesdayopen=dialog.findViewById(R.id.wednesdayopen);
+                        TextView  txtthursdayopen=dialog.findViewById(R.id.thursdayopen);
+                        TextView  txtfridayopen=dialog.findViewById(R.id.fridayopen);
+                        TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
+                        TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
 
-                Tuesdayclosetime= timeto.nextToken();
-                txttuesdayopen.setText(Tuesdayopentime+"-"+Tuesdayclosetime);
 
-                Wednesdayclosetime= timeto.nextToken();
-                txtwednesdayopen.setText(Wednesdayopentime+"-"+Wednesdayclosetime);
+                        Mondayclosetime = timeto.nextToken();
+                        txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);
 
-                Thursdayclosetime= timeto.nextToken();
-                txtthursdayopen.setText(Thursdayopentime+"-"+Thursdayclosetime);
+                        Tuesdayclosetime= timeto.nextToken();
+                        txttuesdayopen.setText(Tuesdayopentime+"-"+Tuesdayclosetime);
 
-                Fridayclosetime= timeto.nextToken();
-                txtfridayopen.setText(Fridayopentime+"-"+Fridayclosetime);
+                        Wednesdayclosetime= timeto.nextToken();
+                        txtwednesdayopen.setText(Wednesdayopentime+"-"+Wednesdayclosetime);
 
-                Saturdayclosetime= timeto.nextToken();
-                txtsaturdayopen.setText(Saturdayopentime+"-"+Saturdayclosetime);
+                        Thursdayclosetime= timeto.nextToken();
+                        txtthursdayopen.setText(Thursdayopentime+"-"+Thursdayclosetime);
 
-                Sundayclosetime= timeto.nextToken();
-                txtsundayopen.setText(Sundayopentime+"-"+Sundayclosetime);
+                        Fridayclosetime= timeto.nextToken();
+                        txtfridayopen.setText(Fridayopentime+"-"+Fridayclosetime);
+
+                        Saturdayclosetime= timeto.nextToken();
+                        txtsaturdayopen.setText(Saturdayopentime+"-"+Saturdayclosetime);
+
+                        Sundayclosetime= timeto.nextToken();
+                        txtsundayopen.setText(Sundayopentime+"-"+Sundayclosetime);
+
+                        dialog.show();
+
+                    }
+                });
+
+//                Mondayclosetime = timeto.nextToken();
+//                txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);
+//
+//                Tuesdayclosetime= timeto.nextToken();
+//                txttuesdayopen.setText(Tuesdayopentime+"-"+Tuesdayclosetime);
+//
+//                Wednesdayclosetime= timeto.nextToken();
+//                txtwednesdayopen.setText(Wednesdayopentime+"-"+Wednesdayclosetime);
+//
+//                Thursdayclosetime= timeto.nextToken();
+//                txtthursdayopen.setText(Thursdayopentime+"-"+Thursdayclosetime);
+//
+//                Fridayclosetime= timeto.nextToken();
+//                txtfridayopen.setText(Fridayopentime+"-"+Fridayclosetime);
+//
+//                Saturdayclosetime= timeto.nextToken();
+//                txtsaturdayopen.setText(Saturdayopentime+"-"+Saturdayclosetime);
+//
+//                Sundayclosetime= timeto.nextToken();
+//                txtsundayopen.setText(Sundayopentime+"-"+Sundayclosetime);
             }
             storeaddress=object.getString("address");
             storeemail=object.getString("email");
@@ -309,6 +387,23 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     }
 
     @Override
+    public void success(ArrayList<SelectCategoryModel> response) {
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewAllOfferFollowActivity.this, response);
+        categoryrecycle.setAdapter(customerTrendingAdapter);
+
+    }
+
+    @Override
+    public void favsuccess(String response) {
+
+        if (isNetworkConnected()) {
+            presenters.ViewAllStoreOffer(idholder, retailer_id);
+        } else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+    @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);
     }
@@ -319,6 +414,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     }
 
     private void showAlert(String message, int animationSource) {
+
+
         final PrettyDialog prettyDialog = new PrettyDialog(this);
         prettyDialog.setCanceledOnTouchOutside(false);
         TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);

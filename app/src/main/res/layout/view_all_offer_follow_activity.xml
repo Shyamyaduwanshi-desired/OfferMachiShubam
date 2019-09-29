@@ -142,42 +142,64 @@
 <!--                android:visibility="gone"-->
 <!--                android:textSize="12dp" />-->
 <!--        </RelativeLayout>-->
-            <RelativeLayout
-                android:id="@+id/relative"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/storelogo"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/banner_relative_id"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:src="@drawable/store"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:scaleType="centerCrop"/>
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:src="@drawable/store"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:scaleType="centerCrop"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/storelogothumb"
-                    android:src="@drawable/store"
-                    android:scaleType="centerCrop"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:foregroundGravity="center"
-                    android:layout_below="@+id/storelogo"/>
+                    <TextView
+                        android:id="@+id/btnfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:background="@drawable/view_background"
+                        android:text="Unfollow"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:layout_alignBottom="@+id/iv_main"
+                        android:layout_toRightOf="@+id/SliderDots"
+                        android:layout_marginBottom="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:layout_marginLeft="190dp"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/storelogothumb"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:src="@drawable/store"
+                android:layout_marginLeft="10dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="120dp"/>
 
+            <LinearLayout
+                android:id="@+id/lyname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/storelogothumb"
+                android:orientation="horizontal"
+                android:layout_marginTop="179dp"
+                >
                 <LinearLayout
-                    android:id="@+id/lyname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@+id/storelogothumb"
-                    android:orientation="vertical"
-                    android:layout_below="@+id/storelogo">
+                    android:orientation="vertical">
                     <TextView
                         android:id="@+id/storename"
                         android:layout_width="wrap_content"
@@ -186,60 +208,176 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/blue"
-                        android:textSize="14dp" />
+                        android:textSize="15dp" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
                         android:background="@color/orange"/>
                 </LinearLayout>
+                <RatingBar
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="false"
+                    android:max="5"
+                    android:rating="5"
+                    android:scaleX=".5"
+                    android:scaleY=".5"
+                    android:theme="@style/MyRatingBar"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/storelogothumb"
+                android:orientation="horizontal"
+                android:layout_below="@+id/lyname"
+                >
                 <TextView
-                    android:id="@+id/btnfollow"
-                    android:layout_width="70dp"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="80dp"
-                    android:background="@drawable/view_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CLosed Now"
                     android:gravity="center"
-                    android:text="Unfollow"
-                    android:layout_below="@+id/lyname"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center"
-                    android:textSize="12dp"
-                    android:layout_marginBottom="20dp"
-                    android:visibility="gone"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/darkred"
+                    android:textSize="15dp"
+                    />
+                <TextView
+                    android:id="@+id/timmers_id"
+                    android:layout_width="20dp"
+                    android:layout_height="23dp"
+                    android:layout_marginLeft="5dp"
+                    android:drawableLeft="@drawable/black_watch"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/description_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/storelogothumb"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/storedescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the"
+                    android:textSize="10dp" />
+            </LinearLayout>
 
-            </RelativeLayout>
+
+
+
+
+
+<!--            -->
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/relative"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/storelogo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:src="@drawable/store"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:scaleType="centerCrop"/>-->
+
+<!--&lt;!&ndash;                <de.hdodenhof.circleimageview.CircleImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                    xmlns:app="http://schemas.android.com/apk/res-auto"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="50dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="50dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/storelogothumb"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:src="@drawable/store"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:scaleType="centerCrop"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginTop="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginLeft="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:foregroundGravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_below="@+id/storelogo"/>&ndash;&gt;-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/lyname"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:layout_toRightOf="@+id/storelogothumb"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_below="@+id/storelogo">-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/storename"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Dominos Store"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/blue"-->
+<!--                        android:textSize="14dp" />-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="3dp"-->
+<!--                        android:background="@color/orange"/>-->
+<!--                </LinearLayout>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/btnfollow"-->
+<!--                    android:layout_width="70dp"-->
+<!--                    android:layout_height="23dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_marginLeft="80dp"-->
+<!--                    android:background="@drawable/view_background"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="Unfollow"-->
+<!--                    android:layout_below="@+id/lyname"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textSize="12dp"-->
+<!--                    android:layout_marginBottom="20dp"-->
+<!--                    android:visibility="gone"/>-->
+
+<!--            </RelativeLayout>-->
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/relative"
+            android:layout_below="@+id/description_id"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/storename2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Dominos Store"
-                android:textColor="@color/pink"
-                android:layout_marginLeft="10dp"
-                android:textStyle="bold"
-                android:textSize="16dp" />
-                        <TextView
-                            android:id="@+id/storedescription"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the"
-                            android:textSize="10dp" />
+<!--            <TextView-->
+<!--                android:id="@+id/storename2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:text="Dominos Store"-->
+<!--                android:textColor="@color/pink"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="16dp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/storedescription"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:layout_marginRight="10dp"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the"-->
+<!--                            android:textSize="10dp" />-->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:orientation="vertical">
                              <LinearLayout
+                                 android:visibility="gone"
                                  android:layout_width="match_parent"
                                  android:layout_height="wrap_content"
                                  android:orientation="horizontal">
@@ -268,9 +406,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
-
                                 <TextView
-                                    android:id="@+id/contactdetail"
+                                    android:visibility="gone"
+                                    android:id="@+id/contactdetails"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Contact Details"
@@ -282,45 +420,74 @@
                                     android:textStyle="bold"
                                     />
                                 <View
+                                    android:visibility="gone"
                                     android:layout_width="140dp"
                                     android:layout_height="1dp"
                                     android:background="@color/black"
                                     android:layout_marginTop="3dp"/>
-                                 <LinearLayout
-                                     android:layout_width="match_parent"
-                                     android:layout_height="wrap_content"
-                                     android:orientation="horizontal"
-                                     android:layout_marginTop="10dp">
-                                     <TextView
-                                         android:layout_width="wrap_content"
-                                         android:layout_height="wrap_content"
-                                         android:text="Hours:"
-                                         android:layout_marginLeft="1dp"
-                                         android:textSize="15dp"
-                                         android:drawableLeft="@drawable/black_watch"
-                                         android:drawablePadding="10dp"
-                                         android:textColor="@color/black"
-                                         android:textStyle="bold"
-                                         />
-                                     <TextView
-                                         android:layout_width="wrap_content"
-                                         android:layout_height="wrap_content"
-                                         android:text="Open "
-                                         android:layout_marginLeft="10dp"
-                                         android:textSize="15dp"
-                                         android:textColor="@color/darkgreen"
-                                         android:textStyle="bold"
-                                         />
-                                     <TextView
-                                         android:layout_width="wrap_content"
-                                         android:layout_height="wrap_content"
-                                         android:text="Closed"
-                                         android:layout_marginLeft="7dp"
-                                         android:textSize="15dp"
-                                         android:textColor="@color/darkred"
-                                         android:textStyle="bold"
-                                         />
-                                 </LinearLayout>
+<!--                                 <LinearLayout-->
+<!--                                     android:layout_width="match_parent"-->
+<!--                                     android:layout_height="wrap_content"-->
+<!--                                     android:orientation="horizontal"-->
+<!--                                     android:layout_marginTop="10dp">-->
+<!--                                     <TextView-->
+<!--                                         android:layout_width="wrap_content"-->
+<!--                                         android:layout_height="wrap_content"-->
+<!--                                         android:text="Hours:"-->
+<!--                                         android:layout_marginLeft="1dp"-->
+<!--                                         android:textSize="15dp"-->
+<!--                                         android:drawableLeft="@drawable/black_watch"-->
+<!--                                         android:drawablePadding="10dp"-->
+<!--                                         android:textColor="@color/black"-->
+<!--                                         android:textStyle="bold"-->
+<!--                                         />-->
+<!--                                     <TextView-->
+<!--                                         android:layout_width="wrap_content"-->
+<!--                                         android:layout_height="wrap_content"-->
+<!--                                         android:text="Open "-->
+<!--                                         android:layout_marginLeft="10dp"-->
+<!--                                         android:textSize="15dp"-->
+<!--                                         android:textColor="@color/darkgreen"-->
+<!--                                         android:textStyle="bold"-->
+<!--                                         />-->
+<!--                                     <TextView-->
+<!--                                         android:layout_width="wrap_content"-->
+<!--                                         android:layout_height="wrap_content"-->
+<!--                                         android:text="Closed"-->
+<!--                                         android:layout_marginLeft="7dp"-->
+<!--                                         android:textSize="15dp"-->
+<!--                                         android:textColor="@color/darkred"-->
+<!--                                         android:textStyle="bold"-->
+<!--                                         />-->
+<!--                                 </LinearLayout>-->
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_toRightOf="@+id/storelogothumb"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:layout_below="@+id/lyname"-->
+<!--                                    android:layout_marginTop="10dp"-->
+<!--                                    >-->
+<!--                                    <TextView-->
+<!--                                        android:layout_width="wrap_content"-->
+<!--                                        android:layout_height="wrap_content"-->
+<!--                                        android:text="CLosed Now"-->
+<!--                                        android:gravity="center"-->
+<!--                                        android:textStyle="bold"-->
+<!--                                        android:textColor="@color/darkred"-->
+<!--                                        android:textSize="15dp"-->
+<!--                                        />-->
+<!--                                    <TextView-->
+<!--                                        android:id="@+id/timmer_id"-->
+<!--                                        android:layout_width="20dp"-->
+<!--                                        android:layout_height="23dp"-->
+<!--                                        android:layout_marginLeft="5dp"-->
+<!--                                        android:drawableLeft="@drawable/black_watch"-->
+<!--                                        android:drawablePadding="10dp"-->
+<!--                                        android:textColor="@color/black"-->
+<!--                                        android:textStyle="bold"-->
+<!--                                        />-->
+<!--                                </LinearLayout>-->
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
@@ -330,217 +497,238 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"
                                         android:layout_alignParentBottom="true">
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="vertical">
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Monday"/>
-                                                <TextView
-                                                    android:id="@+id/mondayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textStyle="bold"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Tuesday"/>
-                                                <TextView
-                                                    android:id="@+id/tuesdayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textStyle="bold"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Wednesday"/>
-                                                <TextView
-                                                    android:id="@+id/wednesdayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textStyle="bold"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Thursday"/>
-                                                <TextView
-                                                    android:id="@+id/thursdayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textStyle="bold"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Friday"/>
-                                                <TextView
-                                                    android:id="@+id/fridayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textStyle="bold"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Saturday"/>
-                                                <TextView
-                                                    android:id="@+id/saturdayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"
-                                                    android:textStyle="bold"/>
-                                            </LinearLayout>
-                                            <LinearLayout
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginTop="10dp"
-                                                android:layout_marginLeft="15dp"
-                                                android:layout_marginRight="15dp"
-                                                android:weightSum="2">
-                                                <TextView
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:textSize="16dp"
-                                                    android:textColor="#000"
-                                                    android:textStyle="bold"
-                                                    android:text="Sunday"/>
-                                                <TextView
-                                                    android:id="@+id/sundayopen"
-                                                    android:layout_width="0dp"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_weight="1"
-                                                    android:gravity="center"
-                                                    android:textSize="16dp"
-                                                    android:textColor="@color/purple"
-                                                    android:text="-"
-                                                    android:textStyle="bold"/>
-                                            </LinearLayout>
-                                        </LinearLayout>
+<!--                                        <LinearLayout-->
+<!--                                            android:layout_width="match_parent"-->
+<!--                                            android:layout_height="wrap_content"-->
+<!--                                            android:orientation="vertical">-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Monday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/mondayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Tuesday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/tuesdayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Wednesday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/wednesdayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Thursday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/thursdayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Friday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/fridayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Saturday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/saturdayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"-->
+<!--                                                    android:textStyle="bold"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                            <LinearLayout-->
+<!--                                                android:layout_width="match_parent"-->
+<!--                                                android:layout_height="wrap_content"-->
+<!--                                                android:layout_marginTop="10dp"-->
+<!--                                                android:layout_marginLeft="15dp"-->
+<!--                                                android:layout_marginRight="15dp"-->
+<!--                                                android:weightSum="2">-->
+<!--                                                <TextView-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="#000"-->
+<!--                                                    android:textStyle="bold"-->
+<!--                                                    android:text="Sunday"/>-->
+<!--                                                <TextView-->
+<!--                                                    android:id="@+id/sundayopen"-->
+<!--                                                    android:layout_width="0dp"-->
+<!--                                                    android:layout_height="wrap_content"-->
+<!--                                                    android:layout_weight="1"-->
+<!--                                                    android:gravity="center"-->
+<!--                                                    android:textSize="16dp"-->
+<!--                                                    android:textColor="@color/purple"-->
+<!--                                                    android:text="-"-->
+<!--                                                    android:textStyle="bold"/>-->
+<!--                                            </LinearLayout>-->
+<!--                                        </LinearLayout>-->
                                     </RelativeLayout>
                                 </LinearLayout>
-
                             </LinearLayout>
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:background="@drawable/green_background"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="14dp">
-                            <TextView
-                                android:id="@+id/viewalloffer_id"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:text="View All Offers"
-                                android:textColor="@color/white"
-                                android:gravity="center"
-                                android:textSize="15dp"
-                                />
-                        </LinearLayout>
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:background="@drawable/green_background"-->
+<!--                            android:layout_marginLeft="10dp"-->
+<!--                            android:layout_marginRight="10dp"-->
+<!--                            android:layout_marginTop="14dp">-->
+<!--                            <TextView-->
+<!--                                android:id="@+id/viewalloffer_id"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:text="View All Offers"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:gravity="center"-->
+<!--                                android:textSize="15dp"-->
+<!--                                />-->
+<!--                        </LinearLayout>-->
 
-
+            <LinearLayout
+                android:id="@+id/store_linear_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/description_id"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Offer from this store "
+                    android:textColor="@color/pink"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/categoryrecycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/cv"/>
+            </LinearLayout>
                    <LinearLayout
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"

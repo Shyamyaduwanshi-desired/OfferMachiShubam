@@ -29,7 +29,6 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.view.activity.ProductActivity;
 import com.desired.offermachi.retalier.constant.AppData;
-import com.jackandphantom.androidlikebutton.AndroidLikeButton;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;

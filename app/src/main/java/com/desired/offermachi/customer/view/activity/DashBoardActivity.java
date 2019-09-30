@@ -1,13 +1,11 @@
 package com.desired.offermachi.customer.view.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -15,7 +13,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -29,7 +26,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -44,8 +40,8 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
-import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
 import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
@@ -76,15 +72,12 @@ import java.util.Locale;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, LocationListener,NotificationCountPresenter.NotiUnReadCount {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener,NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead{
     FragmentManager FM;
     FragmentTransaction FT;
     LinearLayout smartshopping,dealsoftheday,coupons,favourites,ifollow;
@@ -104,6 +97,7 @@ public class DashBoardActivity extends AppCompatActivity
    ImageView btnnotification;
    int count=0;
    ImageView ivLocation;
+    ImageView cancle;
 
     LocationManager locationManager;
    public String lati ;
@@ -112,6 +106,11 @@ public class DashBoardActivity extends AppCompatActivity
     TextView tvNotiCount;
     private NotificationCountPresenter notiCount;
 //    PlacesClient placesClient;
+
+    TextView BottomtvNotiCountdeal,BottomtvNotiCountcoupons,BottomtvNotiCountfavorites;
+    private BottomDealsoftheCountPresenter BottomNotiRead;
+    /////BOttomNotificationCount
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +122,17 @@ public class DashBoardActivity extends AppCompatActivity
         tvMainTitle=toolbar.findViewById(R.id.tv_title);
         ivLocation=toolbar.findViewById(R.id.location_id);
         tvNotiCount = toolbar.findViewById(R.id.txtMessageCount);
+//        notiCount = new NotificationCountPresenter(this,this);
+
+
+        BottomtvNotiCountdeal = findViewById(R.id.category_txtMessageCount_id);
+        BottomtvNotiCountcoupons = findViewById(R.id.coupons_txtMessageCount);
+        BottomtvNotiCountfavorites = findViewById(R.id.fav_txtMessageCount);
+
         notiCount = new NotificationCountPresenter(this,this);
+
+        BottomNotiRead = new BottomDealsoftheCountPresenter(this,this);
+//        BottomNotiRead.BottomNotificationUnreadCount(idholder);
 
         Places.initialize(this,getString(R.string.google_api_key1));
 //        placesClient = Places.createClient(this);
@@ -937,6 +946,11 @@ else {
             btnnotification.setVisibility(View.VISIBLE);
         }
         notiCount.NotificationUnreadCount(idholder);
+        BottomNotiRead.BottomNotificationUnreadCount(idholder);
+
+
+
+
     }
      Dialog DlgLoc=null;
     TextView tvCurloc;
@@ -956,7 +970,16 @@ else {
         RelativeLayout rlCurrent=(RelativeLayout)DlgLoc.findViewById(R.id.rl_current_location);
 
         RelativeLayout rlOther=(RelativeLayout)DlgLoc.findViewById(R.id.rl_other);
-         lyCurrLocation=(LinearLayout)DlgLoc.findViewById(R.id.ly_cur_loc);
+        ImageView cancle=(ImageView)DlgLoc.findViewById(R.id.cancle_img_id);
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DashBoardActivity.this,DashBoardActivity.class));
+                finish();
+            }
+        });
+
+        lyCurrLocation=(LinearLayout)DlgLoc.findViewById(R.id.ly_cur_loc);
         Button btOkay=(Button)DlgLoc.findViewById(R.id.bt_okay);
          tvCurloc=(TextView) DlgLoc.findViewById(R.id.tv_cur_loc);
 
@@ -1025,6 +1048,7 @@ String sCurrentLocation="";
 //        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
         if(checkFlag) {
             if(tvCurloc!=null) {
+
                 tvCurloc.setText(sCurrentLocation);
                 lyCurrLocation.setVisibility(View.VISIBLE);
             }
@@ -1195,6 +1219,53 @@ String sCurrentLocation="";
 
     @Override
     public void failnoti(String response) {
+
+    }
+
+    @Override
+    public void successbottomnoti(String response,String deal,String coupon,String fav) {
+
+
+        if(TextUtils.isEmpty(deal))
+        {
+            BottomtvNotiCountdeal.setText("0");
+        }
+        else if(TextUtils.isEmpty(coupon))
+        {
+            BottomtvNotiCountcoupons.setText("0");
+        }
+        else  if(TextUtils.isEmpty(fav))
+        {
+
+            BottomtvNotiCountfavorites.setText("0");
+
+        }
+        else {
+            BottomtvNotiCountdeal.setText(deal);
+            BottomtvNotiCountcoupons.setText(coupon);
+            BottomtvNotiCountfavorites.setText(fav);
+        }
+    }
+
+    @Override
+    public void errorbottomnoti(String response) {
+
+    }
+
+    @Override
+    public void failbottomnoti(String response) {
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
   /*  @Override

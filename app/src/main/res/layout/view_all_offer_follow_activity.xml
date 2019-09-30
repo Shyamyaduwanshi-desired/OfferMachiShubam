@@ -21,7 +21,8 @@
                 android:src="@drawable/ic_left_arrow"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="0dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                tools:ignore="VectorDrawableCompat" />
             <ImageView
                 android:id="@+id/logo"
                 android:layout_width="90dp"
@@ -156,26 +157,36 @@
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
                         android:src="@drawable/store"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
                         android:scaleType="centerCrop"/>
 
                     <TextView
                         android:id="@+id/btnfollow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="23dp"
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
                         android:background="@drawable/view_background"
-                        android:text="Unfollow"
-                        android:textColor="@color/white"
-                        android:textSize="12dp"
                         android:gravity="center"
-                        android:layout_alignBottom="@+id/iv_main"
-                        android:layout_toRightOf="@+id/SliderDots"
-                        android:layout_marginBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:layout_marginLeft="190dp"/>
+                        android:text="follow"
+                        android:textColor="@color/white"
+                        android:layout_marginTop="140dp"
+                        android:textSize="12dp" />
+                    <!--                    <TextView-->
+<!--                        android:id="@+id/btnfollow"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="23dp"-->
+<!--                        android:background="@drawable/view_background"-->
+<!--                        android:text="Unfollow"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="12dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_alignBottom="@+id/iv_main"-->
+<!--                        android:layout_toRightOf="@+id/SliderDots"-->
+<!--                        android:layout_marginBottom="10dp"-->
+<!--                        android:paddingLeft="10dp"-->
+<!--                        android:paddingRight="10dp"-->
+<!--                        android:layout_marginLeft="190dp"/>-->
                 </RelativeLayout>
             </LinearLayout>
             <ImageView
@@ -187,16 +198,17 @@
                 android:scaleType="centerCrop"
                 android:layout_marginTop="120dp"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/lyname"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/storelogothumb"
                 android:orientation="horizontal"
                 android:layout_marginTop="179dp"
                 >
                 <LinearLayout
+                    android:id="@+id/name_tittle_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -209,23 +221,42 @@
                         android:textStyle="bold"
                         android:textColor="@color/blue"
                         android:textSize="15dp" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
                         android:background="@color/orange"/>
                 </LinearLayout>
+
                 <RatingBar
+                    android:layout_toRightOf="@+id/name_tittle_id"
+                    android:id="@+id/ratingBar"
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:isIndicator="false"
                     android:max="5"
                     android:rating="5"
-                    android:scaleX=".5"
-                    android:scaleY=".5"
+                    android:scaleX=".6"
+                    android:scaleY=".6"
                     android:theme="@style/MyRatingBar"
-                    />
-            </LinearLayout>
+                    android:transformPivotX="0dp" />
+
+
+<!--                <TextView-->
+<!--                    android:layout_toRightOf="@+id/ratingBar"-->
+<!--                    android:id="@+id/rating_test"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="5.0"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:layout_marginLeft="4dp"/>-->
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -233,7 +264,7 @@
                 android:layout_toRightOf="@+id/storelogothumb"
                 android:orientation="horizontal"
                 android:layout_below="@+id/lyname"
-                >
+                android:layout_marginTop="3dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -254,6 +285,18 @@
                     android:textStyle="bold"
                     />
             </LinearLayout>
+
+<!--            <ImageView-->
+<!--                android:layout_below="@+id/lyname"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:id="@+id/location_id"-->
+<!--                android:layout_width="27dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:src="@drawable/ic_facebook_placeholder_for_locate_places_on_maps"-->
+<!--                tools:ignore="VectorDrawableCompat"-->
+<!--                />-->
             <LinearLayout
                 android:id="@+id/description_id"
                 android:layout_width="match_parent"

@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,6 +87,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
+    RatingBar rb;
     ArrayList<slider_viewpager_model> arrayList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +144,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         categoryrecycle.setNestedScrollingEnabled(false);
         textview = findViewById(R.id.timmers_id);
 
-       /* btnfollow=findViewById(R.id.btnfollow);
+
+        /* btnfollow=findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);*/
         /*Toast.makeText(this, ""+followstatus, Toast.LENGTH_SHORT).show();*/
        /* if (followstatus.equals("1")){
@@ -152,6 +155,10 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             btnfollow.setText("follow");
             btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.view_background));
         }*/
+
+        RatingBar ratingbar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingbar.setRating(3.67f);
+
 
         storerecycle.setLayoutManager((new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false)));
         storerecycle.setItemAnimator(new DefaultItemAnimator());

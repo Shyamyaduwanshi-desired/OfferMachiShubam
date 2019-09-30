@@ -37,56 +37,89 @@
         android:weightSum="5">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="5dp">
+
             <LinearLayout
                 android:id="@+id/homelinear"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/home_img"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/yellowonlineshop"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/home_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/yellowonlineshop"
+                        tools:ignore="VectorDrawableCompat" />
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/hometext_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/yellow"
                     android:textSize="10sp"
-                    android:paddingTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="Smart Shopping"/>
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/category_linear_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/categoryimg_id"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/yellowdeals"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/categoryimg_id"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/yellowdeals"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:id="@+id/category_txtMessageCount_id"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:background="@drawable/white_circle_background"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="6sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="39dp"/>
+
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/categorytext_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/yellow"
                     android:textSize="10sp"
-                    android:text="Deals of the Day"
-                    android:paddingTop="5dp"/>
+                    android:layout_marginTop="10dp"
+                    android:text="Deals of the Day"/>
             </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/account_linear_id"
@@ -94,59 +127,101 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/account_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/yellowcoupon"
+                        tools:ignore="VectorDrawableCompat" />
 
-                <ImageView
-                    android:id="@+id/account_img"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/yellowcoupon" />
+                    <TextView
+                        android:id="@+id/coupons_txtMessageCount"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:background="@drawable/white_circle_background"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="6sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="35dp"/>
+
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/accountext_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="5dp"
-                    android:text="MY Coupons"
                     android:textColor="@color/yellow"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:layout_marginTop="10dp"
+                    android:text="MY Coupons"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/cart_linear_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
-
                 android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/cart_img"
-                    android:layout_width="50dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/yellowfavorite"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/cart_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/yellowfavorite"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <TextView
+                        android:id="@+id/fav_txtMessageCount"
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:background="@drawable/white_circle_background"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="6sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="30dp"/>
+
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/carttext_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="10sp"
                     android:textColor="@color/yellow"
                     android:text="Favourites"
-                    android:paddingTop="5dp"/>
+                   android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"/>
             </LinearLayout>
-            
+
             <LinearLayout
                 android:id="@+id/more_linear_id"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
                 android:gravity="center"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
                 <ImageView
                     android:id="@+id/more_img"
@@ -156,13 +231,213 @@
                 <TextView
                     android:id="@+id/moretext_id"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/yellow"
                     android:textSize="10sp"
                     android:text="iFollow"
-                    android:paddingTop="5dp"/>
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
+
+
+
+
+
+            <!--            <LinearLayout-->
+<!--                android:id="@+id/homelinear"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1.1"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/home_img"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:src="@drawable/yellowonlineshop"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/hometext_id"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="@color/yellow"-->
+<!--                    android:textSize="10sp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="Smart Shopping"/>-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/category_linear_id"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1.1"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+
+<!--                -->
+<!--                -->
+<!--                -->
+<!--&lt;!&ndash;                <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:orientation="horizontal">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_alignParentEnd="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/categoryimg_id"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="40dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginTop="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_marginLeft="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:padding="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:scaleType="centerCrop"&ndash;&gt;-->
+<!--&lt;!&ndash;                        app:srcCompat="@drawable/yellowdeals" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_alignParentEnd="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:id="@+id/deal_txtMessageCount"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_width="20dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:layout_height="20dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:background="@drawable/white_circle_background"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textColor="@color/purple"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:textSize="13sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        android:text="0"&ndash;&gt;-->
+<!--&lt;!&ndash;                        tools:ignore="SmallSp"&ndash;&gt;-->
+<!--&lt;!&ndash;                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/categorytext_id"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textColor="@color/yellow"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="10sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Deals of the Day"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:paddingTop="5dp"/>&ndash;&gt;-->
+<!--            </LinearLayout>-->
+<!--            -->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/account_linear_id"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <ImageView-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:id="@+id/account_img"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        app:srcCompat="@drawable/yellowcoupon" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:id="@+id/coupons_txtMessageCount"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:background="@drawable/white_circle_background"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textColor="@color/purple"-->
+<!--                        android:textSize="13sp"-->
+<!--                        android:text="0"-->
+<!--                        tools:ignore="SmallSp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        />-->
+<!--                </LinearLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/accountext_id"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    android:text="MY Coupons"-->
+<!--                    android:textColor="@color/yellow"-->
+<!--                    android:textSize="10sp"-->
+<!--                    android:layout_marginRight="5dp"/>-->
+<!--            </LinearLayout>-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/cart_linear_id"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal">-->
+<!--                    <ImageView-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:id="@+id/cart_img"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_marginLeft="10dp"-->
+<!--                        android:padding="5dp"-->
+<!--                        android:scaleY="1.4"-->
+<!--                        android:scaleX="1.6"-->
+<!--                        app:srcCompat="@drawable/yellowfavorite" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:id="@+id/fav_txtMessageCount"-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:background="@drawable/white_circle_background"-->
+<!--                        android:gravity="center"-->
+<!--                        android:textColor="@color/purple"-->
+<!--                        android:textSize="13sp"-->
+<!--                        android:text="0"-->
+<!--                        tools:ignore="SmallSp"-->
+<!--                        android:layout_marginRight="20dp"-->
+<!--                        />-->
+<!--                </LinearLayout>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/carttext_id"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textSize="10sp"-->
+<!--                    android:textColor="@color/yellow"-->
+<!--                    android:text="Favourites"-->
+<!--                    android:paddingTop="5dp"-->
+<!--                    android:layout_marginRight="5dp"/>-->
+<!--            </LinearLayout>-->
+<!--            -->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/more_linear_id"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="0.8"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="vertical">-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/more_img"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:src="@drawable/yellowfollow"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/moretext_id"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="@color/yellow"-->
+<!--                    android:textSize="10sp"-->
+<!--                    android:text="iFollow"-->
+<!--                    android:layout_marginTop="7dp"/>-->
+<!--            </LinearLayout>-->
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

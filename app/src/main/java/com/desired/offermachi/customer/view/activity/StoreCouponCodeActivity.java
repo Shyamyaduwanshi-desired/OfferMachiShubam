@@ -91,7 +91,7 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
     }
 
     @Override
-    public void success(ArrayList<StoreModel> response) {
+    public void success(ArrayList<StoreModel> response,int totalRecords,int totalPages) {
         customerStoreAdapter=new CustomerStoreAdapter(getApplicationContext(),response);
         storerecycle.setAdapter(customerStoreAdapter);
     }

@@ -67,9 +67,11 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,Dobholder,ImageHolder,SmartShoppingHolder;
     String SoundHolder;
     TextView tvDONodist;
-    String push_notifications_count;
+//    String push_notifications_count;
     private DonoDisturbPresenter dndPresenter;
     private NotiFicationOpenPresenter notiRead;
+    TextView tvLoadMore;
+    int pagNo=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +97,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         push_notification_id=user.getPush_notification_id();
         type=user.getUsertype();
         imageViewback=findViewById(R.id.imageback);
+        tvLoadMore=findViewById(R.id.tv_load_more);
         info=findViewById(R.id.info_id);
         simpleSwitch =findViewById(R.id.donotswitch);
         tvDONodist =findViewById(R.id.tv_disturb);
@@ -106,6 +109,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         tvDONodist.setOnClickListener(this);
 
         simpleSwitch.setOnCheckedChangeListener(this);
+        tvLoadMore.setOnClickListener(this);
         if (SoundHolder.equals("1")){
             simpleSwitch.setChecked(true);
         }
@@ -113,13 +117,17 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(linearLayoutManager);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
-        if (isNetworkConnected()){
-            presenter.sentRequest(idholder);
-            dndPresenter.GetDoNoDisStatus(idholder);
-        } else {
-//            ShowAlert(this, "Please connect to internet.");
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
-        }
+
+//        if (isNetworkConnected()){
+//            presenter.sentRequest(idholder);
+//            dndPresenter.GetDoNoDisStatus(idholder);
+//        } else {
+////            ShowAlert(this, "Please connect to internet.");
+//            showAlert("Please connect to internet.", R.style.DialogAnimation);
+//        }
+
+        CallAPI(1);//for all notitication
+        CallAPI(2);//for know dnd status
 
         simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -135,7 +143,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                    intent.putExtra("dnd_status",dndStatus);
                    intent.putExtra("dnd_start_time",dnd_start_time);
                    intent.putExtra("dnd_end_time",dnd_end_time);
-
                    startActivity(intent);
                }
                else
@@ -150,6 +157,23 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    public void CallAPI(int i)
+    {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1://all notification data
+//                    presenter.sentRequest(idholder);
+                    presenter.AllNotiWithPagination(idholder,pagNo);
+                    break;
+                case 2:
+                    dndPresenter.GetDoNoDisStatus(idholder);
+                    break;
+            }
+        } else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
     @Override
     public void onClick(View v) {
         if (v==imageViewback){
@@ -162,6 +186,10 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         else if (v==tvDONodist){
 //startActivity(new Intent(this,ActDoNotDisturbSetting.class));
 
+        }
+        else if (v==tvLoadMore){
+            pagNo=pagNo+1;
+            CallAPI(1);
         }
 
     }
@@ -203,11 +231,29 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     }
     ArrayList<NotificationModel> arNoti=new ArrayList<>();
     @Override
-    public void success(ArrayList<NotificationModel> response) {
-        arNoti.clear();
-        arNoti=response;
-        customerNotificationAdapter = new CustomerNotificationAdapter(response,NotificationActivity.this,this);
+    public void success(ArrayList<NotificationModel> response,int totalRecords,int totalPages) {
+//        arNoti.clear();
+//        arNoti=response;
+
+        if(pagNo==1) {
+            arNoti.clear();
+            arNoti=response;
+        }
+        else {
+            arNoti.addAll(response);
+        }
+
+        customerNotificationAdapter = new CustomerNotificationAdapter(arNoti,NotificationActivity.this,this);
         categoryrecycle.setAdapter(customerNotificationAdapter);
+
+        if(totalPages>=1&&pagNo<totalPages)
+        {
+            tvLoadMore.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvLoadMore.setVisibility(View.GONE);
+        }
 
     }
 
@@ -292,7 +338,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                          dndId = objJson.getString("dnd_id");
                          dnd_start_time = objJson.getString("dnd_start_time");
                          dnd_end_time = objJson.getString("dnd_end_time");
-                    dndStatus = objJson.getString("status");
+                         dndStatus = objJson.getString("status");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -307,29 +353,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         ClickPos=position;
         String offerId=arNoti.get(position).getNotiId();
         notiRead.ReadNotification(idholder,offerId);
-
-
-//        String Custom_offertype=arNoti.get(position).getCustom_offertype();
-//        UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
-//        Intent myIntent = new Intent(this, DashBoardActivity.class);
-//        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(myIntent);
-//        finish();
-
-        //        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
-//        DashBoardActivity dash=new DashBoardActivity();
-//        dash.GoDealOfTheDay(1);
-
-//        getSupportFragmentManager().beginTransaction().
-//                replace(R.id.root_layout, new DealsoftheDayFragment()).commit();
-
     }
-
-//    @Override
-//    public void successnoti(String push_notifications_count) {
-//        presenter.sentRequest(idholder);
-//    }
-
 
     //read success
     @Override
@@ -353,8 +377,6 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         showAlert(response, R.style.DialogAnimation);
     }
 
-
-
 }
-    //////////////////////////////////////////////////
+
 

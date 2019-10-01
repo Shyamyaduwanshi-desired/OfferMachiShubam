@@ -290,7 +290,7 @@ public class HomePresenter {
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
                                     object2.getString("coupon_code_status"),
-                                    ""
+                                    object2.getString("shop_logo")
 
                             );
                             list2.add(selectCategoryModel);
@@ -341,7 +341,7 @@ public class HomePresenter {
                 params.put("user_id", userid);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
-                params.put("dist", "500");
+//                params.put("dist", "500");
                 Log.e("","Input param= "+params.toString());
                 return params;
             }

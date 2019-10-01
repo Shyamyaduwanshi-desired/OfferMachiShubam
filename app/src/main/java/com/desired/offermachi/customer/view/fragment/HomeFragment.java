@@ -269,7 +269,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
     private void FindMoreData(String name) {
 
-            String sFindCatId=""/*,catName=""*/;
+            String sFindCatId="",sType=""/*,catName=""*/;
         try {
 
             for(int i=0;i<AllSearchData.size();i++)
@@ -277,6 +277,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                 if(AllSearchData.get(i).getName().equals(name))
                 {
                     sFindCatId=AllSearchData.get(i).getId();
+                    sType=AllSearchData.get(i).getType();
 
                 }
             }
@@ -287,6 +288,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             Intent intent = new Intent(getActivity(), ActSearchNew.class);
             intent.putExtra("cat_id",sFindCatId);
             intent.putExtra("cat_name",name);
+            intent.putExtra("cat_type",sType);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 

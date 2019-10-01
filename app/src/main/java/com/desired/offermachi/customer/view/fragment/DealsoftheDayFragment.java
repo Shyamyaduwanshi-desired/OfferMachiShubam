@@ -260,13 +260,18 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
     @Override
     public void fail(String response) {
         if(getActivity() != null) {
-
             showAlert(response, R.style.DialogAnimation);
         }
 
     }
+     PrettyDialog prettyDialog=null;
     private void showAlert(String message, int animationSource){
-        final PrettyDialog prettyDialog = new PrettyDialog(getContext());
+        if(prettyDialog!=null)
+        {
+            prettyDialog.dismiss();
+            prettyDialog=null;
+        }
+         prettyDialog = new PrettyDialog(getContext());
         prettyDialog.setCanceledOnTouchOutside(false);
         TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
         TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);

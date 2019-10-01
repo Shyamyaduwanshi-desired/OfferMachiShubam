@@ -78,35 +78,17 @@ public class SplashActivity extends AppCompatActivity implements LocationListene
         }
         else{
             checkFlag=true;
+
             getLocation();
 
 //            Handler handler = new Handler();
 //            handler.postDelayed(new Runnable() {
 //                @Override
 //                public void run() {// usertype=1(customer),usertype=2(retailer)
-////                    if ((UserSharedPrefManager.getInstance(SplashActivity.this).UserType().equals("0"))) {
-//////
-////                    }
-////                    else
-////                    {
-////
-////                    }
 //
 //                    if (UserSharedPrefManager.getInstance(SplashActivity.this).isLoggedIn()) {
-////                        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-//
 //                        startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
 //                        finish();
-//
-////                        if (user.getSmartShopping().equals("0")){
-//////                            startActivity(new Intent(SplashActivity.this, ActInterestCategory.class));
-//////                            startActivity(new Intent(SplashActivity.this, ActInterestCategoryNew.class));
-////                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-////                            finish();
-////                        }else{
-////                            startActivity(new Intent(SplashActivity.this, DashBoardActivity.class));
-////                            finish();
-////                        }
 //                    }
 //                    else  if (SharedPrefManagerLogin.getInstance(SplashActivity.this).isLoggedIn()) {
 //                        startActivity(new Intent(SplashActivity.this, RetalierDashboard.class));
@@ -122,11 +104,6 @@ public class SplashActivity extends AppCompatActivity implements LocationListene
 //
 //                    }
 //
-//                  /*  Intent intent = new Intent(SplashActivity.this, RegistraionAsActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                      overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//                    */
 //                }
 //            }, 1000);
         }
@@ -220,7 +197,7 @@ public class SplashActivity extends AppCompatActivity implements LocationListene
     void getLocation() {
         try {
             locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
         }
         catch(SecurityException e) {
             e.printStackTrace();
@@ -245,7 +222,17 @@ public class SplashActivity extends AppCompatActivity implements LocationListene
         longi= String.valueOf(location.getLongitude());
 //        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
        if(checkFlag) {
-           UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
+           //1=current,2=other location from location click icon
+           String diff= UserSharedPrefManager.GetCurrentOrOtherLoc(this);
+           switch (diff)
+           {
+               case "1":
+                   UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
+                   break;
+               case "2":
+                   break;
+           }
+
            Navigate();
        }
     }

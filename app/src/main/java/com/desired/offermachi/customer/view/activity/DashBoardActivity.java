@@ -1069,18 +1069,22 @@ String sCurrentLocation="";
     }
     public void RefreshLocWithHomeView()
     {
-        UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
+        try {
+            UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
-        // Highlight the selected item has been done by NavigationView
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
 //            menuItem.setChecked(true);
-        // Set action bar title
+            // Set action bar title
 //            setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        checkFlag=false;
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            checkFlag=false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

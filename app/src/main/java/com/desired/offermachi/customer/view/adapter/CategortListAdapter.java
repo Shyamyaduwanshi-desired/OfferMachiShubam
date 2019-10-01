@@ -100,6 +100,10 @@ public class CategortListAdapter extends RecyclerView.Adapter<CategortListAdapte
             }
         });
     }
+//    @Override
+//    public int getItemCount() {
+//        return mContacts.size();
+//    }
     @Override
     public int getItemCount() {
         return categoryListModelArrayList.size();

@@ -82,7 +82,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     RecyclerView categoryrecycle;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private ViewStoreOfferPresenter presenters;
-    TextView textview;
+//    TextView textview;
+    LinearLayout lyTimer;
 //    ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
@@ -142,7 +143,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
-        textview = findViewById(R.id.timmers_id);
+//        textview = findViewById(R.id.timmers_id);
+        lyTimer = findViewById(R.id.ly_timer);
 
 
         /* btnfollow=findViewById(R.id.btnfollow);
@@ -276,7 +278,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
             }else{
                 StringTokenizer timeto = new StringTokenizer(storeclosetime, ",");
-                textview.setOnClickListener(new View.OnClickListener() {
+                lyTimer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final Dialog dialog = new Dialog(ViewAllOfferFollowActivity.this);
@@ -290,7 +292,14 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                         TextView  txtfridayopen=dialog.findViewById(R.id.fridayopen);
                         TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
                         TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
-
+                        ImageView cancle=(ImageView)dialog.findViewById(R.id.cancle_img_id);
+                        cancle.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(ViewAllOfferFollowActivity.this,ViewAllOfferFollowActivity.class));
+                                finish();
+                            }
+                        });
 
                         Mondayclosetime = timeto.nextToken();
                         txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);

@@ -102,14 +102,14 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 //            holder.ivLikeBtn.setCurrentlyLiked(false);
         }
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
-            holder.productbutton.setText("Coupon Code");//View Coupon Code
+            holder.productbutton.setText("View Coupon Code");//View Coupon Code
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
             holder.productbutton.setText("Redeemed");
         }else{
-            holder.productbutton.setText("Coupon Code");//Get Coupon Code
+            holder.productbutton.setText("Get Coupon Code");//Get Coupon Code
         }
 
-
+        Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
         if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
         }else{
             Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
@@ -275,6 +275,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                 params.put("user_id", id);
                 params.put("offer_id",offerid);
                 params.put("active", getcoupon);
+                Log.e("","Input param= "+params.toString());
                 return params;
             }
         };
@@ -301,4 +302,10 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         }
         notifyDataSetChanged();
     }
+    @Override
+    public int getItemViewType(int position) {
+        return selectCategoryModelArrayList.size();
+//        return contacts.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
 }

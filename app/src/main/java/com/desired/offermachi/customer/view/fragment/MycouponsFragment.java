@@ -158,7 +158,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         public void onReceive(Context context, Intent intent) {
             String Catid = intent.getStringExtra("catid");
 //            presenter.DealFilter(idholder,Catid);
-            Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
         }
     };
     @Override
@@ -178,7 +178,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                     dialog.dismiss();
                     String Status="1";
 //                    presenter.ShortBy(idholder,Status);
-                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -188,7 +188,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                     dialog.dismiss();
                     String Status="2";
 //                    presenter.ShortBy(idholder,Status);
-                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -198,7 +198,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                     dialog.dismiss();
                     String Status="3";
 //                    presenter.ShortBy(idholder,Status);
-                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -208,7 +208,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                     dialog.dismiss();
                     String Status="4";
 //                    presenter.ShortBy(idholder,Status);
-                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
                 }
             });

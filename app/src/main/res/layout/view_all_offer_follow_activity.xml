@@ -258,6 +258,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ly_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"

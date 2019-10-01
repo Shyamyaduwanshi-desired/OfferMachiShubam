@@ -92,9 +92,11 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
             switch (i)
             {
                 case 1:
-                    presenter.ViewAllFeeds(idholder,pagNo);//,loadPos
+//                    presenter.ViewAllFeeds(idholder,pagNo);//,loadPos
+                    presenter.ViewAllFeedsWithPagination(idholder,pagNo);//,loadPos
                     break;
                 case 2:
+                    presenter.ShortByWithPagination(idholder,ShortByStatus,pagNo);
                     break;
             }
         } else {
@@ -114,6 +116,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 
         rlFilter.setOnClickListener(this);
         rlSortBy.setOnClickListener(this);
+        tvLoadMore.setOnClickListener(this);
 
 //        sortbytext=view.findViewById(R.id.sortby_text_id);
 //        sortbytext.setOnClickListener(this);
@@ -156,7 +159,9 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         @Override
         public void onReceive(Context context, Intent intent) {
             String Catid = intent.getStringExtra("catid");
-            presenter.Filter(idholder,Catid);
+            pagNo=1;
+//            presenter.Filter(idholder,Catid);
+            presenter.FilterWithPagination(idholder,Catid,pagNo);
         }
     };
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
@@ -182,6 +187,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
             }
         }
     };
+    String ShortByStatus="";
     @Override
     public void onClick(View v) {
         if (v==rlSortBy)
@@ -198,8 +204,11 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="1";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="1";
+                    ShortByStatus="1";
+                    pagNo=1;
+//                    presenter.ShortBy(idholder,Status);
+                    CallAPI(2);
 
                 }
             });
@@ -207,8 +216,11 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="2";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="2";
+                    ShortByStatus="2";
+                    pagNo=1;
+//                    presenter.ShortBy(idholder,Status);
+                    CallAPI(2);
 
                 }
             });
@@ -216,8 +228,11 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="3";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="3";
+                    ShortByStatus="3";
+                    pagNo=1;
+//                    presenter.ShortBy(idholder,Status);
+                    CallAPI(2);
 
                 }
             });
@@ -225,8 +240,11 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="4";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="4";
+                    ShortByStatus="4";
+                    pagNo=1;
+//                    presenter.ShortBy(idholder,Status);
+                    CallAPI(2);
 
                 }
             });
@@ -237,29 +255,41 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 //            Intent intent = new Intent(getContext(), FilterShowActivity.class);//6
             startActivity(intent);
         }
-//        else if (v==tvLoadMore){
-////           CallAPI(1);
-//        }
+        else if (v==tvLoadMore){
+            pagNo=pagNo+1;
+           CallAPI(1);
+        }
 
     }
-    ArrayList<SelectCategoryModel> arFeedList=new ArrayList<>();
+    int totalRecord=0;
+    ArrayList<SelectCategoryModel> arAllFeedList=new ArrayList<>();
+    ArrayList<SelectCategoryModel> arFilterFeedList=new ArrayList<>();
+    ArrayList<SelectCategoryModel> arShortFeedList=new ArrayList<>();
 //feeds success
     @Override
-    public void success(ArrayList<SelectCategoryModel> response,int totalRecords,int totalPages) {
+    public void success(ArrayList<SelectCategoryModel> response,int totalRecords,int totalPages,int diff) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
 //        categoryrecycle.setAdapter(customerTrendingAdapter);
 
-        arFeedList.clear();
-        arFeedList=response;
-//        arFeedList.add(response)
-
-        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),arFeedList);
+        if(pagNo==1) {
+            arAllFeedList.clear();
+            arAllFeedList=response;
+        }
+        else {
+            arAllFeedList.addAll(response);
+        }
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),arAllFeedList);
         categoryrecycle.setAdapter(customerTrendingAdapter);
 
-//      if(totalPages>1)
-//      {
-//          tvLoadMore.setVisibility(View.VISIBLE);
-//      }
+        if(totalPages>=1&&pagNo<totalPages)
+        {
+            tvLoadMore.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvLoadMore.setVisibility(View.GONE);
+        }
+
     }
 
 
@@ -295,6 +325,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 
     @Override
     public void error(String response) {
+        tvLoadMore.setVisibility(View.GONE);
         if(getActivity() != null) {
             showAlert(response, R.style.DialogAnimation);
         }
@@ -302,6 +333,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 
     @Override
     public void fail(String response) {
+        tvLoadMore.setVisibility(View.GONE);
         if(getActivity() != null) {
             showAlert(response, R.style.DialogAnimation);
         }

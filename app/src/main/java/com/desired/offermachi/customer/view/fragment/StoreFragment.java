@@ -52,6 +52,9 @@ public class StoreFragment extends Fragment implements StoreListPresenter.StoreL
 RelativeLayout rlFilter,rlSortBy;
     EditText edTxtSearch;
     TextView tvLoadMore;
+    int pagNo=1;
+    int diff=1;
+    String Catid="";
     public StoreFragment() {
         // Required empty public constructor
     }
@@ -61,6 +64,7 @@ RelativeLayout rlFilter,rlSortBy;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
          v=inflater.inflate(R.layout.fragment_store, container, false);
+        diff=1;
         initview();
         Listner();
         return v;
@@ -104,17 +108,22 @@ RelativeLayout rlFilter,rlSortBy;
 
         rlFilter.setOnClickListener(this);
         rlSortBy.setOnClickListener(this);
+        tvLoadMore.setOnClickListener(this);
 
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 3, LinearLayoutManager.VERTICAL, false);
         storerecycle.setLayoutManager(gridLayoutManager2);
         storerecycle.setItemAnimator(new DefaultItemAnimator());
-        if (getActivity()!=null) {
-            if (isNetworkConnected()) {
-                presenter.ViewAllStore(idholder);
-            } else {
-                showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
-        }
+
+//        if (getActivity()!=null) {
+//            if (isNetworkConnected()) {
+//                presenter.ViewAllStore(idholder);
+//            } else {
+//                showAlert("Please connect to internet.", R.style.DialogAnimation);
+//            }
+//        }
+
+        CallAPI(1);
+
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(StoreReceiver,
                 new IntentFilter("StoreFollow"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CatReceiver,
@@ -123,8 +132,11 @@ RelativeLayout rlFilter,rlSortBy;
     public BroadcastReceiver CatReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String Catid = intent.getStringExtra("catid");
-            presenter.StoreFilter(idholder,Catid);
+             Catid = intent.getStringExtra("catid");
+//            presenter.StoreFilter(idholder,Catid);
+            diff=3;
+            CallAPI(3);
+//            presenter.StoreFilterPagination(idholder,Catid,pagNo);
         }
     };
     public BroadcastReceiver StoreReceiver = new BroadcastReceiver() {
@@ -136,22 +148,69 @@ RelativeLayout rlFilter,rlSortBy;
         }
     };
 
-
-    @Override
-    public void success(ArrayList<StoreModel> response) {
-        customerStoreAdapter=new CustomerStoreAdapterNew(getContext(),response);
-        storerecycle.setAdapter(customerStoreAdapter);
-    }
-
-    @Override
-    public void followsuccess(String response) {
+    public void CallAPI(int i)
+    {
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
-                presenter.ViewAllStore(idholder);
+                switch (i) {
+                    case 1://all store data
+//                        presenter.ViewAllStore(idholder);
+                        presenter.ViewAllStorePagination(idholder,pagNo);
+                        break;
+                    case 2:
+//                        presenter.ShortBy(idholder,filterByStatus);
+                        presenter.ShortByPagination(idholder,filterByStatus,pagNo);
+
+                        break;
+                  case 3:
+//                        presenter.ShortBy(idholder,filterByStatus);
+                      presenter.StoreFilterPagination(idholder,Catid,pagNo);
+
+                        break;
+
+                }
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
         }
+    }
+
+    ArrayList<StoreModel> arStore=new ArrayList<>();
+    @Override
+    public void success(ArrayList<StoreModel> response,int totalRecords,int totalPages) {
+
+        if(pagNo==1) {
+            arStore.clear();
+            arStore=response;
+        }
+        else {
+            arStore.addAll(response);
+        }
+        customerStoreAdapter=new CustomerStoreAdapterNew(getContext(),arStore);
+        storerecycle.setAdapter(customerStoreAdapter);
+
+        if(totalPages>=1&&pagNo<totalPages)
+        {
+            tvLoadMore.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            tvLoadMore.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void followsuccess(String response) {
+
+        CallAPI(1);
+
+//        if (getActivity()!=null) {
+//            if (isNetworkConnected()) {
+//                presenter.ViewAllStore(idholder);
+//            } else {
+//                showAlert("Please connect to internet.", R.style.DialogAnimation);
+//            }
+//        }
     }
 
     @Override
@@ -169,8 +228,14 @@ RelativeLayout rlFilter,rlSortBy;
         }
 
     }
+    PrettyDialog prettyDialog;
     private void showAlert(String message, int animationSource){
-        final PrettyDialog prettyDialog = new PrettyDialog(getActivity());
+        if(prettyDialog!=null)
+        {
+            prettyDialog.dismiss();
+            prettyDialog=null;
+        }
+        prettyDialog = new PrettyDialog(getActivity());
         prettyDialog.setCanceledOnTouchOutside(false);
         TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
         TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
@@ -194,7 +259,7 @@ RelativeLayout rlFilter,rlSortBy;
         ConnectivityManager cm = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
+String filterByStatus="";
     @Override
     public void onClick(View v) {
         if (v==rlFilter){//filtertext
@@ -203,6 +268,7 @@ RelativeLayout rlFilter,rlSortBy;
             startActivity(intent);
         }else if (v==rlSortBy){//sortbytext
             edTxtSearch.setText("");
+            diff=2;
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
@@ -214,8 +280,11 @@ RelativeLayout rlFilter,rlSortBy;
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="1";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="1";
+                    pagNo=1;
+                    filterByStatus="1";
+                    CallAPI(2);
+//                    presenter.ShortBy(idholder,Status);
 
                 }
             });
@@ -223,8 +292,11 @@ RelativeLayout rlFilter,rlSortBy;
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="2";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="2";
+//                    presenter.ShortBy(idholder,Status);
+                    pagNo=1;
+                    filterByStatus="2";
+                    CallAPI(2);
 
                 }
             });
@@ -232,8 +304,11 @@ RelativeLayout rlFilter,rlSortBy;
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="3";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="3";
+//                    presenter.ShortBy(idholder,Status);
+                    pagNo=1;
+                    filterByStatus="3";
+                    CallAPI(2);
 
                 }
             });
@@ -241,12 +316,19 @@ RelativeLayout rlFilter,rlSortBy;
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();
-                    String Status="4";
-                    presenter.ShortBy(idholder,Status);
+//                    String Status="4";
+//                    presenter.ShortBy(idholder,Status);
+                    pagNo=1;
+                    filterByStatus="4";
+                    CallAPI(2);
 
                 }
             });
             dialog.show();
+        }
+        else if (v==tvLoadMore){
+            pagNo=pagNo+1;
+            CallAPI(diff);
         }
     }
 }

@@ -1,12 +1,10 @@
 package com.desired.offermachi.retalier.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -17,13 +15,13 @@ import com.desired.offermachi.retalier.model.CityBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationAdapter extends ArrayAdapter<CityBean> {
+public class LocationAdapter1 extends ArrayAdapter<CityBean> {
     private Context mContext;
     private ArrayList<CityBean> listState;
-    private LocationAdapter myAdapter;
+    private LocationAdapter1 myAdapter;
     private boolean isFromView = false;
 
-    public LocationAdapter(Context context, int resource, List<CityBean> objects) {
+    public LocationAdapter1(Context context, int resource, List<CityBean> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.listState = (ArrayList<CityBean>) objects;
@@ -53,12 +51,15 @@ public class LocationAdapter extends ArrayAdapter<CityBean> {
                     .findViewById(R.id.tv_loc_nm);
             holder.tvLocId = (TextView) convertView
                     .findViewById(R.id.tv_loc_id);
+            holder.tvOkay = (TextView) convertView
+                    .findViewById(R.id.tv_okay);
             holder.mCheckBox = (CheckBox) convertView
                     .findViewById(R.id.checkbox);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
 
         holder.tvLocId.setText(listState.get(position).getId());
         holder.tvLocNm.setText(listState.get(position).getCity_name());
@@ -70,8 +71,10 @@ public class LocationAdapter extends ArrayAdapter<CityBean> {
 
         if ((position == 0)) {
             holder.mCheckBox.setVisibility(View.INVISIBLE);
+            holder.tvOkay.setVisibility(View.VISIBLE);
         } else {
             holder.mCheckBox.setVisibility(View.VISIBLE);
+            holder.tvOkay.setVisibility(View.GONE);
         }
         holder.mCheckBox.setTag(position);
         holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -89,7 +92,7 @@ public class LocationAdapter extends ArrayAdapter<CityBean> {
     }
 
     private class ViewHolder {
-        private TextView tvLocNm,tvLocId;
+        private TextView tvLocNm,tvLocId,tvOkay;
         private CheckBox mCheckBox;
     }
 }

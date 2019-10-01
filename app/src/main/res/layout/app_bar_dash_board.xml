@@ -65,7 +65,8 @@
                         android:layout_gravity="center"
                         android:layout_toRightOf="@+id/rl_title"
                         android:layout_marginLeft="30dp"
-                        android:src="@drawable/ic_info" />
+                        android:src="@drawable/ic_info"
+                        tools:ignore="VectorDrawableCompat" />
 
                     <ImageView
                         android:id="@+id/btnnotification"
@@ -104,5 +105,6 @@
         android:layout_marginBottom="@dimen/margin_bottom"
         android:src="@drawable/search_icon"
         app:backgroundTint="@color/purple"
-        android:layout_marginRight="@dimen/margin_right"/>
+        android:layout_marginRight="@dimen/margin_right"
+        tools:ignore="VectorDrawableCompat" />
 </android.support.design.widget.CoordinatorLayout>

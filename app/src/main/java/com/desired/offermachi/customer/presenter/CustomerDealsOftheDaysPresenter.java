@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.presenter.DealsOftheDayPresenter;
@@ -59,8 +60,8 @@ public class CustomerDealsOftheDaysPresenter {
             progress.setCancelable(false);
             showpDialog();
         }
-        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_data", new Response.Listener<String>() {
+        final ArrayList<SelectCategoryModel> list = new ArrayList<>();//http://offermachi.in/api/customer_deals_of_the_day_data
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_data2", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 hidepDialog();
@@ -139,6 +140,8 @@ public class CustomerDealsOftheDaysPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
+                params.put("latitude", UserSharedPrefManager.GetLat(context));
+                params.put("longitude", UserSharedPrefManager.GetLong(context));
                 return params;
             }
         };
@@ -269,8 +272,9 @@ public class CustomerDealsOftheDaysPresenter {
     }
 
     public void DealFilter(final String userid,final String catid) {
-        final ArrayList<SelectCategoryModel> list = new ArrayList<>();//customer_deals_of_the_day_by_filter
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_by_filter_categories", new Response.Listener<String>() {
+        final ArrayList<SelectCategoryModel> list = new ArrayList<>();//customer_deals_of_the_day_by_filter_categories,customer_deals_of_the_day_by_filter_categories2
+        // customer_deals_of_the_day_by_filter
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_day_by_filter_categories2", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
               //  hidepDialog();
@@ -334,6 +338,8 @@ public class CustomerDealsOftheDaysPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("category_ids", catid);
+                params.put("latitude", UserSharedPrefManager.GetLat(context));
+                params.put("longitude", UserSharedPrefManager.GetLong(context));
                 return params;
             }
         };
@@ -353,8 +359,8 @@ public class CustomerDealsOftheDaysPresenter {
             progress.setCancelable(false);
             showpDialog();
         }*/
-        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
-        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_data_by_sort_by", new Response.Listener<String>() {
+        final ArrayList<SelectCategoryModel> list = new ArrayList<>();//customer_deals_of_the_data_by_sort_by,customer_deals_of_the_data_by_sort_by2
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_deals_of_the_data_by_sort_by2", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //hidepDialog();
@@ -418,6 +424,8 @@ public class CustomerDealsOftheDaysPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("sort_by", status);
+                params.put("latitude", UserSharedPrefManager.GetLat(context));
+                params.put("longitude", UserSharedPrefManager.GetLong(context));
                 return params;
             }
         };

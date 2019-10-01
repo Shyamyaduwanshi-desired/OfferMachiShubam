@@ -36,7 +36,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,7 +60,6 @@ import com.desired.offermachi.retalier.presenter.CityPresenter;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
 import com.desired.offermachi.retalier.view.adapter.CityAdapter;
-import com.desired.offermachi.retalier.view.adapter.LocationAdapter;
 import com.desired.offermachi.retalier.view.adapter.SelectedImageAdapter;
 import com.desired.offermachi.retalier.view.adapter.StoreLocationDetailsAdapter;
 import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
@@ -71,6 +73,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
@@ -287,6 +290,8 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                 //   Select Provider
                 TextView txCityid = (TextView) view.findViewById(R.id.tv_loc_id);
                 TextView txccityNm = (TextView) view.findViewById(R.id.tv_loc_nm);
+                TextView tvOkay = (TextView) view.findViewById(R.id.tv_okay);
+                tvOkay.setVisibility(View.GONE);
                 sLocation = txccityNm.getText().toString();
             }
 
@@ -526,6 +531,7 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
 
     }
 //city success;
+ArrayList<CityBean> arLocation=new ArrayList<>();
     @Override
     public void success(ArrayList<CityBean> response,String status) {
         switch (status)
@@ -535,7 +541,9 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
                 spCity.setAdapter(cityAdapter);
                 break;
            case "2":
-               locationAdapter = new LocationAdapter(getContext(),0, response);
+               arLocation.clear();
+               arLocation=response;
+               locationAdapter = new LocationAdapter(getContext(),0, arLocation);
                spLocation.setAdapter(locationAdapter);
                 break;
         }
@@ -589,20 +597,6 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
         }
     }
 
-   /* *//* Get the real path from the URI *//*
-    private String getPathFromURI(Uri contentUri) {
-        String res = null;
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        return res;
-    }
-*/
-    /*Compress image receive from gallery*/
     private void compress() {
         try {
             compressedImage = new Compressor(getContext())
@@ -923,6 +917,90 @@ public class RegistrationStoreDetailsFrgment extends Fragment implements Locatio
     public void PhotonClick(int position, int diff) {
 
 
+    }
+
+    public class LocationAdapter extends ArrayAdapter<CityBean> {
+        private Context mContext;
+        private ArrayList<CityBean> listState;
+        private LocationAdapter myAdapter;
+        private boolean isFromView = false;
+
+        public LocationAdapter(Context context, int resource, List<CityBean> objects) {
+            super(context, resource, objects);
+            this.mContext = context;
+            this.listState = (ArrayList<CityBean>) objects;
+            this.myAdapter = this;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView,
+                                    ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getCustomView(position, convertView, parent);
+        }
+
+        public View getCustomView(final int position, View convertView,
+                                  ViewGroup parent) {
+
+            final ViewHolder holder;
+            if (convertView == null) {
+                LayoutInflater layoutInflator = LayoutInflater.from(mContext);
+                convertView = layoutInflator.inflate(R.layout.spinner_item, null);
+                holder = new ViewHolder();
+                holder.tvLocNm = (TextView) convertView
+                        .findViewById(R.id.tv_loc_nm);
+                holder.tvLocId = (TextView) convertView
+                        .findViewById(R.id.tv_loc_id);
+                holder.tvOkay = (TextView) convertView
+                        .findViewById(R.id.tv_okay);
+                holder.mCheckBox = (CheckBox) convertView
+                        .findViewById(R.id.checkbox);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+
+            holder.tvLocId.setText(listState.get(position).getId());
+            holder.tvLocNm.setText(listState.get(position).getCity_name());
+
+            // To check weather checked event fire from getview() or user input
+            isFromView = true;
+            holder.mCheckBox.setChecked(listState.get(position).isSelected());
+            isFromView = false;
+
+            if ((position == 0)) {
+                holder.mCheckBox.setVisibility(View.INVISIBLE);
+                holder.tvOkay.setVisibility(View.VISIBLE);
+            } else {
+                holder.mCheckBox.setVisibility(View.VISIBLE);
+                holder.tvOkay.setVisibility(View.GONE);
+            }
+            holder.mCheckBox.setTag(position);
+            holder.mCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int getPosition = (Integer) buttonView.getTag();
+
+                    if (!isFromView) {
+//                        listState.get(position).setSelected(isChecked);
+                        arLocation.get(position).setSelected(isChecked);
+                        notifyDataSetChanged();
+                    }
+                }
+            });
+            return convertView;
+        }
+
+        private class ViewHolder {
+            private TextView tvLocNm,tvLocId,tvOkay;
+            private CheckBox mCheckBox;
+        }
     }
 
 //    String uploadBase64="";

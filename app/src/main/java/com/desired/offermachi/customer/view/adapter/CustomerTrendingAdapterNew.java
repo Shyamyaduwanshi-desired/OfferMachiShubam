@@ -113,7 +113,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
         }else{
             Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.pizza_logo).into(holder.ivStoreLogo);
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.shortlogo).into(holder.ivStoreLogo);
         }
        holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override

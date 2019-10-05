@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    >
+    <TextView
+        android:id="@+id/tv_title_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cv"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:text="Please Select your store location"
+        />
+
+    <LinearLayout
+        android:id="@+id/searchlinear_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_background_view"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="50dp">
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:queryHint="What are you looking for?"
+            android:queryBackground="@android:color/transparent"
+            android:background="@null"
+            android:layout_marginTop="0dp"
+            android:iconifiedByDefault="false">
+        </SearchView>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cv_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/searchlinear_id"
+        android:layout_above="@+id/bt_proceed" />
+    <Button
+        android:id="@+id/bt_proceed"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/login_button_background"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"     android:text="Okay"
+        android:textSize="15dp"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+
+        />
+
+</RelativeLayout>

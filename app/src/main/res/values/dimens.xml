@@ -9,4 +9,8 @@
     <dimen name="fab_margin">59dp</dimen>
     <dimen name="margin_bottom">95dp</dimen>
     <dimen name="margin_right">20dp</dimen>
+
+    <dimen name="wallet_edit_height">40dp</dimen>
+    <dimen name="title_txt_size">16sp</dimen>
+    <dimen name="margin_5">5dp</dimen>
 </resources>

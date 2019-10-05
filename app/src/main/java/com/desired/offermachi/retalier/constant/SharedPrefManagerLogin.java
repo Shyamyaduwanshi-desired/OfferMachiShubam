@@ -11,6 +11,7 @@ import com.desired.offermachi.retalier.view.activity.RetalierLogin;
 public class SharedPrefManagerLogin {
     private static final  String SHARED_PREF_NAME = "volleyregisterlogin";
     private static final  String KEY_ID = "id";
+    private static final  String KEY_CATEGORY_ID = "category_id";
     private static final  String KEY_NAME = "username";
     private static final  String KEY_EMAIL = "email";
     private static final  String KEY_PHONE = "mobile";
@@ -73,6 +74,7 @@ public class SharedPrefManagerLogin {
         return new UserModel(
 
                 sharedPreferences.getString(KEY_ID, "NA"),
+                sharedPreferences.getString(KEY_CATEGORY_ID,"NA"),
                 sharedPreferences.getString(KEY_NAME, "NA"),
                 sharedPreferences.getString(KEY_EMAIL, "NA"),
                 sharedPreferences.getString(KEY_PHONE, "NA"),

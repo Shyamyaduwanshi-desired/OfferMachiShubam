@@ -33,7 +33,7 @@ public class BottomDealsoftheCountPresenter {
         void failbottomnoti(String response);
     }
 
-    public void BottomNotificationUnreadCount(final String userid) {
+    public void BottomNotificationUnreadCount(final String userid , final String lati , final String longi ) {
 
         if(!((Activity) context).isFinishing())
         {
@@ -81,7 +81,10 @@ public class BottomDealsoftheCountPresenter {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id", userid);
+                params.put("user_id",  userid);
+                params.put("latitude",lati);
+                params.put("longitude",longi);
+//
                 return params;
             }
         };

@@ -5,27 +5,31 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.model.ImageBean;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
+import com.desired.offermachi.retalier.view.fragment.GetItemView;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdapter.MyViewHolder> {
+public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdapter.MyViewHolder>  {
     private List<ImageBean> list;
     private Context context;
     private ImageClick planClick;
 
-    public SelectedImageAdapter(Context context, List<ImageBean> list, ImageClick planClick) {
+
+    public SelectedImageAdapter(Context context, List<ImageBean> list, ImageClick planClick ) {
         this.context = context;
         this.list = list;
         this.planClick = planClick;
+
     }
 
     @Override
@@ -39,44 +43,35 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-//                Glide.with(context)
-//                .load(new File(list.get(position).getImagePath()))
-//                .placeholder(R.drawable.shortlogo)
-//                .into(holder.ivPic);
-
         Picasso.get().load(new File(list.get(position).getImagePath())).placeholder(R.drawable.shortlogo).into(holder.ivPic);
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.img_cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                planClick.onClick(position,2);
+                // Remove the item on remove/button click
+                list.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position,list.size());
+                // Show the removed item label`enter code here`
+
             }
         });
-
-
-        holder.rlAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                planClick.onClick(position,1);
-            }
-        });*/
     }
-
     @Override
     public int getItemCount() {
         return list.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivPic;
+        ImageView ivPic ,img_cross;
         public MyViewHolder(View view) {
             super(view);
 
             ivPic = view.findViewById(R.id.img_pic);
+            img_cross = view.findViewById(R.id.cancel_action_id);
 
         }
     }
-
     public interface ImageClick{
         void PhotonClick(int position, int diff);
     }

@@ -96,6 +96,7 @@ public class TypeBrandCategoryPresenter {
 
                         String offer_brands=jsonObject.getString("offer_brands");
                         Log.e("fetchdata", "offer_types ="+offer_types );
+
                         JSONArray jsonArray=new JSONArray(offer_types);
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {

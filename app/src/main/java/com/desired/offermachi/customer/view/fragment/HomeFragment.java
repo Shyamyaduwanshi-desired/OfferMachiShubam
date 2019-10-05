@@ -165,6 +165,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         storeviewall.setOnClickListener(this);
         rlCategory =view.findViewById(R.id.rl_icon);
 
+
+
         categoryid =view.findViewById(R.id.selectcategoryname);
         categoryid.setText(catname);
         rlCategory.setOnClickListener(this);
@@ -253,12 +255,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                 String longi= UserSharedPrefManager.GetLong(getActivity());
                 String locnm= UserSharedPrefManager.GetLocNm(getActivity());
                 Log.e("","lati= "+lati+" logi= "+longi+" locnm= "+locnm);
+
                 presenter.GetAllMultipleCateList(catid, idholder);
                 searchPresenter.GetSearchList("", "");//for all searchable list data
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
         }
+
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(locationReceiver,
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(StoreReceiver,
@@ -309,6 +313,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             String status = intent.getStringExtra("followstatus");
             String storeid = intent.getStringExtra("storeid");
             presenter.AddStoreFollow(idholder,storeid,status);
+            presenter.GetAllListSingle(catid, idholder);
         }
     };
     public BroadcastReceiver CouponReceiver = new BroadcastReceiver() {
@@ -396,6 +401,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
                 presenter.GetAllMultipleCateList(catid, idholder);
+
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }

@@ -19,6 +19,7 @@ import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierDashboard;
 import com.desired.offermachi.retalier.view.activity.RetalierOtpActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -104,6 +105,85 @@ public class SignupPresenter {
                 params.put("latitude", lati);
                 params.put("longitude", longi);
                 params.put("shop_category", category);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
+    public void Registrtion(final String name, final String mobile, final String email, final String password, final String shop_name, final String shop_contact_number, final String address, final String city
+    , final String shop_logo, final String shop_day_hours, final String opening_time, final String closing_time, final String about_store, final String devicekey, final String lati, final String longi, final String category, JSONArray jsonArrayBannerImage, JSONArray jsonArrayLocation
+
+    ) {
+        final ProgressDialog progress = new ProgressDialog(context);
+        progress.setMessage("Please Wait..");
+        progress.setCancelable(false);
+        progress.show();
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "retailer_signup_new2", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progress.dismiss();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if(status == 200){
+                        signUp.success(reader.getString("message"));
+                        String result=reader.getString("result");
+                        JSONObject jsonObject=new JSONObject(result);
+                                String userid=jsonObject.getString("user_id");
+                                String otp=jsonObject.getString("otp");
+                                Intent intent = new Intent(context, RetalierOtpActivity.class);
+                                intent.putExtra("userid",userid);
+                                intent.putExtra("otp",otp);
+                                context.startActivity(intent);
+                               ((Activity)context).finish();
+
+                    }else if(status == 404){
+                       signUp.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    signUp.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progress.dismiss();
+                signUp.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("username", name);
+                params.put("mobile", mobile);
+                params.put("email", email);
+                params.put("password", password);
+                params.put("shop_name", shop_name);
+                params.put("shop_contact_number", shop_contact_number);
+                params.put("address", address);
+                params.put("city", city);
+                params.put("shop_logo", shop_logo);
+                params.put("shop_days", shop_day_hours);
+                params.put("opening_time",opening_time);
+                params.put("closing_time",closing_time);
+                params.put("about_store",about_store);
+                params.put("device_key",devicekey);
+                params.put("device_type", "Android");
+                params.put("latitude", lati);
+                params.put("longitude", longi);
+                params.put("shop_category", category);
+                params.put("store_banners", String.valueOf(jsonArrayBannerImage));
+                params.put("store_locations", String.valueOf(jsonArrayLocation));
+
+Log.e("","SignUp param= "+params.toString());
+
+
                 return params;
             }
         };

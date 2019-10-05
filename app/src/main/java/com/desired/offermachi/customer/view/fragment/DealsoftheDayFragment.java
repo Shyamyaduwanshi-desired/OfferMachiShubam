@@ -31,6 +31,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.model.category_model;
+import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
 import com.desired.offermachi.customer.presenter.CustomerDealsOftheDaysPresenter;
 import com.desired.offermachi.customer.presenter.CustomerFeedsPresenter;
 import com.desired.offermachi.customer.view.activity.ActFeedsFilterShow;
@@ -46,13 +47,15 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class DealsoftheDayFragment extends Fragment implements View.OnClickListener, CustomerDealsOftheDaysPresenter.DealsList {
+public class DealsoftheDayFragment extends Fragment implements View.OnClickListener, CustomerDealsOftheDaysPresenter.DealsList, BottomDealsoftheCountPresenter.BottomNotiRead {
     View view;
     RecyclerView categoryrecycle;
 //    private CustomerTrendingAdapter customerTrendingAdapter;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private CustomerDealsOftheDaysPresenter presenter;
     String idholder;
+    TextView BottomtvNotiCountdeal,BottomtvNotiCountcoupons,BottomtvNotiCountfavorites;
+    private BottomDealsoftheCountPresenter BottomNotiRead;
 //    TextView sortbytext,filtertext;
 
     RelativeLayout rlFilter,rlSortBy;
@@ -213,8 +216,6 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
 //            Intent intent = new Intent(getContext(), FilterShowActivity.class);
             startActivity(intent);
 
-
-
         }
 
     }
@@ -297,6 +298,32 @@ public class DealsoftheDayFragment extends Fragment implements View.OnClickListe
     }
 
 
+    @Override
+    public void successbottomnoti(String response, String deal, String coupon, String fav) {
+
+
+
+
+
+
+
+
+    }
+
+    @Override
+    public void errorbottomnoti(String response) {
+
+
+
+
+
+
+    }
+
+    @Override
+    public void failbottomnoti(String response) {
+
+    }
 }
 
 

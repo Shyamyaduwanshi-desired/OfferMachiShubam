@@ -78,6 +78,7 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -213,6 +214,7 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -291,6 +293,7 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -377,6 +380,7 @@ public class CustomerDealsOftheDaysPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -401,6 +405,7 @@ public class CustomerDealsOftheDaysPresenter {
                             list.add(selectCategoryModel);
                         }
                         dealsList.success(list);
+
 
 
                     } else if (status == 404) {

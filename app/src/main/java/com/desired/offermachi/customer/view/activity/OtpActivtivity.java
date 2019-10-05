@@ -61,9 +61,11 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
             if(TextUtils.isEmpty(Otp)){
                 etotp.requestFocus();
                 etotp.setError("Please enter otp");
-            }else if (!(Otpholder.equals(Otp))){
+            }
+            else if (!(Otpholder.equals(Otp))){
                 Toast.makeText(this, "Enter Wrong Otp Please Try Again.", Toast.LENGTH_SHORT).show();
-            }else {
+            }
+            else {
                 if(isNetworkConnected()){
 //                    presenter.verifyOtp(Idholder);
                     presenter.verifyOtpCommon(Idholder,Otpholder);
@@ -88,7 +90,6 @@ public class OtpActivtivity extends AppCompatActivity implements View.OnClickLis
         finish();
 
     }
-
     @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);

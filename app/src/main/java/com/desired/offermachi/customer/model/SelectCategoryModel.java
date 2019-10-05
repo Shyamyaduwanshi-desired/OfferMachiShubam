@@ -1,15 +1,24 @@
 package com.desired.offermachi.customer.model;
 
 public class SelectCategoryModel {
-    private String id,Offerid,Offername,OfferCategory,OfferSubCategory,Offertype,Offertypename,Offervalue,OfferDetail,Offerstartdate,
-            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,Offerfav,OfferImage,Offerqrcodeimage,OfferCouponCodeStatus,storeLogo;
+    private String id,Offerid,Offername,OfferCategory,offer_title_slug,OfferSubCategory,Offertype,Offertypename,Offervalue,OfferDetail,Offerstartdate,
+            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,Offerfav,OfferImage,Offerqrcodeimage,OfferCouponCodeStatus,storeLogo ;
 
-    public SelectCategoryModel(String id,String offerid,String offername,String offerCategory,String offerSubCategory,
-                          String offertype,String offertypename,String offervalue,String offerDetail,String offerstartdate,String offerenddate,String offertime,
-                          String offerdescription,String coupon_code,String posted_by,String offerstatus,String offerbrandname,String offerfav,String offerImage,String offerqrcodeimage,String offerCouponCodeStatus,String storeLogo) {
+    public String getOffer_title_slug() {
+        return offer_title_slug;
+    }
+
+    public void setOffer_title_slug(String offer_title_slug) {
+        this.offer_title_slug = offer_title_slug;
+    }
+
+    public SelectCategoryModel(String id, String offerid, String offername, String offer_title_slug, String offerCategory, String offerSubCategory,
+                               String offertype, String offertypename, String offervalue, String offerDetail, String offerstartdate, String offerenddate, String offertime,
+                               String offerdescription, String coupon_code, String posted_by, String offerstatus, String offerbrandname, String offerfav, String offerImage, String offerqrcodeimage, String offerCouponCodeStatus, String storeLogo) {
         this.id = id;
         this.Offerid = offerid;
         this.Offername = offername;
+        this.offer_title_slug = offer_title_slug;
         this.OfferCategory=offerCategory;
         this.OfferSubCategory=offerSubCategory;
         this.Offertype=offertype;

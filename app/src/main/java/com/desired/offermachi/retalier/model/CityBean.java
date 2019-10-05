@@ -1,7 +1,7 @@
 package com.desired.offermachi.retalier.model;
 
 public class CityBean {
-    String id,city_name,city_slug,status,created,modified;
+    String id,city_name,city_slug,status,created,modified,locality_name;
     private boolean selected;
     public String getId() {
         return id;
@@ -17,6 +17,14 @@ public class CityBean {
 
     public void setCity_name(String city_name) {
         this.city_name = city_name;
+    }
+
+    public String getLocality_name() {
+        return locality_name;
+    }
+
+    public void setLocality_name(String locality_name) {
+        this.locality_name = locality_name;
     }
 
     public String getCity_slug() {

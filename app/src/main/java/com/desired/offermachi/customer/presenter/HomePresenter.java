@@ -88,6 +88,7 @@ public class HomePresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -121,6 +122,7 @@ public class HomePresenter {
                                     object2.getString("id"),
                                     object2.getString("offer_id"),
                                     object2.getString("offer_title"),
+                                    object2.getString("offer_title_slug"),
                                     object2.getString("offer_category"),
                                     object2.getString("sub_category"),
                                     object2.getString("offer_type"),
@@ -140,7 +142,6 @@ public class HomePresenter {
                                     object2.getString("qr_code_image"),
                                     object2.getString("coupon_code_status"),
                                     ""
-
                             );
                             list2.add(selectCategoryModel);
                         }
@@ -272,6 +273,7 @@ public class HomePresenter {
                                     object2.getString("id"),
                                     object2.getString("offer_id"),
                                     object2.getString("offer_title"),
+                                    object2.getString("offer_title_slug"),
                                     object2.getString("offer_category"),
                                     object2.getString("sub_category"),
                                     object2.getString("offer_type"),
@@ -290,8 +292,7 @@ public class HomePresenter {
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
                                     object2.getString("coupon_code_status"),
-                                    object2.getString("shop_logo")
-
+                                    ""
                             );
                             list2.add(selectCategoryModel);
                         }
@@ -339,6 +340,7 @@ public class HomePresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("category_ids", catid);
                 params.put("user_id", userid);
+
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
 //                params.put("dist", "500");

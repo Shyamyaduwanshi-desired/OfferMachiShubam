@@ -52,6 +52,7 @@ public class RetalierVerifyActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
             }
             public void onFinish() {
+
                 Nevigate();
             }
         };

@@ -69,12 +69,16 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
             Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
+
         /* holder.productshare.setText();*/
         if (selectCategoryModel.getOfferfav().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
-        }else{
+
+        }else if(selectCategoryModel.getOfferfav().equals("0")){
             holder.likeimg.setImageResource(R.drawable.heart);
+            Log.e("likeimage","0");
         }
+
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
             holder.productbutton.setText("View Coupon Code");
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
@@ -82,6 +86,7 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
         }else{
             holder.productbutton.setText("Get Coupon Code");
         }
+
 
         holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +164,7 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
                 }
             }
         });
+
 
         holder.productshare.setOnClickListener(new View.OnClickListener() {
             @Override

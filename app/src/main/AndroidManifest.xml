@@ -96,6 +96,11 @@
 
         </activity>
         <activity
+            android:name=".retalier.view.activity.PickLocation"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
             android:name=".customer.view.activity.ActInterestCategoryNew"
             android:screenOrientation="portrait">
         </activity>

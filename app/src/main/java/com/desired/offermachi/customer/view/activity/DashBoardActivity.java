@@ -150,6 +150,9 @@ public class DashBoardActivity extends AppCompatActivity
        String pos= UserSharedPrefManager.GetClickNoti(this);
         idholder=user.getId();
 
+        lati= UserSharedPrefManager.GetLat(this);
+        longi= UserSharedPrefManager.GetLong(this);
+
 
         String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
         if (pos.equals("1")) {
@@ -339,6 +342,9 @@ else {
     }
 
     private void GoMyCoupon(int diff) {
+
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
                 smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -397,6 +403,8 @@ else {
 
     }
     private void GoFavorite(int diff) {
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
                 dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -429,7 +437,11 @@ else {
 
     private void GoDealOfTheDay(int diff) {
 
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
+
+
 
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
@@ -955,9 +967,7 @@ else {
             btnnotification.setVisibility(View.VISIBLE);
         }
         notiCount.NotificationUnreadCount(idholder);
-        BottomNotiRead.BottomNotificationUnreadCount(idholder);
-
-
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
 
 
     }

@@ -37,6 +37,7 @@
         android:layout_height="30dp"
         android:text="Okay"
         android:padding="5dp"
+        android:visibility="gone"
      android:layout_gravity="center_horizontal|right"
 
         />

@@ -91,16 +91,29 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
 
-//        holder.ivLikeBtn.setOnTouchListener(null);
+
         if (selectCategoryModel.getOfferfav().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
-//            holder.ivLikeBtn.setLikeIcon(R.drawable.ic_like);
-//            holder.ivLikeBtn.setCurrentlyLiked(true);
         }else{
             holder.likeimg.setImageResource(R.drawable.heart);
-//            holder.ivLikeBtn.setUnlikeIcon(R.drawable.heart);
-//            holder.ivLikeBtn.setCurrentlyLiked(false);
         }
+
+
+//
+//
+////        holder.ivLikeBtn.setOnTouchListener(null);
+//        if (selectCategoryModel.getOfferfav().equals("1")){
+//            holder.likeimg.setImageResource(R.drawable.ic_like);
+////            holder.ivLikeBtn.setLikeIcon(R.drawable.ic_like);
+////            holder.ivLikeBtn.setCurrentlyLiked(true);
+//        }else{
+//            holder.likeimg.setImageResource(R.drawable.heart);
+////            holder.ivLikeBtn.setUnlikeIcon(R.drawable.heart);
+////            holder.ivLikeBtn.setCurrentlyLiked(false);
+//        }
+//
+
+
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
             holder.productbutton.setText("View Coupon Code");//View Coupon Code
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
@@ -163,6 +176,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                 }
             }
         });
+
 
         holder.rlLike.setOnClickListener(new View.OnClickListener() {
             @Override

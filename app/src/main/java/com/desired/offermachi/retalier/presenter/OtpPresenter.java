@@ -68,6 +68,7 @@ public class OtpPresenter {
                         JSONObject jsonObject = new JSONObject(result);
                         UserModel userModel = new UserModel(
                                 jsonObject.getString("id"),
+                                jsonObject.getString("category_id"),
                                 jsonObject.getString("username"),
                                 jsonObject.getString("email"),
                                 jsonObject.getString("mobile"),

@@ -75,11 +75,15 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
        /* holder.productshare.setText();*/
+
+
         if (selectCategoryModel.getOfferfav().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
         }else{
             holder.likeimg.setImageResource(R.drawable.heart);
         }
+
+
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
             holder.productbutton.setText("View Coupon Code");
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
@@ -88,7 +92,8 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
             holder.productbutton.setText("Get Coupon Code");
         }
 
-       holder.productname.setOnClickListener(new View.OnClickListener() {
+
+        holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ProductActivity.class);

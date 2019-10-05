@@ -17,12 +17,12 @@ import com.desired.offermachi.retalier.model.AddStoreLocBean;
 
 import java.util.List;
 
-public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocationDetailsAdapter.MyViewHolder> {
+public class StoreLocationDetailsAdapter1 extends RecyclerView.Adapter<StoreLocationDetailsAdapter1.MyViewHolder> {
     private List<AddStoreLocBean> list;
     private Context context;
     private LocDetailClick planClick;
 
-    public StoreLocationDetailsAdapter(Context context, List<AddStoreLocBean> list, LocDetailClick planClick) {
+    public StoreLocationDetailsAdapter1(Context context, List<AddStoreLocBean> list, LocDetailClick planClick) {
         this.context = context;
         this.list = list;
         this.planClick = planClick;
@@ -40,20 +40,23 @@ public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocat
 
         holder.etLocNm.setText(list.get(position).getsLocNm());
 
-      /*  holder.etLocNm.setKeyListener(null);
+        holder.etLocNm.setKeyListener(null);
         holder.etLocNm.setFocusable(false);
         holder.etLocNm.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
-        holder.etLocNm.setClickable(true);*/
+        holder.etLocNm.setClickable(true);
 
+//        if(position==0)
+//        {
+//            holder.rlAdd.setVisibility(View.GONE);
+//        }
+//        else
+//        {
+//            holder.rlAdd.setVisibility(View.GONE);
+//        }
 
-        if(position==0)
-        {
-            holder.rlAdd.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            holder.rlAdd.setVisibility(View.GONE);
-        }
+        holder.etPerNm.setText(list.get(position).getPersonNm());
+        holder.etAddress.setText(list.get(position).getAddress());
+        holder.etPhoneNumber.setText(list.get(position).getPhoneNumber());
 
 //        holder.etLocNm.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -69,7 +72,8 @@ public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocat
                 planClick.onClick(position,1);
             }
         });
-        holder.etLocNm.addTextChangedListener(new TextWatcher() {
+
+        holder.etPerNm.addTextChangedListener(new TextWatcher() {
 
             public void onTextChanged(CharSequence s, int start, int before,
                                       int count) {
@@ -84,7 +88,50 @@ public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocat
             }
 
             public void afterTextChanged(Editable s) {
-                list.get(position).setsLocNm(s.toString());
+
+                list.get(position).setPersonNm(s.toString());
+//                notifyDataSetChanged();
+            }
+        });
+        holder.etAddress.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+            }
+
+
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+                list.get(position).setAddress(s.toString());
+//                notifyDataSetChanged();
+            }
+        });
+
+        holder.etPhoneNumber.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+
+            }
+
+
+
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+                list.get(position).setPhoneNumber(s.toString());
+//                notifyDataSetChanged();
             }
         });
     }
@@ -96,13 +143,16 @@ public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocat
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 //        TextView tvLocNm;
-        EditText etLocNm;
+        EditText etLocNm,etPerNm,etAddress,etPhoneNumber;
         LinearLayout lyMain;
         RelativeLayout rlAdd;
         public MyViewHolder(View view) {
             super(view);
 //            tvLocNm = view.findViewById(R.id.tv_loc_nm);
             etLocNm = view.findViewById(R.id.et_loction_name);
+            etPerNm = view.findViewById(R.id.et_contact_person);
+            etAddress = view.findViewById(R.id.et_address);
+            etPhoneNumber = view.findViewById(R.id.et_phone_number);
             lyMain = view.findViewById(R.id.ly_main);
             rlAdd = view.findViewById(R.id.rl_add_location);
         }

@@ -150,14 +150,16 @@ public class CustomerOtpPresenter {
                                     "0",
                                     "0",
                                     "1"
-
                             );
+
                             UserSharedPrefManager.getInstance(context).userLogin(user);
+
                         }else {
 
 //                        JSONObject jsonObject = new JSONObject(result);
                             UserModel userModel = new UserModel(
                                     jsonObject.getString("id"),
+                                    jsonObject.getString("category_id"),
                                     jsonObject.getString("username"),
                                     jsonObject.getString("email"),
                                     jsonObject.getString("mobile"),

@@ -122,11 +122,11 @@ public class CityPresenter {
                         JSONObject object;
                         CityBean bean;
 
-                        bean=new CityBean();
-                        bean.setId("0");
-                        bean.setCity_name("Select Location");
-                        bean.setStatus("1");
-                        list.add(bean);
+//                        bean=new CityBean();
+//                        bean.setId("0");
+//                        bean.setCity_name("Select Location");
+//                        bean.setStatus("1");
+//                        list.add(bean);
 
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);

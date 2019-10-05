@@ -23,7 +23,6 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
 
     RetalierTabLayoutAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +37,7 @@ public class RetalierRegistration extends AppCompatActivity implements TabLayout
         viewPager1 = (ViewPager) findViewById(R.id.pager);
         tabLayout.setOnTabSelectedListener(RetalierRegistration.this);
 
-//        TabLayoutUtils.enableTabs( tabLayout, false );
+        TabLayoutUtils.enableTabs( tabLayout, false );
 
         viewPager1.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

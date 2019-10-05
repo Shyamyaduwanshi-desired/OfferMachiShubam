@@ -68,7 +68,9 @@ public class ActFeedsFilterShow extends AppCompatActivity implements CustomerCat
         notiCount.NotificationUnreadCount(idholder);
 
         if (isNetworkConnected()) {
+
             presenter.GetFeedCategoryList(idholder);//for show all followed category
+
         }  else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }

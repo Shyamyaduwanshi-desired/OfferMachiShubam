@@ -132,24 +132,24 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         offerspinner = view.findViewById(R.id.offertypespinner);
         brandspinner = view.findViewById(R.id.brandnamespinner);
         categoryspinner = view.findViewById(R.id.categoryspinner);
-         submitbutton =view.findViewById(R.id.submit_button_id);
-         submitbutton.setOnClickListener(this);
-         nextbutton=view.findViewById(R.id.next_button_id);
-         nextbutton.setOnClickListener(this);
-         fistcircle=view.findViewById(R.id.firstcircle_id);
-         firsthomelinear=view.findViewById(R.id.firsthome_linear_id);
-         secondlinear=view.findViewById(R.id.second_home_linear_id);
-         etstartdate=view.findViewById(R.id.editText1);
-         etstartdate.setOnClickListener(this);
-         etenddate=view.findViewById(R.id.editexpirydate);
-         etenddate.setOnClickListener(this);
-         start_Time = view.findViewById(R.id.time_view_start);
-         start_Time.setOnClickListener(this);
-         end_Time =view.findViewById(R.id.time_view_end);
-         end_Time.setOnClickListener(this);
-         offerimage=view.findViewById(R.id.offerimage);
-         imagepickerly=view.findViewById(R.id.imagepicker);
-         imagepickerly.setOnClickListener(this);
+        submitbutton =view.findViewById(R.id.submit_button_id);
+        submitbutton.setOnClickListener(this);
+        nextbutton=view.findViewById(R.id.next_button_id);
+        nextbutton.setOnClickListener(this);
+        fistcircle=view.findViewById(R.id.firstcircle_id);
+        firsthomelinear=view.findViewById(R.id.firsthome_linear_id);
+        secondlinear=view.findViewById(R.id.second_home_linear_id);
+        etstartdate=view.findViewById(R.id.editText1);
+        etstartdate.setOnClickListener(this);
+        etenddate=view.findViewById(R.id.editexpirydate);
+        etenddate.setOnClickListener(this);
+        start_Time = view.findViewById(R.id.time_view_start);
+        start_Time.setOnClickListener(this);
+        end_Time =view.findViewById(R.id.time_view_end);
+        end_Time.setOnClickListener(this);
+        offerimage=view.findViewById(R.id.offerimage);
+        imagepickerly=view.findViewById(R.id.imagepicker);
+        imagepickerly.setOnClickListener(this);
         btngenerate=view.findViewById(R.id.btngenerate);
         btngenerate.setOnClickListener(this);
         if (isNetworkConnected()) {
@@ -249,7 +249,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         offerenddate=etenddate.getText().toString();
         offerstarttime=start_Time.getText().toString();
         offerendtime=end_Time.getText().toString();
-       if (TextUtils.isEmpty(offercouponcode)) {
+        if (TextUtils.isEmpty(offercouponcode)) {
             txtoffercouponcode.requestFocus();
             txtoffercouponcode.setError("Please generate Couponcode");
         }
@@ -270,54 +270,54 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
             end_Time.setError("Please select end time");
         }else{
             alltime= offerstarttime+"-"+offerendtime;
-           if (isNetworkConnected()) {
+            if (isNetworkConnected()) {
 
-               Log.e("","categoryid= "+categoryid);
+                Log.e("","categoryid= "+categoryid);
 
-               postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,1);
-           }
-       }
+                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,1);
+            }
+        }
     }
     @Override
     public void onClick(View v) {
-         if (v==submitbutton){
-             PostOfferValidation2();
-         }
-         else if (v==nextbutton){
-             PostOfferValidation();
-         }
-         else if (v==etstartdate){
+        if (v==submitbutton){
+            PostOfferValidation2();
+        }
+        else if (v==nextbutton){
+            PostOfferValidation();
+        }
+        else if (v==etstartdate){
             datepick="0";
             datepicker();
-         }
-         else if (v==etenddate){
+        }
+        else if (v==etenddate){
             datepick="1";
             datepicker();;
-         }
-         else if (v==start_Time){
-             timepick="0";
-             new TimePickerDialog(getContext(), mTimeSetListener, mrngtimeHour, mrngtimeMinute, false).show();
-         }
-         else if (v==end_Time){
-             timepick="1";
-             new TimePickerDialog(getContext(), mTimeSetListener, mrngtimeHour, mrngtimeMinute, false).show();
-         }else if (v==imagepickerly){
-             if (Build.VERSION.SDK_INT >= 23) {
-                 if (isStoragePermissionGranted()) {
-                     openGallery();
-                 } else {
-                     ActivityCompat.requestPermissions(getActivity(), permissions, 100);
-                 }
-             } else {
-                 openGallery();
-             }
-         }else if (v==btngenerate){
-             if (isNetworkConnected()) {
-                 postpresenter.GenerateCouponcode();
-             }  else {
-                 showAlert("Please connect to internet.", R.style.DialogAnimation);
-             }
-         }
+        }
+        else if (v==start_Time){
+            timepick="0";
+            new TimePickerDialog(getContext(), mTimeSetListener, mrngtimeHour, mrngtimeMinute, false).show();
+        }
+        else if (v==end_Time){
+            timepick="1";
+            new TimePickerDialog(getContext(), mTimeSetListener, mrngtimeHour, mrngtimeMinute, false).show();
+        }else if (v==imagepickerly){
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (isStoragePermissionGranted()) {
+                    openGallery();
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), permissions, 100);
+                }
+            } else {
+                openGallery();
+            }
+        }else if (v==btngenerate){
+            if (isNetworkConnected()) {
+                postpresenter.GenerateCouponcode();
+            }  else {
+                showAlert("Please connect to internet.", R.style.DialogAnimation);
+            }
+        }
     }
 
     @Override
@@ -397,12 +397,12 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         picker = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                 if (datepick.equals("0")){
-                         etstartdate.setText(year + "-" + (month + 1) + "-" +dayOfMonth );
-                  }
-                 else if (datepick.equals("1")){
-                           etenddate.setText( year+ "-" + (month + 1) + "-" + dayOfMonth);
-                   }
+                if (datepick.equals("0")){
+                    etstartdate.setText(year + "-" + (month + 1) + "-" +dayOfMonth );
+                }
+                else if (datepick.equals("1")){
+                    etenddate.setText( year+ "-" + (month + 1) + "-" + dayOfMonth);
+                }
             }
         }, year, month, day);
         picker.show();
@@ -500,10 +500,10 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void successoffer(String response) {
-            Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getActivity(), RetalierViewOfferDiscount.class);
-            startActivity(intent);
-            getActivity().finish();
+        Toast.makeText(getContext(), ""+response, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), RetalierViewOfferDiscount.class);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     @Override
@@ -525,5 +525,4 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
-
 

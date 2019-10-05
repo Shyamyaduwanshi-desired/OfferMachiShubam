@@ -72,6 +72,7 @@ public class SmartShoppingNotificationDataPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),

@@ -137,6 +137,7 @@
         android:layout_marginTop="5dp"
         android:visibility="gone"
         android:text="Load more"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoryrecycleview"
         android:layout_width="match_parent"

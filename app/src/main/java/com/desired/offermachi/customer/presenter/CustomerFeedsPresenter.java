@@ -79,6 +79,7 @@ public class CustomerFeedsPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -226,6 +227,7 @@ public class CustomerFeedsPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -250,17 +252,19 @@ public class CustomerFeedsPresenter {
                               list.add(selectCategoryModel);
                         }
 
-                        Collections.sort(list, new Comparator<SelectCategoryModel>() {//yyyy-MM-dd
-                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");//2019-09-26
-                            @Override
-                            public int compare(SelectCategoryModel lhs, SelectCategoryModel rhs) {
-                                try {
-                                    return f.parse(lhs.getOfferstartdate()).compareTo(f.parse(rhs.getOfferstartdate()));
-                                } catch (ParseException e) {
-                                    throw new IllegalArgumentException(e);
-                                }
-                            }
-                        });
+//                        Collections.sort(list, new Comparator<SelectCategoryModel>() {//yyyy-MM-dd
+//                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd");//2019-09-26
+//                            @Override
+//                            public int compare(SelectCategoryModel lhs, SelectCategoryModel rhs) {
+//                                try {
+//                                    return f.parse(lhs.getOfferstartdate()).compareTo(f.parse(rhs.getOfferstartdate()));
+//                                } catch (ParseException e) {
+//                                    throw new IllegalArgumentException(e);
+//                                }
+//                            }
+//                        });
+//
+
 
                         Collections.reverse(list);
                         }
@@ -362,6 +366,7 @@ public class CustomerFeedsPresenter {
                                         object.getString("id"),
                                         object.getString("offer_id"),
                                         object.getString("offer_title"),
+                                        object.getString("offer_title_slug"),
                                         object.getString("offer_category"),
                                         object.getString("sub_category"),
                                         object.getString("offer_type"),
@@ -467,6 +472,7 @@ public class CustomerFeedsPresenter {
                                         object.getString("id"),
                                         object.getString("offer_id"),
                                         object.getString("offer_title"),
+                                        object.getString("offer_title_slug"),
                                         object.getString("offer_category"),
                                         object.getString("sub_category"),
                                         object.getString("offer_type"),
@@ -591,6 +597,7 @@ public class CustomerFeedsPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),
@@ -610,9 +617,8 @@ public class CustomerFeedsPresenter {
                                     object.getString("qr_code_image"),
                                     object.getString("coupon_code_status"),
                                     ""
-
-
                             );
+
                             list.add(selectCategoryModel);
                         }
                         feedsList.success(list,0,0,2);
@@ -635,6 +641,7 @@ public class CustomerFeedsPresenter {
             }
         }
         ) {
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -675,6 +682,7 @@ public class CustomerFeedsPresenter {
                                     object.getString("id"),
                                     object.getString("offer_id"),
                                     object.getString("offer_title"),
+                                    object.getString("offer_title_slug"),
                                     object.getString("offer_category"),
                                     object.getString("sub_category"),
                                     object.getString("offer_type"),

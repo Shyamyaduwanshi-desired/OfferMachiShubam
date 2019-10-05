@@ -64,6 +64,7 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
                 etotp.requestFocus();
                 etotp.setError("Please enter otp");
             }else if (!(OtpHolder.equals(Otp))){
+
                 Toast.makeText(this, "Enter Wrong Otp Please Try Again. ", Toast.LENGTH_SHORT).show();
             }else {
                 if(isNetworkConnected()){
@@ -77,6 +78,7 @@ public class RetalierOtpActivity extends AppCompatActivity implements View.OnCli
             if(isNetworkConnected()){
                 presenter.resentOtp(Idholder);
             }else {
+
                 showAlert("Please connect to internet", R.style.DialogAnimation);
             }
         }

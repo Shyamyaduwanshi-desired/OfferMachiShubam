@@ -50,7 +50,7 @@
 
         <item
             android:id="@+id/nav_dealsday"
-            android:icon="@drawable/ic_deal"
+            android:icon="@drawable/appointment"
             android:title="@string/dealsday" />
         <item
             android:id="@+id/nav_exclusive"
@@ -67,7 +67,7 @@
             android:title="@string/invite" />
         <item
             android:id="@+id/nav_help"
-            android:icon="@drawable/infomenu"
+            android:icon="@drawable/ic_info"
             android:title="@string/help" />
         <item
             android:id="@+id/nav_customer"

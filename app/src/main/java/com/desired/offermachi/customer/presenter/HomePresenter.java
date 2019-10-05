@@ -107,7 +107,7 @@ public class HomePresenter {
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
                                     object.getString("coupon_code_status"),
-                                    ""
+                                    object.getString("shop_logo")
 
                             );
                             list.add(selectCategoryModel);
@@ -141,7 +141,7 @@ public class HomePresenter {
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
                                     object2.getString("coupon_code_status"),
-                                    ""
+                                    object2.getString("shop_logo")
                             );
                             list2.add(selectCategoryModel);
                         }
@@ -292,7 +292,7 @@ public class HomePresenter {
                                     object2.getString("offer_image"),
                                     object2.getString("qr_code_image"),
                                     object2.getString("coupon_code_status"),
-                                    ""
+                                    object2.getString("shop_logo")
                             );
                             list2.add(selectCategoryModel);
                         }
@@ -430,8 +430,6 @@ public class HomePresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
-
-
 
 
     private void showpDialog() {

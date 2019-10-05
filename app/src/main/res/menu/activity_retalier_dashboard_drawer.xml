@@ -58,7 +58,7 @@
 
         <item
             android:id="@+id/nav_rateapp"
-            android:icon="@drawable/support"
+            android:icon="@drawable/ic_rating"
             android:title="@string/rate" />
 
         <item

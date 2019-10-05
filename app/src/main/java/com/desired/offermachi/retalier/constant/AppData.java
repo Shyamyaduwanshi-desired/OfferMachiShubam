@@ -82,7 +82,7 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("dd MMMM");// hh:mm:ss aa
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
@@ -96,7 +96,7 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("dd MMMM");
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
@@ -111,8 +111,8 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy");
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("dd MMMM ");
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -126,8 +126,8 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("dd/MM");
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -140,8 +140,8 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("MMMM dd  yyyy");
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("MMMM dd ");
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -154,7 +154,7 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("dd MMMM");
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
@@ -169,8 +169,8 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("MMM dd, yyyy");// MMMM dd yyyy Jun 20 2019
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("MMM dd");// MMMM dd yyyy Jun 20 2019
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -184,8 +184,8 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("dd MMMM yyyy HH:mm");//dd MMMM yyyy HH:mm a
+            DateFormat originalFormat = new SimpleDateFormat("MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("dd MMMM  HH:mm");//dd MMMM yyyy HH:mm a
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -199,7 +199,7 @@ public class AppData {
     {
         String shortTimeStr="";
         try {
-            SimpleDateFormat toFullDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat toFullDate = new SimpleDateFormat("MM-dd HH:mm:ss");
             Date fullDate = toFullDate.parse(indate);
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             shortTimeStr = sdf.format(fullDate);

@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                     android:textSize="15dp"
                     android:drawableLeft="@drawable/black_watch"
                     android:drawablePadding="10dp"
-                    android:textColor="@color/pink"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
                 <TextView
@@ -54,17 +54,16 @@
                     android:gravity="end"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="20dp">
-
                     <ImageView
                         android:id="@+id/cancle_img_id"
-                        android:layout_width="wrap_content"
+                        android:layout_width="25dp"
                         android:layout_height="18dp"
                         android:layout_centerVertical="true"
                         android:layout_gravity="end"
                         android:layout_marginLeft="100dp"
                         android:layout_marginTop="0dp"
                         android:layout_toRightOf="@+id/logo"
-                        android:src="@drawable/red_cancek_button"
+                        android:src="@drawable/colourerror"
                         tools:ignore="VectorDrawableCompat" />
                 </LinearLayout>
             </LinearLayout>
@@ -84,16 +83,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Monday"/>
                 <TextView
                     android:id="@+id/mondayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -110,16 +109,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Tuesday"/>
                 <TextView
                     android:id="@+id/tuesdayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -136,16 +135,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Wednesday"/>
                 <TextView
                     android:id="@+id/wednesdayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -162,16 +161,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Thursday"/>
                 <TextView
                     android:id="@+id/thursdayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -188,16 +187,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Friday"/>
                 <TextView
                     android:id="@+id/fridayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textStyle="bold"
@@ -214,16 +213,16 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Saturday"/>
                 <TextView
                     android:id="@+id/saturdayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textColor="@color/purple"
@@ -236,20 +235,21 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginBottom="30dp"
                 android:weightSum="2">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
+                    android:layout_weight="0.6"
                     android:textSize="16dp"
-                    android:textColor="@color/blue"
+                    android:textColor="#000"
                     android:textStyle="bold"
                     android:text="Sunday"/>
                 <TextView
                     android:id="@+id/sundayopen"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textSize="16dp"
                     android:textColor="@color/purple"

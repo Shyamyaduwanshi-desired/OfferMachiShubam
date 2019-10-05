@@ -442,12 +442,16 @@ public class CustomerDealsOftheDaysPresenter {
         queue.add(postRequest);
     }
     private void showpDialog() {
-        if (!progress.isShowing())
-            progress.show();
+        if (progress!=null) {
+            if (!progress.isShowing() )
+                progress.show();
+        }
     }
 
     private void hidepDialog() {
-        if (progress.isShowing())
-            progress.dismiss();
+        if (progress!=null) {
+            if (progress.isShowing())
+                progress.dismiss();
+        }
     }
 }

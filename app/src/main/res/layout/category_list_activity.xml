@@ -60,7 +60,7 @@
             <TextView
                 android:id="@+id/unfollowtext"
                 android:layout_width="60dp"
-                android:layout_height="25dp"
+                android:layout_height="22dp"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
                 android:background="@drawable/view_background"

@@ -133,14 +133,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         User user = UserSharedPrefManager.getInstance(getContext()).getCustomer();
         idholder= user.getId();
 
-      Nameholder= user.getUsername();
-       EmailHolder=user.getEmail();
+        Nameholder= user.getUsername();
+        EmailHolder=user.getEmail();
         PhoneHolder= user.getMobile();
         AddressHolder= user.getAddress();
         GenderHolder= user.getGender();
-       ImageHolder=user.getProfile();
-       SmartShoppingHolder=user.getSmartShopping();
-       SoundHolder=user.getNotificationsound();
+        ImageHolder=user.getProfile();
+        SmartShoppingHolder=user.getSmartShopping();
+        SoundHolder=user.getNotificationsound();
 
 //        selectCategoryModelList=new ArrayList<>();
         presenter = new HomePresenter(getActivity(), HomeFragment.this);
@@ -202,6 +202,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 //        categoryrecycle.setNestedScrollingEnabled(false);
 
         //trendingrecycle
+
         trendingrecycle=view.findViewById(R.id.trendingrecycleview);
 
 //        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
@@ -326,7 +327,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     showAlert("Please connect to internet.", R.style.DialogAnimation);
                 }
             }
-
         }
     };
 
@@ -484,6 +484,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();*/
           startActivity(new Intent(getContext(),DashBoardActivity.class));
+
         }else{
             User user = new User(
                     idholder,
@@ -498,6 +499,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     SoundHolder,
                     "1"//shyam 11/9/19
             );
+
             UserSharedPrefManager.getInstance(getActivity()).userLogin(user);
            /* Fragment fragment = new HomeFragment();
             FragmentManager fragmentManager = getChildFragmentManager();
@@ -581,5 +583,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     @Override
     public void couponfail(String response) {
         showAlert(response, R.style.DialogAnimation);
-    }*/
+
+ }*/
 }

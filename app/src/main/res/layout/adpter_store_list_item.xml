@@ -126,8 +126,8 @@
     </android.support.v7.widget.CardView>
     <TextView
         android:id="@+id/btnfollow"
-        android:layout_width="80dp"
-        android:layout_height="25dp"
+        android:layout_width="60dp"
+        android:layout_height="24dp"
         android:gravity="center"
         android:layout_marginRight="10dp"
         android:layout_gravity="right"
@@ -138,5 +138,6 @@
         android:layout_marginBottom="10dp"
        android:layout_below="@+id/cv_main"
         android:layout_centerHorizontal="true"
+        android:textStyle="bold"
         android:background="@drawable/view_background" />
 </RelativeLayout>

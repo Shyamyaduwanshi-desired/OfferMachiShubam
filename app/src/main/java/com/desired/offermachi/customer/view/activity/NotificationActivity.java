@@ -350,11 +350,11 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 //adapter click
     @Override
     public void onNotiClick(int position) {
+
         ClickPos=position;
         String offerId=arNoti.get(position).getNotiId();
         notiRead.ReadNotification(idholder,offerId);
     }
-
     //read success
     @Override
     public void successReadNoti(String response) {
@@ -365,6 +365,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(myIntent);
         finish();
+
     }
 
     @Override

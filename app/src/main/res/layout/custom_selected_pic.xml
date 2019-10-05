@@ -23,7 +23,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/red_cancek_button"
-            android:id="@+id/cancel_action_id"
+            android:id="@+id/ccancel_action_id"
             app:civ_border_color="@color/white"
             app:civ_border_width="1dp"
             app:civ_border_overlay="true"/>

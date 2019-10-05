@@ -82,8 +82,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     RecyclerView categoryrecycle;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private ViewStoreOfferPresenter presenters;
-//    TextView textview;
-    LinearLayout lyTimer;
+    TextView textview;
 //    ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
@@ -143,8 +142,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
-//        textview = findViewById(R.id.timmers_id);
-        lyTimer = findViewById(R.id.ly_timer);
+        textview = findViewById(R.id.timmers_id);
 
 
         /* btnfollow=findViewById(R.id.btnfollow);
@@ -278,20 +276,12 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
             }else{
                 StringTokenizer timeto = new StringTokenizer(storeclosetime, ",");
-                lyTimer.setOnClickListener(new View.OnClickListener() {
+                textview.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         final Dialog dialog = new Dialog(ViewAllOfferFollowActivity.this);
                         dialog.setContentView(R.layout.open_close_dialog);
                         dialog.setTitle("Custom Dialog");
-
-                        TextView  txtmondayopen=dialog.findViewById(R.id.mondayopen);
-                        TextView   txttuesdayopen=dialog.findViewById(R.id.tuesdayopen);
-                        TextView  txtwednesdayopen=dialog.findViewById(R.id.wednesdayopen);
-                        TextView  txtthursdayopen=dialog.findViewById(R.id.thursdayopen);
-                        TextView  txtfridayopen=dialog.findViewById(R.id.fridayopen);
-                        TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
-                        TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
                         ImageView cancle=(ImageView)dialog.findViewById(R.id.cancle_img_id);
                         cancle.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -300,6 +290,15 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                                 finish();
                             }
                         });
+
+                        TextView  txtmondayopen=dialog.findViewById(R.id.mondayopen);
+                        TextView   txttuesdayopen=dialog.findViewById(R.id.tuesdayopen);
+                        TextView  txtwednesdayopen=dialog.findViewById(R.id.wednesdayopen);
+                        TextView  txtthursdayopen=dialog.findViewById(R.id.thursdayopen);
+                        TextView  txtfridayopen=dialog.findViewById(R.id.fridayopen);
+                        TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
+                        TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
+
 
                         Mondayclosetime = timeto.nextToken();
                         txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);

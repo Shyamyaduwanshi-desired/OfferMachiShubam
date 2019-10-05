@@ -36,6 +36,71 @@ public class TypeBrandCategoryPresenter {
         this.typeBrandCategory = typeBrandCategory;
     }
 
+    public void sentRequestById(String userId, String categoryid) {
+        final ProgressDialog progress = new ProgressDialog(context);
+        progress.setMessage("Please Wait..");
+        progress.setCancelable(false);
+        progress.show();
+        final ArrayList<BrandModel> brandname= new ArrayList<BrandModel>();
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_filter_offer_brand_by_categoryid", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progress.dismiss();
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    if (status == 200) {
+                        brandname.clear();
+                        BrandModel brandModel1=new BrandModel(
+                                "0",
+                                "Select Brand",
+                                "0"
+                        );
+                        brandname.add(brandModel1);
+
+                        JSONArray jsonArray3 = reader.optJSONArray("result");
+                        for (int count = 0; count < jsonArray3.length(); count++) {
+                            JSONObject object3 = jsonArray3.getJSONObject(count);
+                            BrandModel brandModel=new BrandModel(
+                                    object3.getString("id"),
+                                    object3.getString("brand_name"),
+                                    object3.getString("status")
+                            );
+                            brandname.add(brandModel);
+
+                        }
+                        typeBrandCategory.successbrand(brandname);
+
+                    } else if (status == 404) {
+                        typeBrandCategory.error(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    typeBrandCategory.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progress.dismiss();
+                typeBrandCategory.fail("Server Error.\n Please try after some time.");
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userId);
+                params.put("category_id", categoryid);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
+
     public interface TypeBrandCategory {
         void successtype(ArrayList<OfferTypeModel> response);
 

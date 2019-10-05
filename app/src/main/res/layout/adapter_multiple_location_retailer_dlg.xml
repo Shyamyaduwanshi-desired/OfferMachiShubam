@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="35dp">
+
+    <TextView
+        android:id="@+id/tvLocationName"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10dp"
+        android:layout_toLeftOf="@+id/rl_check_box"
+        android:gravity="center_vertical"
+        android:text="text"
+        android:textAlignment="gravity" />
+    <RelativeLayout
+        android:id="@+id/rlLocationCheckBox"
+        android:layout_width="40dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        >
+        <ImageView
+            android:id="@+id/ivLocationCheck"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_un_check_box_40dp"
+            tools:ignore="VectorDrawableCompat" />
+
+    </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

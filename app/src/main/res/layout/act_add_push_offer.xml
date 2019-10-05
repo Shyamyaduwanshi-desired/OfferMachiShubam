@@ -192,6 +192,43 @@
                                 android:orientation="horizontal"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp">
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Offer Category"
+                                    android:textSize="18dp"
+                                    android:layout_gravity="center"
+                                    android:textColor="@color/black" />
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6">
+
+                                    <Spinner
+                                        android:id="@+id/categoryspinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edit_background"
+                                        android:padding="8dp" />
+
+                                    <TextView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="12dp"
+                                        android:background="@drawable/downarrow" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:weightSum="1">
                                 <TextView
@@ -289,6 +326,37 @@
                                     android:background="@drawable/edit_background"/>
 
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.4"
+                                    android:text="Location"
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
+                                <TextView
+                                    android:id="@+id/tvPushOfferLocation"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6"
+                                    android:background="@drawable/edit_background"
+                                    android:hint="Location"
+                                    android:maxLines="1"
+                                    android:paddingTop="10dp"
+                                    android:paddingBottom="10dp"
+                                    android:paddingLeft="10dp"
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -335,43 +403,7 @@
 
                                 </RelativeLayout>
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp">
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.4"
-                                    android:text="Offer Category"
-                                    android:textSize="18dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black" />
-                                <RelativeLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="0.6">
 
-                                    <Spinner
-                                        android:id="@+id/categoryspinner"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/edit_background"
-                                        android:padding="8dp" />
-
-                                    <TextView
-                                        android:layout_width="18dp"
-                                        android:layout_height="18dp"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_centerVertical="true"
-                                        android:layout_marginRight="12dp"
-                                        android:background="@drawable/downarrow" />
-                                </RelativeLayout>
-
-                            </LinearLayout>
 
                             <TextView
                                 android:layout_width="match_parent"

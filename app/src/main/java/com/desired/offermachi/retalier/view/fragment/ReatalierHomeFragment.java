@@ -2,6 +2,7 @@ package com.desired.offermachi.retalier.view.fragment;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,6 +25,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -36,6 +40,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -47,12 +52,15 @@ import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.BrandModel;
 import com.desired.offermachi.retalier.model.CategoryModel;
 import com.desired.offermachi.retalier.model.OfferTypeModel;
+import com.desired.offermachi.retalier.model.RetailerLocation;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.PostOfferDiscountPresenter;
+import com.desired.offermachi.retalier.presenter.RetailerLocationPresenter;
 import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierViewOfferDiscount;
 import com.desired.offermachi.retalier.view.adapter.BrandAdapter;
 import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
+import com.desired.offermachi.retalier.view.adapter.LocationAdapter;
 import com.desired.offermachi.retalier.view.adapter.OfferTypeAdapter;
 
 import java.io.ByteArrayOutputStream;
@@ -67,7 +75,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 
 import static android.app.Activity.RESULT_OK;
 
-public class ReatalierHomeFragment extends Fragment implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount {
+public class ReatalierHomeFragment extends Fragment implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount ,RetailerLocationPresenter.RetailerLocationInfo,LocationAdapter.ItemClick{
     View view;
     DatePickerDialog picker;
     TextView etstartdate,etenddate,start_Time,end_Time;
@@ -94,6 +102,10 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
     TextView txtoffercouponcode;
     TextView btngenerate;
     String idholder;
+    private ArrayList<RetailerLocation> alRetailerLocation;
+    private TextView tvRetailerLocation;
+    private String offerLocalityId = "";
+    private String offerLocality="";
 
     public ReatalierHomeFragment() {
     }
@@ -105,6 +117,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         init();
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(couponReceiver,
                 new IntentFilter("Coupon"));
+
         return  view;
     }
     public BroadcastReceiver couponReceiver = new BroadcastReceiver() {
@@ -152,8 +165,12 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
         imagepickerly.setOnClickListener(this);
         btngenerate=view.findViewById(R.id.btngenerate);
         btngenerate.setOnClickListener(this);
+        tvRetailerLocation=view.findViewById(R.id.tvRetailerLocation);
+        tvRetailerLocation.setOnClickListener(this);
+
         if (isNetworkConnected()) {
             presenter.sentRequest(idholder);
+            new RetailerLocationPresenter(getContext(), ReatalierHomeFragment.this).GetAllRetailerLocation(idholder);
         }  else {
             Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }
@@ -189,6 +206,14 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
                 //   Select Provider
                 TextView txcategoryid = (TextView) view.findViewById(R.id.offerid);
                 categoryid = txcategoryid.getText().toString();
+                if(!categoryid.equals("0")) {
+                    if (isNetworkConnected()) {
+                        presenter.sentRequestById(idholder, categoryid);
+                    } else {
+                        Toast.makeText(getContext(), "Please connect to internet.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
 
             @Override
@@ -274,7 +299,7 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
 
                 Log.e("","categoryid= "+categoryid);
 
-                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,1);
+                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,1,offerLocalityId);
             }
         }
     }
@@ -317,8 +342,12 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
             }  else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
+        }else if(v==tvRetailerLocation){
+            showMultipleLocationDialog();
         }
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults) {
@@ -469,6 +498,11 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
+    public void success(ArrayList<RetailerLocation> response, String status) {
+        alRetailerLocation = response;
+    }
+
+    @Override
     public void error(String response) {
         showAlert(response, R.style.DialogAnimation);
     }
@@ -523,6 +557,89 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
 
     public void showError(String errorMessage) {
         Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    Dialog locationDlg = null;
+    RecyclerView rvStoreLocation;
+    Button btnOkay;
+
+    public void showMultipleLocationDialog() {
+        if (locationDlg != null) {
+            locationDlg.dismiss();
+            locationDlg = null;
+        }
+        locationDlg = new Dialog(getActivity());
+        locationDlg.setContentView(R.layout.store_location_dlg);
+        locationDlg.setTitle("");
+        rvStoreLocation = locationDlg.findViewById(R.id.rvStoreLocation);
+
+        btnOkay = locationDlg.findViewById(R.id.btStoreLocationProceed);
+        /*SearchView searchView = locationDlg.findViewById(R.id.svStoreLocationSearch);
+        searchView.setOnQueryTextListener(this);
+*/
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        rvStoreLocation.setLayoutManager(mLayoutManager);
+        rvStoreLocation.setItemAnimator(new DefaultItemAnimator());
+
+        locationAdapter = new LocationAdapter(getActivity(), alRetailerLocation, this);
+        rvStoreLocation.setAdapter(locationAdapter);
+
+
+        btnOkay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetAllSelectedLocation();
+
+            }
+
+        });
+
+        locationDlg.show();
+    }
+
+    LocationAdapter locationAdapter;
+
+    @Override
+    public void onLocationClick(RetailerLocation retailerLocation) {
+        for (RetailerLocation loc:alRetailerLocation) {
+            if(loc.getId()==retailerLocation.getId()){
+                if (retailerLocation.isSelected()) {
+                    retailerLocation.setSelected(false);
+                } else {
+                    retailerLocation.setSelected(true);
+                }
+                break;
+            }
+        }
+        locationAdapter.notifyDataSetChanged();
+    }
+    public void GetAllSelectedLocation() {
+        offerLocalityId = "";
+        offerLocality="";
+        for (int i = 0; i < alRetailerLocation.size(); i++) {
+            if (alRetailerLocation.get(i).isSelected()) {
+                if (TextUtils.isEmpty(offerLocalityId)) {
+                    offerLocalityId = alRetailerLocation.get(i).getId();
+                    offerLocality = alRetailerLocation.get(i).getLocalityName();
+
+                } else {
+                    offerLocalityId = offerLocalityId + "," + alRetailerLocation.get(i).getId();
+                    offerLocality = offerLocality + "," + alRetailerLocation.get(i).getLocalityName();
+                }
+            }
+        }
+        if (locationDlg != null) {
+            locationDlg.dismiss();
+            if (offerLocality.length() > 25) {
+                tvRetailerLocation.setText(offerLocality.substring(0, 25) + "...");
+            } else {
+                tvRetailerLocation.setText(offerLocality);
+            }
+        }
+        Log.e("", "sAllCityId= " + offerLocalityId);
+        //SetAdapter();
+
     }
 }
 

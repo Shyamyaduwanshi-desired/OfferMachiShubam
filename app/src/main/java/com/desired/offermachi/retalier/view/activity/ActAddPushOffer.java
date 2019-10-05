@@ -2,6 +2,7 @@ package com.desired.offermachi.retalier.view.activity;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,8 +21,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,12 +46,16 @@ import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.BrandModel;
 import com.desired.offermachi.retalier.model.CategoryModel;
 import com.desired.offermachi.retalier.model.OfferTypeModel;
+import com.desired.offermachi.retalier.model.RetailerLocation;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.PostOfferDiscountPresenter;
+import com.desired.offermachi.retalier.presenter.RetailerLocationPresenter;
 import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
 import com.desired.offermachi.retalier.view.adapter.BrandAdapter;
 import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
+import com.desired.offermachi.retalier.view.adapter.LocationAdapter;
 import com.desired.offermachi.retalier.view.adapter.OfferTypeAdapter;
+import com.desired.offermachi.retalier.view.fragment.ReatalierHomeFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,7 +67,7 @@ import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActAddPushOffer extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount  {
+public class ActAddPushOffer extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount , RetailerLocationPresenter.RetailerLocationInfo,LocationAdapter.ItemClick {
     ImageView imageViewback,info;
     DatePickerDialog picker;
     TextView etstartdate,etenddate,start_Time,end_Time;
@@ -85,6 +94,10 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
     TextView txtoffercouponcode;
     TextView btngenerate;
     String idholder;
+    private TextView tvPushOfferLocation;
+    private String offerLocalityId="";
+    private String offerLocality="";
+    private ArrayList<RetailerLocation> alRetailerLocation = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +149,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         offerimage=findViewById(R.id.offerimage);
         imagepickerly=findViewById(R.id.imagepicker);
         btngenerate=findViewById(R.id.btngenerate);
-
+        tvPushOfferLocation = findViewById(R.id.tvPushOfferLocation);
         btngenerate.setOnClickListener(this);
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
@@ -147,10 +160,11 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         etstartdate.setOnClickListener(this);
         nextbutton.setOnClickListener(this);
         submitbutton.setOnClickListener(this);
-
+        tvPushOfferLocation.setOnClickListener(this);
 
         if (isNetworkConnected()) {
             presenter.sentRequest(idholder);
+            new RetailerLocationPresenter(this, this).GetAllRetailerLocation(idholder);
         }  else {
             Toast.makeText(this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }
@@ -186,6 +200,13 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
                 //   Select Provider
                 TextView txcategoryid = (TextView) view.findViewById(R.id.offerid);
                 categoryid = txcategoryid.getText().toString();
+                if(!categoryid.equals("0")) {
+                    if (isNetworkConnected()) {
+                        presenter.sentRequestById(idholder, categoryid);
+                    } else {
+                        Toast.makeText(ActAddPushOffer.this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
 
             @Override
@@ -270,7 +291,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 //            Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
 
             if (isNetworkConnected()) {
-                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2);
+                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2,offerLocalityId);
             }
 
         }
@@ -321,6 +342,8 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
             }  else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
+        }else if(v==tvPushOfferLocation){
+            showMultipleLocationDialog();
         }
     }
 
@@ -543,5 +566,93 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public void success(ArrayList<RetailerLocation> response, String status) {
+        alRetailerLocation = response;
+    }
+
+    Dialog locationDlg = null;
+    RecyclerView rvStoreLocation;
+    Button btnOkay;
+
+    public void showMultipleLocationDialog() {
+        if (locationDlg != null) {
+            locationDlg.dismiss();
+            locationDlg = null;
+        }
+        locationDlg = new Dialog(ActAddPushOffer.this);
+        locationDlg.setContentView(R.layout.store_location_dlg);
+        locationDlg.setTitle("");
+        rvStoreLocation = locationDlg.findViewById(R.id.rvStoreLocation);
+
+        btnOkay = locationDlg.findViewById(R.id.btStoreLocationProceed);
+        /*SearchView searchView = locationDlg.findViewById(R.id.svStoreLocationSearch);
+        searchView.setOnQueryTextListener(this);
+*/
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ActAddPushOffer.this);
+        rvStoreLocation.setLayoutManager(mLayoutManager);
+        rvStoreLocation.setItemAnimator(new DefaultItemAnimator());
+
+        locationAdapter = new LocationAdapter(ActAddPushOffer.this, alRetailerLocation, this);
+        rvStoreLocation.setAdapter(locationAdapter);
+
+
+        btnOkay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetAllSelectedLocation();
+
+            }
+
+        });
+
+        locationDlg.show();
+    }
+
+    LocationAdapter locationAdapter;
+
+    @Override
+    public void onLocationClick(RetailerLocation retailerLocation) {
+        for (RetailerLocation loc:alRetailerLocation) {
+            if(loc.getId()==retailerLocation.getId()){
+                if (retailerLocation.isSelected()) {
+                    retailerLocation.setSelected(false);
+                } else {
+                    retailerLocation.setSelected(true);
+                }
+                break;
+            }
+        }
+        locationAdapter.notifyDataSetChanged();
+    }
+    public void GetAllSelectedLocation() {
+        offerLocalityId = "";
+        offerLocality="";
+        for (int i = 0; i < alRetailerLocation.size(); i++) {
+            if (alRetailerLocation.get(i).isSelected()) {
+                if (TextUtils.isEmpty(offerLocalityId)) {
+                    offerLocalityId = alRetailerLocation.get(i).getId();
+                    offerLocality = alRetailerLocation.get(i).getLocalityName();
+
+                } else {
+                    offerLocalityId = offerLocalityId + "," + alRetailerLocation.get(i).getId();
+                    offerLocality = offerLocality + "," + alRetailerLocation.get(i).getLocalityName();
+                }
+            }
+        }
+        if (locationDlg != null) {
+            locationDlg.dismiss();
+            if (offerLocality.length() > 25) {
+                tvPushOfferLocation.setText(offerLocality.substring(0, 25) + "...");
+            } else {
+                tvPushOfferLocation.setText(offerLocality);
+            }
+        }
+        Log.e("", "sAllCityId= " + offerLocalityId);
+        //SetAdapter();
+
     }
 }

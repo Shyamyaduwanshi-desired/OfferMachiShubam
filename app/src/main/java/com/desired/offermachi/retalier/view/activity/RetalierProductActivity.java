@@ -25,7 +25,10 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
+import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
+import com.desired.offermachi.retalier.presenter.DeleteOfferDetailPresenter;
 import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
@@ -58,6 +61,7 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
     TextView tvNotiCount;
     private NotificationCountPresenter notiCount;
     private String idholder;
+    private Button btnDelete;
 
 
     @Override
@@ -83,12 +87,13 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
         couponbutton.setOnClickListener(this);
-        User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
+        UserModel user = SharedPrefManagerLogin.getInstance(this).getUser();
         idholder= user.getId();
         notiCount = new NotificationCountPresenter(this,this);
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
-
+        btnDelete = findViewById(R.id.coupon_delete_button_id);
+        btnDelete.setOnClickListener(this);
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(offerid);
         }  else {
@@ -106,6 +111,8 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         }else if(v==info){
             Intent intent = new Intent(RetalierProductActivity.this, InfoActivity.class);
             startActivity(intent);
+        }else if(v==btnDelete){
+            showAlertTwoButton("Are you sure?",R.style.DialogAnimation);
         }
     }
     private void showdialog(String image,String code) {
@@ -203,6 +210,49 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
                 prettyDialog.dismiss();
             }
         }).show();
+    }
+    private void showAlertTwoButton(String message, int animationSource){
+        final PrettyDialog prettyDialog = new PrettyDialog(this);
+        prettyDialog.setCanceledOnTouchOutside(false);
+        TextView title = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_title);
+        TextView tvmessage = (TextView) prettyDialog.findViewById(libs.mjn.prettydialog.R.id.tv_message);
+        title.setTextSize(15);
+        tvmessage.setTextSize(15);
+        prettyDialog.setIconTint(R.color.colorPrimary);
+        prettyDialog.setIcon(R.drawable.pdlg_icon_info);
+        prettyDialog.setTitle("");
+        prettyDialog.setMessage(message);
+        prettyDialog.setAnimationEnabled(false);
+        prettyDialog.getWindow().getAttributes().windowAnimations = animationSource;
+        prettyDialog.addButton("Yes", R.color.black, R.color.white, new PrettyDialogCallback() {
+            @Override
+            public void onClick() {
+                new DeleteOfferDetailPresenter(RetalierProductActivity.this, new DeleteOfferDetailPresenter.DeleteOffer() {
+                    @Override
+                    public void success(String response) {
+                        finish();
+                    }
+
+                    @Override
+                    public void error(String response) {
+                        showAlert(response, R.style.DialogAnimation);
+                    }
+
+                    @Override
+                    public void fail(String response) {
+                        showAlert(response, R.style.DialogAnimation);
+                    }
+                }).deleteOffer(idholder,offerid);
+                prettyDialog.dismiss();
+            }
+        });
+        prettyDialog.addButton("No", R.color.black, R.color.white, new PrettyDialogCallback() {
+            @Override
+            public void onClick() {
+                prettyDialog.dismiss();
+            }
+        });
+        prettyDialog.show();
     }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

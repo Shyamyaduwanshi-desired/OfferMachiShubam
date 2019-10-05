@@ -65,11 +65,7 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
 
-        if (isNetworkConnected()) {
-            presenter.getOfferDiscount(idholder);
-        }  else {
-            showAlert("Please connect to internet.", R.style.DialogAnimation);
-    }
+
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
     }
@@ -159,6 +155,15 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
     @Override
     public void failnoti(String response) {
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isNetworkConnected()) {
+            presenter.getOfferDiscount(idholder);
+        }  else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
     }
 }
 

@@ -684,6 +684,10 @@ import static android.app.Activity.RESULT_OK;
              } catch (IOException e) {
                  e.printStackTrace();
              }
+         }else if(reqCode==120){
+             lati = data.getStringExtra("loc_lati");
+             longi = data.getStringExtra("loc_longi");
+             storeaddress.setText(data.getStringExtra("loc_name"));
          }
      }
 
@@ -1184,12 +1188,17 @@ import static android.app.Activity.RESULT_OK;
 
      //for mulitple selection adpter click
      @Override
-     public void onMultipleLocClick(int position) {
+     public void onMultipleLocClick(CityBean cityBean) {
 
-         if (arLocation.get(position).isSelected()) {
-             arLocation.get(position).setSelected(false);
-         } else {
-             arLocation.get(position).setSelected(true);
+         for(int i =0;i<arLocation.size();i++){
+             if(arLocation.get(i).getId()==cityBean.getId()){
+                 if (arLocation.get(i).isSelected()) {
+                     arLocation.get(i).setSelected(false);
+                 } else {
+                     arLocation.get(i).setSelected(true);
+                 }
+                 break;
+             }
          }
          multiLocAdpter.notifyDataSetChanged();
 
@@ -1202,7 +1211,7 @@ import static android.app.Activity.RESULT_OK;
 //     ArrayList<CityBean> arLocation = new ArrayList<>();
      @Override
      public boolean onQueryTextChange(String newText ) {
-
+//vj
          List<CityBean> temp = new ArrayList();
          for (CityBean d : arLocation) {
              String cityname = d.getCity_name().toLowerCase().replace(" ", "");

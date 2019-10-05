@@ -37,7 +37,7 @@ public class PostOfferDiscountPresenter {
     }
 
     public void sentRequest(final String user_id, final String offer_title, final String offer_brand, final String offer_type, final String offer_value, final String offer_image, final String offer_category
-           ,final String description , final String start_date, final String end_date, final String coupon_code, final String alltime,int type)
+           ,final String description , final String start_date, final String end_date, final String coupon_code, final String alltime,int type,String offerLocalityId)
     {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Please Wait..");
@@ -98,6 +98,7 @@ String methodNm="";
                 params.put("end_date", end_date);
                 params.put("coupon_code", coupon_code);
                 params.put("alltime", alltime);
+                params.put("offer_locality", offerLocalityId);
                 Log.e("","push offer input data= "+params.toString());
                 return params;
             }

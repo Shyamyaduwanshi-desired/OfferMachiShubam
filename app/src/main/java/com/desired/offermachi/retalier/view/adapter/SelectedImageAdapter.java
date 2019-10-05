@@ -68,7 +68,8 @@ public class SelectedImageAdapter extends RecyclerView.Adapter<SelectedImageAdap
             super(view);
 
             ivPic = view.findViewById(R.id.img_pic);
-            img_cross = view.findViewById(R.id.cancel_action_id);
+            img_cross=view.findViewById(R.id.ccancel_action_id);
+//            img_cross = view.findViewById(R.id.cancel_action_id);
 
         }
     }

@@ -1,88 +1,89 @@
+
 package com.desired.offermachi.customer.view.activity;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
+        import android.Manifest;
+        import android.app.AlertDialog;
+        import android.app.Dialog;
+        import android.content.ActivityNotFoundException;
+        import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.content.pm.PackageManager;
+        import android.location.Address;
+        import android.location.Geocoder;
+        import android.location.Location;
+        import android.location.LocationListener;
+        import android.location.LocationManager;
+        import android.net.Uri;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.provider.Settings;
+        import android.support.annotation.NonNull;
+        import android.support.design.widget.FloatingActionButton;
+        import android.support.design.widget.NavigationView;
+        import android.support.design.widget.Snackbar;
+        import android.support.v4.app.Fragment;
+        import android.support.v4.app.FragmentManager;
+        import android.support.v4.app.FragmentTransaction;
+        import android.support.v4.content.ContextCompat;
+        import android.support.v4.view.GravityCompat;
+        import android.support.v4.widget.DrawerLayout;
+        import android.support.v7.app.ActionBarDrawerToggle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.text.TextUtils;
+        import android.util.Log;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.CompoundButton;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.RelativeLayout;
+        import android.widget.Switch;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
 
-import com.desired.offermachi.R;
-import com.desired.offermachi.customer.constant.UserSharedPrefManager;
-import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
-import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
-import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
-import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
-import com.desired.offermachi.customer.view.fragment.ExclusiveFragment;
-import com.desired.offermachi.customer.view.fragment.FavouritesFragment;
-import com.desired.offermachi.customer.view.fragment.FeedsFragment;
-import com.desired.offermachi.customer.view.fragment.FollowFragment;
-import com.desired.offermachi.customer.view.fragment.HelpFragment;
-import com.desired.offermachi.customer.view.fragment.HomeFragment;
-import com.desired.offermachi.customer.view.fragment.InviteFriendFragment;
-import com.desired.offermachi.customer.view.fragment.MycouponsFragment;
-import com.desired.offermachi.customer.view.fragment.ProfileFragment;
-import com.desired.offermachi.customer.view.fragment.SmartShoppingFragment;
-import com.desired.offermachi.customer.view.fragment.StoreFragment;
-import com.desired.offermachi.customer.view.fragment.TermConditionFragment;
-import com.google.android.gms.common.api.Status;
+        import com.desired.offermachi.R;
+        import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+        import com.desired.offermachi.customer.model.User;
+        import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
+        import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
+        import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
+        import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
+        import com.desired.offermachi.customer.view.fragment.ExclusiveFragment;
+        import com.desired.offermachi.customer.view.fragment.FavouritesFragment;
+        import com.desired.offermachi.customer.view.fragment.FeedsFragment;
+        import com.desired.offermachi.customer.view.fragment.FollowFragment;
+        import com.desired.offermachi.customer.view.fragment.HelpFragment;
+        import com.desired.offermachi.customer.view.fragment.HomeFragment;
+        import com.desired.offermachi.customer.view.fragment.InviteFriendFragment;
+        import com.desired.offermachi.customer.view.fragment.MycouponsFragment;
+        import com.desired.offermachi.customer.view.fragment.ProfileFragment;
+        import com.desired.offermachi.customer.view.fragment.SmartShoppingFragment;
+        import com.desired.offermachi.customer.view.fragment.StoreFragment;
+        import com.desired.offermachi.customer.view.fragment.TermConditionFragment;
+        import com.google.android.gms.common.api.Status;
 //import com.google.android.gms.location.places.Place;
 //import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLng;
-import com.johnnylambada.location.LocationObserver;
-import com.johnnylambada.location.LocationProvider;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
+        import com.google.android.gms.maps.model.LatLng;
+        import com.johnnylambada.location.LocationObserver;
+        import com.johnnylambada.location.LocationProvider;
+        import com.squareup.picasso.MemoryPolicy;
+        import com.squareup.picasso.NetworkPolicy;
+        import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+        import java.io.IOException;
+        import java.util.Arrays;
+        import java.util.List;
+        import java.util.Locale;
 
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.widget.Autocomplete;
-import com.google.android.libraries.places.widget.AutocompleteActivity;
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+        import com.google.android.libraries.places.api.Places;
+        import com.google.android.libraries.places.api.model.Place;
+        import com.google.android.libraries.places.widget.Autocomplete;
+        import com.google.android.libraries.places.widget.AutocompleteActivity;
+        import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 public class DashBoardActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener/*, LocationListener*/,NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead,LocationObserver, Runnable {
@@ -101,14 +102,14 @@ public class DashBoardActivity extends AppCompatActivity
     TextView name,email;
     ImageView imageView;
     String ImageHolder,username,useremail;
-   User user;
-   ImageView btnnotification;
-   int count=0;
-   ImageView ivLocation;
+    User user;
+    ImageView btnnotification;
+    int count=0;
+    ImageView ivLocation;
     ImageView cancle;
 
     LocationManager locationManager;
-   public String lati ;
+    public String lati ;
     public String longi,idholder ;
 
     TextView tvNotiCount;
@@ -126,7 +127,7 @@ public class DashBoardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dash_board);
 //        getLocation();
         setCurLoc();
-         toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         ivTitleLogo=toolbar.findViewById(R.id.logo);
         tvMainTitle=toolbar.findViewById(R.id.tv_title);
         ivLocation=toolbar.findViewById(R.id.location_id);
@@ -147,8 +148,11 @@ public class DashBoardActivity extends AppCompatActivity
 //        placesClient = Places.createClient(this);
         setToolTittle("",1);
         user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-       String pos= UserSharedPrefManager.GetClickNoti(this);
+        String pos= UserSharedPrefManager.GetClickNoti(this);
         idholder=user.getId();
+
+        lati= UserSharedPrefManager.GetLat(this);
+        longi= UserSharedPrefManager.GetLong(this);
 
 
         String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
@@ -162,15 +166,15 @@ public class DashBoardActivity extends AppCompatActivity
             {
                 case "0":
                     FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
-                break;
+                    break;
 
                 case "1":
 //                    GoDealOfTheDay(1);
                     FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
-                break;
+                    break;
                 case "2":
                     FT.replace(R.id.framelayout_id, new ExclusiveFragment()).commit();
-                break;
+                    break;
                 default:
                     FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
                     break;
@@ -180,7 +184,7 @@ public class DashBoardActivity extends AppCompatActivity
 
             UserSharedPrefManager.SaveClickNoti(this,"0","");
         }
-else {
+        else {
             if (user.getSmartShopping().equals("1")) {
                 FM = getSupportFragmentManager();
                 FT = FM.beginTransaction();
@@ -292,14 +296,14 @@ else {
                     showdialog();
                 }
 
-                }
+            }
         });
 
         dealsoftheday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoDealOfTheDay(1);
-                 }
+            }
         });
 
 
@@ -315,13 +319,13 @@ else {
             @Override
             public void onClick(View v) {
                 GoFavorite(1);
-                }
+            }
         });
         ifollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoIfollow(1);
-                }
+            }
         });
 
 
@@ -339,17 +343,20 @@ else {
     }
 
     private void GoMyCoupon(int diff) {
+
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
-                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
-                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
-                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
-                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
-                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
-                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
-                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
-                couponstext.setTextColor(getResources().getColor(R.color.white));
-                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
-                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+            smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+            dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+            couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
+            favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+            ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+            smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+            dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+            couponstext.setTextColor(getResources().getColor(R.color.white));
+            favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+            ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
             switch (diff)
             {
@@ -365,21 +372,21 @@ else {
             }
 
 
-                }
+        }
 
     }
     private void GoIfollow(int diff) {
         if (user.getSmartShopping().equals("0")){
-                smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
-                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
-                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
-                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
-                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefollow));
-                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
-                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
-                couponstext.setTextColor(getResources().getColor(R.color.yellow));
-                favouritestext.setTextColor(getResources().getColor(R.color.yellow));
-                ifollowtext.setTextColor(getResources().getColor(R.color.white));
+            smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
+            dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+            couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+            favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfavorite));
+            ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefollow));
+            smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+            dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+            couponstext.setTextColor(getResources().getColor(R.color.yellow));
+            favouritestext.setTextColor(getResources().getColor(R.color.yellow));
+            ifollowtext.setTextColor(getResources().getColor(R.color.white));
             switch (diff)
             {
                 case 1:
@@ -393,22 +400,24 @@ else {
                     break;
             }
 
-                }
+        }
 
     }
     private void GoFavorite(int diff) {
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
-                dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
-                couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
-                favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefavorite));
-                ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
+            dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
+            couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
+            favouritesimg.setImageDrawable(getResources().getDrawable(R.drawable.whitefavorite));
+            ifollowimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowfollow));
 
-                smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
-                dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
-                couponstext.setTextColor(getResources().getColor(R.color.yellow));
-                favouritestext.setTextColor(getResources().getColor(R.color.white));
-                ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
+            smartshoppingtext.setTextColor(getResources().getColor(R.color.yellow));
+            dealsofthedaytext.setTextColor(getResources().getColor(R.color.yellow));
+            couponstext.setTextColor(getResources().getColor(R.color.yellow));
+            favouritestext.setTextColor(getResources().getColor(R.color.white));
+            ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
             switch (diff)
             {
@@ -423,13 +432,17 @@ else {
                     break;
             }
 
-                }
+        }
 
     }
 
     private void GoDealOfTheDay(int diff) {
 
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+
         if (user.getSmartShopping().equals("0")){
+
+
 
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.whitedeals));
@@ -481,7 +494,7 @@ else {
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                     UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this,"");//only for not show privious selected category
+                                UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this,"");//only for not show privious selected category
                                 Intent intent = new Intent(Intent.ACTION_MAIN);
                                 intent.addCategory(Intent.CATEGORY_HOME);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
@@ -502,7 +515,7 @@ else {
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Fragment fragment = null;
-       // Class fragmentClass;
+        // Class fragmentClass;
         switch(menuItem.getItemId()) {
 
             case R.id.nav_home:
@@ -518,36 +531,36 @@ else {
                 }
 
                 break;
-                case R.id.nav_account:
-                    if (count==0){
-                        navigationView.getMenu().getItem(2).setVisible(true);
-                        navigationView.getMenu().getItem(3).setVisible(true);
-                        navigationView.getMenu().getItem(4).setVisible(true);
-                        navigationView.getMenu().getItem(5).setVisible(true);
-                        count=1;
-                    }else{
-                        navigationView.getMenu().getItem(2).setVisible(false);
-                        navigationView.getMenu().getItem(3).setVisible(false);
-                        navigationView.getMenu().getItem(4).setVisible(false);
-                        navigationView.getMenu().getItem(5).setVisible(false);
+            case R.id.nav_account:
+                if (count==0){
+                    navigationView.getMenu().getItem(2).setVisible(true);
+                    navigationView.getMenu().getItem(3).setVisible(true);
+                    navigationView.getMenu().getItem(4).setVisible(true);
+                    navigationView.getMenu().getItem(5).setVisible(true);
+                    count=1;
+                }else{
+                    navigationView.getMenu().getItem(2).setVisible(false);
+                    navigationView.getMenu().getItem(3).setVisible(false);
+                    navigationView.getMenu().getItem(4).setVisible(false);
+                    navigationView.getMenu().getItem(5).setVisible(false);
 
-                        count=0;
-                    }
-              break;
+                    count=0;
+                }
+                break;
 
             case R.id.nav_profile:
 
                 if (user.getSmartShopping().equals("0")){
                     UserSharedPrefManager.SaveStoreFilter(this,"");
-                      fragment = new ProfileFragment();
-                     drawer.closeDrawer(GravityCompat.START);
-                  }
+                    fragment = new ProfileFragment();
+                    drawer.closeDrawer(GravityCompat.START);
+                }
                 else{
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
                 }
-                    break;
+                break;
 
             case R.id.nav_feeds:
                 if (user.getSmartShopping().equals("0")){
@@ -785,8 +798,8 @@ else {
                 }
 //             finish();
                 break;
-                default:
-                    fragment = new HomeFragment();
+            default:
+                fragment = new HomeFragment();
 
         }
 
@@ -796,23 +809,23 @@ else {
             e.printStackTrace();
         }*/
 
-       if(fragment==null)//only for not refresh
-       {
-           DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if(fragment==null)//only for not refresh
+        {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
 //           drawer.closeDrawer(GravityCompat.START);
-       }
-       else {
-           // Insert the fragment by replacing any existing fragment
-           FragmentManager fragmentManager = getSupportFragmentManager();
-           fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();
-           // Highlight the selected item has been done by NavigationView
-           menuItem.setChecked(true);
-           // Set action bar title
-           setTitle(menuItem.getTitle());
-           // Close the navigation drawer
-           DrawerLayout drawer = findViewById(R.id.drawer_layout);
-           drawer.closeDrawer(GravityCompat.START);
-       }
+        }
+        else {
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();
+            // Highlight the selected item has been done by NavigationView
+            menuItem.setChecked(true);
+            // Set action bar title
+            setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
         return true;
     }
     public  void setToolTittle(String tittle,int diff)
@@ -955,13 +968,11 @@ else {
             btnnotification.setVisibility(View.VISIBLE);
         }
         notiCount.NotificationUnreadCount(idholder);
-        BottomNotiRead.BottomNotificationUnreadCount(idholder);
-
-
+        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
 
 
     }
-     Dialog DlgLoc=null;
+    Dialog DlgLoc=null;
     TextView tvCurloc;
     LinearLayout lyCurrLocation;
     boolean clickFlag=false;
@@ -991,8 +1002,8 @@ else {
         });
 
         lyCurrLocation=(LinearLayout)DlgLoc.findViewById(R.id.ly_cur_loc);
-         btOkay=(Button)DlgLoc.findViewById(R.id.bt_okay);
-         tvCurloc=(TextView) DlgLoc.findViewById(R.id.tv_cur_loc);
+        btOkay=(Button)DlgLoc.findViewById(R.id.bt_okay);
+        tvCurloc=(TextView) DlgLoc.findViewById(R.id.tv_cur_loc);
 
         String diff= UserSharedPrefManager.GetCurrentOrOtherLoc(this);
         tvCurloc.setText(UserSharedPrefManager.GetLocNm(this));
@@ -1066,11 +1077,10 @@ else {
     }
 }*/
 
-String sCurrentLocation="";
+    String sCurrentLocation="";
     boolean checkFlag=false;
   /*  @Override
     public void onLocationChanged(Location location) {
-
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List<Address> addresses = null;
         try {
@@ -1087,13 +1097,11 @@ String sCurrentLocation="";
 //        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
         if(checkFlag) {
             if(tvCurloc!=null) {
-
                 tvCurloc.setText(sCurrentLocation);
                 lyCurrLocation.setVisibility(View.VISIBLE);
             }
             RefreshLocWithHomeView();
            *//* UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
-
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
             // Highlight the selected item has been done by NavigationView
@@ -1158,22 +1166,16 @@ String sCurrentLocation="";
 //        }
     }
 
-/*
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-
-    }*/
+    /*
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+        @Override
+        public void onProviderEnabled(String provider) {
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+        }*/
     private void startAutocompleteActivity() {
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.RATING, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.OPENING_HOURS, Place.Field.USER_RATINGS_TOTAL,
@@ -1217,7 +1219,7 @@ String sCurrentLocation="";
 //            }
 //        } else
 
-            if (requestCode == 103) {
+        if (requestCode == 103) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 String addressname="";
@@ -1235,7 +1237,7 @@ String sCurrentLocation="";
 //                edtSearchLocation.setText(addressname);
 //                tvLocation.setText(addressname);
                 LatLng latLng = place.getLatLng();
-              String  latitude = "" + latLng.latitude;
+                String  latitude = "" + latLng.latitude;
                 String longitude = "" + latLng.longitude;
 
                 lati = "" + latLng.latitude;
@@ -1275,7 +1277,7 @@ String sCurrentLocation="";
                     }
                 }).show();
     }
-//notification count
+    //notification count
     @Override
     public void successnoti(String response) {
         if(TextUtils.isEmpty(response))
@@ -1345,58 +1347,58 @@ String sCurrentLocation="";
 
 
     }
-  /*  @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 100: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    LocationManager manager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-                    if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivityForResult(intent, 101);
-                    } else {
-                        initLocation();
-                    }
+    /*  @Override
+      public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+          switch (requestCode) {
+              case 100: {
+                  // If request is cancelled, the result arrays are empty.
+                  if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                      LocationManager manager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+                      if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                          Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                          startActivityForResult(intent, 101);
+                      } else {
+                          initLocation();
+                      }
+                  } else {
+                      new android.support.v7.app.AlertDialog.Builder(this)
+                              .setTitle("")
+                              .setMessage("Please allow permission")
+                              .setCancelable(false)
+                              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                  public void onClick(DialogInterface dialog, int id) {
+                                      dialog.dismiss();
+                                      requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                                  }
+                              }).show();
+                  }
+              }
+          }
+      }*/
+    public void setCurLoc()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkLocationPermission()) {
+                LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivityForResult(intent, 101);
                 } else {
-                    new android.support.v7.app.AlertDialog.Builder(this)
-                            .setTitle("")
-                            .setMessage("Please allow permission")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.dismiss();
-                                    requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-                                }
-                            }).show();
+                    initLocation();
                 }
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+            }
+        } else {
+            LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(intent, 101);
+            } else {
+                initLocation();
             }
         }
-    }*/
-  public void setCurLoc()
-  {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-          if (checkLocationPermission()) {
-              LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-              if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                  Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                  startActivityForResult(intent, 101);
-              } else {
-                  initLocation();
-              }
-          } else {
-              requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
-          }
-      } else {
-          LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-          if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-              Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-              startActivityForResult(intent, 101);
-          } else {
-              initLocation();
-          }
-      }
-  }
+    }
     private LocationProvider locationProvider;
     private void initLocation() {
         locationProvider = new LocationProvider.Builder(this)
@@ -1468,3 +1470,6 @@ String sCurrentLocation="";
         }
     }
 }
+
+
+

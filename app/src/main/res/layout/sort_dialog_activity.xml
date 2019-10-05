@@ -1,20 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_gravity="center_vertical">
 
-<LinearLayout
+    <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-      <RadioGroup
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:id="@+id/top_queries_text_id"
+               android:layout_below="@+id/faq_linear_id"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:text="Short By"
+               android:gravity="center"
+               android:textStyle="bold"
+               android:textColor="@color/red"
+               android:layout_marginLeft="10dp"
+               android:textSize="20dp"
+               android:layout_marginTop="30dp"/>
+
+
+       </LinearLayout>
+
+        <View
+            android:id="@+id/view_id"
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_gravity="start"
+            android:background="@color/lightcolour"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/lightcolour"
+            android:layout_below="@+id/top_queries_text_id"/>
+
+        <RadioGroup
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="vertical">
+
           <RadioButton
               android:id="@+id/rdone"
               android:layout_width="fill_parent"
@@ -28,7 +63,12 @@
               android:textColor="@color/purple"
               android:textStyle="bold"
               android:textSize="20dip"
-              android:gravity="center"/>
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              android:buttonTint="@color/blue"
+              android:layout_marginTop="20dp"
+              android:paddingRight="10dp"
+              />
           <RadioButton
               android:id="@+id/rdtwo"
               android:layout_width="fill_parent"
@@ -42,7 +82,9 @@
               android:textColor="@color/purple"
               android:textStyle="bold"
               android:textSize="20dip"
-              android:gravity="center"/>
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              android:paddingRight="10dp"/>
           <RadioButton
               android:id="@+id/rdthree"
               android:layout_width="fill_parent"
@@ -56,7 +98,9 @@
               android:textColor="@color/purple"
               android:textStyle="bold"
               android:textSize="20dip"
-              android:gravity="center"/>
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              android:paddingRight="10dp"/>
 
 
           <RadioButton
@@ -72,7 +116,10 @@
               android:textColor="@color/purple"
               android:textStyle="bold"
               android:textSize="20dip"
-              android:gravity="center"/>
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              android:layout_marginBottom="30dp"
+              android:paddingRight="10dp"/>
 
       </RadioGroup>
 

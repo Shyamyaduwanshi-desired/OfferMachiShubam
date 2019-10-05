@@ -29,7 +29,7 @@
             android:background="@drawable/simple_background">
             <TextView
                 android:id="@+id/btnfollow"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="20dp"
                 android:gravity="center"
                 android:layout_gravity="center_vertical|right"

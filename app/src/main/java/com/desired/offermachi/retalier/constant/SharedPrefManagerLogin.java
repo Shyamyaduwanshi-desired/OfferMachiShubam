@@ -74,7 +74,6 @@ public class SharedPrefManagerLogin {
         return new UserModel(
 
                 sharedPreferences.getString(KEY_ID, "NA"),
-                sharedPreferences.getString(KEY_CATEGORY_ID,"NA"),
                 sharedPreferences.getString(KEY_NAME, "NA"),
                 sharedPreferences.getString(KEY_EMAIL, "NA"),
                 sharedPreferences.getString(KEY_PHONE, "NA"),

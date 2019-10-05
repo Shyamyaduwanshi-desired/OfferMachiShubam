@@ -74,8 +74,8 @@ public class CustomerNotificationPresenter {
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
-                            String custom_offertype = object.getString("custom_offertype");
 
+                            String custom_offertype = object.getString("custom_offertype");
                             NotificationModel notificationModel = new NotificationModel(
                                     object.getString("id"),
                                     object.getString("title"),
@@ -140,9 +140,11 @@ public class CustomerNotificationPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if(status == 200){
+
 //                        String result=reader.getString("result");
 //                        JSONArray jsonArray = new JSONArray(result);
 //                        JSONObject object;
+
                         String result = reader.getString("result");
                         JSONObject jsObj = new JSONObject(result);
                         int totalRecord=0,countPage=0;
@@ -177,7 +179,7 @@ public class CustomerNotificationPresenter {
 
                                 list.add(notificationModel);
                             }
-                            Collections.reverse(list);
+                            //Collections.reverse(list);
                             notificationList.success(list,totalRecord,countPage);
                         }
                         else

@@ -89,7 +89,8 @@ public class ViewStoreOfferPresenter {
                                     object.getString("offer_image"),
                                     object.getString("qr_code_image"),
                                     object.getString("coupon_code_status"),
-                                    ""
+                                    object.getString("shop_logo")
+
 
                             );
                             list.add(selectCategoryModel);

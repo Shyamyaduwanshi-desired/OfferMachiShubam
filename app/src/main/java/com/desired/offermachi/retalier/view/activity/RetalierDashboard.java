@@ -56,12 +56,12 @@ public class RetalierDashboard extends AppCompatActivity
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navHeader = navigationView.getHeaderView(0);
-        navigationView.getMenu().getItem(1).setActionView(R.layout.menu_image);
-        navigationView.getMenu().getItem(2).setVisible(false);
+        navigationView.getMenu().getItem(2).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(3).setVisible(false);
-        navigationView.getMenu().getItem(6).setActionView(R.layout.menu_image);
-        navigationView.getMenu().getItem(7).setVisible(false);
+        navigationView.getMenu().getItem(4).setVisible(false);
+        navigationView.getMenu().getItem(7).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(8).setVisible(false);
+        navigationView.getMenu().getItem(9).setVisible(false);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -99,12 +99,12 @@ public class RetalierDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_offer){
             if (count==0){
-                navigationView.getMenu().getItem(2).setVisible(true);
                 navigationView.getMenu().getItem(3).setVisible(true);
+                navigationView.getMenu().getItem(4).setVisible(true);
                 count=1;
             }else{
-                navigationView.getMenu().getItem(2).setVisible(false);
                 navigationView.getMenu().getItem(3).setVisible(false);
+                navigationView.getMenu().getItem(4).setVisible(false);
                 count=0;
             }
         }
@@ -128,12 +128,12 @@ public class RetalierDashboard extends AppCompatActivity
 
         } else if (id == R.id.nav_redeemcode) {
             if (count==0){
-                navigationView.getMenu().getItem(7).setVisible(true);
                 navigationView.getMenu().getItem(8).setVisible(true);
+                navigationView.getMenu().getItem(9).setVisible(true);
                 count=1;
             }else{
-                navigationView.getMenu().getItem(7).setVisible(false);
                 navigationView.getMenu().getItem(8).setVisible(false);
+                navigationView.getMenu().getItem(9).setVisible(false);
                 count=0;
             }
 
@@ -193,7 +193,14 @@ public class RetalierDashboard extends AppCompatActivity
             startActivity(viewIntent);*/
             startActivity(new Intent(getApplicationContext(), RetalierTermsConditionActivity.class));
 
-        }else if (id == R.id.nav_logout) {
+        }
+        else if (id == R.id.nav_mylocation) {
+            drawer.closeDrawer(GravityCompat.START);
+            startActivity(new Intent(getApplicationContext(), MyLocationActivity.class));
+
+        }
+
+        else if (id == R.id.nav_logout) {
             drawer.closeDrawer(GravityCompat.START);
             SharedPrefManagerLogin.getInstance(getApplicationContext()).logout();
             finish();

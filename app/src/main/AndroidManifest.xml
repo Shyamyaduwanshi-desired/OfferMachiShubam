@@ -269,6 +269,11 @@
         <activity
             android:name=".retalier.view.activity.VerifyCouponcodeActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".retalier.view.activity.MyLocationActivity"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".retalier.view.activity.QRcodeScannerActivity"
             android:screenOrientation="portrait" />

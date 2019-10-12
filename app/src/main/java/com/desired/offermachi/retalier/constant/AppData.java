@@ -170,7 +170,7 @@ public class AppData {
         String formattedDate = null;
         try {
             DateFormat originalFormat = new SimpleDateFormat("MM-dd", Locale.ENGLISH);
-            DateFormat targetFormat = new SimpleDateFormat("MMM dd");// MMMM dd yyyy Jun 20 2019
+            DateFormat targetFormat = new SimpleDateFormat("dd MMM");// MMMM dd yyyy Jun 20 2019
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);
         } catch (ParseException e) {
@@ -193,7 +193,20 @@ public class AppData {
         }
         return formattedDate;
     }
-
+    // 2019-06-18 11:17:55  to  18 June 2019 11:17 PM
+    public static String ConvertDateV(String indate)
+    {
+        String formattedDate = null;
+        try {
+            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH);
+            DateFormat targetFormat = new SimpleDateFormat("dd MMMM  HH:mm");//dd MMMM yyyy HH:mm a
+            Date date = originalFormat.parse(indate);
+            formattedDate = targetFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
     //   2019-06-18 11:17:55 to 11:17
     public String ConvertTime(String indate)
     {

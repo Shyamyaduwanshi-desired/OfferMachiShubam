@@ -26,6 +26,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
         this.arMultiLoc = data;
         this.mContext = context;
         this.itemClick = cateClick;
+        if(arMultiLoc==null){
+            arMultiLoc = new ArrayList<>();
+        }
 
     }
 

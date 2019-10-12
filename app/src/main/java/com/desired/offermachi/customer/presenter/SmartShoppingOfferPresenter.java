@@ -13,13 +13,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.view.activity.OtpActivtivity;
 import com.desired.offermachi.customer.view.activity.SmartShoppingRemoveActivity;
 import com.desired.offermachi.retalier.constant.AppData;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +37,7 @@ public class SmartShoppingOfferPresenter {
     }
 
     public interface NotificationOfferList {
-        void success(String response);
+        void success(ArrayList<SelectCategoryModel> alData);
 
         void error(String response);
 
@@ -52,15 +55,53 @@ public class SmartShoppingOfferPresenter {
             public void onResponse(String response) {
                 progress.dismiss();
                 try {
+                    ArrayList<SelectCategoryModel> alData = new ArrayList<>();
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
-                        notificationOfferList.success(reader.getString("message"));
+                            String result = reader.getString("result");
+                            JSONArray jsonArray = new JSONArray(result);
+                            JSONObject object;
+                            for (int count = 0; count < jsonArray.length(); count++) {
+                                object = jsonArray.getJSONObject(count);
+                                SelectCategoryModel selectCategoryModel=new SelectCategoryModel(
+                                        object.getString("id"),
+                                        object.getString("offer_id"),
+                                        object.getString("offer_title"),
+                                        object.getString("offer_title_slug"),
+                                        object.getString("offer_category"),
+                                        object.getString("sub_category"),
+                                        object.getString("offer_type"),
+                                        object.getString("offer_type_name"),
+                                        object.getString("offer_value"),
+                                        object.getString("offer_details"),
+                                        object.getString("start_date"),
+                                        object.getString("end_date"),
+                                        object.getString("alltime"),
+                                        object.getString("description"),
+                                        object.getString("coupon_code"),
+                                        object.getString("posted_by"),
+                                        object.getString("status"),
+                                        object.getString("offer_brand_name"),
+                                        object.getString("favourite_status"),
+                                        object.getString("offer_image"),
+                                        object.getString("qr_code_image"),
+                                        object.getString("coupon_code_status"),
+                                        "",
+                                        object.optDouble("latitude"),
+                                        object.optDouble("longitude"),
+                                        object.optString("shop_name")
+
+                                );
+                                alData.add(selectCategoryModel);
+                            }
+
+                        notificationOfferList.success(alData);
                       //  Toast.makeText(context, ""+reader.getString("message"), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, SmartShoppingRemoveActivity.class);
+                        /*Intent intent = new Intent(context, SmartShoppingRemoveActivity.class);
                         context.startActivity(intent);
                         ((Activity) context).finish();
-
+*/
                     } else if (status == 404) {
                         notificationOfferList.error(reader.getString("message"));
                     }
@@ -83,7 +124,7 @@ public class SmartShoppingOfferPresenter {
                 params.put("user_id",userid);
                 params.put("latitude",latitude );
                 params.put("longitude",longitude );
-                params.put("category_id",catid);
+                params.put("category_ids",catid);
                 params.put("distance",distance);
                 Log.e("map", "params===="+params );
                 return params;

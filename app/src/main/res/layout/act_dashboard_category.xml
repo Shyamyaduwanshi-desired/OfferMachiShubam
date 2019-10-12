@@ -113,6 +113,7 @@
         android:textAllCaps="false"
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
-
+        android:layout_marginLeft="@dimen/margin_save_button"
+        android:layout_marginRight="@dimen/margin_save_button"
         />
 </RelativeLayout>

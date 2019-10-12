@@ -182,7 +182,7 @@ TextView tvPreSetDND;
         if(!TextUtils.isEmpty(preSetDndId))
         {
             tvPreSetDND.setVisibility(View.VISIBLE);
-            tvPreSetDND.setText("DND Start From= "+AppData.ConvertDate5(dnd_start_time)+" To= "+AppData.ConvertDate5(dnd_end_time));
+            tvPreSetDND.setText("DND Start From= "+AppData.ConvertDateV(dnd_start_time)+" To= "+AppData.ConvertDateV(dnd_end_time));
         }
         else
         {
@@ -260,6 +260,11 @@ TextView tvPreSetDND;
 
     @Override
     public void error(String response) {
+
+    }
+
+    @Override
+    public void dndServiceOff() {
 
     }
 

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -60,6 +61,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 {
     ImageView imageViewback,info;
     Switch simpleSwitch;
+    boolean switchStatus = false;
     private CustomerNotificationAdapter customerNotificationAdapter;
     private CustomerNotificationPresenter presenter;
     RecyclerView categoryrecycle;
@@ -72,6 +74,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     private NotiFicationOpenPresenter notiRead;
     TextView tvLoadMore;
     int pagNo=1;
+    private TextView tvDndName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,12 +107,12 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         tvDONodist =findViewById(R.id.tv_disturb);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
 
-
+        tvDndName = findViewById(R.id.tv_disturb_name);
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
         tvDONodist.setOnClickListener(this);
 
-        simpleSwitch.setOnCheckedChangeListener(this);
+        //simpleSwitch.setOnCheckedChangeListener(this);
         tvLoadMore.setOnClickListener(this);
         if (SoundHolder.equals("1")){
             simpleSwitch.setChecked(true);
@@ -129,7 +133,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         CallAPI(1);//for all notitication
         CallAPI(2);//for know dnd status
 
-        simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*simpleSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                if(isChecked)
                {
@@ -152,6 +156,31 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
                        mDialog.dismiss();
                    }
                }
+            }
+        });*/
+        simpleSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(switchStatus){
+                    dndPresenter.offDndService(idholder);
+                    if(mDialog!=null)
+                    {
+                        mDialog.dismiss();
+                    }
+                }else{
+                    switchStatus = true;
+                    simpleSwitch.setChecked(switchStatus);
+                    if(dndStatus.equals("1"))
+                    {
+                        Toast.makeText(NotificationActivity.this, "You have already set DND setting Start date from"+dnd_start_time+" to "+dnd_end_time, Toast.LENGTH_SHORT).show();
+                    }
+                    Intent intent=new Intent(NotificationActivity.this,ActDoNotDisturbSetting.class);
+                    intent.putExtra("dnd_id",dndId);//dndStatus="0",dnd_start_time="",dnd_end_time="",dndId=""
+                    intent.putExtra("dnd_status",dndStatus);
+                    intent.putExtra("dnd_start_time",dnd_start_time);
+                    intent.putExtra("dnd_end_time",dnd_end_time);
+                    startActivityForResult(intent,2906);
+                }
             }
         });
 
@@ -264,6 +293,14 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public void dndServiceOff() {
+        switchStatus = false;
+        simpleSwitch.setChecked(switchStatus);
+        startActivity(getIntent());
+        finish();
+    }
+
+    @Override
     public void fail(String response) {
         showAlert(response, R.style.DialogAnimation);
     }
@@ -326,7 +363,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     public void success(ArrayList<days_model> dayResponse, ArrayList<hours_model> hoursResponse, String status) {
 
     }
-    String dndStatus="0",dnd_start_time="",dnd_end_time="",dndId="";
+    String dndStatus="0",dnd_start_time="",dnd_end_time="",dndId="",dndName="";
     @Override
     public void successDND(JSONObject objJson, String status) {
         switch (status)
@@ -336,12 +373,25 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 //                    JSONObject objJson =new JSONObject(status);
                         String id = objJson.getString("id");
                          dndId = objJson.getString("dnd_id");
+                         dndName = objJson.optString("title");
                          dnd_start_time = objJson.getString("dnd_start_time");
                          dnd_end_time = objJson.getString("dnd_end_time");
-                         dndStatus = objJson.getString("status");
+                         dndStatus = objJson.optString("status");
+                         if(dndStatus.equals("1")){
+                             switchStatus = true;
+                             simpleSwitch.setChecked(switchStatus);
+                         }else {
+                             switchStatus = false;
+                             simpleSwitch.setChecked(switchStatus);
+                         }
+                         tvDndName.setText(dndName);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                break;
+            case "4":
+                switchStatus = false;
+                simpleSwitch.setChecked(switchStatus);
                 break;
         }
 
@@ -378,6 +428,12 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         showAlert(response, R.style.DialogAnimation);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        startActivity(getIntent());
+        finish();
+    }
 }
 
 

@@ -629,30 +629,31 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         locationAdapter.notifyDataSetChanged();
     }
     public void GetAllSelectedLocation() {
-        offerLocalityId = "";
-        offerLocality="";
-        for (int i = 0; i < alRetailerLocation.size(); i++) {
-            if (alRetailerLocation.get(i).isSelected()) {
-                if (TextUtils.isEmpty(offerLocalityId)) {
-                    offerLocalityId = alRetailerLocation.get(i).getId();
-                    offerLocality = alRetailerLocation.get(i).getLocalityName();
+        if(alRetailerLocation!=null) {
+            offerLocalityId = "";
+            offerLocality = "";
+            for (int i = 0; i < alRetailerLocation.size(); i++) {
+                if (alRetailerLocation.get(i).isSelected()) {
+                    if (TextUtils.isEmpty(offerLocalityId)) {
+                        offerLocalityId = alRetailerLocation.get(i).getId();
+                        offerLocality = alRetailerLocation.get(i).getLocalityName();
 
-                } else {
-                    offerLocalityId = offerLocalityId + "," + alRetailerLocation.get(i).getId();
-                    offerLocality = offerLocality + "," + alRetailerLocation.get(i).getLocalityName();
+                    } else {
+                        offerLocalityId = offerLocalityId + "," + alRetailerLocation.get(i).getId();
+                        offerLocality = offerLocality + "," + alRetailerLocation.get(i).getLocalityName();
+                    }
                 }
             }
-        }
-        if (locationDlg != null) {
-            locationDlg.dismiss();
-            if (offerLocality.length() > 25) {
-                tvPushOfferLocation.setText(offerLocality.substring(0, 25) + "...");
-            } else {
-                tvPushOfferLocation.setText(offerLocality);
+            if (locationDlg != null) {
+                locationDlg.dismiss();
+                if (offerLocality.length() > 25) {
+                    tvPushOfferLocation.setText(offerLocality.substring(0, 25) + "...");
+                } else {
+                    tvPushOfferLocation.setText(offerLocality);
+                }
             }
+            Log.e("", "sAllCityId= " + offerLocalityId);
+            //SetAdapter();
         }
-        Log.e("", "sAllCityId= " + offerLocalityId);
-        //SetAdapter();
-
     }
 }

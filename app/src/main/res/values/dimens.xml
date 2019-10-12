@@ -13,4 +13,5 @@
     <dimen name="wallet_edit_height">40dp</dimen>
     <dimen name="title_txt_size">16sp</dimen>
     <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_save_button">60dp</dimen>
 </resources>

@@ -93,12 +93,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="175dp">
+            >
+            <TextView
+                android:id="@+id/tv_disturb_name"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                />
             <TextView
                 android:id="@+id/tv_disturb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Do Not Disturb"
+                android:layout_gravity="center_vertical"
                 android:textColor="@color/purple"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -107,10 +118,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:switchMinWidth="50dp"
-                android:layout_gravity="right"
+                android:layout_gravity="right|center_vertical"
                 android:layout_marginLeft="5dp"
                 android:textOff="OFF"
-
                 android:textOn="ON"/>
         </LinearLayout>
         <android.support.v7.widget.RecyclerView

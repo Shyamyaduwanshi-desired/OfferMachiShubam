@@ -73,6 +73,7 @@
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:visibility="gone"
             android:queryHint="What are you looking for?"
             android:queryBackground="@android:color/transparent"
             android:background="@null"
@@ -93,6 +94,38 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/lightcolour" />
+        <TextView
+            android:paddingLeft="20dp"
+            android:layout_width="wrap_content"
+            android:text="Select the range from current location"
+            android:layout_height="wrap_content" />
+        <RadioGroup
+            android:id="@+id/rg_location_distance"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb_one_km"
+                android:layout_width="wrap_content"
+                android:text="1 Km"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_two_km"
+                android:layout_width="wrap_content"
+                android:text="2 Km"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_five_km"
+                android:layout_width="wrap_content"
+                android:text="5 Km"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb_ten_km"
+                android:layout_width="wrap_content"
+                android:text="10 Km"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
         <RelativeLayout
             android:id="@+id/rl_current_location"
             android:layout_width="match_parent"
@@ -128,6 +161,7 @@
 
 
         </RelativeLayout>
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
@@ -210,9 +244,9 @@
             android:layout_height="40dp"
             android:background="@drawable/login_button_background"
             android:layout_marginTop="40dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="Proceed"
+            android:layout_marginLeft="@dimen/margin_save_button"
+            android:layout_marginRight="@dimen/margin_save_button"
+            android:text="Close"
             android:textSize="15dp"
             android:textAllCaps="false"
             android:layout_marginBottom="20dp"

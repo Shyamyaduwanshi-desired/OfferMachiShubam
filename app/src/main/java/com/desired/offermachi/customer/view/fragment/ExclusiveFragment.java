@@ -58,7 +58,7 @@ public class ExclusiveFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_exclusive, container, false);
-        ((DashBoardActivity)getActivity()).setToolTittle("Exclusive Offers",2);
+        ((DashBoardActivity)getActivity()).setToolTittle("Just for you",2);
         initview();
         return  view;
     }

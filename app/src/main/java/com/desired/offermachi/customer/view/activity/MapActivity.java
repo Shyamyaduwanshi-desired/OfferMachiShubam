@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -27,9 +28,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
@@ -43,12 +46,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.johnnylambada.location.LocationObserver;
 import com.johnnylambada.location.LocationProvider;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,6 +84,14 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         initview();
     }
     private void initview(){
+        findViewById(R.id.btnMapProcess).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, SmartShoppingRemoveActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         presenter=new SmartShoppingOfferPresenter(MapActivity.this,MapActivity.this);
         Intent intent=getIntent();
         catid=intent.getStringExtra("catid");
@@ -135,6 +149,7 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             return;
         }
         mMapSession.setMyLocationEnabled(true);
+
     }
     private void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -245,7 +260,7 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
 
     @Override
     public void onLocationChanged(Location location) {
-
+        mLastLocation = location;
     }
 
     private void showAlert(String message, int animationSource){
@@ -269,8 +284,10 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
         }).show();
     }
     @Override
-    public void success(String response) {
-
+    public void success(ArrayList<SelectCategoryModel> alData) {
+        for (SelectCategoryModel data:alData) {
+            addMarker(data);
+        }
     }
 
     @Override
@@ -299,12 +316,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             public void onClick(View v) {
                 dialog.dismiss();
                 txtselectkilometer.setText("1 Km");
-                if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"1");
-                }else{
-                    showAlert("Please connect to internet.",R.style.DialogAnimation);
-                }
-
+                dist = 1;
+                drawCircle();
 
             }
         });
@@ -313,12 +326,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             public void onClick(View v) {
                 dialog.dismiss();
                 txtselectkilometer.setText("3 Km");
-                if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"3");
-                }else{
-                    showAlert("Please connect to internet.",R.style.DialogAnimation);
-                }
-
+                dist = 3;
+                drawCircle();
             }
         });
         rb3.setOnClickListener(new View.OnClickListener() {
@@ -326,11 +335,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             public void onClick(View v) {
                 dialog.dismiss();
                 txtselectkilometer.setText("5 Km");
-                if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"5");
-                }else{
-                    showAlert("Please connect to internet.",R.style.DialogAnimation);
-                }
+                dist = 5;
+                drawCircle();
             }
         });
         rb4.setOnClickListener(new View.OnClickListener() {
@@ -338,11 +344,8 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             public void onClick(View v) {
                 dialog.dismiss();
                 txtselectkilometer.setText("10 Km");
-                if (isNetworkConnected()){
-                    presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,"10");
-                }else{
-                    showAlert("Please connect to internet.",R.style.DialogAnimation);
-                }
+                dist = 10;
+                drawCircle();
             }
         });
 
@@ -385,6 +388,79 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
 
     @Override
     public void failnoti(String response) {
+
+    }
+    public float getZoomLevel(Circle circle) {
+        float zoomLevel=0;
+        if (circle != null){
+            double radius = circle.getRadius();
+            double scale = radius / 500;
+            zoomLevel =(int) (16 - Math.log(scale) / Math.log(2));
+        }
+        return zoomLevel +.5f;
+    }
+
+    Circle circle;
+    int dist = 10;
+    public void drawCircle(){
+        if(circle!=null){
+            circle.remove();
+        }
+        if(mMapSession!=null){
+            mMapSession.clear();
+        }
+        circle = mMapSession.addCircle(new CircleOptions()
+                        .center(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()))
+                        .radius(dist*1000)
+                        .strokeColor(Color.RED)
+                //.fillColor(Color.BLUE)
+        );
+        circle.isVisible();
+
+
+
+        float currentZoomLevel = getZoomLevel(circle);
+        float animateZomm = currentZoomLevel + 5;
+
+        Log.e("Zoom Level:", currentZoomLevel + "");
+        Log.e("Zoom Level Animate:", animateZomm + "");
+
+        mMapSession.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()), animateZomm));
+        mMapSession.animateCamera(CameraUpdateFactory.zoomTo(currentZoomLevel-1), 2000, null);
+        callApi();
+    }
+
+    void callApi(){
+        if (isNetworkConnected()){
+            presenter.sentRequest(idholder,String.valueOf(lati),String.valueOf(longi),catid,dist+"");
+        }else{
+            showAlert("Please connect to internet.",R.style.DialogAnimation);
+        }
+
+    }
+
+    void addMarker(SelectCategoryModel data){
+
+
+        //Show Marker on a Location
+        mMapSession.addMarker(new MarkerOptions().position(new LatLng(data.getLat(),data.getLng())).title(data.getStoreName()));
+/*
+        //Change Default Color of Marker
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(BROOKLYN_BRIDGE)
+                .title("First Pit Stop")
+                .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        //Replace Default Marker Icon with Custom Image
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(WALL_STREET)
+                .title("Wrong Turn!")
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.my_flag)));
+*/
 
     }
 }

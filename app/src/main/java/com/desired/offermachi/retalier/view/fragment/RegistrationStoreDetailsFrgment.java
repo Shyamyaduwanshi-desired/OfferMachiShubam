@@ -1069,43 +1069,44 @@ import static android.app.Activity.RESULT_OK;
 
 
      public void GetAllSelectedLocation() {
-         sAllCityId = "";
-         sAllCityNm = "";
-         AddStoreLocBean bean;
-         arLocDetail.clear();
-         for (int i = 0; i < arLocation.size(); i++) {
-             if (arLocation.get(i).isSelected()) {
-                 if (TextUtils.isEmpty(sAllCityId)) {
-                     sAllCityId = arLocation.get(i).getId();
-                     sAllCityNm = arLocation.get(i).getCity_name();
+         if(arLocation!=null) {
+             sAllCityId = "";
+             sAllCityNm = "";
+             AddStoreLocBean bean;
+             arLocDetail.clear();
+             for (int i = 0; i < arLocation.size(); i++) {
+                 if (arLocation.get(i).isSelected()) {
+                     if (TextUtils.isEmpty(sAllCityId)) {
+                         sAllCityId = arLocation.get(i).getId();
+                         sAllCityNm = arLocation.get(i).getCity_name();
 
-                 } else {
-                     sAllCityId = sAllCityId + "," + arLocation.get(i).getId();
-                     sAllCityNm = sAllCityNm + "," + arLocation.get(i).getCity_name();
+                     } else {
+                         sAllCityId = sAllCityId + "," + arLocation.get(i).getId();
+                         sAllCityNm = sAllCityNm + "," + arLocation.get(i).getCity_name();
+                     }
+
+                     bean = new AddStoreLocBean();
+                     bean.setsLocNm(arLocation.get(i).getCity_name());//Compaign Location name
+                     bean.setLocId(arLocation.get(i).getId());//Compaign Location name
+                     bean.setsLocLat("22.71246");
+                     bean.setsLocLong("75.86491");
+                     bean.setAddress("");
+                     bean.setPhoneNumber("");
+                     bean.setPersonNm("");
+                     arLocDetail.add(bean);
                  }
-
-                 bean = new AddStoreLocBean();
-                 bean.setsLocNm(arLocation.get(i).getCity_name());//Compaign Location name
-                 bean.setLocId(arLocation.get(i).getId());//Compaign Location name
-                 bean.setsLocLat("22.71246");
-                 bean.setsLocLong("75.86491");
-                 bean.setAddress("");
-                 bean.setPhoneNumber("");
-                 bean.setPersonNm("");
-                 arLocDetail.add(bean);
              }
-         }
-         if (multipleLocDlg != null) {
-             multipleLocDlg.dismiss();
-             if (sAllCityNm.length() > 70) {
-                 tvMultiLocation.setText(sAllCityNm.substring(0, 70) + "...");
-             } else {
-                 tvMultiLocation.setText(sAllCityNm);
+             if (multipleLocDlg != null) {
+                 multipleLocDlg.dismiss();
+                 if (sAllCityNm.length() > 70) {
+                     tvMultiLocation.setText(sAllCityNm.substring(0, 70) + "...");
+                 } else {
+                     tvMultiLocation.setText(sAllCityNm);
+                 }
              }
+             Log.e("", "sAllCityId= " + sAllCityId);
+             SetAdapter();
          }
-         Log.e("", "sAllCityId= " + sAllCityId);
-         SetAdapter();
-
      }
 
 

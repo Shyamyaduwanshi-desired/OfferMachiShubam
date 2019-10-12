@@ -116,10 +116,14 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
             holder.productbutton.setText("View Coupon Code");//View Coupon Code
+            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
+            holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
             holder.productbutton.setText("Redeemed");
         }else{
             holder.productbutton.setText("Get Coupon Code");//Get Coupon Code
+            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
+            holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
         }
 
         Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
@@ -232,6 +236,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         ImageView productimg,likeimg,ivStoreLogo;
         TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
+        RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
 //        AndroidLikeButton ivLikeBtn;
 
@@ -245,6 +250,8 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_a_code);
+            productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
+
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);

@@ -42,7 +42,7 @@ public class DonoDisturbPresenter {
         void success(ArrayList<days_model> dayResponse,ArrayList<hours_model> hoursResponse,String status);
         void successDND(JSONObject Response,String status);
         void error(String response);
-
+        void dndServiceOff();
         void fail(String response);
     }
 
@@ -254,6 +254,55 @@ public class DonoDisturbPresenter {
         queue.add(postRequest);
     }
 
+    public void offDndService(final String userid) {
+        progress = new ProgressDialog(context);
+        progress.setMessage("Please Wait..");
+        progress.setCancelable(false);
+        showpDialog();
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "remove_dnd_for_userby_id", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                hidepDialog();
+                try {
+                    JSONObject mainJson = new JSONObject(response);
+                    String status = mainJson.getString("status");
+                    String message = mainJson.getString("message");
+                    if (status.equals("200"))
+                    {
+
+                        donoDisList.dndServiceOff();
+                    } else {
+                        donoDisList.error(message);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    donoDisList.fail("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(!((Activity) context).isFinishing())
+                {
+                    hidepDialog();
+                }
+                donoDisList.fail("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                Log.e("surbhi", "params" + params);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+    }
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

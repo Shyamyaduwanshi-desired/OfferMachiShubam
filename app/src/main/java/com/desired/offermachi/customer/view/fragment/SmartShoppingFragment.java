@@ -280,7 +280,7 @@ Context context;
         }
         else {
             Intent myIntent = new Intent(getActivity(), MapActivity.class);
-            myIntent.putExtra("catid",sSingleCateId);
+            myIntent.putExtra("catid",sAllCatId);
             myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(myIntent);
         }

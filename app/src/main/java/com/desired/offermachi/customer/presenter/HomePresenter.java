@@ -181,7 +181,7 @@ public class HomePresenter {
                     hidepDialog();
                 }
 
-                homeList.fail("Server Error.\n Please try after some time.");
+                homeList.fail("Data is not available for this category. \nPlease select another location");
             }
         }
         ) {

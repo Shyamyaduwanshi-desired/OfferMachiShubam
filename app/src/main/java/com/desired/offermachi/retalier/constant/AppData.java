@@ -169,7 +169,7 @@ public class AppData {
     {
         String formattedDate = null;
         try {
-            DateFormat originalFormat = new SimpleDateFormat("MM-dd", Locale.ENGLISH);
+            DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
             DateFormat targetFormat = new SimpleDateFormat("dd MMM");// MMMM dd yyyy Jun 20 2019
             Date date = originalFormat.parse(indate);
             formattedDate = targetFormat.format(date);

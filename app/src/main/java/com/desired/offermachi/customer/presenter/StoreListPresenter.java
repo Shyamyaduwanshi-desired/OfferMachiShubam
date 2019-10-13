@@ -368,7 +368,7 @@ public class StoreListPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("pageno", String.valueOf(currentPagNo));
-                params.put("perpage", "12");
+                params.put("perpage", "1");
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
                 Log.e("","Input param= "+params.toString());

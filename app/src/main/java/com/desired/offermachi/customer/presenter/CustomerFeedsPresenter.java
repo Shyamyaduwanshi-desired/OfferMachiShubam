@@ -266,7 +266,7 @@ public class CustomerFeedsPresenter {
 //
 
 
-                        Collections.reverse(list);
+                        //Collections.reverse(list);
                         }
                         feedsList.success(list,totalRecord,countPage,1);
 
@@ -306,7 +306,7 @@ public class CustomerFeedsPresenter {
                 params.put("user_id", userid);
                 params.put("pageno", String.valueOf(currentPagNo));
                 params.put("perpage", "10");
-                Log.e("","Input param= "+params.toString());
+                Log.e("param","Input param= "+params.toString());
                 return params;
             }
         };

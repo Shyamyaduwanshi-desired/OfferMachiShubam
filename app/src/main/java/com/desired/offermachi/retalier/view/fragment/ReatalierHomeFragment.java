@@ -642,5 +642,12 @@ public class ReatalierHomeFragment extends Fragment implements View.OnClickListe
             //SetAdapter();
         }
     }
+    @Override
+    public void failureBrand() {
+        ArrayList<BrandModel> tmp = new ArrayList<BrandModel>();
+        tmp.add(new BrandModel("0","Select Brand",""));
+        brandAdapter = new BrandAdapter(getContext(), tmp);
+        brandspinner.setAdapter(brandAdapter);
+    }
 }
 

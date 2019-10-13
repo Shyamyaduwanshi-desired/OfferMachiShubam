@@ -64,7 +64,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     @Override
     public void onBindViewHolder(CustomerNotificationAdapter.MyViewHolder holder, int position) {
         NotificationModel hmBhavModel = modelList.get(position);
-        holder.tv_title.setText(hmBhavModel.getTitle());
+        holder.tv_title.setText(hmBhavModel.getNotiId()+" "+hmBhavModel.getTitle());
         holder.tv_msg.setText(hmBhavModel.getMsg());
         CardView noti_item_card = holder.noti_item_card;
 

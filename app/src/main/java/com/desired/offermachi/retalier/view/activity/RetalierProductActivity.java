@@ -26,6 +26,8 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.model.OfferLocation;
+import com.desired.offermachi.retalier.model.RetailerLocation;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.DeleteOfferDetailPresenter;
@@ -33,6 +35,8 @@ import com.desired.offermachi.retalier.presenter.SignupPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
 import com.desired.offermachi.retalier.view.fragment.RegistrationStoreDetailsFrgment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -62,7 +66,10 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
     private NotificationCountPresenter notiCount;
     private String idholder;
     private Button btnDelete;
-
+    private ArrayList<OfferLocation> alOfferLocation;
+    private String offerLocations;
+    private Button btnEdit;
+    private String data="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +100,9 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
         btnDelete = findViewById(R.id.coupon_delete_button_id);
+        btnEdit = findViewById(R.id.coupon_edit_button);
         btnDelete.setOnClickListener(this);
+        btnEdit.setOnClickListener(this);
         if (isNetworkConnected()) {
             presenter.getOfferDiscount(offerid);
         }  else {
@@ -113,6 +122,9 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
             startActivity(intent);
         }else if(v==btnDelete){
             showAlertTwoButton("Are you sure?",R.style.DialogAnimation);
+        }else if(v==btnEdit){
+            startActivity(new Intent(RetalierProductActivity.this,EditOfferActivity.class).putExtra("data",data));
+            finish();
         }
     }
     private void showdialog(String image,String code) {
@@ -140,10 +152,26 @@ public class RetalierProductActivity extends AppCompatActivity implements View.O
 
     @Override
     public void success(String response) {
+        data = response;
         Log.e("details", "response="+response );
         //Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
         try {
+            offerLocations = "";
             JSONObject object = new JSONObject(response);
+            alOfferLocation = new Gson().fromJson(object.optString("offer_locations"),  new TypeToken<ArrayList<OfferLocation>>(){}.getType());
+            for (OfferLocation loc:alOfferLocation){
+                if(TextUtils.isEmpty(offerLocations)){
+                    offerLocations = loc.getLocalityName();
+                }else {
+                    offerLocations =offerLocations +", "+ loc.getLocalityName();
+                }
+            }
+            if(object.optString("can_delete").equals("1")){
+                btnDelete.setVisibility(View.VISIBLE);
+            }else {
+                btnDelete.setVisibility(View.GONE);
+            }
+            ((TextView)findViewById(R.id.storeLocations)).setText(offerLocations);
                     String id=object.getString("id");
                     String offerid=object.getString("offer_id");
                     String offertitle=object.getString("offer_title");

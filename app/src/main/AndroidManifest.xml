@@ -34,6 +34,7 @@
         tools:replace="android:appComponentFactory"-->
         <activity android:name=".customer.view.activity.LocationActivity"/>
         <activity android:name=".customer.view.activity.MainActivity"></activity>
+        <activity android:name=".retalier.view.activity.EditOfferActivity"></activity>
         <activity android:name=".retalier.view.activity.MobileVerifyActivity"></activity>
         <activity android:name=".customer.view.activity.MapActivity" />
         <activity android:name=".customer.view.activity.ProductActivity"/>

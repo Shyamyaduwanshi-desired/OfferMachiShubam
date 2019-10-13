@@ -26,7 +26,7 @@
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="Deals of the Day"
+                android:text="Edit"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
@@ -84,6 +84,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Deal of the Day"
@@ -506,17 +507,6 @@
                                     android:textSize="14dp"
                                     android:gravity="center"
                                     android:background="@drawable/edit_background"/>
-                                <TextView
-                                    android:id="@+id/btngenerate"
-                                    android:layout_width="0dp"
-                                    android:layout_height="40dp"
-                                    android:layout_weight="1"
-                                    android:text="Generate Coupon Code"
-                                    android:layout_marginLeft="5dp"
-                                    android:background="@drawable/view_background"
-                                    android:textSize="14dp"
-                                    android:gravity="center"
-                                    android:textColor="@color/white" />
                             </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"

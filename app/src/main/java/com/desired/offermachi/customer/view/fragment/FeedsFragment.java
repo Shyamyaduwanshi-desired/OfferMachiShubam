@@ -270,7 +270,10 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
     public void success(ArrayList<SelectCategoryModel> response,int totalRecords,int totalPages,int diff) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
 //        categoryrecycle.setAdapter(customerTrendingAdapter);
-
+        int pos = 0;
+        if(categoryrecycle.getLayoutManager()!=null){
+            pos = ((LinearLayoutManager)categoryrecycle.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        }
         if(pagNo==1) {
             arAllFeedList.clear();
             arAllFeedList=response;
@@ -280,7 +283,9 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         }
         customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),arAllFeedList);
         categoryrecycle.setAdapter(customerTrendingAdapter);
-
+        if(arAllFeedList.size()>0) {
+            categoryrecycle.scrollToPosition(pos);
+        }
         if(totalPages>=1&&pagNo<totalPages)
         {
             tvLoadMore.setVisibility(View.VISIBLE);

@@ -40,15 +40,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
-import com.desired.offermachi.customer.view.activity.ActDashboardCategory;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.BrandModel;
 import com.desired.offermachi.retalier.model.CategoryModel;
+import com.desired.offermachi.retalier.model.OfferLocation;
 import com.desired.offermachi.retalier.model.OfferTypeModel;
 import com.desired.offermachi.retalier.model.RetailerLocation;
 import com.desired.offermachi.retalier.model.UserModel;
+import com.desired.offermachi.retalier.presenter.EditOfferPresenter;
 import com.desired.offermachi.retalier.presenter.PostOfferDiscountPresenter;
 import com.desired.offermachi.retalier.presenter.RetailerLocationPresenter;
 import com.desired.offermachi.retalier.presenter.TypeBrandCategoryPresenter;
@@ -56,6 +57,14 @@ import com.desired.offermachi.retalier.view.adapter.BrandAdapter;
 import com.desired.offermachi.retalier.view.adapter.CategoryAdapter;
 import com.desired.offermachi.retalier.view.adapter.LocationAdapter;
 import com.desired.offermachi.retalier.view.adapter.OfferTypeAdapter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -67,7 +76,7 @@ import id.zelory.compressor.Compressor;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, PostOfferDiscountPresenter.PostOfferDiscount, RetailerLocationPresenter.RetailerLocationInfo,LocationAdapter.ItemClick   {
+public class EditOfferActivity extends AppCompatActivity implements View.OnClickListener, TypeBrandCategoryPresenter.TypeBrandCategory, EditOfferPresenter.PostOfferDiscount, RetailerLocationPresenter.RetailerLocationInfo,LocationAdapter.ItemClick   {
     ImageView imageViewback,info;
     DatePickerDialog picker;
     TextView etstartdate,etenddate,start_Time,end_Time;
@@ -83,32 +92,122 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     LinearLayout imagepickerly;
     private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     private TypeBrandCategoryPresenter presenter;
-    private PostOfferDiscountPresenter postpresenter;
+    private EditOfferPresenter editOfferPresenter;
     Spinner offerspinner,brandspinner,categoryspinner;
     private OfferTypeAdapter offerTypeAdapter;
     private BrandAdapter brandAdapter;
     private CategoryAdapter categoryAdapter;
     String offerid,categoryid,brandid;
     EditText etoffertitle,etoffervalue,etofferdescription;
-    String offertitle,offervalue,offerdescription,offercouponcode,offerstartdate/*,offerenddate*/,offerstarttime,offerendtime,alltime;
+    String offertitle,offervalue,offerdescription,offercouponcode,offerstartdate,offerenddate,offerstarttime,offerendtime,alltime;
     TextView txtoffercouponcode;
-    TextView btngenerate;
     String idholder;
     private TextView tvDealOfDayLocation;
     private String offerLocalityId="";
     private String offerLocality="";
     private ArrayList<RetailerLocation> alRetailerLocation = new ArrayList<>();
-
+    ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<BrandModel> alBrand =new ArrayList<>();
+    private ArrayList<OfferTypeModel> alOffer = new ArrayList<>();
+    private String offerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_add_deal_of_the_day_retalier);
+        setContentView(R.layout.activity_edit_offer);
         presenter = new TypeBrandCategoryPresenter(this, this);
-        postpresenter = new PostOfferDiscountPresenter(this, this);
+        editOfferPresenter = new EditOfferPresenter(this, this);
         init();
         LocalBroadcastManager.getInstance(this).registerReceiver(couponReceiver,
                 new IntentFilter("Coupon"));
+        setDataOnView(getIntent().getStringExtra("data"));
+
+    }
+
+    public void setDataOnView(String data) {
+        //Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
+        try {
+            JSONObject object = new JSONObject(data);
+            ArrayList<OfferLocation> alOfferLocation = new Gson().fromJson(object.optString("offer_locations"),  new TypeToken<ArrayList<OfferLocation>>(){}.getType());
+            offerLocalityId = "";
+            offerLocality = "";
+            for (OfferLocation loc:alOfferLocation){
+                ids.add(loc.getId());
+                if(TextUtils.isEmpty(offerLocalityId)){
+                    offerLocality = loc.getLocalityName();
+                    offerLocalityId = loc.getId();
+                }else {
+                    offerLocality =offerLocality +", "+ loc.getLocalityName();
+                    offerLocalityId = loc.getId();
+                }
+            }
+            etoffertitle.setText(object.optString("offer_title"));
+            etoffervalue.setText(object.optString("offer_value"));
+            etofferdescription.setText(object.optString("description"));
+            categoryspinner.setTag(object.optString("sub_category"));
+            brandspinner.setTag(object.optString("offer_brand"));
+            offerspinner.setTag(object.optString("offer_type"));
+
+            if (offerLocality.length() > 25) {
+                tvDealOfDayLocation.setText(offerLocality.substring(0, 25) + "...");
+            } else {
+                tvDealOfDayLocation.setText(offerLocality);
+            }
+            Picasso.get().load(object.optString("offer_image")).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(offerimage);
+
+            etstartdate.setText(object.optString("start_date"));
+            etenddate.setText(object.optString("end_date"));
+            txtoffercouponcode.setText(object.optString("coupon_code"));
+            String[] tmp = object.optString("alltime").split("-");
+            if(tmp.length==2) {
+                start_Time.setText(tmp[0]);
+                end_Time.setText(tmp[1]);
+            }else if(tmp.length==1) {
+                start_Time.setText(tmp[0]);
+            }
+            offerId = object.optString("id");
+            /*if(object.optString("can_delete").equals("1")){
+                btnDelete.setVisibility(View.VISIBLE);
+            }else {
+                btnDelete.setVisibility(View.GONE);
+            }
+            ((TextView)findViewById(R.id.storeLocations)).setText(offerLocations);
+            String id=object.getString("id");
+            String offerid=object.getString("offer_id");
+            String offertitle=object.getString("offer_title");
+            txtoffername.setText(offertitle);
+            String brandid=object.getString("offer_brand");
+            String brandname=object.getString("offer_brand_name");
+            txtbrandname.setText(brandname);
+            String offercategory= object.getString("offer_category");
+            String subcategory=object.getString("sub_category");
+            String offertype=object.getString("offer_type");
+            String offervalue=object.getString("offer_value");
+            String offertypename=object.getString("offer_type_name");
+            txtoffertypename.setText(offertypename+" Off "+offervalue);
+            String offerdetail=object.getString("offer_details");
+            String startdate=object.getString("start_date");
+            String enddate=object.getString("end_date");
+            txtenddate.setText(enddate);
+            String time=object.getString("alltime");
+            txttime.setText(time);
+            String description= object.getString("description");
+            txtofferdescription.setText(description);
+            couponcode=object.getString("coupon_code");
+            String postby=object.getString("posted_by");
+            String status=object.getString("status");
+            String offerimage=object.getString("offer_image");
+            if(offerimage.equals("")){
+            }else{
+                Picasso.get().load(offerimage).networkPolicy(NetworkPolicy.NO_CACHE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(viewPager_product);
+            }
+            qrcodeimage=object.getString("qr_code_image");*/
+        }catch (JSONException e) {
+            e.printStackTrace();
+
+        }
     }
 
     public BroadcastReceiver couponReceiver = new BroadcastReceiver() {
@@ -120,7 +219,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     };
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean isStoragePermissionGranted() {
-        if (ActivityCompat.checkSelfPermission(this,android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             return true;
         } else {
             return false;
@@ -145,12 +244,10 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         secondlinear=findViewById(R.id.second_home_linear_id);
         etstartdate=findViewById(R.id.editText1);
         etenddate=findViewById(R.id.editexpirydate);
-        etenddate.setVisibility(View.GONE);
         start_Time = findViewById(R.id.time_view_start);
         end_Time =findViewById(R.id.time_view_end);
         offerimage=findViewById(R.id.offerimage);
         imagepickerly=findViewById(R.id.imagepicker);
-        btngenerate=findViewById(R.id.btngenerate);
         tvDealOfDayLocation = findViewById(R.id.tvDealOfDayLocation);
         tvDealOfDayLocation.setOnClickListener(this);
 
@@ -160,7 +257,6 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         }  else {
             Toast.makeText(this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
         }
-        btngenerate.setOnClickListener(this);
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
         imagepickerly.setOnClickListener(this);
@@ -180,8 +276,9 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //   Select Provider
-                TextView txofferid = (TextView) view.findViewById(R.id.offerid);
-                offerid = txofferid.getText().toString();
+                /*TextView txofferid = (TextView) view.findViewById(R.id.offerid);
+                offerid = txofferid.getText().toString();*/
+                offerid = alOffer.get(i).getId();
             }
 
             @Override
@@ -193,8 +290,10 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //   Select Provider
-                TextView txbrandid = (TextView) view.findViewById(R.id.offerid);
-                brandid = txbrandid.getText().toString();
+                /*TextView txbrandid = (TextView) view.findViewById(R.id.offerid);
+                brandid = txbrandid.getText().toString();*/
+                brandid = alBrand.get(i).getId();
+
             }
 
             @Override
@@ -206,13 +305,14 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //   Select Provider
-                TextView txcategoryid = (TextView) view.findViewById(R.id.offerid);
-                categoryid = txcategoryid.getText().toString();
+                categoryid  = alCategory.get(i).getId();
+                /*TextView txcategoryid = (TextView) view.findViewById(R.id.offerid);
+                categoryid = txcategoryid.getText().toString();*/
                 if(!categoryid.equals("0")) {
                     if (isNetworkConnected()) {
                         presenter.sentRequestById(idholder, categoryid);
                     } else {
-                        Toast.makeText(ActAddDealsOftheDay.this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditOfferActivity.this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -248,9 +348,9 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             etofferdescription.setError("Please enter your offer description");
         }
 
-        else if (TextUtils.isEmpty(picture)){
+        /*else if (TextUtils.isEmpty(picture)){
             Toast.makeText(this, "Please select offer & Discount picture", Toast.LENGTH_SHORT).show();
-        }else if (offerid.equals("0")){
+        }*/else if (offerid.equals("0")){
             Toast.makeText(this, "Please select offer", Toast.LENGTH_SHORT).show();
 
         }
@@ -272,7 +372,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     private void PostOfferValidation2() {
         offercouponcode=txtoffercouponcode.getText().toString();
         offerstartdate=etstartdate.getText().toString();
-//        offerenddate=etenddate.getText().toString();
+        offerenddate=etenddate.getText().toString();
         offerstarttime=start_Time.getText().toString();
         offerendtime=end_Time.getText().toString();
         if (TextUtils.isEmpty(offercouponcode)) {
@@ -299,7 +399,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
 //            Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
 
             if (isNetworkConnected()) {
-                postpresenter.AddDealOfTheDay(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offercouponcode,alltime,offerLocalityId);
+                editOfferPresenter.editOffer(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,offerLocalityId,offerId);
             }
 
         }
@@ -309,7 +409,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         if (v==imageViewback){
             onBackPressed();
         }else if(v==info){
-            Intent intent = new Intent(ActAddDealsOftheDay.this, InfoActivity.class);
+            Intent intent = new Intent(EditOfferActivity.this, InfoActivity.class);
             startActivity(intent);
         }else if (v==submitbutton){
             PostOfferValidation2();
@@ -342,13 +442,6 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             } else {
                 openGallery();
             }
-        }else if (v==btngenerate){
-
-            if (isNetworkConnected()) {
-                postpresenter.GenerateCouponcode();
-            }  else {
-                showAlert("Please connect to internet.", R.style.DialogAnimation);
-            }
         }else if(v==tvDealOfDayLocation){
             showMultipleLocationDialog();
         }
@@ -366,7 +459,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.dismiss();
-                            ActivityCompat.requestPermissions(ActAddDealsOftheDay.this, permissions, 100);
+                            ActivityCompat.requestPermissions(EditOfferActivity.this, permissions, 100);
                         }
                     }).show();
         }
@@ -497,21 +590,58 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
 
     @Override
     public void successtype(ArrayList<OfferTypeModel> response) {
-        offerTypeAdapter = new OfferTypeAdapter(this, response);
+        alOffer = response;
+        offerTypeAdapter = new OfferTypeAdapter(this, alOffer);
         offerspinner.setAdapter(offerTypeAdapter);
+        if(offerspinner.getTag()!=null){
+            String tmp = offerspinner.getTag().toString();
+            int pos=0;
+            for (int i = 0 ;i<response.size();i++){
+                if(response.get(i).getId().equals(tmp)){
+                    pos=i;
+                    break;
+                }
+            }
+            offerspinner.setSelection(pos);
+        }
 
     }
 
     @Override
     public void successbrand(ArrayList<BrandModel> response) {
+        alBrand = response;
         brandAdapter = new BrandAdapter(this, response);
         brandspinner.setAdapter(brandAdapter);
+        if(brandspinner.getTag()!=null){
+            String tmp = brandspinner.getTag().toString();
+            int pos=0;
+            for (int i = 0 ;i<response.size();i++){
+                if(response.get(i).getId().equals(tmp)){
+                    pos=i;
+                    break;
+                }
+            }
+            brandspinner.setSelection(pos);
+        }
     }
-
+    ArrayList<CategoryModel> alCategory;
     @Override
     public void successcategory(ArrayList<CategoryModel> response) {
-        categoryAdapter = new CategoryAdapter(this, response);
+        alCategory = response;
+        categoryAdapter = new CategoryAdapter(this, alCategory);
         categoryspinner.setAdapter(categoryAdapter);
+        if(categoryspinner.getTag()!=null){
+            String tmp = categoryspinner.getTag().toString();
+            int pos=0;
+            for (int i = 0 ;i<response.size();i++){
+                if(response.get(i).getId().equals(tmp)){
+                    pos=i;
+                    break;
+                }
+            }
+            categoryspinner.setSelection(pos);
+        }
+
     }
 
     @Override
@@ -552,10 +682,6 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         this.finish();
     }
 
-    @Override
-    public void successGenerate(String response) {
-        Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void erroroffer(String response) {
@@ -586,6 +712,11 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     @Override
     public void success(ArrayList<RetailerLocation> response, String status) {
         alRetailerLocation = response;
+        for (RetailerLocation location:alRetailerLocation){
+            if(ids.contains(location.getId())){
+                location.setSelected(true);
+            }
+        }
     }
 
     Dialog locationDlg = null;
@@ -597,7 +728,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             locationDlg.dismiss();
             locationDlg = null;
         }
-        locationDlg = new Dialog(ActAddDealsOftheDay.this);
+        locationDlg = new Dialog(EditOfferActivity.this);
         locationDlg.setContentView(R.layout.store_location_dlg);
         locationDlg.setTitle("");
         rvStoreLocation = locationDlg.findViewById(R.id.rvStoreLocation);
@@ -607,11 +738,11 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         searchView.setOnQueryTextListener(this);
 */
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(ActAddDealsOftheDay.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(EditOfferActivity.this);
         rvStoreLocation.setLayoutManager(mLayoutManager);
         rvStoreLocation.setItemAnimator(new DefaultItemAnimator());
 
-        locationAdapter = new LocationAdapter(ActAddDealsOftheDay.this, alRetailerLocation, this);
+        locationAdapter = new LocationAdapter(EditOfferActivity.this, alRetailerLocation, this);
         rvStoreLocation.setAdapter(locationAdapter);
 
 

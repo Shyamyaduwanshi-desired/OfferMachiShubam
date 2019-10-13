@@ -597,6 +597,11 @@ import static android.app.Activity.RESULT_OK;
      }
 
      @Override
+     public void failureBrand() {
+
+     }
+
+     @Override
      public void onRequestPermissionsResult(int requestCode, final String[] permissions, int[] grantResults) {
          super.onRequestPermissionsResult(requestCode, permissions, grantResults);
          if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {

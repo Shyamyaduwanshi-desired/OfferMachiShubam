@@ -20,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -198,6 +200,15 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
         try {
             LayoutInflater li = LayoutInflater.from(ActRetalierPushOffer.this);
             View confirmDialog = li.inflate(R.layout.dialog_followers, null);
+            ((CheckBox)confirmDialog.findViewById(R.id.selectAll)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
+                        multiAdapter.selectAll();
+                    else
+                        multiAdapter.unSelectAll();
+                }
+            });
             RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
             Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
             recyclerView.setHasFixedSize(true);

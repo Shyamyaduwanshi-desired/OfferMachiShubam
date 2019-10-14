@@ -188,6 +188,39 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Locations :"
+                    android:layout_weight=".6"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="19dp" />
+                <TextView
+                    android:id="@+id/storeLocations"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"
+                    android:textColor="@color/blue"
+                    android:textSize="19dp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+        </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -265,6 +298,19 @@
                 android:layout_height="35dp"
                 android:background="@drawable/delate_button"
                 android:text="Delete"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/coupon_edit_button"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/delate_button"
+                android:text="Edit"
                 android:textSize="18dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"

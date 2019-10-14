@@ -73,6 +73,7 @@ public class TypeBrandCategoryPresenter {
                         typeBrandCategory.successbrand(brandname);
 
                     } else if (status == 404) {
+                        typeBrandCategory.failureBrand();
                         typeBrandCategory.error(reader.getString("message"));
                     }
                 } catch (JSONException e) {
@@ -111,6 +112,8 @@ public class TypeBrandCategoryPresenter {
         void error(String response);
 
         void fail(String response);
+
+        void failureBrand();
     }
 
     public void sentRequest(final String userId) {

@@ -15,6 +15,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -201,8 +202,12 @@ RelativeLayout rlFilter,rlSortBy;
 
     @Override
     public void followsuccess(String response) {
+        if(TextUtils.isEmpty(Catid)){
+            CallAPI(1);
+        }else{
+            CallAPI(3);
+        }
 
-        CallAPI(1);
 
 //        if (getActivity()!=null) {
 //            if (isNetworkConnected()) {

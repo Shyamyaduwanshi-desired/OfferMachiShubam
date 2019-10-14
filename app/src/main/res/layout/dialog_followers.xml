@@ -23,7 +23,11 @@
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="?android:attr/listDivider" />
-
+<CheckBox
+    android:id="@+id/selectAll"
+    android:layout_width="wrap_content"
+    android:text="Select All"
+    android:layout_height="wrap_content" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewrate"
             android:layout_width="match_parent"

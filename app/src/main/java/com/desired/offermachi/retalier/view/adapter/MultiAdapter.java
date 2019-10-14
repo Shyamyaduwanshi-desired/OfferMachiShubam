@@ -55,6 +55,18 @@ public class MultiAdapter extends RecyclerView.Adapter<MultiAdapter.MultiViewHol
         return followerModels.size();
     }
 
+    public void selectAll() {
+        for (FollowerModel fm:followerModels) {
+            fm.setChecked(true);
+        }
+        notifyDataSetChanged();
+    }
+    public void unSelectAll() {
+        for (FollowerModel fm:followerModels) {
+            fm.setChecked(false);
+        }
+        notifyDataSetChanged();
+    }
     public static class MultiViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textView,textViewid;

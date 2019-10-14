@@ -263,7 +263,10 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     public void success(ArrayList<NotificationModel> response,int totalRecords,int totalPages) {
 //        arNoti.clear();
 //        arNoti=response;
-
+        int pos=0;
+        if(categoryrecycle.getLayoutManager()!=null){
+            pos = ((LinearLayoutManager)categoryrecycle.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+        }
         if(pagNo==1) {
             arNoti.clear();
             arNoti=response;
@@ -274,7 +277,9 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
 
         customerNotificationAdapter = new CustomerNotificationAdapter(arNoti,NotificationActivity.this,this);
         categoryrecycle.setAdapter(customerNotificationAdapter);
-
+        if(arNoti.size()>0) {
+            categoryrecycle.scrollToPosition(pos);
+        }
         if(totalPages>=1&&pagNo<totalPages)
         {
             tvLoadMore.setVisibility(View.VISIBLE);

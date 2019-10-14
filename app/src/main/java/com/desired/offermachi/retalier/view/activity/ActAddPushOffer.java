@@ -206,6 +206,8 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
                     } else {
                         Toast.makeText(ActAddPushOffer.this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
                     }
+                }else{
+                    failureBrand();
                 }
             }
 
@@ -500,7 +502,13 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         brandAdapter = new BrandAdapter(this, response);
         brandspinner.setAdapter(brandAdapter);
     }
-
+    @Override
+    public void failureBrand() {
+        ArrayList<BrandModel> tmp = new ArrayList<BrandModel>();
+        tmp.add(new BrandModel("0","Select Brand",""));
+        brandAdapter = new BrandAdapter(this, tmp);
+        brandspinner.setAdapter(brandAdapter);
+    }
     @Override
     public void successcategory(ArrayList<CategoryModel> response) {
         categoryAdapter = new CategoryAdapter(this, response);

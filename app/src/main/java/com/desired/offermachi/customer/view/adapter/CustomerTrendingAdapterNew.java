@@ -60,7 +60,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     @Override
     public CustomerTrendingAdapterNew.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                       int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adpter_home_offer_new, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.adpter_home_offer_new, parent, false);
         CustomerTrendingAdapterNew.MyViewHolder myViewHolder = new CustomerTrendingAdapterNew.MyViewHolder(view);
         return myViewHolder;
     }
@@ -87,8 +87,10 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
         if(selectCategoryModel.getOfferImage().equals("")){
         }else{
-            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+//            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
+//                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+
+            Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
 
 
@@ -97,22 +99,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         }else{
             holder.likeimg.setImageResource(R.drawable.heart);
         }
-
-
-//
-//
-////        holder.ivLikeBtn.setOnTouchListener(null);
-//        if (selectCategoryModel.getOfferfav().equals("1")){
-//            holder.likeimg.setImageResource(R.drawable.ic_like);
-////            holder.ivLikeBtn.setLikeIcon(R.drawable.ic_like);
-////            holder.ivLikeBtn.setCurrentlyLiked(true);
-//        }else{
-//            holder.likeimg.setImageResource(R.drawable.heart);
-////            holder.ivLikeBtn.setUnlikeIcon(R.drawable.heart);
-////            holder.ivLikeBtn.setCurrentlyLiked(false);
-//        }
-//
-
 
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
             holder.productbutton.setText("View Coupon Code");//View Coupon Code

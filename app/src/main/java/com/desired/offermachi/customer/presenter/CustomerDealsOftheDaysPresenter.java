@@ -143,6 +143,9 @@ public class CustomerDealsOftheDaysPresenter {
                 params.put("user_id", userid);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 return params;
             }
         };
@@ -343,6 +346,8 @@ public class CustomerDealsOftheDaysPresenter {
                 params.put("category_ids", catid);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 return params;
             }
         };
@@ -431,6 +436,8 @@ public class CustomerDealsOftheDaysPresenter {
                 params.put("sort_by", status);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 return params;
             }
         };

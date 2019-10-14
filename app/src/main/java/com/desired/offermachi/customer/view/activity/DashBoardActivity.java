@@ -17,6 +17,7 @@ package com.desired.offermachi.customer.view.activity;
         import android.net.Uri;
         import android.os.Build;
         import android.os.Bundle;
+        import android.provider.MediaStore;
         import android.provider.Settings;
         import android.support.annotation.NonNull;
         import android.support.design.widget.FloatingActionButton;
@@ -39,6 +40,8 @@ package com.desired.offermachi.customer.view.activity;
         import android.widget.CompoundButton;
         import android.widget.ImageView;
         import android.widget.LinearLayout;
+        import android.widget.RadioButton;
+        import android.widget.RadioGroup;
         import android.widget.RelativeLayout;
         import android.widget.Switch;
         import android.widget.TextView;
@@ -153,7 +156,9 @@ public class DashBoardActivity extends AppCompatActivity
 
         lati= UserSharedPrefManager.GetLat(this);
         longi= UserSharedPrefManager.GetLong(this);
+      String distances= UserSharedPrefManager.GetDistance(this);
 
+        Toast.makeText(this, "lati= "+lati+" longi= "+longi+" distances= "+distances, Toast.LENGTH_SHORT).show();
 
         String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
         if (pos.equals("1")) {
@@ -977,6 +982,9 @@ public class DashBoardActivity extends AppCompatActivity
     LinearLayout lyCurrLocation;
     boolean clickFlag=false;
     Button btOkay;
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    String sDistance="1";
     public void DialogLocation()
     {
         if(DlgLoc!=null)
@@ -984,7 +992,7 @@ public class DashBoardActivity extends AppCompatActivity
             DlgLoc.dismiss();
             DlgLoc=null;
         }
-        DlgLoc = new Dialog(this);
+        DlgLoc = new Dialog(DashBoardActivity.this);
         DlgLoc.setContentView(R.layout.dialog_select_location);
         DlgLoc.setTitle("Select your Location");
 
@@ -992,6 +1000,14 @@ public class DashBoardActivity extends AppCompatActivity
         RelativeLayout rlCurrent=(RelativeLayout)DlgLoc.findViewById(R.id.rl_current_location);
 
         RelativeLayout rlOther=(RelativeLayout)DlgLoc.findViewById(R.id.rl_other);
+
+        radioGroup = (RadioGroup)DlgLoc.findViewById(R.id.rg_location_distance);
+
+        RadioButton  rb1 = (RadioButton)DlgLoc.findViewById(R.id.rb_one_km);
+        RadioButton rb2 = (RadioButton)DlgLoc.findViewById(R.id.rb_two_km);
+        RadioButton rb5 = (RadioButton)DlgLoc.findViewById(R.id.rb_five_km);
+        RadioButton rb10 = (RadioButton)DlgLoc.findViewById(R.id.rb_ten_km);
+
         ImageView cancle=(ImageView)DlgLoc.findViewById(R.id.cancle_img_id);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1010,42 +1026,66 @@ public class DashBoardActivity extends AppCompatActivity
         if(locationProvider!=null) {
             locationProvider.startTrackingLocation();
         }
-//        switch (diff)
-//        {
-//            case "1":
-//                String lati= UserSharedPrefManager.GetLat(this);
-//                String longi= UserSharedPrefManager.GetLong(this);
-//                sCurrentLocation= UserSharedPrefManager.GetLocNm(this);
-//                break;
-//            case "2":
-//
-//                if(locationProvider!=null) {
-//                    locationProvider.startTrackingLocation();
-//                }
-//                break;
-//        }
 
-        rlCurrent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        String distances= UserSharedPrefManager.GetDistance(this);
+        switch (distances)
+        {
+            case "1":
+                rb1.setChecked(true);
+                break;
+            case "2":
+                rb2.setChecked(true);
+                break;
+             case "5":
+                 rb5.setChecked(true);
+                break;
+             case "10":
+                 rb10.setChecked(true);
+                break;
+                default:
+                    rb1.setChecked(true);
+                    break;
+
+        }
+
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId)
+            {
+                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this,"1");
                 checkFlag=true;
                 clickFlag=true;
+                SetDistance();
                 if(locationProvider!=null) {
                     locationProvider.startTrackingLocation();
                 }
                 DlgLoc.dismiss();
-
-//                getLocation();
-//                tvCurloc.setText(sCurrentLocation);
-//                lyCurrLocation.setVisibility(View.VISIBLE);
             }
-
         });
+
+//        rlCurrent.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+////                checkFlag=true;
+////                clickFlag=true;
+////                SetDistance();
+////                if(locationProvider!=null) {
+////                    locationProvider.startTrackingLocation();
+////                }
+////                DlgLoc.dismiss();
+//            }
+//
+//        });
         rlOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DlgLoc.dismiss();
+
+                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this,"2");
+                SetDistance();
                 startAutocompleteActivity();
+                DlgLoc.dismiss();
             }
 
         });
@@ -1061,11 +1101,37 @@ public class DashBoardActivity extends AppCompatActivity
             }
 
         });
-
         DlgLoc.show();
 
     }
 
+    public void SetDistance()
+    {
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+        // find the radiobutton by returned id
+        radioButton = (RadioButton)DlgLoc.findViewById(selectedId);
+//        Toast.makeText(DashBoardActivity.this,
+//                "You are seeing arround "+radioButton.getText(), Toast.LENGTH_SHORT).show();
+        switch (radioButton.getText().toString())
+        {
+            case "1 Km":
+                sDistance="1";
+                break;
+            case "2 Km":
+                sDistance="2";
+                break;
+            case "5 Km":
+                sDistance="5";
+                break;
+            case "10 Km":
+                sDistance="10";
+                break;
+        }
+        Toast.makeText(DashBoardActivity.this,
+                "km= "+sDistance, Toast.LENGTH_SHORT).show();
+    }
 //for current location
 /*void getLocation() {
     try {
@@ -1136,11 +1202,7 @@ public class DashBoardActivity extends AppCompatActivity
 
     public void RefreshLocWithHomeView(int diff)
     {
-        UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
-
-//        if (user.getSmartShopping().equals("0"))
-//        {
-
+        UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation,sDistance);//static
         smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
         dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
         couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -1160,22 +1222,9 @@ public class DashBoardActivity extends AppCompatActivity
         if(locationProvider!=null) {
             locationProvider.stopTrackingLocation();
         }
-
-//        }else{
-//
-//        }
     }
 
-    /*
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-        @Override
-        public void onProviderEnabled(String provider) {
-        }
-        @Override
-        public void onProviderDisabled(String provider) {
-        }*/
+
     private void startAutocompleteActivity() {
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.RATING, Place.Field.ADDRESS,
                 Place.Field.TYPES, Place.Field.OPENING_HOURS, Place.Field.USER_RATINGS_TOTAL,

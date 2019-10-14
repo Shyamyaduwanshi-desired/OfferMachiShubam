@@ -71,8 +71,11 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
         holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
         if(selectCategoryModel.getOfferImage().equals("")){
         }else{
-            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+//            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
+//                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+//
+            Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
+
         }
        /* holder.productshare.setText();*/
 
@@ -120,8 +123,10 @@ public class CustomerTrendingAdapter extends RecyclerView.Adapter<CustomerTrendi
                     ImageView image=(ImageView)dialog.findViewById(R.id.qr_code_img_id);
                     if(selectCategoryModel.getOfferqrcodeimage().equals("")){
                     }else{
-                        Picasso.get().load(selectCategoryModel.getOfferqrcodeimage()).networkPolicy(NetworkPolicy.NO_CACHE)
-                                .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(image);
+//                        Picasso.get().load(selectCategoryModel.getOfferqrcodeimage()).networkPolicy(NetworkPolicy.NO_CACHE)
+//                                .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(image);
+
+                        Picasso.get().load(selectCategoryModel.getOfferqrcodeimage()).placeholder(R.drawable.ic_broken).into(image);
                     }
                     Button button=(Button)dialog.findViewById(R.id.coupon_button_apply_id);
                     button.setText(selectCategoryModel.getCoupon_code());

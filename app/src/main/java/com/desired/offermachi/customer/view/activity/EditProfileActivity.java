@@ -37,6 +37,8 @@ import com.desired.offermachi.customer.presenter.CustomerUpdateProfilePresenter;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.presenter.ProfileImagePresenter;
 import com.desired.offermachi.retalier.view.activity.RetalierProfileActivity;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -162,7 +164,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         if (user.getProfile().equals("null")){
 
         }else{
-            Picasso.get().load(user.getProfile()).into(imgProfileAvatar);
+//            Picasso.get().load(user.getProfile()).into(imgProfileAvatar);
+            Picasso.get().load(user.getProfile()).networkPolicy(NetworkPolicy.NO_CACHE)
+                    .memoryPolicy(MemoryPolicy.NO_CACHE).into(imgProfileAvatar);
         }
         if (user.getGender().equals("male")){
             male.setBackgroundResource(R.drawable.maleblue);

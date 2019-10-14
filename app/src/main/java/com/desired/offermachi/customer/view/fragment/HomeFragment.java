@@ -145,10 +145,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 //        selectCategoryModelList=new ArrayList<>();
         presenter = new HomePresenter(getActivity(), HomeFragment.this);
         searchPresenter = new SearchPresenter(getActivity(), HomeFragment.this);
-       /* Intent intent=getActivity().getIntent();
-        catid=intent.getStringExtra("catid");
-        catname=intent.getStringExtra("catname");
-        catofferimage=intent.getStringExtra("catofferimage");*/
         TextView trendingdeals=(TextView)view.findViewById(R.id.dealsoftheday_text_id);
         Typeface content2= ResourcesCompat.getFont(getContext(), R.font.ralewaybold);
         trendingdeals.setTypeface(content2);
@@ -171,13 +167,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         categoryid.setText(catname);
         rlCategory.setOnClickListener(this);
 
-
-//        searchView = view.findViewById(R.id.search);
-//        searchView.setOnClickListener(this);
-
         actv = view.findViewById(R.id.autoCompleteTextView1);
-//       /* String[]*/ arrayAutoCompleteText = getResources().getStringArray(R.array.list_of_location);
-
         actv.setThreshold(1);
         actv.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
@@ -193,22 +183,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
                     }
                 });
-
-        //categoryrecyle
-//        categoryrecycle=view.findViewById(R.id.categoryrecycleview);
-//        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-//        categoryrecycle.setLayoutManager(gridLayoutManager1);
-//        categoryrecycle.setItemAnimator(new DefaultItemAnimator());
-//        categoryrecycle.setNestedScrollingEnabled(false);
-
         //trendingrecycle
 
         trendingrecycle=view.findViewById(R.id.trendingrecycleview);
-
-//        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 2, LinearLayoutManager.VERTICAL, false);
-//        trendingrecycle.setLayoutManager(gridLayoutManager2);
-
-
 
         trendingrecycle.setHasFixedSize(true);
         trendingrecycle.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -239,12 +216,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(bannerimage);
 
         }
-
-        /*if(catofferimage.equals("")){
-        }else{
-            Picasso.get().load(catofferimage).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(bannerimage);
-        }*/
 
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
@@ -314,6 +285,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             String status = intent.getStringExtra("followstatus");
             String storeid = intent.getStringExtra("storeid");
             presenter.AddStoreFollow(idholder,storeid,status);
+//            presenter.GetAllMultipleCateList(catid, idholder);
             presenter.GetAllListSingle(catid, idholder);
         }
     };

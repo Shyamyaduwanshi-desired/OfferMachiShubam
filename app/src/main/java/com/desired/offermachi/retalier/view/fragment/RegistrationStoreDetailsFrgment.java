@@ -92,7 +92,7 @@ import static android.app.Activity.RESULT_OK;
      String name, mobile, email, password;
      private String/* picture = "",*/pictureLogo = "";
      private File file, compressedImage;
-     ImageView imagestore, ivStoreLogo;
+     ImageView imagestore/*, ivStoreLogo*/;
 //     RelativeLayout imagepick, rlStoreLogo;
      RelativeLayout imagepick , rlStoreLogo;
      private String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -128,7 +128,7 @@ import static android.app.Activity.RESULT_OK;
      int diffLogoPicture = 1;
      ArrayList<ImageBean> arImageNm = new ArrayList<>();
      RecyclerView rvImage;
-     String allImagNm = "";
+     String allImagNm = "",allAddressId="";
 
      public RegistrationStoreDetailsFrgment() {
      }
@@ -241,28 +241,13 @@ import static android.app.Activity.RESULT_OK;
          aboutstore = (EditText) view.findViewById(R.id.about_store_name_id);
          imagestore = view.findViewById(R.id.iv_store_logo);
 
-
-
-
-
-
-
-         ivStoreLogo = view.findViewById(R.id.img_camera);
+//         ivStoreLogo = view.findViewById(R.id.img_camera);//img_camera_store_logo
          imagepick=view.findViewById(R.id.pickly);
          imagepick.setOnClickListener(this);
-
-
-
-
-
-
-
 
          rlStoreLogo = view.findViewById(R.id.rl_store_logo);
          registerbutton = (Button) view.findViewById(R.id.registerbutton_button_id);
          registerbutton.setOnClickListener(this);
-
-
 
          rlStoreLogo.setOnClickListener(this);
          tvMultiLocation.setOnClickListener(this);
@@ -305,7 +290,6 @@ import static android.app.Activity.RESULT_OK;
                  city = txccityNm.getText().toString();
                  String cityId = txCityid.getText().toString();
                  cityPresenter.GetLocationViaCity(cityId);
-
              }
 
              @Override
@@ -313,23 +297,6 @@ import static android.app.Activity.RESULT_OK;
 
              }
          });
-
-//        spLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                //   Select Provider
-//                TextView txCityid = (TextView) view.findViewById(R.id.tv_loc_id);
-//                TextView txccityNm = (TextView) view.findViewById(R.id.tv_loc_nm);
-//                TextView tvOkay = (TextView) view.findViewById(R.id.tv_okay);
-//                tvOkay.setVisibility(View.GONE);
-////                sLocation = txccityNm.getText().toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
 
          if (isNetworkConnected()) {
              typeBrandCategoryPresenter.sentRequestRegistration();
@@ -434,6 +401,7 @@ import static android.app.Activity.RESULT_OK;
                  openGallery();
              }
          } else if (v == rlStoreLogo) {//for logo
+             pictureLogo="";
              diffLogoPicture = 1;
              if (Build.VERSION.SDK_INT >= 23) {
                  if (isStoragePermissionGranted()) {
@@ -451,8 +419,6 @@ import static android.app.Activity.RESULT_OK;
              Intent intent = new Intent(getActivity(), PickLocation.class);
              startActivityForResult(intent, 120);
          }
-
-
      }
 
      private void Registraionvalid() {
@@ -505,21 +471,13 @@ import static android.app.Activity.RESULT_OK;
                  for (int i = 0; i < arImageNm.size(); i++) {
                      JSONObject locObj = new JSONObject();
                      try {
-
-
                          locObj.put("banner_image", arImageNm.get(i).getData());
-                         locObj.put("banner_image_name", arImageNm.get(i).getName());
-
-
-
-
-
+                         locObj.put("banner_image_name",arImageNm.get(i).getName());
                          jsonArrayImage.put(locObj);
-
                          if (TextUtils.isEmpty(allImagNm)) {
-                             allImagNm = arImageNm.get(i).getName();
+                             allImagNm = arImageNm.get(i).getName().trim();
                          } else {
-                             allImagNm = allImagNm + "," + arImageNm.get(i).getName();
+                             allImagNm = allImagNm + "," + arImageNm.get(i).getName().trim();
                          }
 
                      } catch (JSONException e) {
@@ -531,42 +489,33 @@ import static android.app.Activity.RESULT_OK;
                  JSONArray jsonArrayLocation = new JSONArray();
 
                  for (int i = 0; i < arLocDetail.size(); i++) {
+
+                     if (TextUtils.isEmpty(allAddressId)) {//
+                         allAddressId = arLocDetail.get(i).getLocId().trim();
+                     } else {
+                         allAddressId = allAddressId + "," + arLocDetail.get(i).getLocId().trim();
+                     }
+
                      JSONObject locObj = new JSONObject();
                      try {
-                         locObj.put("locality_id", arLocDetail.get(i).getLocId());
-                         locObj.put("address", arLocDetail.get(i).getAddress());
-                         locObj.put("persion_name", arLocDetail.get(i).getPersonNm());
-                         locObj.put("persion_contact", arLocDetail.get(i).getPhoneNumber());
-
+                         locObj.put("locality_id", arLocDetail.get(i).getLocId().trim());
+                         locObj.put("address", arLocDetail.get(i).getAddress().trim());
+                         locObj.put("persion_name", arLocDetail.get(i).getPersonNm().trim());
+                         locObj.put("persion_contact", arLocDetail.get(i).getPhoneNumber().trim());
+                         locObj.put("latitude", arLocDetail.get(i).getsLocLat().trim());
+                         locObj.put("longitude", arLocDetail.get(i).getsLocLong().trim());
                          jsonArrayLocation.put(locObj);
-
-
                      } catch (JSONException e) {
 
                          e.printStackTrace();
                      }
                  }
-
-
-//                if (isNetworkConnected()) {//for register
-
+                 //for register
                  Log.e("", "" + name + "" + mobile + "" + email + "" + password + "" + shop_name + "" + shop_contact_number + "" + address + "" + city + "" + pictureLogo + "" + shopdays + "" + shopopentime + "" + shopclosetime + "" + about_store + "" + android_id + "" + lati + "" + longi + "" + categoryid);
-                 Log.e("", "Image json array= " + jsonArrayImage.toString() + " jsonArrayLocation= " + jsonArrayLocation);
+                 Log.e("", "Image json array= " + jsonArrayImage.toString() + " jsonArrayLocation= " + jsonArrayLocation+" allAddressId= "+allAddressId);
 
-
-                 presenter.Registrtion(name, mobile, email, password, shop_name, shop_contact_number, address, city, pictureLogo, shopdays, shopopentime, shopclosetime, about_store, android_id, lati, longi, categoryid, jsonArrayImage, jsonArrayLocation);
-//
-
-
-//                        presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id,lati,longi,categoryid);
-//                }
-
-
-//                GeocodingLocation locationAddress = new GeocodingLocation();
-//                locationAddress.getAddressFromLocation(address, getContext(), new GeocoderHandler());
-                 //  presenter.sentRequest(name,mobile,email,password,shop_name,shop_contact_number,address,city,picture,shopdays,shopopentime,shopclosetime,about_store,android_id);
+                 presenter.Registrtion(name, mobile, email, password, shop_name, shop_contact_number, address, city, pictureLogo, shopdays, shopopentime, shopclosetime, about_store, android_id, lati, longi, categoryid, jsonArrayImage, jsonArrayLocation,allAddressId);
              }
-
          }
 
      }
@@ -684,10 +633,20 @@ import static android.app.Activity.RESULT_OK;
              } catch (IOException e) {
                  e.printStackTrace();
              }
-         }else if(reqCode==120){
+         }
+         else if(reqCode==120){
              lati = data.getStringExtra("loc_lati");
              longi = data.getStringExtra("loc_longi");
              storeaddress.setText(data.getStringExtra("loc_name"));
+
+         }else if(reqCode==130){
+//             lati = data.getStringExtra("loc_lati");
+//             longi = data.getStringExtra("loc_longi");
+Log.e("","lat= "+data.getStringExtra("loc_lati")+" long= "+data.getStringExtra("loc_longi"));
+             arLocDetail.get(postionApt).setAddress(data.getStringExtra("loc_name"));
+             arLocDetail.get(postionApt).setsLocLat(data.getStringExtra("loc_lati"));
+             arLocDetail.get(postionApt).setsLocLong(data.getStringExtra("loc_longi"));
+             mAdapter.notifyDataSetChanged();
          }
      }
 
@@ -708,11 +667,12 @@ import static android.app.Activity.RESULT_OK;
              {
                  case 1://for store logo
                      pictureLogo = getEncoded64(bitmap);
-                     ivStoreLogo.setImageBitmap(bitmap);
+//                     ivStoreLogo.setImageBitmap(bitmap);
+                     imagestore.setImageBitmap(bitmap);
                      break;
                  case 2://for store banner
 //                     picture = getEncoded64(bitmap);
-                     imagestore.setImageBitmap(bitmap);
+
                      String fileNm = file.getName();
                      if(arImageNm.size()<5) {
 //                       arImage.add(filePath);
@@ -1235,7 +1195,7 @@ import static android.app.Activity.RESULT_OK;
 
 
 //for multiple location
-
+int postionApt=0;
     public class StoreLocationDetailsAdapter extends RecyclerView.Adapter<StoreLocationDetailsAdapter.MyViewHolder> {
         private List<AddStoreLocBean> list;
         private Context context;
@@ -1267,6 +1227,13 @@ import static android.app.Activity.RESULT_OK;
             holder.etPerNm.setText(list.get(position).getPersonNm());
             holder.etAddress.setText(list.get(position).getAddress());
             holder.etPhoneNumber.setText(list.get(position).getPhoneNumber());
+
+            holder.etAddress.setKeyListener(null);
+            holder.etAddress.setFocusable(false);
+            holder.etAddress.setFocusableInTouchMode(false); // user touches widget on phone with touch screen
+            holder.etAddress.setClickable(true);
+
+
             holder.etPerNm.addTextChangedListener(new TextWatcher() {
 
                 public void onTextChanged(CharSequence s, int start, int before,
@@ -1287,40 +1254,35 @@ import static android.app.Activity.RESULT_OK;
                     arLocDetail.get(position).setPersonNm(s.toString());
                 }
             });
-            holder.etAddress.addTextChangedListener(new TextWatcher() {
 
-                public void onTextChanged(CharSequence s, int start, int before,
-                                          int count) {
-
-                }
-
-
-
-                public void beforeTextChanged(CharSequence s, int start, int count,
-                                              int after) {
-
-                }
-
-                public void afterTextChanged(Editable s) {
-
-                    list.get(position).setAddress(s.toString());
+            holder.etAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    postionApt=position;
+                    Intent intent = new Intent(getActivity(), PickLocation.class);
+                   startActivityForResult(intent, 130);
                 }
             });
+           /* holder.etAddress.addTextChangedListener(new TextWatcher() {
+                public void onTextChanged(CharSequence s, int start, int before,
+                                          int count) {
+                }
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                }
+                public void afterTextChanged(Editable s) {
+                    list.get(position).setAddress(s.toString());
+                }
+            });*/
 
             holder.etPhoneNumber.addTextChangedListener(new TextWatcher() {
 
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
-
                 }
-
-
-
                 public void beforeTextChanged(CharSequence s, int start, int count,
                                               int after) {
-
                 }
-
                 public void afterTextChanged(Editable s) {
 
                     list.get(position).setPhoneNumber(s.toString());
@@ -1351,59 +1313,11 @@ import static android.app.Activity.RESULT_OK;
 
             }
         }
-
-
+//        public interface AddAddressLocClick{
+//            void onAddAddressLocClick(int possition);
+//        }
     }
-//    String uploadBase64="";
-//    String fileNm="";
-    //    ArrayList<String>arImage=new ArrayList<>();
 
-
-
-   /* private void selectcategory (){
-        LayoutInflater li = LayoutInflater.from(getContext());
-        View confirmDialog = li.inflate(R.layout.dialog_followers, null);
-        RecyclerView recyclerView = (RecyclerView) confirmDialog.findViewById(R.id.recyclerViewrate);
-        Button btnsend = (Button) confirmDialog.findViewById(R.id.sendoffer);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        multiAdapter = new MultiAdapter(getContext(),followerModels);
-        recyclerView.setAdapter(multiAdapter);
-        android.app.AlertDialog.Builder alert = new android.app.AlertDialog.Builder(getContext());
-        alert.setView(confirmDialog);
-        alertDialog = alert.create();
-        WindowManager.LayoutParams wmlp =  alertDialog.getWindow().getAttributes();
-        wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        wmlp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        alertDialog.getWindow().setAttributes(wmlp);
-        alertDialog.show();
-        btnsend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (multiAdapter.getSelected().size() > 0) {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    for (int i = 0; i < multiAdapter.getSelected().size(); i++) {
-                        stringBuilder.append(multiAdapter.getSelected().get(i).getId());
-                        stringBuilder.append(",");
-                    }
-                    String followerid=stringBuilder.toString();
-                    if (isNetworkConnected()) {
-                        followerpresenter.SendOffer(idholder,PushOfferid,followerid);
-                        //  Toast.makeText(RetalierPushActivity.this, ""+followerid, Toast.LENGTH_SHORT).show();
-                        alertDialog.dismiss();
-                    }  else {
-                        alertDialog.dismiss();
-                        showAlert("Please connect to internet.", R.style.DialogAnimation);
-                    }
-
-                } else {
-                    Toast.makeText(getContext(), "No Selection", Toast.LENGTH_SHORT).show();
-                    alertDialog.dismiss();
-                }
-            }
-        });
-    }*/
 }
 
 

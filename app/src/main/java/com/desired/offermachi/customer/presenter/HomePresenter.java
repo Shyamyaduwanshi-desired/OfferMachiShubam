@@ -61,7 +61,7 @@ public class HomePresenter {
             progress.setCancelable(false);
             showpDialog();
         }
-        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
+//        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
         final ArrayList<SelectCategoryModel> list2 = new ArrayList<>();
         final ArrayList<StoreModel> list3 = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_home_page_offers_data", new Response.Listener<String>() {
@@ -77,42 +77,44 @@ public class HomePresenter {
                     if (status == 200) {
                         String result = reader.getString("result");
                         JSONObject jsonObject = new JSONObject(result);
-                        String catofferdata = jsonObject.getString("cat_offer_data");
+//                        String catofferdata = jsonObject.getString("cat_offer_data");
                         String all_offer_data = jsonObject.getString("all_offer_data");
                         String all_store_data = jsonObject.getString("all_store_data");
-                        JSONArray jsonArray = new JSONArray(catofferdata);
-                        JSONObject object;
-                        for (int count = 0; count < jsonArray.length(); count++) {
-                            object = jsonArray.getJSONObject(count);
-                            SelectCategoryModel selectCategoryModel=new SelectCategoryModel(
-                                    object.getString("id"),
-                                    object.getString("offer_id"),
-                                    object.getString("offer_title"),
-                                    object.getString("offer_title_slug"),
-                                    object.getString("offer_category"),
-                                    object.getString("sub_category"),
-                                    object.getString("offer_type"),
-                                    object.getString("offer_type_name"),
-                                    object.getString("offer_value"),
-                                    object.getString("offer_details"),
-                                    object.getString("start_date"),
-                                    object.getString("end_date"),
-                                    object.getString("alltime"),
-                                    object.getString("description"),
-                                    object.getString("coupon_code"),
-                                    object.getString("posted_by"),
-                                    object.getString("status"),
-                                    object.getString("offer_brand_name"),
-                                    object.getString("favourite_status"),
-                                    object.getString("offer_image"),
-                                    object.getString("qr_code_image"),
-                                    object.getString("coupon_code_status"),
-                                    object.getString("shop_logo")
 
-                            );
-                            list.add(selectCategoryModel);
-                        }
-                        homeList.categorysuccess(list);
+//                        JSONArray jsonArray = new JSONArray(catofferdata);
+//                        JSONObject object;
+//                        for (int count = 0; count < jsonArray.length(); count++) {
+//                            object = jsonArray.getJSONObject(count);
+//                            SelectCategoryModel selectCategoryModel=new SelectCategoryModel(
+//                                    object.getString("id"),
+//                                    object.getString("offer_id"),
+//                                    object.getString("offer_title"),
+//                                    object.getString("offer_title_slug"),
+//                                    object.getString("offer_category"),
+//                                    object.getString("sub_category"),
+//                                    object.getString("offer_type"),
+//                                    object.getString("offer_type_name"),
+//                                    object.getString("offer_value"),
+//                                    object.getString("offer_details"),
+//                                    object.getString("start_date"),
+//                                    object.getString("end_date"),
+//                                    object.getString("alltime"),
+//                                    object.getString("description"),
+//                                    object.getString("coupon_code"),
+//                                    object.getString("posted_by"),
+//                                    object.getString("status"),
+//                                    object.getString("offer_brand_name"),
+//                                    object.getString("favourite_status"),
+//                                    object.getString("offer_image"),
+//                                    object.getString("qr_code_image"),
+//                                    object.getString("coupon_code_status"),
+//                                    object.getString("shop_logo")
+//
+//                            );
+//                            list.add(selectCategoryModel);
+//                        }
+//                        homeList.categorysuccess(list);
+
 
                         JSONArray jsonArray2 = new JSONArray(all_offer_data);
                         JSONObject object2;
@@ -211,7 +213,7 @@ public class HomePresenter {
             progress.setCancelable(false);
             showpDialog();
 
-        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
+//        final ArrayList<SelectCategoryModel> list = new ArrayList<>();
         final ArrayList<SelectCategoryModel> list2 = new ArrayList<>();
         final ArrayList<StoreModel> list3 = new ArrayList<>();//customer_home_page_offers_data_bycategoryid,customer_home_page_offers_data_bycategoryid2
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "customer_home_page_offers_data_bycategoryid2", new Response.Listener<String>() {
@@ -263,7 +265,7 @@ public class HomePresenter {
 //                            list.add(selectCategoryModel);
 //                        }
 
-                        homeList.categorysuccess(list);
+//                        homeList.categorysuccess(list);
 
                         JSONArray jsonArray2 = new JSONArray(catofferdata);
                         JSONObject object2;
@@ -343,6 +345,8 @@ public class HomePresenter {
 
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
 //                params.put("dist", "500");
                 Log.e("","Input param= "+params.toString());
                 return params;

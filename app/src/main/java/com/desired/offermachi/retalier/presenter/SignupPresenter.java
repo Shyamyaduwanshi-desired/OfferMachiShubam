@@ -42,7 +42,7 @@ public class SignupPresenter {
         void fail(String response);
     }
 
-    public void sentRequest(final String name, final String mobile, final String email,final String password, final String shop_name, final String shop_contact_number, final String address, final String city
+  /*  public void sentRequest(final String name, final String mobile, final String email,final String password, final String shop_name, final String shop_contact_number, final String address, final String city
     , final String shop_logo, final String shop_day_hours, final String opening_time, final String closing_time, final String about_store,final String devicekey,final String lati,final String longi,final String category) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Please Wait..");
@@ -112,10 +112,10 @@ public class SignupPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
-
+*/
     public void Registrtion(final String name, final String mobile, final String email, final String password, final String shop_name, final String shop_contact_number, final String address, final String city
     , final String shop_logo, final String shop_day_hours, final String opening_time, final String closing_time, final String about_store, final String devicekey, final String lati, final String longi, final String category, JSONArray jsonArrayBannerImage, JSONArray jsonArrayLocation
-
+,final String allAddressLocId
     ) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Please Wait..");
@@ -178,8 +178,9 @@ public class SignupPresenter {
                 params.put("latitude", lati);
                 params.put("longitude", longi);
                 params.put("shop_category", category);
-                params.put("store_banners", String.valueOf(jsonArrayBannerImage));
-                params.put("store_locations", String.valueOf(jsonArrayLocation));
+                params.put("store_banners", jsonArrayBannerImage.toString());//String.valueOf(jsonArrayBannerImage)
+                params.put("store_locations", jsonArrayLocation.toString());//String.valueOf(jsonArrayLocation)
+                params.put("locality", allAddressLocId);
 
 Log.e("","SignUp param= "+params.toString());
 

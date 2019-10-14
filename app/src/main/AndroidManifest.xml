@@ -29,8 +29,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        android:hardwareAccelerated="false"
         tools:ignore="GoogleAppIndexingWarning">
+
+
         <!--
+        android:hardwareAccelerated="false" , android:largeHeap="true"
         tools:replace="android:appComponentFactory"-->
         <activity android:name=".customer.view.activity.LocationActivity"/>
         <activity android:name=".customer.view.activity.MainActivity"></activity>

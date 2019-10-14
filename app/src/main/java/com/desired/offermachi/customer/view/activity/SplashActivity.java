@@ -226,8 +226,9 @@ public class SplashActivity extends AppCompatActivity implements LocationListene
            String diff= UserSharedPrefManager.GetCurrentOrOtherLoc(this);
            switch (diff)
            {
-               case "1":
-                   UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation);
+               case "1"://current location
+                   String distances= UserSharedPrefManager.GetDistance(this);
+                   UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation,distances);
                    break;
                case "2":
                    break;

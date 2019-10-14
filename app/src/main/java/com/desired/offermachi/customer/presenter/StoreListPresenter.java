@@ -103,6 +103,8 @@ public class StoreListPresenter {
                 params.put("user_id", userid);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 return params;
             }
         };
@@ -213,6 +215,8 @@ public class StoreListPresenter {
                 params.put("category_id", catid);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 Log.e("","Input param= "+params.toString());
                 return params;
             }
@@ -371,6 +375,8 @@ public class StoreListPresenter {
                 params.put("perpage", "12");
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 Log.e("","Input param= "+params.toString());
                 return params;
             }
@@ -471,6 +477,8 @@ public class StoreListPresenter {
                 params.put("perpage", "12");
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 Log.e("","Input param= "+params.toString());
                 return params;
             }
@@ -564,6 +572,8 @@ public class StoreListPresenter {
                 params.put("perpage", "12");
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 Log.e("","Input param= "+params.toString());
                 return params;
             }

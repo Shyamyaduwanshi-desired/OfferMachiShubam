@@ -38,6 +38,7 @@ public class UserSharedPrefManager {
     private static final  String KEY_CUR_LAT="user_cur_lat";
     private static final  String KEY_CUR_LONG="user_cur_long";
     private static final  String KEY_CUR_LON_NM="user_cur_loc_nm";
+    private static final  String KEY_CUR_DISTANCE="user_cur_distance";
 
 //    private static final  String KEY_OTHER_LAT="user_cur_lat";
 //    private static final  String KEY_OTHER_LONG="user_cur_long";
@@ -189,12 +190,13 @@ public class UserSharedPrefManager {
     }
 
 
-    public static void SaveCurrentLatLongAndLocNm(Context context,String lati,String longi,String locNm) {
+    public static void SaveCurrentLatLongAndLocNm(Context context,String lati,String longi,String locNm,String distance) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_CUR_LAT, lati);
         editor.putString(KEY_CUR_LONG, longi);
         editor.putString(KEY_CUR_LON_NM, locNm);
+        editor.putString(KEY_CUR_DISTANCE, distance);
         editor.apply();
     }
 
@@ -213,15 +215,20 @@ public class UserSharedPrefManager {
         String value=sharedPreferences.getString(KEY_CUR_LON_NM, "");
         return value;
     }
-
-    public static void SaveOtherLatLongAndLocNm(Context context,String lati,String longi,String locNm) {
+    public static String GetDistance(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_CUR_LAT, lati);
-        editor.putString(KEY_CUR_LONG, longi);
-        editor.putString(KEY_CUR_LON_NM, locNm);
-        editor.apply();
+        String value=sharedPreferences.getString(KEY_CUR_DISTANCE, "1");
+        return value;
     }
+
+//    public static void SaveOtherLatLongAndLocNm(Context context,String lati,String longi,String locNm) {
+//        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString(KEY_CUR_LAT, lati);
+//        editor.putString(KEY_CUR_LONG, longi);
+//        editor.putString(KEY_CUR_LON_NM, locNm);
+//        editor.apply();
+//    }
 
  /*   public static String GetOtherLat(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -238,7 +245,7 @@ public class UserSharedPrefManager {
         String value=sharedPreferences.getString(KEY_CUR_LON_NM, "");
         return value;
     }*/
-//current=1,other=2
+////current=1,other=2
     public static void SaveCurrentOrOtherLoc(Context context,String current)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);

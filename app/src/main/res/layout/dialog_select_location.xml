@@ -28,7 +28,7 @@
                 android:layout_height="20dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_facebook_placeholder_for_locate_places_on_maps"
-                />
+                tools:ignore="VectorDrawableCompat" />
             <TextView
                 android:id="@+id/tv_cur_loc"
                 android:textSize="18dp"
@@ -56,7 +56,8 @@
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="0dp"
                 android:layout_toRightOf="@+id/logo"
-                android:src="@drawable/colourerror" />
+                android:src="@drawable/colourerror"
+                tools:ignore="VectorDrawableCompat" />
         </LinearLayout>
 
     </LinearLayout>
@@ -102,13 +103,16 @@
         <RadioGroup
             android:id="@+id/rg_location_distance"
             android:orientation="horizontal"
+            android:padding="@dimen/margin_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
                 android:id="@+id/rb_one_km"
                 android:layout_width="wrap_content"
                 android:text="1 Km"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:checked="true"
+                />
             <RadioButton
                 android:id="@+id/rb_two_km"
                 android:layout_width="wrap_content"
@@ -130,6 +134,7 @@
             android:id="@+id/rl_current_location"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:visibility="gone"
             android:layout_marginLeft="10dp">
             <RelativeLayout
                 android:id="@+id/rl_location"

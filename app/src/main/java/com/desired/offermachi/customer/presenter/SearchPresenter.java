@@ -151,6 +151,8 @@ public class SearchPresenter {
                 params.put("search_text", text);
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
+//                params.put("dist", UserSharedPrefManager.GetDistance(context));
+//                params.put("dist", "1");
                 return params;
             }
         };

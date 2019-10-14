@@ -51,6 +51,7 @@ public class TypeBrandCategoryPresenter {
                     JSONObject reader = new JSONObject(response);
                     int status = reader.getInt("status");
                     if (status == 200) {
+
                         brandname.clear();
                         BrandModel brandModel1=new BrandModel(
                                 "0",
@@ -177,6 +178,7 @@ public class TypeBrandCategoryPresenter {
 
                             offertype.add(offerTypeModel);
                         }
+
                         typeBrandCategory.successtype(offertype);
 
                         JSONArray jsonArray2=new JSONArray(offer_categories);

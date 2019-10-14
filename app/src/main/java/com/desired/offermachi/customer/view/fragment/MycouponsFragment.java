@@ -170,7 +170,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
             RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
             RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
             RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
-            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
+//            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
             rdone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -201,7 +201,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
 
                 }
             });
-            rdfour.setOnClickListener(new View.OnClickListener() {
+            rdthree.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialog.dismiss();

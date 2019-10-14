@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.desired.offermachi.R;
@@ -179,6 +180,8 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
 //            presenter.DealFilter(idholder,Catid);
 //        }
 //    };
+String ShortByStatus="";
+
     @Override
     public void onClick(View v) {
         if (v==rlSortBy){//sortbytext
@@ -186,7 +189,42 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
             final Dialog dialog = new Dialog(getContext());
             dialog.setContentView(R.layout.sort_dialog_activity);
             dialog.setTitle("Custom Dialog");
+            RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
+            RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
+            RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
+            rdone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    ShortByStatus="1";
+//                    String Status="1";
+//                    presenter.ShortBy(idholder,Status);
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
+                }
+            });
+            rdtwo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+//                    String Status="2";
+                    ShortByStatus="2";
+//                    presenter.ShortBy(idholder,Status);
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+            rdthree.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    ShortByStatus="1";
+//                    String Status="3";
+//                    presenter.ShortBy(idholder,Status);
+//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
+
+                }
+            });
             dialog.show();
         }else if (v==rlFilter){//filtertext
             edTxtSearch.setText("");

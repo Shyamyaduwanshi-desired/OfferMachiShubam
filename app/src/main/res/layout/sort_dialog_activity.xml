@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@drawable/s_background"
     android:layout_gravity="center_vertical">
 
     <LinearLayout
@@ -48,7 +48,9 @@
         <RadioGroup
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="vertical">
+          android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
           <RadioButton
               android:id="@+id/rdone"
@@ -68,24 +70,25 @@
               android:buttonTint="@color/blue"
               android:layout_marginTop="20dp"
               android:paddingRight="10dp"
+
               />
-          <RadioButton
-              android:id="@+id/rdtwo"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="right"
-              android:background="@color/white"
-              android:button="@null"
-              android:drawablePadding="30dp"
-              android:drawableRight="@android:drawable/btn_radio"
-              android:text="Popularity"
-              android:textColor="@color/purple"
-              android:textStyle="bold"
-              android:textSize="20dip"
-              android:gravity="center_vertical"
-              android:paddingLeft="20dp"
-              android:paddingRight="10dp"/>
-          <RadioButton
+          <!--<RadioButton-->
+              <!--android:id="@+id/rdtwo"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_gravity="right"-->
+              <!--android:background="@color/white"-->
+              <!--android:button="@null"-->
+              <!--android:drawablePadding="30dp"-->
+              <!--android:drawableRight="@android:drawable/btn_radio"-->
+              <!--android:text="Popularity"-->
+              <!--android:textColor="@color/purple"-->
+              <!--android:textStyle="bold"-->
+              <!--android:textSize="20dip"-->
+              <!--android:gravity="center_vertical"-->
+              <!--android:paddingLeft="20dp"-->
+              <!--android:paddingRight="10dp"/>-->
+          <!--<RadioButton-->
               android:id="@+id/rdthree"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
@@ -100,11 +103,12 @@
               android:textSize="20dip"
               android:gravity="center_vertical"
               android:paddingLeft="20dp"
-              android:paddingRight="10dp"/>
+              android:paddingRight="10dp"
+              android:visibility="gone"/>
 
 
           <RadioButton
-              android:id="@+id/rdfour"
+              android:id="@+id/rdtwo"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_gravity="right"
@@ -112,17 +116,34 @@
               android:button="@null"
               android:drawablePadding="30dp"
               android:drawableRight="@android:drawable/btn_radio"
-              android:text="Z-A"
+              android:text="By Validity"
               android:textColor="@color/purple"
               android:textStyle="bold"
               android:textSize="20dip"
               android:gravity="center_vertical"
               android:paddingLeft="20dp"
-              android:layout_marginBottom="30dp"
               android:paddingRight="10dp"/>
 
-      </RadioGroup>
+            <RadioButton
+                android:id="@+id/rdthree"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@color/white"
+                android:button="@null"
+                android:drawablePadding="30dp"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:text="Popularity"
+                android:textColor="@color/purple"
+                android:textStyle="bold"
+                android:textSize="20dip"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:layout_marginBottom="40dp"/>
 
+
+      </RadioGroup>
     </LinearLayout>
 </LinearLayout>
 </RelativeLayout>

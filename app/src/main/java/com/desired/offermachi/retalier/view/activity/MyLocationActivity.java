@@ -47,7 +47,6 @@ public class MyLocationActivity extends AppCompatActivity implements View.OnClic
 
     String idholder;
     private ArrayList<mylocation_model> mylocation_modelslist;
-
     private ProgressDialog pDialog;
     private static final String ROOT_URL = "http://offermachi.in/api/get_retailer_locationby_reatailer_id";
     RecyclerView recyclerView;

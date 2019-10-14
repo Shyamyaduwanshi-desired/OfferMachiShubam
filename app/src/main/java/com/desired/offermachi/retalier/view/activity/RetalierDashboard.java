@@ -25,6 +25,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
+import com.desired.offermachi.retalier.view.fragment.DasBoardMenuFragment;
 import com.desired.offermachi.retalier.view.fragment.ReatalierHomeFragment;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -51,7 +52,7 @@ public class RetalierDashboard extends AppCompatActivity
 
         FM = getSupportFragmentManager();
         FT = FM.beginTransaction();
-        FT.replace(R.id.screenarearetalier, new ReatalierHomeFragment()).commit();
+        FT.replace(R.id.screenarearetalier, new DasBoardMenuFragment()).commit();
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);

@@ -44,35 +44,37 @@ public class DealsOfDayAdapter extends RecyclerView.Adapter<DealsOfDayAdapter.My
 
     @Override
     public void onBindViewHolder(final DealsOfDayAdapter.MyViewHolder holder, final int i) {
+try {
+    final DealsModel dealsModel = dealsModelArrayList.get(i);
 
-        final DealsModel dealsModel = dealsModelArrayList.get(i);
-
-        if(dealsModel.getOffername().length()>15)
-        {
-            holder.productname.setText(dealsModel.getOffername().substring(0,15)+"...");
-        }
-        else
-        {
-            holder.productname.setText(dealsModel.getOffername());
-        }
+    if(dealsModel.getOffername().length()>15)
+    {
+        holder.productname.setText(dealsModel.getOffername().substring(0,15)+"...");
+    }
+    else
+    {
+        holder.productname.setText(dealsModel.getOffername());
+    }
 
 //        holder.productname.setText(dealsModel.getOffername());
-        holder.productdate.setText(dealsModel.getOfferenddate());
-        holder.offertypename.setText(dealsModel.getOffertypename()+" Off "+dealsModel.getOffervalue());
-        if(dealsModel.getOfferImage().equals("")){
-        }else{
-            Picasso.get().load(dealsModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+    holder.productdate.setText(dealsModel.getOfferenddate());
+    holder.offertypename.setText(dealsModel.getOffertypename()+" Off "+dealsModel.getOffervalue());
+    if(dealsModel.getOfferImage().equals("")){
+    }else{
+        Picasso.get().load(dealsModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
+                .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
+    }
+    holder.productname.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent myIntent = new Intent(mContext, RetalierProductActivity.class);
+            myIntent.putExtra("offerid",dealsModel.getId());
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(myIntent);
         }
-        holder.productname.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(mContext, RetalierProductActivity.class);
-                myIntent.putExtra("offerid",dealsModel.getId());
-                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(myIntent);
-            }
-        });
+    });
+}catch (Exception e){e.printStackTrace();}
+
 
     }
     @Override

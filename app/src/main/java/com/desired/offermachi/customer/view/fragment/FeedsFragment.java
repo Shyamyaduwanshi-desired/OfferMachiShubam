@@ -199,7 +199,7 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
             RadioButton rdone=(RadioButton) dialog.findViewById(R.id.rdone);
             RadioButton rdtwo=(RadioButton) dialog.findViewById(R.id.rdtwo);
             RadioButton rdthree=(RadioButton) dialog.findViewById(R.id.rdthree);
-            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
+//            RadioButton rdfour=(RadioButton) dialog.findViewById(R.id.rdfour);
             rdone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -236,8 +236,9 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 
                 }
             });
-            rdfour.setOnClickListener(new View.OnClickListener() {
-                @Override
+            rdthree.setOnClickListener(new View.OnClickListener() {
+
+   @Override
                 public void onClick(View v) {
                     dialog.dismiss();
 //                    String Status="4";

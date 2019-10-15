@@ -267,6 +267,12 @@ import static android.app.Activity.RESULT_OK;
          RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
          rvLocationNm.setLayoutManager(mLayoutManager);
          rvLocationNm.setItemAnimator(new DefaultItemAnimator());
+         rvLocationNm.setNestedScrollingEnabled(true);
+
+
+
+
+
 
          categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override

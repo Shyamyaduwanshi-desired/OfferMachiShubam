@@ -83,6 +83,7 @@
         android:layout_height="45dp"
         android:background="@drawable/edit_background"
         android:layout_marginTop="5dp"
+        android:visibility="gone"
         >
         <EditText
             android:id="@+id/et_address"

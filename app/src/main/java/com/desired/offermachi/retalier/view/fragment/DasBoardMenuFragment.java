@@ -29,8 +29,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.adapter.DealsOfDayAdapter;
+import com.desired.offermachi.retalier.view.adapter.ExpiressoonAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -46,12 +48,13 @@ public class DasBoardMenuFragment extends Fragment {
     View view;
     String idholder;
     private ArrayList<DealsModel> alDealModel;
+    private ArrayList<ExpiressoonModel> expiressoonModel;
     private ProgressDialog pDialog;
     TextView activeoffer,followerscount,dealtoday,expiressoon;
     private static final String ROOT_URL = "http://offermachi.in/api/get_retailer_dashboard";
     RecyclerView deals_day_recyclerView,expiressoon_recyclerview;
     private DealsOfDayAdapter dealsOfDayAdapter;
-
+    private ExpiressoonAdapter expiressoonAdapter;
 
     public DasBoardMenuFragment() {
     }
@@ -60,6 +63,7 @@ public class DasBoardMenuFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.retalier_dashboard_fragment, container, false);
         alDealModel=new ArrayList<DealsModel>();
+        expiressoonModel=new ArrayList<ExpiressoonModel>();
         init();
         return view;
     }
@@ -69,9 +73,9 @@ public class DasBoardMenuFragment extends Fragment {
         idholder= user.getId();
 
         activeoffer = (TextView)view.findViewById(R.id.active_offer_count_id);
-        followerscount = (TextView)view.findViewById(R.id.followers_count_id);followerscount = (TextView)view.findViewById(R.id.followers_count_id);
-        dealtoday = (TextView)view.findViewById(R.id.deal_count_id);
-        expiressoon = (TextView)view.findViewById(R.id.expires_id);
+        followerscount = (TextView)view.findViewById(R.id.followers_count_id);
+        dealtoday = (TextView)view.findViewById(R.id.deals_today_count_id);
+        expiressoon = (TextView)view.findViewById(R.id.expires_count_id);
 
         deals_day_recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_deal_today_id);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
@@ -156,35 +160,35 @@ public class DasBoardMenuFragment extends Fragment {
                                         );
                                         alDealModel.add(dealsModel);
                                     }
-                                    JSONArray jsonArray3=new JSONArray(deal_today);
+                                    JSONArray jsonArray3=new JSONArray(expires_soon);
                                     JSONObject object3;
                                     for (int count = 0; count < jsonArray3.length(); count++) {
-                                        object2 = jsonArray3.getJSONObject(count);
+                                        object3 = jsonArray3.getJSONObject(count);
 
-                                        DealsModel dealsModel=new DealsModel(
-                                                object2.optString("id"),
-                                                object2.optString("offer_id"),
-                                                object2.optString("offer_title"),
-                                                object2.optString("offer_category"),
-                                                object2.optString("sub_category"),
-                                                object2.optString("offer_type"),
-                                                object2.optString("offer_type_name"),
-                                                object2.optString("offer_value"),
-                                                object2.optString("offer_details"),
-                                                object2.optString("start_date"),
-                                                object2.optString("end_date"),
-                                                object2.optString("alltime"),
-                                                object2.optString("description"),
-                                                object2.optString("coupon_code"),
-                                                object2.optString("posted_by"),
-                                                object2.optString("status"),
-                                                object2.optString("offer_brand_name"),
-                                                object2.optString("deals_of_the_day_status"),
-                                                object2.optString("offer_image"),
-                                                object2.optString("qr_code_image")
+                                        ExpiressoonModel expireModel=new ExpiressoonModel(
+                                                object3.optString("id"),
+                                                object3.optString("offer_id"),
+                                                object3.optString("offer_title"),
+                                                object3.optString("offer_category"),
+                                                object3.optString("sub_category"),
+                                                object3.optString("offer_type"),
+                                                object3.optString("offer_type_name"),
+                                                object3.optString("offer_value"),
+                                                object3.optString("offer_details"),
+                                                object3.optString("start_date"),
+                                                object3.optString("end_date"),
+                                                object3.optString("alltime"),
+                                                object3.optString("description"),
+                                                object3.optString("coupon_code"),
+                                                object3.optString("posted_by"),
+                                                object3.optString("status"),
+                                                object3.optString("offer_brand_name"),
+                                                object3.optString("deals_of_the_day_status"),
+                                                object3.optString("offer_image"),
+                                                object3.optString("qr_code_image")
 
                                         );
-                                        alDealModel.add(dealsModel);
+                                        expiressoonModel.add(expireModel);
                                     }
                                 }
                             } catch (JSONException e) {
@@ -229,9 +233,9 @@ public class DasBoardMenuFragment extends Fragment {
     }
     private void displayData2 () {
 
-        dealsOfDayAdapter = new DealsOfDayAdapter(getContext(), alDealModel);
-        expiressoon_recyclerview.setAdapter(dealsOfDayAdapter);
-        if (dealsOfDayAdapter.getItemCount() == 0) {
+        expiressoonAdapter = new ExpiressoonAdapter(getContext(), expiressoonModel);
+        expiressoon_recyclerview.setAdapter(expiressoonAdapter);
+        if (expiressoonAdapter.getItemCount() == 0) {
             Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();
         } else {
 

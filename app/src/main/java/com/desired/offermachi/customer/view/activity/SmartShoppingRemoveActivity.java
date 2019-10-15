@@ -55,7 +55,6 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.smart_shopping_text_activity);
         init();
-
     }
     private void init(){
         presenter=new SmartShoppingNotificationDataPresenter(SmartShoppingRemoveActivity.this,SmartShoppingRemoveActivity.this);
@@ -66,7 +65,7 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         info= findViewById(R.id.info_id);
         info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
         categoryrecycle.setLayoutManager(gridLayoutManager1);
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);

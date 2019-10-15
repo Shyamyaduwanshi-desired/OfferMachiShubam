@@ -2,8 +2,8 @@ package com.desired.offermachi.retalier.model;
 
 public class mylocation_model {
     private String id;
+    private String locality_name;
     private String location_address;
-    private String location_contact_persion;
     private String locationpersonmobileno;
 
 
@@ -15,6 +15,14 @@ public class mylocation_model {
         this.id = id;
     }
 
+    public String getLocality_name() {
+        return locality_name;
+    }
+
+    public void setLocality_name(String locality_name) {
+        this.locality_name = locality_name;
+    }
+
     public String getLocation_address() {
         return location_address;
     }
@@ -23,13 +31,7 @@ public class mylocation_model {
         this.location_address = location_address;
     }
 
-    public String getLocation_contact_persion() {
-        return location_contact_persion;
-    }
 
-    public void setLocation_contact_persion(String location_contact_persion) {
-        this.location_contact_persion = location_contact_persion;
-    }
 
     public String getLocationpersonmobileno() {
         return locationpersonmobileno;
@@ -39,10 +41,10 @@ public class mylocation_model {
         this.locationpersonmobileno = locationpersonmobileno;
     }
 
-    public mylocation_model(String id, String location_address, String location_contact_persion , String locationpersonmobileno) {
+    public mylocation_model(String id,String locality_name ,String location_address, String locationpersonmobileno) {
         this.id = id;
+        this.locality_name=locality_name;
         this.location_address = location_address;
-        this.location_contact_persion = location_contact_persion;
         this .locationpersonmobileno =locationpersonmobileno;
 
     }

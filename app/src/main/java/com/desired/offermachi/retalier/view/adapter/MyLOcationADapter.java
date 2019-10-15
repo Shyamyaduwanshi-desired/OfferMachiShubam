@@ -38,22 +38,23 @@ public class MyLOcationADapter extends RecyclerView.Adapter<MyLOcationADapter.Vi
     public void onBindViewHolder(@NonNull final MyLOcationADapter.ViewHolder viewHolder, int i) {
         final mylocation_model mylocation_model = mylocation_modelslist.get(i);
         viewHolder.locationaddress.setText(mylocation_model.getLocation_address());
-        viewHolder. locationcontactperson.setText(Html.fromHtml(mylocation_model.getLocation_contact_persion()));
+        viewHolder.locality_name.setText(mylocation_model.getLocality_name());
         viewHolder.locationpersonmobileno.setText(mylocation_model.getLocationpersonmobileno());
 
     }
+
     @Override
     public int getItemCount() {
         return mylocation_modelslist.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView locationaddress, locationcontactperson,locationpersonmobileno;
+        TextView locationaddress, locality_name,locationpersonmobileno;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             locationaddress=itemView.findViewById(R.id.location_address_id);
-            locationcontactperson=itemView.findViewById(R.id.location_contact_person);
+            locality_name=itemView.findViewById(R.id.location_contact_person);
             locationpersonmobileno=itemView.findViewById(R.id.locationpersonmobile);
 
         }

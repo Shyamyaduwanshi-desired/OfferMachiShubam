@@ -54,7 +54,7 @@ public class SmartShoppingRemoveAdapter extends RecyclerView.Adapter<SmartShoppi
     public SmartShoppingRemoveAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                            int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.smart_shopping_remove_activity, parent, false);
+                .inflate(R.layout.smart_shopping_remove_activity_new, parent, false);
 
         SmartShoppingRemoveAdapter.MyViewHolder myViewHolder = new SmartShoppingRemoveAdapter.MyViewHolder(view);
         return myViewHolder;

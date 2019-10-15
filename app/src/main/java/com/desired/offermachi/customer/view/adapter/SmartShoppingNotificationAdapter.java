@@ -53,7 +53,7 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
     @Override
     public SmartShoppingNotificationAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                    int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.smart_shopping_remove_activity, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.smart_shopping_remove_activity_new, parent, false);
         SmartShoppingNotificationAdapter.MyViewHolder myViewHolder = new SmartShoppingNotificationAdapter.MyViewHolder(view);
         return myViewHolder;
     }
@@ -62,7 +62,7 @@ public class SmartShoppingNotificationAdapter extends RecyclerView.Adapter<Smart
     public void onBindViewHolder(final SmartShoppingNotificationAdapter.MyViewHolder holder, final int i) {
         final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
-        holder.productdate.setText(selectCategoryModel.getOfferenddate());
+//        holder.productdate.setText(selectCategoryModel.getOfferenddate());
         holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
         if(selectCategoryModel.getOfferImage().equals("")){
         }else{

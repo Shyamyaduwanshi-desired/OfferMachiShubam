@@ -104,16 +104,13 @@ public class MyLocationActivity extends AppCompatActivity implements View.OnClic
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         JSONObject jobj = jsonArray.getJSONObject(i);
                                         String id = jobj.getString("id");
-
-
-
                                         String user_id = jobj.getString("user_id");
+                                        String locality_name= jobj.getString("locality_name");
                                         String location_address = jobj.getString("location_address");
-                                        String location_contact_persion = jobj.getString("location_contact_persion");
                                         String location_contact_phone = jobj.getString("location_contact_phone");
 
                                         mylocation_model mylocation_model = new mylocation_model(
-                                                id,location_address, location_contact_persion,location_contact_phone
+                                                id,locality_name,location_address,location_contact_phone
                                         );
 
                                         mylocation_modelslist.add(mylocation_model);

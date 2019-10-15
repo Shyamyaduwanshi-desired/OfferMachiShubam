@@ -10,7 +10,7 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"  xmlns:app="http://schemas.android.com/tools"
+        android:layout_height="60dp"
         android:orientation="vertical"
         android:background="@drawable/splash">
 
@@ -19,15 +19,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            card_view:cardBackgroundColor="#fff"
-            android:layout_margin="10dp"
-            card_view:cardCornerRadius="8dp">
+        android:layout_marginTop="10dp"
+    >
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -67,94 +60,113 @@
                                     android:id="@+id/card_viewfirst"
                                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="0dp"
-                                    android:layout_height="120dp"
+                                    android:layout_height="170dp"
                                     android:layout_weight="1.0"
-                                    card_view:cardBackgroundColor="#fff"
-                                    app:cardCornerRadius="10dp"
+                                    card_view:cardBackgroundColor="@color/white"
                                     android:layout_marginLeft="3dp"
+                                    card_view:cardCornerRadius="15dp"
                                     >
                                     <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/s_background"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:gravity="center">
-
-                                       <TextView
-                                           android:id="@+id/active_offer_count_id"
-                                           android:layout_width="match_parent"
-                                           android:layout_height="wrap_content"
-                                           android:text=""
-                                           android:gravity="center"
-                                           android:textColor="@color/red"
-                                           android:textSize="18dp"
-                                           android:textStyle="bold"
-
-                                           />
-
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp">
                                         <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-
-                                            android:text="Active Offers"
+                                            android:id="@+id/active_offer_img_id"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:background="@drawable/ic_tag_second"
                                             android:gravity="center"
                                             android:layout_marginTop="10dp"
                                             android:textColor="@color/purple"
                                             android:textSize="18dp"
                                             android:textStyle="bold"
+                                            android:layout_gravity="center"
                                             />
 
 
+                                        <TextView
+                                            android:id="@+id/active_offer_count_id"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:layout_gravity="center"
+                                            android:textColor="@color/red"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold"
+                                            android:layout_marginTop="10dp"
+
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Active Offers"
+                                            android:gravity="center"
+                                            android:layout_marginTop="15dp"
+                                            android:textColor="@color/red"
+                                            android:textSize="17dp"
+                                            android:textStyle="bold"
+                                            />
                                     </LinearLayout>
-
-
-
-
                                 </android.support.v7.widget.CardView>
 
                                 <android.support.v7.widget.CardView
                                     android:id="@+id/card_viewsecond"
                                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="0dp"
-                                    android:layout_height="120dp"
+                                    android:layout_height="170dp"
                                     android:layout_weight="1.0"
-                                    card_view:cardBackgroundColor="#fff"
+                                    card_view:cardBackgroundColor="@color/white"
                                     android:layout_marginLeft="30dp"
-                                    app:cardCornerRadius="10dp">
+                                    card_view:cardCornerRadius="15dp"
+                                    >
 
                                     <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/s_background"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:gravity="center">
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp">
 
                                         <TextView
-                                            android:id="@+id/expires_id"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text=""
-                                            android:gravity="center"
-                                            android:textColor="@color/red"
-                                            android:textSize="18dp"
-                                            android:textStyle="bold"
-
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-
-                                            android:text="Expires soon"
-                                            android:gravity="center"
+                                            android:id="@+id/followers_img_id"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:background="@drawable/ic_followerssecond"
                                             android:layout_marginTop="10dp"
                                             android:textColor="@color/purple"
                                             android:textSize="18dp"
                                             android:textStyle="bold"
+                                            android:layout_gravity="center"
                                             />
 
-
+                                        <TextView
+                                            android:id="@+id/followers_count_id"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:layout_gravity="center"
+                                            android:textColor="@color/red"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold"
+                                            android:layout_marginTop="10dp"
+                                            />
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Followers"
+                                            android:gravity="center"
+                                            android:layout_marginTop="15dp"
+                                            android:textColor="@color/red"
+                                            android:textSize="17dp"
+                                            android:textStyle="bold"
+                                            />
                                     </LinearLayout>
+
 
                                 </android.support.v7.widget.CardView>
                             </LinearLayout>
@@ -176,85 +188,104 @@
                                     android:id="@+id/card_viewthird"
                                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="0dp"
-                                    android:layout_height="120dp"
+                                    android:layout_height="170dp"
                                     android:layout_weight="1.0"
-                                    card_view:cardBackgroundColor="#fff"
-                                    app:cardCornerRadius="10dp"
+                                    card_view:cardBackgroundColor="@color/white"
+                                    card_view:cardCornerRadius="15dp"
                                     android:layout_marginLeft="3dp">
 
                                     <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/s_background"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:gravity="center">
-
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp">
                                         <TextView
-                                            android:id="@+id/deal_count_id"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text=""
-                                            android:gravity="center"
-                                            android:textColor="@color/red"
-                                            android:textSize="18dp"
-                                            android:textStyle="bold"
-
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-
-                                            android:text="Deal Today"
-                                            android:gravity="center"
+                                            android:id="@+id/deal_today_img_id"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:background="@drawable/ic_handshake_second"
                                             android:layout_marginTop="10dp"
                                             android:textColor="@color/purple"
                                             android:textSize="18dp"
                                             android:textStyle="bold"
+                                            android:layout_gravity="center"
                                             />
+                                        <TextView
+                                            android:id="@+id/deals_today_count_id"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:layout_gravity="center"
+                                            android:textColor="@color/red"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold"
+                                            android:layout_marginTop="10dp"/>
 
-
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Deal Today"
+                                            android:gravity="center"
+                                            android:layout_marginTop="10dp"
+                                            android:textColor="@color/red"
+                                            android:textSize="17dp"
+                                            android:textStyle="bold"
+                                            />
                                     </LinearLayout>
-
-
                                 </android.support.v7.widget.CardView>
                                 <android.support.v7.widget.CardView
                                     android:id="@+id/card_viewforth"
                                     xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                     android:layout_width="0dp"
-                                    android:layout_height="120dp"
+                                    android:layout_height="170dp"
                                     android:layout_weight="1.0"
-                                    card_view:cardBackgroundColor="#fff"
+                                    card_view:cardBackgroundColor="@color/white"
                                     android:layout_marginLeft="30dp"
-                                    app:cardCornerRadius="10dp">
+                                    card_view:cardCornerRadius="15dp"
+                                    >
+
+
                                     <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:background="@drawable/s_background"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
                                         android:orientation="vertical"
-                                        android:gravity="center">
-
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp">
                                         <TextView
-                                            android:id="@+id/followers_count_id"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text=""
-                                            android:gravity="center"
-                                            android:textColor="@color/red"
-                                            android:textSize="18dp"
-                                            android:textStyle="bold"
-
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-
-                                            android:text="Followers"
-                                            android:gravity="center"
+                                            android:id="@+id/expiressoon_img_id"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:background="@drawable/ic_kalender"
                                             android:layout_marginTop="10dp"
                                             android:textColor="@color/purple"
                                             android:textSize="18dp"
+                                            android:textStyle="bold"
+                                            android:layout_gravity="center"
+
+                                            />
+
+
+                                        <TextView
+                                            android:id="@+id/expires_count_id"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text=""
+                                            android:layout_gravity="center"
+                                            android:textColor="@color/red"
+                                            android:textSize="18dp"
+                                            android:textStyle="bold"
+                                            android:layout_marginTop="10dp"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="Expires soon"
+                                            android:gravity="center"
+                                            android:layout_marginTop="15dp"
+                                            android:textColor="@color/red"
+                                            android:textSize="15dp"
                                             android:textStyle="bold"
                                             />
                                     </LinearLayout>
@@ -269,7 +300,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+                            android:layout_marginLeft="10dp"
                             android:text="Deal Today"
                             android:gravity="start"
                             android:layout_marginTop="20dp"
@@ -291,8 +322,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:text="Deal Today"
+                        android:layout_marginLeft="10dp"
+                        android:text="Expires soon"
                         android:gravity="start"
                         android:layout_marginTop="20dp"
                         android:textColor="@color/purple"
@@ -311,168 +342,6 @@
                 </LinearLayout>
                 </LinearLayout>
             </ScrollView>
-
-        </android.support.v7.widget.CardView>
     </LinearLayout>
 </RelativeLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--xmlns:app="http://schemas.android.com/tools"-->
-    <!--android:orientation="vertical"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:background="@drawable/home_background"-->
-    <!--app:ignore="NamespaceTypo">-->
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"  xmlns:app="http://schemas.android.com/tools"-->
-        <!--android:orientation="vertical"-->
-        <!--android:background="@drawable/splash">-->
-        <!--<ImageView-->
-            <!--android:layout_width="180dp"-->
-            <!--android:layout_height="80dp"-->
-            <!--android:src="@drawable/logooffermachi"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginTop="50dp"/>-->
-
-    <!--</LinearLayout>-->
-
-    <!--<RelativeLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:weightSum="2">-->
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/card_viewfirst"-->
-                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:layout_weight="1.0"-->
-                <!--card_view:cardBackgroundColor="#fff"-->
-                <!--app:cardCornerRadius="10dp"-->
-                <!--android:layout_marginLeft="3dp"-->
-                <!--&gt;-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Active Offers"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/purple"-->
-                    <!--android:textSize="18dp"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--/>-->
-
-            <!--</android.support.v7.widget.CardView>-->
-
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/card_viewsecond"-->
-                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:layout_weight="1.0"-->
-                <!--card_view:cardBackgroundColor="#fff"-->
-                <!--android:layout_marginLeft="30dp"-->
-                <!--app:cardCornerRadius="10dp">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" android:text="Expires soon"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/purple"-->
-                    <!--android:textSize="18dp"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--/>-->
-            <!--</android.support.v7.widget.CardView>-->
-        <!--</LinearLayout>-->
-
-    <!--</RelativeLayout>-->
-    <!--<RelativeLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="20dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:weightSum="2">-->
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/card_viewthird"-->
-                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:layout_weight="1.0"-->
-                <!--card_view:cardBackgroundColor="#fff"-->
-                <!--app:cardCornerRadius="10dp"-->
-                <!--android:layout_marginLeft="3dp">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="Deal Today"-->
-                    <!--android:textColor="@color/purple"-->
-                    <!--android:textSize="18dp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:layout_gravity="center"/>-->
-
-            <!--</android.support.v7.widget.CardView>-->
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:id="@+id/card_viewforth"-->
-                <!--xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="120dp"-->
-                <!--android:layout_weight="1.0"-->
-                <!--card_view:cardBackgroundColor="#fff"-->
-                <!--android:layout_marginLeft="30dp"-->
-                <!--app:cardCornerRadius="10dp">-->
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Followers"-->
-                    <!--android:gravity="center"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:textColor="@color/purple"-->
-                    <!--android:textSize="18dp"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--/>-->
-            <!--</android.support.v7.widget.CardView>-->
-        <!--</LinearLayout>-->
-
-
-    <!--</RelativeLayout>-->
-<!--</LinearLayout>-->
 </android.support.v4.widget.NestedScrollView>

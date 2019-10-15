@@ -1,12 +1,12 @@
 package com.desired.offermachi.retalier.model;
 
-public class DealToday {
+public class ExpiressoonModel {
     private String id,Offerid,Offername,OfferCategory,OfferSubCategory,Offertype,Offertypename,Offervalue,OfferDetail,Offerstartdate,
-            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,DealsStatus,OfferImage,Offerqrcodeimage,viewcount;
+            Offerenddate,Offertime,Offerdescription,Coupon_code,Posted_by,Offerstatus,Offerbrandname,DealsStatus,OfferImage,Offerqrcodeimage;
 
-    public DealToday(String id,String offerid,String offername,String offerCategory,String offerSubCategory,
-                      String offertype,String offertypename,String offervalue,String offerDetail,String offerstartdate,String offerenddate,String offertime,
-                      String offerdescription,String coupon_code,String posted_by,String offerstatus,String offerbrandname,String dealsStatus,String offerImage,String offerqrcodeimage,String viewcount) {
+    public ExpiressoonModel(String id, String offerid, String offername, String offerCategory, String offerSubCategory,
+                            String offertype, String offertypename, String offervalue, String offerDetail, String offerstartdate, String offerenddate, String offertime,
+                            String offerdescription, String coupon_code, String posted_by, String offerstatus, String offerbrandname, String dealsStatus, String offerImage, String offerqrcodeimage) {
         this.id = id;
         this.Offerid = offerid;
         this.Offername = offername;
@@ -27,7 +27,7 @@ public class DealToday {
         this.DealsStatus=dealsStatus;
         this.OfferImage=offerImage;
         this.Offerqrcodeimage=offerqrcodeimage;
-        this.viewcount = viewcount;
+
     }
 
     public String getId() {
@@ -62,13 +62,6 @@ public class DealToday {
         return OfferDetail;
     }
 
-    public String getViewcount() {
-        return viewcount;
-    }
-
-    public void setViewcount(String viewcount) {
-        this.viewcount = viewcount;
-    }
 
     public String getOfferImage() {
         return OfferImage;

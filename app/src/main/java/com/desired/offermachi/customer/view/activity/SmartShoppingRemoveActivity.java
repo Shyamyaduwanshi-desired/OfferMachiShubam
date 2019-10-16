@@ -27,6 +27,7 @@ import com.desired.offermachi.customer.presenter.SmartShoppingNotificationDataPr
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.SmartShoppingNotificationAdapter;
+import com.desired.offermachi.customer.view.adapter.SmartShoppingREmoveAdapter;
 import com.desired.offermachi.customer.view.adapter.SmartShoppingRemoveAdapter;
 import com.desired.offermachi.customer.model.category_model;
 import org.json.JSONArray;
@@ -44,7 +45,8 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
     String result;
-    private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
+//    private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
+    private SmartShoppingREmoveAdapter smartShoppingNotificationAdapter;
     private SmartShoppingNotificationDataPresenter presenter;
     String idholder;
     TextView btnclearall;
@@ -64,11 +66,14 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         imageViewback.setOnClickListener(this);
         info= findViewById(R.id.info_id);
         info.setOnClickListener(this);
+
         categoryrecycle = findViewById(R.id.categoryrecycleview);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 1, LinearLayoutManager.VERTICAL, false);
-        categoryrecycle.setLayoutManager(gridLayoutManager1);
+        categoryrecycle.setLayoutManager(new LinearLayoutManager(this));
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
+        categoryrecycle.setHasFixedSize(true);
+
+
         btnclearall=findViewById(R.id.clearall);
         btnclearall.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
@@ -128,10 +133,9 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         }
     }
 
-
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        smartShoppingNotificationAdapter = new SmartShoppingNotificationAdapter(SmartShoppingRemoveActivity.this,response);
+        smartShoppingNotificationAdapter = new SmartShoppingREmoveAdapter(SmartShoppingRemoveActivity.this,response);
         categoryrecycle.setAdapter(smartShoppingNotificationAdapter);
     }
 

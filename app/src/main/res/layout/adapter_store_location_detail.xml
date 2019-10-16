@@ -64,6 +64,7 @@
         android:layout_height="45dp"
         android:background="@drawable/edit_background"
         android:layout_marginTop="5dp"
+        android:visibility="gone"
         >
         <EditText
             android:id="@+id/et_contact_person"
@@ -83,8 +84,20 @@
         android:layout_height="45dp"
         android:background="@drawable/edit_background"
         android:layout_marginTop="5dp"
-        android:visibility="gone"
         >
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="41dp"
+            android:background="@drawable/circle_background"
+            android:layout_marginLeft="1dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/locationicon"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/et_address"
             android:layout_width="match_parent"
@@ -95,6 +108,7 @@
             android:inputType="text"
             android:paddingLeft="10dp"
             android:textColor="@color/darkblue"
+            android:layout_marginLeft="50dp"
             />
     </RelativeLayout>
 

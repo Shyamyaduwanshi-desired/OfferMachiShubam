@@ -99,8 +99,8 @@ public class CustomerFeedsPresenter {
                                     object.getString("qr_code_image"),
                                     object.getString("coupon_code_status"),
                                     object.getString("shop_logo")
-
                             );
+
                             if(loadItem==0)
                             {
                                 list.add(selectCategoryModel);

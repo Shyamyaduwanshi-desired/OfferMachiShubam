@@ -188,7 +188,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_alignParentStart="true"
-                        android:src="@drawable/yellowfavorite"
+                        android:src="@drawable/yellowseondfavorite"
                         tools:ignore="VectorDrawableCompat" />
 
                     <TextView

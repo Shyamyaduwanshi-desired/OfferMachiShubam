@@ -20,6 +20,8 @@
 <!--for location-->
 
     <uses-feature android:name="android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
@@ -278,11 +280,14 @@
 
         <activity
             android:name=".retalier.view.activity.MyLocationActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name=".retalier.view.activity.QRcodeScannerActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".retalier.view.activity.MyLocationAddActivity" />
+        <activity android:name=".retalier.view.activity.MyLocationEditActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

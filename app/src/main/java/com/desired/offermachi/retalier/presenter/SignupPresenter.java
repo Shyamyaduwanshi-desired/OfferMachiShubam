@@ -181,6 +181,7 @@ public class SignupPresenter {
                 params.put("store_banners", jsonArrayBannerImage.toString());//String.valueOf(jsonArrayBannerImage)
                 params.put("store_locations", jsonArrayLocation.toString());//String.valueOf(jsonArrayLocation)
                 params.put("locality", allAddressLocId);
+                Log.e("params...", params.toString());
 
 Log.e("","SignUp param= "+params.toString());
 

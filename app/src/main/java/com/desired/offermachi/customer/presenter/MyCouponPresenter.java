@@ -162,6 +162,7 @@ public class MyCouponPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
+
     private void showpDialog() {
         if (!progress.isShowing())
             progress.show();

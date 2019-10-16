@@ -524,7 +524,6 @@ public class EditOfferActivity extends AppCompatActivity implements View.OnClick
         byte[] byteFormat = stream.toByteArray();
         // get the base 64 string
         String imgString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
-
         return imgString;
     }
     public void datepicker(){

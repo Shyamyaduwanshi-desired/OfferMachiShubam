@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +20,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_left_arrow"/>
+                app:srcCompat="@drawable/ic_left_arrow"/>
             <TextView
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
@@ -74,8 +74,18 @@
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+    <FrameLayout
+        android:layout_below="@id/cv"
+        android:id="@+id/screenarearetalier"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-26dp"
+        tools:layout_editor_absoluteY="0dp">
 
+    </FrameLayout>
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/cv"
         android:id="@+id/recyclerview_mylocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -83,6 +93,18 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floting_add_botton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_add_white_20dp"
+        app:backgroundTint="@color/purple"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/margin_right"
+        tools:ignore="VectorDrawableCompat" />
 
-
-</LinearLayout>
+</RelativeLayout>

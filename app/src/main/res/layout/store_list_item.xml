@@ -45,7 +45,7 @@
                 android:layout_height="90dp"
                 android:padding="5dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/brandfirst_new"
+                android:src="@drawable/brandfirst"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"/>
             <TextView

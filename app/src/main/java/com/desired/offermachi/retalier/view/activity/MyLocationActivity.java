@@ -84,6 +84,7 @@ public class MyLocationActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 Intent i = new Intent(MyLocationActivity.this, MyLocationAddActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

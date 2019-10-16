@@ -13,8 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +32,6 @@ import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.mylocation_model;
 import com.desired.offermachi.retalier.view.activity.MyLocationEditActivity;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -123,13 +120,15 @@ public class MyLOcationADapter extends RecyclerView.Adapter<MyLOcationADapter.Vi
                 i.putExtra("LocationName", mylocation_model.getLocality_name());
                 i.putExtra("LocationId", mylocation_model.getId());
                 context.startActivity(i);
+                ((Activity) context).finish();
+
                 /*    editLocationDialog(mylocation_model.getLocality_name(), mylocation_model.getId());*/
             }
         });
         viewHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Deletelocationdata(mylocation_model.getId(), i);
+                // Deletelocationdata(mylocation_model.getId(), i);
                 AlertDialog.Builder builder = new AlertDialog.Builder((AppCompatActivity) v.getContext());
                 builder.setTitle("Delete Alert");
                 builder.setMessage("Are you sure you want to delete this location?");
@@ -188,14 +187,14 @@ public class MyLOcationADapter extends RecyclerView.Adapter<MyLOcationADapter.Vi
                                 JSONObject mainJson = new JSONObject(response);
                                 String status = mainJson.getString("status");
                                 String message = mainJson.getString("message");
-                                Log.e("Response....",message);
+                                Log.e("Response....", message);
 
                                 if (status.equals("200")) {
                                     Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
                                     //notifyItemChanged(positon);
                                     mylocation_modelslist.remove(positon);
                                     notifyItemRemoved(positon);
-                                  //  MyLOcationADapter.this.notify();
+                                    //  MyLOcationADapter.this.notify();
                                    /* String result = mainJson.getString("result");
 
                                     JSONArray jsonArray = new JSONArray(result);
@@ -214,8 +213,7 @@ public class MyLOcationADapter extends RecyclerView.Adapter<MyLOcationADapter.Vi
                                         mylocation_modelslist.add(mylocation_model);
 
                                     }*/
-                                }
-                                else {
+                                } else {
                                     Toast.makeText(context, "" + message, Toast.LENGTH_SHORT).show();
                                 }
 

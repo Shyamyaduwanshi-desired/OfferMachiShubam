@@ -24,6 +24,7 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.SmartShoppingNotificationDataPresenter;
+import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.SmartShoppingNotificationAdapter;
@@ -40,7 +41,7 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class SmartShoppingRemoveActivity  extends AppCompatActivity implements View.OnClickListener, SmartShoppingNotificationDataPresenter.NotificationOfferDataList {
+public class SmartShoppingRemoveActivity  extends AppCompatActivity implements View.OnClickListener, SmartShoppingNotificationDataPresenter.NotificationOfferDataList, SmartShoppingOfferPresenter.NotificationOfferList {
 
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
@@ -48,9 +49,11 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
 //    private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
     private SmartShoppingREmoveAdapter smartShoppingNotificationAdapter;
     private SmartShoppingNotificationDataPresenter presenter;
+    SmartShoppingOfferPresenter smartShoppingOfferPresenter;
     String idholder;
     TextView btnclearall;
     ImageView imgNotiBell;
+    private String latitude,longitude,distance,catIds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     }
     private void init(){
         presenter=new SmartShoppingNotificationDataPresenter(SmartShoppingRemoveActivity.this,SmartShoppingRemoveActivity.this);
+        smartShoppingOfferPresenter=new SmartShoppingOfferPresenter(SmartShoppingRemoveActivity.this,SmartShoppingRemoveActivity.this);
         User user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
         idholder=user.getId();
         imageViewback = findViewById(R.id.imageback);
@@ -78,8 +82,20 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         btnclearall.setOnClickListener(this);
         imgNotiBell=findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        catIds = intent.getStringExtra("catIds");
+        distance = intent.getStringExtra("distance");
+        latitude = intent.getStringExtra("lat");
+        longitude= intent.getStringExtra("longi");
+        Log.e("Values...","+++catIds+++++"+catIds);
+        Log.e("Values...","+++distance+++++"+distance);
+        Log.e("Values...","+++lat+++++"+latitude);
+        Log.e("Values...","+++longi+++++"+longitude);
+
         if (isNetworkConnected()) {
-            presenter.ViewAllSmartData(idholder);
+            smartShoppingOfferPresenter.sentRequest(idholder,latitude,longitude,catIds,distance);
+            //presenter.ViewAllSmartData(idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
@@ -111,7 +127,8 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         @Override
         public void onReceive(Context context, Intent intent2) {
             if (isNetworkConnected()) {
-                presenter.ViewAllSmartData(idholder);
+                smartShoppingOfferPresenter.sentRequest(idholder,latitude,longitude,catIds,distance);
+               // presenter.ViewAllSmartData(idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }

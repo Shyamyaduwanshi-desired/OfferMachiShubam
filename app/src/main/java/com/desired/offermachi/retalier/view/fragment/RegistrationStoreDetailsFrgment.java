@@ -39,6 +39,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -129,6 +130,7 @@ import static android.app.Activity.RESULT_OK;
      ArrayList<ImageBean> arImageNm = new ArrayList<>();
      RecyclerView rvImage;
      String allImagNm = "",allAddressId="";
+     private CheckBox cb_selectall;
 
      public RegistrationStoreDetailsFrgment() {
      }
@@ -337,6 +339,15 @@ import static android.app.Activity.RESULT_OK;
 
      @Override
      public void onClick(View v) {
+         if (v == cb_selectall) {
+//            selectcategory();
+             if(cb_selectall.isChecked()){
+                 multiLocAdpter.selectAll();
+             }
+             else {
+                 multiLocAdpter.unselectall();
+             }
+         }
          if (v == registerbutton) {
              Registraionvalid();
          } else if (v == monplus) {
@@ -1124,7 +1135,8 @@ Log.e("","lat= "+data.getStringExtra("loc_lati")+" long= "+data.getStringExtra("
          multipleLocDlg.setContentView(R.layout.multiple_location_selection_dlg);
          multipleLocDlg.setTitle("Select Store Location Dialog");
          rlStoreMultiLocation = multipleLocDlg.findViewById(R.id.cv_location);
-
+         cb_selectall =  multipleLocDlg.findViewById(R.id.cb_selectall);
+         cb_selectall.setOnClickListener(this);
          btnOkay = multipleLocDlg.findViewById(R.id.bt_proceed);
          SearchView searchView = multipleLocDlg.findViewById(R.id.search);
          searchView.setOnQueryTextListener(this);
@@ -1161,6 +1173,7 @@ Log.e("","lat= "+data.getStringExtra("loc_lati")+" long= "+data.getStringExtra("
      //for mulitple selection adpter click
      @Override
      public void onMultipleLocClick(CityBean cityBean) {
+         cb_selectall.setChecked(false);
 
          for(int i =0;i<arLocation.size();i++){
              if(arLocation.get(i).getId()==cityBean.getId()){

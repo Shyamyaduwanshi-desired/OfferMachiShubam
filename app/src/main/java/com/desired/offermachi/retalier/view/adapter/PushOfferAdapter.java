@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
 import com.squareup.picasso.MemoryPolicy;
@@ -26,11 +27,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class PushOfferAdapter extends RecyclerView.Adapter<PushOfferAdapter.MyViewHolder> {
-    private ArrayList<ViewOfferModel> viewOfferModelArrayList;
+    private ArrayList<DealsModelNew> viewOfferModelArrayList;
     private final Context mContext;
     int countBACK=0;
     int count=0;
-    public PushOfferAdapter(Context context,ArrayList<ViewOfferModel> viewOfferModelArrayList) {
+    public PushOfferAdapter(Context context,ArrayList<DealsModelNew> viewOfferModelArrayList) {
         this.viewOfferModelArrayList = viewOfferModelArrayList;
         this.mContext = context;
     }
@@ -47,7 +48,7 @@ public class PushOfferAdapter extends RecyclerView.Adapter<PushOfferAdapter.MyVi
 
     @Override
     public void onBindViewHolder(final PushOfferAdapter.MyViewHolder holder, final int i) {
-        final ViewOfferModel viewOfferModel = viewOfferModelArrayList.get(i);
+        final DealsModelNew viewOfferModel = viewOfferModelArrayList.get(i);
 
         if(viewOfferModel.getOffername().length()>15)
         {

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:outlineSpotShadowColor="@color/black"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="2dp">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="2dp">
+
+            <!-- android:background="@drawable/category_background"-->
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:outlineSpotShadowColor="@color/white"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="5dp"
+                android:layout_centerVertical="true"
+                app:cardElevation="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/electronics" />
+                <TextView
+                    android:id="@+id/tv_flat_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="Flat 20% off"
+                    android:gravity="center_vertical"
+                    android:textSize="10dp"
+                    android:textAllCaps="true"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="6dp"
+                    android:paddingBottom="3.4dp"
+                    android:paddingTop="2.2dp"
+                    android:layout_centerVertical="true"
+                    android:background="@color/green"
+                    android:textColor="@color/white" />
+            </android.support.v7.widget.CardView>
+            <LinearLayout
+                android:id="@+id/linear_category_id"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/cv_image"
+                android:layout_marginLeft="5dp"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_product_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="middle"
+                        android:singleLine="true"
+                        android:text="Electronics"
+                        android:gravity="center_vertical"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/darkgray" />
+                    <RelativeLayout
+                        android:id="@+id/rl_info"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:gravity="center_vertical"
+                        android:padding="5dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/colour_background"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_alignParentRight="true">
+                        <ImageView
+                            android:id="@+id/iv_info"
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:src="@drawable/ic_info"
+                            android:layout_centerInParent="true"
+                            tools:ignore="VectorDrawableCompat"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_prod_dsc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:ellipsize="middle"
+                    android:singleLine="false"
+                    android:text="Electronicssdfsdfsdfdsfsdfsdfdsfsdfsdfsdfsd"
+                    android:gravity="center"
+                    android:textSize="13dp"
+                    android:textColor="@color/darkgray"/>
+                <TextView
+                    android:id="@+id/tv_prod_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="date"
+                    android:gravity="center"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/darkgray"
+                    android:textSize="13dp" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+
+                    >
+                    <RelativeLayout
+                        android:id="@+id/rl_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="fill_parent"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:id="@+id/iv_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="fitCenter"
+                            android:adjustViewBounds="true"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_toRightOf="@+id/rl_icon"
+                        android:layout_centerVertical="true"
+                        >
+                        <!-- <RelativeLayout
+                             android:id="@+id/rl_info"
+                             android:layout_width="15dp"
+                             android:layout_height="15dp"
+                             android:layout_toLeftOf="@+id/rl_like"
+
+                             android:gravity="center_vertical"
+                             android:padding="5dp"
+                             android:layout_centerVertical="true"
+                             android:background="@drawable/colour_background"
+                             android:layout_marginRight="5dp"
+                             >
+                             <ImageView
+                                 android:id="@+id/iv_info"
+                                 android:layout_width="12dp"
+                                 android:layout_height="12dp"
+                                 android:src="@drawable/ic_info"
+                                 android:layout_centerInParent="true"
+                                 tools:ignore="VectorDrawableCompat"/>
+                         </RelativeLayout>-->
+
+                        <RelativeLayout
+                            android:id="@+id/rl_like"
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:gravity="center_vertical"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:layout_toLeftOf="@+id/rl_share"
+                            >
+
+                            <ImageView
+                                android:id="@+id/iv_like"
+                                android:layout_width="24dp"
+                                android:layout_height="23dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="0dp"
+                                android:src="@drawable/heart" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rl_share"
+                            android:layout_width="35dp"
+                            android:layout_height="38dp"
+                            android:layout_toLeftOf="@+id/rl_get_coupon"
+                            android:gravity="center_vertical"
+                            android:layout_marginRight="5dp"
+                            android:layout_centerVertical="true"
+                            >
+
+                            <ImageView
+                                android:id="@+id/iv_share"
+                                android:layout_width="25dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_share"
+                                tools:ignore="VectorDrawableCompat" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_get_coupon_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/home_coupon_code_bg"
+                            >
+
+                            <ImageView
+                                android:id="@+id/iv_gift"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:src="@drawable/ic_gift"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:visibility="gone"
+
+                                />
+                            <ImageView
+                                android:id="@+id/vw"
+                                android:layout_width="0.5dp"
+                                android:layout_height="fill_parent"
+                                android:src="@drawable/dot_line"
+                                android:layout_toRightOf="@+id/iv_gift"
+                                android:layout_toLeftOf="@+id/bt_get_a_code"
+                                android:visibility="gone"
+                                />
+                            <!--android:layout_toRightOf="@+id/iv_gift"-->
+                            <Button
+
+                                android:id="@+id/bt_get_a_code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:text="Add to deals"
+                                android:textSize="13dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:textAllCaps="false"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/white" />
+                            <!-- android:layout_alignParentRight="true"-->
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <!--   <TextView
+                           android:id="@+id/tv_flat_diss"
+                           android:layout_width="fill_parent"
+                           android:layout_height="wrap_content"
+                           android:ellipsize="middle"
+                           android:singleLine="true"
+                           android:maxLength="13"
+                           android:text="Flat 20%"
+                           android:gravity="center_vertical"
+                           android:textSize="13dp"
+                           android:layout_centerVertical="true"
+                           android:layout_toLeftOf="@+id/bt_get_a_code"
+                           />
+
+                       <Button
+                           android:id="@+id/bt_get_a_code"
+                           android:layout_width="wrap_content"
+                           android:layout_height="35dp"
+                           android:background="@drawable/coupon_bg"
+                           android:gravity="center"
+                           android:text="View Coupon Code"
+                           android:textSize="13dp"
+                           android:padding="10dp"
+                           android:textAllCaps="false"
+                           android:layout_alignParentRight="true"
+                          android:layout_marginBottom="5dp"
+                           android:textColor="@color/white" />-->
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

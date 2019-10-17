@@ -24,11 +24,13 @@ import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.model.retalier_category_model;
 import com.desired.offermachi.retalier.presenter.DealsOftheDayPresenter;
 import com.desired.offermachi.retalier.view.adapter.AddDealsofDayAdapter;
+import com.desired.offermachi.retalier.view.adapter.AddDealsofDayAdapterNew;
 import com.desired.offermachi.retalier.view.adapter.DealsOfDayAdapter;
 import com.desired.offermachi.retalier.view.adapter.RetalierCategoryAdapter;
 
@@ -41,7 +43,8 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class RetalierAddDeals extends AppCompatActivity implements View.OnClickListener , DealsOftheDayPresenter.DealsOftheDay , NotificationCountPresenter.NotiUnReadCount {
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
-    private AddDealsofDayAdapter addDealsofDayAdapter;
+//    private AddDealsofDayAdapter addDealsofDayAdapter;
+    private AddDealsofDayAdapterNew addDealsofDayAdapterNew;
     private DealsOftheDayPresenter presenter;
     private String idholder,Offerid;
     ImageView imgNotiBell;
@@ -63,8 +66,9 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
             info=findViewById(R.id.info_id);
             info.setOnClickListener(this);
             product_recyclerview = findViewById(R.id.addtodeals_recycler_id);
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
-            product_recyclerview.setLayoutManager(gridLayoutManager);
+         product_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+         product_recyclerview.setHasFixedSize(true);
             product_recyclerview.setItemAnimator(new DefaultItemAnimator());
             notiCount = new NotificationCountPresenter(this,this);
             tvNotiCount = findViewById(R.id.txtMessageCount);
@@ -111,9 +115,9 @@ public class RetalierAddDeals extends AppCompatActivity implements View.OnClickL
         Toast.makeText(this, ""+response, Toast.LENGTH_SHORT).show();
     }
     @Override
-    public void success(ArrayList<DealsModel> response) {
-        addDealsofDayAdapter = new AddDealsofDayAdapter(getApplicationContext(), response);
-        product_recyclerview.setAdapter(addDealsofDayAdapter);
+    public void success(ArrayList<DealsModelNew> response) {
+        addDealsofDayAdapterNew = new AddDealsofDayAdapterNew(getApplicationContext(), response);
+        product_recyclerview.setAdapter(addDealsofDayAdapterNew);
     }
 
     @Override

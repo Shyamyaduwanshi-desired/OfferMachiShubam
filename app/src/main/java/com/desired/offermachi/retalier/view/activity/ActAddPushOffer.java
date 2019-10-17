@@ -194,6 +194,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
         categoryspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -206,9 +207,8 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
                     } else {
                         Toast.makeText(ActAddPushOffer.this, "Please connect to internet.", Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    failureBrand();
                 }
+
             }
 
             @Override
@@ -293,7 +293,7 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
 //            Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
 
             if (isNetworkConnected()) {
-                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2,offerLocalityId);
+                postpresenter.sentRequest(idholder,offerid,offertitle,brandid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2,offerLocalityId);
             }
 
         }

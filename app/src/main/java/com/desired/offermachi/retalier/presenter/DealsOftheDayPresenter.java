@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.model.DealsModel;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +30,7 @@ public class DealsOftheDayPresenter {
     }
 
     public interface DealsOftheDay{
-        void success(ArrayList<DealsModel> response);
+        void success(ArrayList<DealsModelNew> response);
         void Adddealsuccess(String response);
         void error(String response);
         void fail(String response);
@@ -39,7 +40,7 @@ public class DealsOftheDayPresenter {
         progress.setMessage("Get Deals of the Days Please Wait..");
         progress.setCancelable(false);
         progress.show();
-        final ArrayList<DealsModel> list = new ArrayList<>();//old retailer_deals_of_the_day
+        final ArrayList<DealsModelNew> list = new ArrayList<>();//old retailer_deals_of_the_day
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_deals_of_the_day_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -56,28 +57,30 @@ public class DealsOftheDayPresenter {
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
-                            DealsModel dealsModel=new DealsModel(
-                                    object.getString("id"),
-                                    object.getString("offer_id"),
-                                    object.getString("offer_title"),
-                                    object.getString("offer_category"),
-                                    object.getString("sub_category"),
-                                    object.getString("offer_type"),
-                                    object.getString("offer_type_name"),
-                                    object.getString("offer_value"),
-                                    object.getString("offer_details"),
-                                    object.getString("start_date"),
-                                    object.getString("end_date"),
-                                    object.getString("alltime"),
-                                    object.getString("description"),
-                                    object.getString("coupon_code"),
-                                    object.getString("posted_by"),
-                                    object.getString("status"),
-                                    object.getString("offer_brand_name"),
-                                    object.getString("deals_of_the_day_status"),
-                                    object.getString("offer_image"),
-                                    object.getString("qr_code_image")
-
+                            DealsModelNew dealsModel=new DealsModelNew(
+                                    object.optString("id"),
+                                    object.optString("offer_id"),
+                                    object.optString("offer_title"),
+                                    object.optString("offer_title_slug"),
+                                    object.optString("offer_category"),
+                                    object.optString("sub_category"),
+                                    object.optString("offer_type"),
+                                    object.optString("offer_type_name"),
+                                    object.optString("offer_value"),
+                                    object.optString("offer_details"),
+                                    object.optString("start_date"),
+                                    object.optString("end_date"),
+                                    object.optString("alltime"),
+                                    object.optString("description"),
+                                    object.optString("coupon_code"),
+                                    object.optString("posted_by"),
+                                    object.optString("status"),
+                                    object.optString("offer_brand_name"),
+                                    object.optString("favourite_status"),
+                                    object.optString("offer_image"),
+                                    object.optString("qr_code_image"),
+                                    object.optString("coupon_code_status"),
+                                    object.optString("shop_logo")
                             );
                             list.add(dealsModel);
 
@@ -116,7 +119,7 @@ public class DealsOftheDayPresenter {
         progress.setMessage("Get Deals of the Days Please Wait..");
         progress.setCancelable(false);
         progress.show();
-        final ArrayList<DealsModel> list = new ArrayList<>();
+        final ArrayList<DealsModelNew> list = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "retailer_add_to_deals_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -133,28 +136,30 @@ public class DealsOftheDayPresenter {
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
                             object = jsonArray.getJSONObject(count);
-                            DealsModel dealsModel=new DealsModel(
-                                    object.getString("id"),
-                                    object.getString("offer_id"),
-                                    object.getString("offer_title"),
-                                    object.getString("offer_category"),
-                                    object.getString("sub_category"),
-                                    object.getString("offer_type"),
-                                    object.getString("offer_type_name"),
-                                    object.getString("offer_value"),
-                                    object.getString("offer_details"),
-                                    object.getString("start_date"),
-                                    object.getString("end_date"),
-                                    object.getString("alltime"),
-                                    object.getString("description"),
-                                    object.getString("coupon_code"),
-                                    object.getString("posted_by"),
-                                    object.getString("status"),
-                                    object.getString("offer_brand_name"),
-                                    object.getString("deals_of_the_day_status"),
-                                    object.getString("offer_image"),
-                                    object.getString("qr_code_image")
-
+                            DealsModelNew dealsModel=new DealsModelNew(
+                                    object.optString("id"),
+                                    object.optString("offer_id"),
+                                    object.optString("offer_title"),
+                                    object.optString("offer_title_slug"),
+                                    object.optString("offer_category"),
+                                    object.optString("sub_category"),
+                                    object.optString("offer_type"),
+                                    object.optString("offer_type_name"),
+                                    object.optString("offer_value"),
+                                    object.optString("offer_details"),
+                                    object.optString("start_date"),
+                                    object.optString("end_date"),
+                                    object.optString("alltime"),
+                                    object.optString("description"),
+                                    object.optString("coupon_code"),
+                                    object.optString("posted_by"),
+                                    object.optString("status"),
+                                    object.optString("offer_brand_name"),
+                                    object.optString("favourite_status"),
+                                    object.optString("offer_image"),
+                                    object.optString("qr_code_image"),
+                                    object.optString("coupon_code_status"),
+                                    object.optString("shop_logo")
                             );
                             list.add(dealsModel);
 

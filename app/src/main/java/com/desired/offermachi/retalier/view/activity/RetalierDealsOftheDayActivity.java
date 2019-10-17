@@ -19,8 +19,10 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.presenter.DealsOftheDayPresenter;
+import com.desired.offermachi.retalier.view.adapter.DealsOfAdapterNew;
 import com.desired.offermachi.retalier.view.adapter.DealsOfDayAdapter;
 
 import java.util.ArrayList;
@@ -33,7 +35,8 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
 //    Button addnewdeals;
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
-    private DealsOfDayAdapter dealsOfDayAdapter;
+//    private DealsOfDayAdapter dealsOfDayAdapter;
+    private DealsOfAdapterNew dealsOfAdapterNew;
     private DealsOftheDayPresenter presenter;
     private String idholder;
     ImageView imgNotiBell;
@@ -61,8 +64,9 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
 
 
         product_recyclerview =findViewById(R.id.dealsoftheday_recycler_id);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
-        product_recyclerview.setLayoutManager(gridLayoutManager);
+        product_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+        product_recyclerview.setHasFixedSize(true);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
 
         imgNotiBell=findViewById(R.id.imgNotiBell);
@@ -110,9 +114,9 @@ public class RetalierDealsOftheDayActivity extends AppCompatActivity implements 
     }
 
     @Override
-    public void success(ArrayList<DealsModel> response) {
-        dealsOfDayAdapter = new DealsOfDayAdapter(getApplicationContext(), response);
-        product_recyclerview.setAdapter(dealsOfDayAdapter);
+    public void success(ArrayList<DealsModelNew> response) {
+        dealsOfAdapterNew = new DealsOfAdapterNew(getApplicationContext(), response);
+        product_recyclerview.setAdapter(dealsOfAdapterNew);
     }
 
     @Override

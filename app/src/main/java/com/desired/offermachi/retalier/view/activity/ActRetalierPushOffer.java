@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.FollowerModel;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
@@ -36,6 +37,7 @@ import com.desired.offermachi.retalier.presenter.FollowerPresenter;
 import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
 import com.desired.offermachi.retalier.view.adapter.MultiAdapter;
 import com.desired.offermachi.retalier.view.adapter.PushOfferAdapter;
+import com.desired.offermachi.retalier.view.adapter.PushOfferAdapterNew;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,8 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
 
     ImageView imageViewback;
     RecyclerView product_recyclerview;
-    private PushOfferAdapter pushOfferAdapter;
+//    private PushOfferAdapter pushOfferAdapter;
+    private PushOfferAdapterNew pushOfferAdapterNew;
     private MultiAdapter multiAdapter;
     private ViewOfferPresenter presenter;
     private FollowerPresenter followerpresenter;
@@ -78,8 +81,10 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
       tvNotiCount = findViewById(R.id.txtMessageCount);
       notiCount.NotificationUnreadCount(idholder);
 
-      GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
-      product_recyclerview.setLayoutManager(gridLayoutManager);
+      product_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+      product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+      product_recyclerview.setHasFixedSize(true);
+
       product_recyclerview.setItemAnimator(new DefaultItemAnimator());
 
    /*   if (isNetworkConnected()) {
@@ -148,9 +153,9 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void success(ArrayList<ViewOfferModel> response) {
-        pushOfferAdapter = new PushOfferAdapter(getApplicationContext(),response);
-        product_recyclerview.setAdapter(pushOfferAdapter);
+    public void success(ArrayList<DealsModelNew> response) {
+        pushOfferAdapterNew = new PushOfferAdapterNew(getApplicationContext(),response);
+        product_recyclerview.setAdapter(pushOfferAdapterNew);
     }
 
     @Override

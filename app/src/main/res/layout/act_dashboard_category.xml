@@ -30,12 +30,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="0dp"
                     android:gravity="center"/>
-
                 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:layout_alignParentRight="true"
-    >
+    android:layout_alignParentRight="true">
                 <ImageView
                     android:id="@+id/info_id"
                     android:layout_width="27dp"
@@ -101,7 +99,6 @@
         android:layout_above="@+id/bt_proceed"
         >
     </android.support.v7.widget.RecyclerView>
-
     <Button
         android:id="@+id/bt_proceed"
         android:layout_width="match_parent"

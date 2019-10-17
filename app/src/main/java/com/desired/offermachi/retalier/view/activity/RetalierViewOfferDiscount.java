@@ -22,9 +22,11 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
+import com.desired.offermachi.retalier.view.adapter.ExperieSoonAdapterNew;
 import com.desired.offermachi.retalier.view.adapter.ViewOfferDiscountAdapter;
 
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
 
     ImageView imageViewback,info;
     RecyclerView product_recyclerview;
-    private ViewOfferDiscountAdapter viewOfferAdapter;
+//    private ViewOfferDiscountAdapter viewOfferAdapter;
+    private ExperieSoonAdapterNew experieSoonAdapterNew;
     private ViewOfferPresenter presenter;
     private String idholder;
     ImageView imgNotiBell;
@@ -57,8 +60,9 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
         info=findViewById(R.id.info_id);
         info.setOnClickListener(this);
         product_recyclerview = (RecyclerView)findViewById(R.id.view_opffer_discount_recycler_id);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
-        product_recyclerview.setLayoutManager(gridLayoutManager);
+        product_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+        product_recyclerview.setHasFixedSize(true);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
 
         notiCount = new NotificationCountPresenter(this,this);
@@ -84,9 +88,9 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
     }
 
     @Override
-    public void success(ArrayList<ViewOfferModel> response) {
-        viewOfferAdapter = new ViewOfferDiscountAdapter(getApplicationContext(), response);
-        product_recyclerview.setAdapter(viewOfferAdapter);
+    public void success(ArrayList<DealsModelNew> response) {
+        experieSoonAdapterNew = new ExperieSoonAdapterNew(getApplicationContext(), response);
+        product_recyclerview.setAdapter(experieSoonAdapterNew);
     }
 
 

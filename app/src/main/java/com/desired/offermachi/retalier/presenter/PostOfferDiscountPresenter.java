@@ -29,6 +29,7 @@ public class PostOfferDiscountPresenter {
         this.postOfferDiscount = postOfferDiscount;
     }
 
+
     public interface PostOfferDiscount{
         void successoffer(String response);
         void successGenerate(String response);

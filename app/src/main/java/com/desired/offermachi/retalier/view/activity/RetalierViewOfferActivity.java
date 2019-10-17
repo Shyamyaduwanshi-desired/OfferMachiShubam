@@ -68,8 +68,9 @@ public class RetalierViewOfferActivity extends AppCompatActivity implements  Not
 
         product_recyclerview = (RecyclerView)findViewById(R.id.viewalloffer_recycler_id);
         viewOfferAdapter = new ViewOfferDiscountAdapter(getApplicationContext(), (ArrayList<ViewOfferModel>) viewcategorylistdataset);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
-        product_recyclerview.setLayoutManager(gridLayoutManager);
+        product_recyclerview.setLayoutManager(new LinearLayoutManager(this));
+        product_recyclerview.setItemAnimator(new DefaultItemAnimator());
+        product_recyclerview.setHasFixedSize(true);
         product_recyclerview.setItemAnimator(new DefaultItemAnimator());
         product_recyclerview.setAdapter(viewOfferAdapter);
     }

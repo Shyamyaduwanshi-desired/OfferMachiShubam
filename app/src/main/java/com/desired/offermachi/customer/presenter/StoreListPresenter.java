@@ -659,7 +659,4 @@ public class StoreListPresenter {
             progress.dismiss();
     }
 
-
-
-
 }

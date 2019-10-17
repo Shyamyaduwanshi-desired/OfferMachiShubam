@@ -29,12 +29,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.desired.offermachi.R;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModel;
+import com.desired.offermachi.retalier.model.DealsModelNew;
 import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.UserModel;
+import com.desired.offermachi.retalier.view.adapter.DealsOfAdapterNew;
 import com.desired.offermachi.retalier.view.adapter.DealsOfDayAdapter;
+import com.desired.offermachi.retalier.view.adapter.ExperieSoonAdapterNew;
 import com.desired.offermachi.retalier.view.adapter.ExpiressoonAdapter;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,14 +48,15 @@ import java.util.Map;
 public class DasBoardMenuFragment extends Fragment {
     View view;
     String idholder;
-    private ArrayList<DealsModel> alDealModel;
+    private ArrayList<DealsModelNew> alDealModel;
     private ArrayList<ExpiressoonModel> expiressoonModel;
     private ProgressDialog pDialog;
     TextView activeoffer,followerscount,dealtoday,expiressoon;
     private static final String ROOT_URL = "http://offermachi.in/api/get_retailer_dashboard";
     RecyclerView deals_day_recyclerView,expiressoon_recyclerview;
-    private DealsOfDayAdapter dealsOfDayAdapter;
-    private ExpiressoonAdapter expiressoonAdapter;
+//    private DealsOfDayAdapter dealsOfDayAdapter;
+    private DealsOfAdapterNew dealsOfAdapterNew ;
+    private ExperieSoonAdapterNew expiressoonAdapter;
 
     public DasBoardMenuFragment() {
     }
@@ -62,8 +64,7 @@ public class DasBoardMenuFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.retalier_dashboard_fragment, container, false);
-        alDealModel=new ArrayList<DealsModel>();
-        expiressoonModel=new ArrayList<ExpiressoonModel>();
+        alDealModel=new ArrayList<DealsModelNew>();
         init();
         return view;
     }
@@ -78,14 +79,17 @@ public class DasBoardMenuFragment extends Fragment {
         expiressoon = (TextView)view.findViewById(R.id.expires_count_id);
 
         deals_day_recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview_deal_today_id);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        deals_day_recyclerView.setLayoutManager(gridLayoutManager);
         deals_day_recyclerView.setItemAnimator(new DefaultItemAnimator());
         deals_day_recyclerView.setNestedScrollingEnabled(true);
+        deals_day_recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        deals_day_recyclerView.setItemAnimator(new DefaultItemAnimator());
+        deals_day_recyclerView.setHasFixedSize(true);
+
 
         expiressoon_recyclerview=(RecyclerView)view.findViewById(R.id.recyclerview_expiresson_id);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false);
-        expiressoon_recyclerview.setLayoutManager(gridLayoutManager1);
+        expiressoon_recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        expiressoon_recyclerview.setItemAnimator(new DefaultItemAnimator());
+        expiressoon_recyclerview.setHasFixedSize(true);
         expiressoon_recyclerview.setItemAnimator(new DefaultItemAnimator());
         expiressoon_recyclerview.setNestedScrollingEnabled(true);
 
@@ -135,10 +139,11 @@ public class DasBoardMenuFragment extends Fragment {
                                     for (int count = 0; count < jsonArray2.length(); count++) {
                                         object2 = jsonArray2.getJSONObject(count);
 
-                                        DealsModel dealsModel=new DealsModel(
+                                        DealsModelNew dealsModel=new DealsModelNew(
                                                 object2.optString("id"),
                                                 object2.optString("offer_id"),
                                                 object2.optString("offer_title"),
+                                                object2.optString("offer_title_slug"),
                                                 object2.optString("offer_category"),
                                                 object2.optString("sub_category"),
                                                 object2.optString("offer_type"),
@@ -153,9 +158,31 @@ public class DasBoardMenuFragment extends Fragment {
                                                 object2.optString("posted_by"),
                                                 object2.optString("status"),
                                                 object2.optString("offer_brand_name"),
-                                                object2.optString("deals_of_the_day_status"),
+                                                object2.optString("favourite_status"),
                                                 object2.optString("offer_image"),
-                                                object2.optString("qr_code_image")
+                                                object2.optString("qr_code_image"),
+                                                object2.optString("coupon_code_status"),
+                                                object2.optString("shop_logo")
+//                                                object2.optString("id"),
+//                                                object2.optString("offer_id"),
+//                                                object2.optString("offer_title"),
+//                                                object2.optString("offer_category"),
+//                                                object2.optString("sub_category"),
+//                                                object2.optString("offer_type"),
+//                                                object2.optString("offer_type_name"),
+//                                                object2.optString("offer_value"),
+//                                                object2.optString("offer_details"),
+//                                                object2.optString("start_date"),
+//                                                object2.optString("end_date"),
+//                                                object2.optString("alltime"),
+//                                                object2.optString("description"),
+//                                                object2.optString("coupon_code"),
+//                                                object2.optString("posted_by"),
+//                                                object2.optString("status"),
+//                                                object2.optString("offer_brand_name"),
+//                                                object2.optString("deals_of_the_day_status"),
+//                                                object2.optString("offer_image"),
+//                                                object2.optString("qr_code_image")
 
                                         );
                                         alDealModel.add(dealsModel);
@@ -165,30 +192,53 @@ public class DasBoardMenuFragment extends Fragment {
                                     for (int count = 0; count < jsonArray3.length(); count++) {
                                         object3 = jsonArray3.getJSONObject(count);
 
-                                        ExpiressoonModel expireModel=new ExpiressoonModel(
-                                                object3.optString("id"),
-                                                object3.optString("offer_id"),
-                                                object3.optString("offer_title"),
-                                                object3.optString("offer_category"),
-                                                object3.optString("sub_category"),
-                                                object3.optString("offer_type"),
-                                                object3.optString("offer_type_name"),
-                                                object3.optString("offer_value"),
-                                                object3.optString("offer_details"),
-                                                object3.optString("start_date"),
-                                                object3.optString("end_date"),
-                                                object3.optString("alltime"),
-                                                object3.optString("description"),
-                                                object3.optString("coupon_code"),
-                                                object3.optString("posted_by"),
-                                                object3.optString("status"),
-                                                object3.optString("offer_brand_name"),
-                                                object3.optString("deals_of_the_day_status"),
-                                                object3.optString("offer_image"),
-                                                object3.optString("qr_code_image")
+                                         DealsModelNew dealsModelNew=new DealsModelNew(
+                                                 object3.optString("id"),
+                                                 object3.optString("offer_id"),
+                                                 object3.optString("offer_title"),
+                                                 object3.optString("offer_title_slug"),
+                                                 object3.optString("offer_category"),
+                                                 object3.optString("sub_category"),
+                                                 object3.optString("offer_type"),
+                                                 object3.optString("offer_type_name"),
+                                                 object3.optString("offer_value"),
+                                                 object3.optString("offer_details"),
+                                                 object3.optString("start_date"),
+                                                 object3.optString("end_date"),
+                                                 object3.optString("alltime"),
+                                                 object3.optString("description"),
+                                                 object3.optString("coupon_code"),
+                                                 object3.optString("posted_by"),
+                                                 object3.optString("status"),
+                                                 object3.optString("offer_brand_name"),
+                                                 object3.optString("favourite_status"),
+                                                 object3.optString("offer_image"),
+                                                 object3.optString("qr_code_image"),
+                                                 object3.optString("coupon_code_status"),
+                                                 object3.optString("shop_logo")
+//                                                object3.optString("id"),
+//                                                object3.optString("offer_id"),
+//                                                object3.optString("offer_title"),
+//                                                object3.optString("offer_category"),
+//                                                object3.optString("sub_category"),
+//                                                object3.optString("offer_type"),
+//                                                object3.optString("offer_type_name"),
+//                                                object3.optString("offer_value"),
+//                                                object3.optString("offer_details"),
+//                                                object3.optString("start_date"),
+//                                                object3.optString("end_date"),
+//                                                object3.optString("alltime"),
+//                                                object3.optString("description"),
+//                                                object3.optString("coupon_code"),
+//                                                object3.optString("posted_by"),
+//                                                object3.optString("status"),
+//                                                object3.optString("offer_brand_name"),
+//                                                object3.optString("deals_of_the_day_status"),
+//                                                object3.optString("offer_image"),
+//                                                object3.optString("qr_code_image")
 
                                         );
-                                        expiressoonModel.add(expireModel);
+                                        alDealModel.add(dealsModelNew);
                                     }
                                 }
                             } catch (JSONException e) {
@@ -222,9 +272,9 @@ public class DasBoardMenuFragment extends Fragment {
 
     private void displayData1() {
 
-        dealsOfDayAdapter = new DealsOfDayAdapter(getContext(), alDealModel);
-        deals_day_recyclerView.setAdapter(dealsOfDayAdapter);
-        if (dealsOfDayAdapter.getItemCount() == 0) {
+        dealsOfAdapterNew = new DealsOfAdapterNew(getContext(), alDealModel);
+        deals_day_recyclerView.setAdapter(dealsOfAdapterNew);
+        if (dealsOfAdapterNew.getItemCount() == 0) {
             Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();
         } else {
 
@@ -233,7 +283,7 @@ public class DasBoardMenuFragment extends Fragment {
     }
     private void displayData2 () {
 
-        expiressoonAdapter = new ExpiressoonAdapter(getContext(), expiressoonModel);
+        expiressoonAdapter  = new ExperieSoonAdapterNew(getContext(), alDealModel);
         expiressoon_recyclerview.setAdapter(expiressoonAdapter);
         if (expiressoonAdapter.getItemCount() == 0) {
             Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();

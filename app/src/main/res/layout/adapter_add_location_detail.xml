@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    android:id="@+id/ly_main"
+    android:background="@drawable/location_bg"
+    android:padding="10dp"
+    android:elevation="5dp"
+  >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/edit_background"
+        >
+        <EditText
+            android:id="@+id/et_loction_name"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Store Location name"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="@color/darkblue"
+            android:layout_toLeftOf="@+id/rl_add_location"
+
+            />
+        <RelativeLayout
+            android:id="@+id/rl_add_location"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/add"
+                android:layout_centerVertical="true"
+                tools:ignore="VectorDrawableCompat" />
+        </RelativeLayout>
+        <!--  <TextView
+              android:id="@+id/addclickbutton_id"
+              android:l50dpayout_width="match_parent"
+              android:layout_height="fill_parent"
+              android:drawableRight="@drawable/add"
+              android:text="Location for brand exposure"
+              android:imeOptions="actionNext"
+              android:gravity="center_vertical"
+              android:paddingLeft="20dp"
+              android:paddingRight="20dp"
+              android:textSize="19dp"
+              />-->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/edit_background"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        >
+        <EditText
+            android:id="@+id/et_contact_person"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Contact Person Name"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="@color/darkblue"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/edit_background"
+        android:layout_marginTop="5dp"
+        android:visibility="visible"
+        >
+        <EditText
+            android:id="@+id/et_address"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Store Address"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:textColor="@color/darkblue"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/edit_background"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+        <EditText
+            android:id="@+id/et_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:hint="Phone Number"
+            android:background="@null"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingLeft="10dp"
+            android:textColor="@color/darkblue"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

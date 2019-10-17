@@ -22,7 +22,7 @@
                android:layout_below="@+id/faq_linear_id"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:text="Short By"
+               android:text="Sort By"
                android:gravity="center"
                android:textStyle="bold"
                android:textColor="@color/red"

@@ -65,4 +65,7 @@
         <item name="android:minHeight">18dp</item>
         <item name="android:maxHeight">18dp</item>
     </style>
+    <style name="GreenCheck">
+        <item name="colorAccent">#00E500</item>
+    </style>
 </resources>

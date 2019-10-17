@@ -88,6 +88,10 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapActivity.this, SmartShoppingRemoveActivity.class);
+                intent.putExtra("lat",""+lati);
+                intent.putExtra("longi",""+longi);
+                intent.putExtra("distance",""+dist);
+                intent.putExtra("catIds",catid);
                 startActivity(intent);
                 finish();
             }
@@ -113,7 +117,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         buildGoogleApiClient();
+
         setCurLoc();
+
     }
 
     @Override
@@ -178,6 +184,9 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
 
 //        mMapSession.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,16f));
 //        mMapSession.getUiSettings().setZoomControlsEnabled(true);
+        txtselectkilometer.setText("1 Km");
+        dist = 1;
+        drawCircle();
 
     }
     public void setCurLoc()

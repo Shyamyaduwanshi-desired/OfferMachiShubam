@@ -22,6 +22,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
     private final Context mContext;
 
     private ItemClick itemClick;
+    private boolean isSelectedAll;
+    private boolean clickItem;
+
     public LocationAdapter(Context context, ArrayList<RetailerLocation> data, ItemClick cateClick) {
         this.arMultiLoc = data;
         this.mContext = context;
@@ -47,6 +50,24 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
 
         TextView textView = holder.textView;
         textView.setText(arMultiLoc.get(listPosition).getLocalityName());
+        if(!clickItem){
+            if (!isSelectedAll) {
+                holder.ivCheck.setImageResource(R.drawable.ic_un_check_box_40dp);
+                for (int i = 0; i < arMultiLoc.size(); i++) {
+                    arMultiLoc.get(i).setSelected(false);
+
+                    //  arMultiLoc.get(i).setSelected(false);
+                }
+                // holder.ivCheck.setChecked(false);
+            } else {
+                holder.ivCheck.setImageResource(R.drawable.ic_check_box_40dp);
+                for (int i = 0; i < arMultiLoc.size(); i++) {
+                    //   if (arMultiLoc.get(i).isSelected()) {
+                    arMultiLoc.get(i).setSelected(true);
+                }
+
+            }
+        }
         if(arMultiLoc.get(listPosition).isSelected())
         {
             holder.ivCheck.setImageResource(R.drawable.ic_check_box_40dp);
@@ -58,6 +79,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
         holder.rlCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickItem=true;
+
                 itemClick.onLocationClick(arMultiLoc.get(listPosition));
             }
         });
@@ -94,6 +117,20 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyView
     public interface ItemClick{
         void onLocationClick(RetailerLocation RetailerLocation);
     }
+
+    public void selectAll() {
+        isSelectedAll = true;
+        clickItem=false;
+        notifyDataSetChanged();
+    }
+
+    public void unselectall() {
+        isSelectedAll = false;
+        clickItem=false;
+
+        notifyDataSetChanged();
+    }
+
 }
 
 

@@ -119,7 +119,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
 
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
-                presenter.ViewAllCoupons(idholder);
+                presenter.ViewAllCoupons(idholder,"");
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
@@ -145,7 +145,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         public void onReceive(Context context, Intent intent) {
             if (getActivity()!=null) {
                 if (isNetworkConnected()) {
-                    presenter.ViewAllCoupons(idholder);
+                    presenter.ViewAllCoupons(idholder,"");
                 } else {
                     showAlert("Please connect to internet.", R.style.DialogAnimation);
                 }
@@ -156,6 +156,8 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         @Override
         public void onReceive(Context context, Intent intent) {
             String Catid = intent.getStringExtra("catid");
+         //   presenter.ViewAllCoupons(idholder,"");
+
 //            presenter.DealFilter(idholder,Catid);
 //            Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
         }
@@ -176,6 +178,8 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                 public void onClick(View v) {
                     dialog.dismiss();
                     String Status="1";
+                    presenter.ViewAllCoupons(idholder,Status);
+
 //                    presenter.ShortBy(idholder,Status);
 //                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
@@ -186,6 +190,8 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                 public void onClick(View v) {
                     dialog.dismiss();
                     String Status="2";
+                    presenter.ViewAllCoupons(idholder,Status);
+
 //                    presenter.ShortBy(idholder,Status);
 //                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
@@ -196,24 +202,18 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
                 public void onClick(View v) {
                     dialog.dismiss();
                     String Status="3";
+                    presenter.ViewAllCoupons(idholder,Status);
+
 //                    presenter.ShortBy(idholder,Status);
 //                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
                 }
             });
-            rdthree.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-                    String Status="4";
-//                    presenter.ShortBy(idholder,Status);
-//                    Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
 
-                }
-            });
             dialog.show();
 
-        }else if (v==rlFilter){
+        }
+        else if (v==rlFilter){
             edTxtSearch.setText("");
             Intent intent = new Intent(getContext(), FilterShowActivity.class);//8
             startActivity(intent);
@@ -234,7 +234,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         //Toast.makeText(getActivity(), ""+response, Toast.LENGTH_SHORT).show();
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
-                presenter.ViewAllCoupons(idholder);
+                presenter.ViewAllCoupons(idholder,"");
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
@@ -245,7 +245,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
     public void getsuc(String response) {
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
-                presenter.ViewAllCoupons(idholder);
+                presenter.ViewAllCoupons(idholder,"");
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }

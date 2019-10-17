@@ -3,6 +3,7 @@ package com.desired.offermachi.customer.presenter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,7 +45,7 @@ public class MyCouponPresenter {
         void fail(String response);
     }
 
-    public void ViewAllCoupons(final String userid) {
+    public void ViewAllCoupons(final String userid, String sortByStatus) {
         if(!((Activity) context).isFinishing())
         {
             progress = new ProgressDialog(context);
@@ -116,6 +117,8 @@ public class MyCouponPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
+                params.put("sort_by", sortByStatus);
+                Log.e("MyCoupens...",params.toString());
                 return params;
             }
         };

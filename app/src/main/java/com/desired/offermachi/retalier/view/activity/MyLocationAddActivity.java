@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -85,6 +86,7 @@ public class MyLocationAddActivity extends AppCompatActivity implements View.OnC
     Button btn_add;
     private String allAddressId = "";
     private EditText storeaddress;
+    CheckBox cb_selectall;
 
 
     @Override
@@ -101,6 +103,7 @@ public class MyLocationAddActivity extends AppCompatActivity implements View.OnC
         UserModel user = SharedPrefManagerLogin.getInstance(this).getUser();
         idholder = user.getId();
         recyclerView = (RecyclerView) findViewById(R.id.rv_location_list);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MyLocationAddActivity.this));
 
@@ -247,6 +250,14 @@ public class MyLocationAddActivity extends AppCompatActivity implements View.OnC
         if (v == tvMultiLocation) {
 //            selectcategory();
             MulitiSelectionDlg();
+        }if (v == cb_selectall) {
+//            selectcategory();
+            if(cb_selectall.isChecked()){
+                multiLocAdpter.selectAll();
+            }
+            else {
+                multiLocAdpter.unselectall();
+            }
         }
         if (v == btn_add) {
             JSONArray jsonArrayLocation = new JSONArray();
@@ -291,7 +302,8 @@ public class MyLocationAddActivity extends AppCompatActivity implements View.OnC
         multipleLocDlg.setContentView(R.layout.multiple_location_selection_dlg);
         multipleLocDlg.setTitle("Select Store Location Dialog");
         rlStoreMultiLocation = multipleLocDlg.findViewById(R.id.cv_location);
-
+        cb_selectall =  multipleLocDlg.findViewById(R.id.cb_selectall);
+        cb_selectall.setOnClickListener(this);
         btnOkay = multipleLocDlg.findViewById(R.id.bt_proceed);
         TextView  tv_selectAll= multipleLocDlg.findViewById(R.id.tv_selectAll);
         tv_selectAll.setOnClickListener(new View.OnClickListener() {
@@ -444,6 +456,7 @@ public class MyLocationAddActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onMultipleLocClick(CityBean cityBean) {
+        cb_selectall.setChecked(false);
         for (int i = 0; i < arLocation.size(); i++) {
             if (arLocation.get(i).getId() == cityBean.getId()) {
                 if (arLocation.get(i).isSelected()) {

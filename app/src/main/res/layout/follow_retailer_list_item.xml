@@ -55,7 +55,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/myvegpizza" />
+                    android:src="@drawable/logooffermachi" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,7 +88,7 @@
                 android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:src="@drawable/myvegpizza"/>
+                android:src="@drawable/logooffermachi"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

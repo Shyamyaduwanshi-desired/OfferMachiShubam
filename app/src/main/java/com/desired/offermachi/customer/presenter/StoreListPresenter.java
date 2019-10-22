@@ -64,10 +64,11 @@ public class StoreListPresenter {
                     int status = reader.getInt("status");
                     if (status == 200) {
                         String result = reader.getString("result");
-                        JSONArray jsonArray = new JSONArray(result);
+                        JSONObject jsonArray = new JSONObject(result);
+                        JSONArray jsonArray1 =jsonArray.getJSONArray("retailers");
                         JSONObject object;
-                        for (int count = 0; count < jsonArray.length(); count++) {
-                            object = jsonArray.getJSONObject(count);
+                        for (int count = 0; count < jsonArray1.length(); count++) {
+                            object = jsonArray1.getJSONObject(count);
                             StoreModel storeModel=new StoreModel(
                                     object.getString("id"),
                                     object.getString("shop_name"),

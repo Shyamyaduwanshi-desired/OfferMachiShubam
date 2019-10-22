@@ -87,6 +87,7 @@ public class ActDashboardCategory extends AppCompatActivity implements View.OnCl
         if (v==imageViewback){
             onBackPressed();
         }
+
         else if (v==btProceed){
             getAllSelectedId();
         }else if(v==info){

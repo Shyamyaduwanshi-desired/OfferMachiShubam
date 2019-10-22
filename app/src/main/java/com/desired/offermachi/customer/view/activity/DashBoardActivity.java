@@ -27,6 +27,7 @@ package com.desired.offermachi.customer.view.activity;
         import android.support.v4.app.FragmentManager;
         import android.support.v4.app.FragmentTransaction;
         import android.support.v4.content.ContextCompat;
+        import android.support.v4.content.LocalBroadcastManager;
         import android.support.v4.view.GravityCompat;
         import android.support.v4.widget.DrawerLayout;
         import android.support.v7.app.ActionBarDrawerToggle;
@@ -1218,6 +1219,8 @@ public class DashBoardActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+
         checkFlag=false;
         if(locationProvider!=null) {
             locationProvider.stopTrackingLocation();
@@ -1292,8 +1295,16 @@ public class DashBoardActivity extends AppCompatActivity
                 lati = "" + latLng.latitude;
                 longi = "" + latLng.longitude;
                 sCurrentLocation = addressname;
-                Toast.makeText(this, ""+addressname+" latitude= "+latitude+" longitude= "+longitude, Toast.LENGTH_SHORT).show();
-                RefreshLocWithHomeView(1);
+                Toast.makeText(this, ""+addressname+" latitude= "+latitude+" longitude= "+longitude+""+sCurrentLocation, Toast.LENGTH_SHORT).show();
+              //  RefreshLocWithHomeView(1);
+                UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation,"");//static
+
+                Intent intent=new Intent("Refresh");
+            /*    intent.putExtra("catid",categoryListModel.getCatid());
+                intent.putExtra("followstatus",followstatus);
+                intent.putExtra("pos",i);*/
+                LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+
 //                if (isNetworkConnected()) {
 //                    presenter.getVendor(latitude, longitude);
 //                } else {

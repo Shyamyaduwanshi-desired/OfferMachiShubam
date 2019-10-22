@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,7 +28,9 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.retalier.constant.AppData;
+import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModelNew;
+import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -45,6 +48,8 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
     private ArrayList<DealsModelNew> selectCategoryModelArrayList;
     private Context mContext;
     private String Favstatus;
+    private String idholder;
+
     AppData appdata;
 
     public ExperieSoonAdapterNew(Context context, ArrayList<DealsModelNew> selectCategoryModelArrayList) {
@@ -94,6 +99,19 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
             holder.likeimg.setImageResource(R.drawable.heart);
         }
 
+//        if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
+//            holder.productbutton.setText("View Coupon Code");//View Coupon Code
+//            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
+//            holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
+//        }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
+//            holder.productbutton.setText("Redeemed");
+//        }else{
+//            holder.productbutton.setText("Get Coupon Code");//Get Coupon Code
+//            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
+//            holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
+//        }
+
+
         Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
         if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
         }else{
@@ -111,7 +129,68 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
             }
         });
 
+        holder.productbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext, RetalierProductActivity.class);
+                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(myIntent);
 
+            }
+        });
+
+        holder.cv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext, RetalierProductActivity.class);
+                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(myIntent);
+
+            }
+        });
+
+
+
+//        holder.productbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                UserModel user = SharedPrefManagerLogin.getInstance(mContext).getUser();
+//                idholder= user.getId();
+//                String couponstatus=selectCategoryModel.getOfferCouponCodeStatus();
+//                if (couponstatus.equals("0")){
+//                    couponstatus="1";
+//                    getcoupon(idholder,selectCategoryModel.getId(),couponstatus);
+//
+//                }else if (couponstatus.equals("1")){
+//                    final Dialog dialog = new Dialog((Activity) v.getContext());
+//                    dialog.setContentView(R.layout.coupon_code_activity);
+//                    dialog.setTitle("Custom Dialog");
+//                    ImageView image=(ImageView)dialog.findViewById(R.id.qr_code_img_id);
+//                    if(selectCategoryModel.getOfferqrcodeimage().equals("")){
+//                    }else{
+//                        Picasso.get().load(selectCategoryModel.getOfferqrcodeimage()).networkPolicy(NetworkPolicy.NO_CACHE)
+//                                .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(image);
+//                    }
+//                    Button button=(Button)dialog.findViewById(R.id.coupon_button_apply_id);
+//                    button.setText(selectCategoryModel.getCoupon_code());
+//                    TextView textView=(TextView)dialog.findViewById(R.id.coupon_ok_id);
+//                    textView.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            dialog.dismiss();
+//                        }
+//
+//                    });
+//
+//                    dialog.show();
+//
+//                }else if (couponstatus.equals("2")){
+//
+//                }
+//            }
+//        });
 
 //        holder.rlLike.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -168,6 +247,8 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
         TextView productname,productdate/*,offertype*/,tvDsc;
         RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
+        Button productbutton ;
+        CardView cv_image;
 //        AndroidLikeButton ivLikeBtn;
 
         public MyViewHolder(View itemView) {
@@ -179,7 +260,9 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
             productdate = itemView.findViewById(R.id.tv_prod_date);
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
-            productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
+            productbutton=itemView.findViewById(R.id.bt_get_a_code_id);
+            productbuttonlayout=itemView.findViewById(R.id.bt_get_acoupon_code);
+            cv_image=itemView.findViewById(R.id.cv_image);
 
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);

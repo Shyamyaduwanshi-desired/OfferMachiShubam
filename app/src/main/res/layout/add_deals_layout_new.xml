@@ -39,7 +39,7 @@
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/electronics" />
+                    android:src="@drawable/logooffermachi" />
                 <TextView
                     android:id="@+id/tv_flat_discount"
                     android:layout_width="wrap_content"
@@ -250,13 +250,12 @@
                                 />
                             <!--android:layout_toRightOf="@+id/iv_gift"-->
                             <Button
-                                android:visibility="gone"
-                                android:id="@+id/bt_get_a_code"
+                                android:id="@+id/bt_get_a_code_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
                                 android:background="@null"
                                 android:gravity="center"
-                                android:text="Add to deals"
+                                android:text="view Details"
                                 android:textSize="13dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginRight="5dp"

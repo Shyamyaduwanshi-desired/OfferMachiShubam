@@ -39,7 +39,7 @@
                     android:scaleType="centerCrop"
                     android:adjustViewBounds="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/electronics" />
+                    android:src="@drawable/logooffermachi" />
                 <TextView
                     android:id="@+id/tv_flat_discount"
                     android:layout_width="wrap_content"

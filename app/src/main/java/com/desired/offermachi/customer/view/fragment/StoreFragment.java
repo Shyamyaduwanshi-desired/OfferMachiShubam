@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -106,6 +109,21 @@ RelativeLayout rlFilter,rlSortBy;
         edTxtSearch=v.findViewById(R.id.et_search);
         rlFilter=v.findViewById(R.id.rl_filter);
         rlSortBy=v.findViewById(R.id.rl_shorted_by);
+
+        FloatingActionButton fab =v.findViewById(R.id.floting_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment someFragment = new StoreFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.framelayout_id, someFragment ); // give your fragment container id in first parameter
+                transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
+                transaction.commit();
+
+            }
+        });
+
 
         rlFilter.setOnClickListener(this);
         rlSortBy.setOnClickListener(this);

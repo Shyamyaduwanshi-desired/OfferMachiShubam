@@ -37,7 +37,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="1dp"
-                    android:src="@drawable/brandfirst" />
+                    android:src="@drawable/logooffermachi" />
                 <TextView
                     android:id="@+id/store_name_id"
                     android:layout_width="wrap_content"

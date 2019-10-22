@@ -8,7 +8,10 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,6 +34,7 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerFeedsPresenter;
 import com.desired.offermachi.customer.view.activity.ActFeedsFilterShow;
+import com.desired.offermachi.customer.view.activity.SearchActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
@@ -84,6 +88,8 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
 //                adpt.filter(searchText);
             }
         });
+
+
     }
 
     public void CallAPI(int i)
@@ -113,6 +119,22 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         edTxtSearch=view.findViewById(R.id.et_search);
         rlFilter=view.findViewById(R.id.rl_filter);
         rlSortBy=view.findViewById(R.id.rl_shorted_by);
+
+
+        FloatingActionButton fab =view.findViewById(R.id.floting_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Fragment someFragment = new FeedsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.framelayout_id, someFragment ); // give your fragment container id in first parameter
+                transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
+                transaction.commit();
+
+            }
+        });
+
 
         rlFilter.setOnClickListener(this);
         rlSortBy.setOnClickListener(this);

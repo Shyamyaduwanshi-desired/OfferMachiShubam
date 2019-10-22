@@ -236,7 +236,6 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
             productimg = itemView.findViewById(R.id.iv_image);
             productname =  itemView.findViewById(R.id.tv_product_name);
             tvDsc =  itemView.findViewById(R.id.tv_prod_dsc);
@@ -245,7 +244,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_a_code);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
-            removebutton=itemView.findViewById(R.id.remove_button_id);
+            removebutton=itemView.findViewById(R.id.remove_smart_button_id);
 
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);

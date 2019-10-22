@@ -40,7 +40,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="130dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/electronics"
+                    android:src="@drawable/logooffermachi"
                     android:layout_gravity="start"/>
                 <TextView
                     android:id="@+id/tv_flat_discount"
@@ -317,7 +317,7 @@
                             android:layout_centerVertical="true"
                             >
                             <Button
-                                android:id="@+id/remove_button_id"
+                                android:id="@+id/remove_smart_button_id"
                                 android:layout_width="110dp"
                                 android:layout_height="35dp"
                                 android:background="@drawable/remove_button_background"

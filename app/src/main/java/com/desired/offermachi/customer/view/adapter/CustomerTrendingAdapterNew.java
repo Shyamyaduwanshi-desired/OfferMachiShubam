@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -69,9 +70,10 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     public void onBindViewHolder(final CustomerTrendingAdapterNew.MyViewHolder holder, final int i) {
         final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
+//        holder.offertype.setText(selectCategoryModel.getOffertype());
         holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
 
-//        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
+        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
 
 //        String text = "<font color=#cc0029>First Color</font> <font color=#ffcc00>Second Color</font>";
 //        yourtextview.setText(Html.fromHtml(text));
@@ -128,6 +130,19 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
             }
         });
+
+
+        holder.cv_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext, ProductActivity.class);
+                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(myIntent);
+
+            }
+        });
+
         holder.productbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,10 +235,11 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
      //   public CardView categorylinear;
         ImageView productimg,likeimg,ivStoreLogo;
-        TextView productname,productdate/*,offertype*/,tvDsc;
+        TextView productname,productdate,offertype,tvDsc;
         Button productbutton;
         RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
+        CardView cv_image;
 //        AndroidLikeButton ivLikeBtn;
 
         public MyViewHolder(View itemView) {
@@ -235,10 +251,10 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             productdate = itemView.findViewById(R.id.tv_prod_date);
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
-            productbutton=itemView.findViewById(R.id.bt_get_a_code);
+            productbutton=itemView.findViewById(R.id.bt_get_acoupon_code);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
-
-//            offertype=itemView.findViewById(R.id.tv_flat_diss);
+            cv_image=itemView.findViewById(R.id.cv_image);
+            offertype=itemView.findViewById(R.id.tv_flat_discount);
             likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);
 //            ivLikeBtn=itemView.findViewById(R.id.bt_like);

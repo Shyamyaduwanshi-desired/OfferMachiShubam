@@ -292,7 +292,7 @@
             android:layout_height="100dp"
             android:background="@drawable/simple_background"
             android:hint="Your Request..."
-            android:textColor="#013893"
+            android:textColor="@color/purple"
             android:maxLength="150"
             android:padding="10dp"
             android:gravity="center_vertical|top"

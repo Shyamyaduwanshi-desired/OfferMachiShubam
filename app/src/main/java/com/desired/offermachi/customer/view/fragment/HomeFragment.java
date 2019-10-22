@@ -279,6 +279,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         }
     };
 
+    public BroadcastReceiver getAllReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String fav = intent.getStringExtra("fav");
+            String offerid = intent.getStringExtra("offerid");
+            presenter.GetAllMultipleCateList(catid,idholder);
+        }
+    };
+
     public BroadcastReceiver StoreReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

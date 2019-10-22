@@ -16,7 +16,7 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:background="@drawable/store"/>
+                android:background="@drawable/logooffermachi"/>
             <LinearLayout
                 android:id="@+id/SliderDots"
                 android:layout_width="wrap_content"
@@ -31,7 +31,6 @@
                 android:id="@+id/btnfollow"
                 android:layout_width="120dp"
                 android:layout_height="23dp"
-                android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/SliderDots"
                 android:background="@drawable/view_background"
                 android:gravity="center"
@@ -39,6 +38,8 @@
                 android:paddingRight="10dp"
                 android:text="Unfollow"
                 android:textColor="@color/white"
+                android:layout_marginTop="120dp"
+                android:layout_marginLeft="120dp"
                 android:textSize="12dp" />
         </RelativeLayout>
     </LinearLayout>
@@ -46,7 +47,7 @@
         android:id="@+id/storelogothumb"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:src="@drawable/store"
+        android:src="@drawable/logooffermachi"
         android:layout_marginLeft="10dp"
         android:scaleType="centerCrop"
         android:layout_marginTop="120dp"/>

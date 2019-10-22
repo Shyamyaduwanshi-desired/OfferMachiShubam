@@ -18,7 +18,7 @@ import com.desired.offermachi.retalier.presenter.CustomerSupportPresenter;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class CustomerSupportFragment extends Fragment implements View.OnClickListener,CustomerSupportPresenter.CustomerSupport {
+public class CustomerSupportFragment extends Fragment implements CustomerSupportPresenter.CustomerSupport {
     View view;
     Button submitbutton;
     EditText etname,etemail,etmessage,etmobile;
@@ -31,58 +31,25 @@ public class CustomerSupportFragment extends Fragment implements View.OnClickLis
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.customer_support_activity, container, false);
         ((DashBoardActivity)getActivity()).setToolTittle("Customer Support",2);
-       // init();
+        init();
+        presenter = new CustomerSupportPresenter(getContext(), CustomerSupportFragment.this);
          return  view;
     }
     private void init(){
-        presenter = new CustomerSupportPresenter(getContext(), CustomerSupportFragment.this);
-        etname=view.findViewById(R.id.etname);
-        etemail=view.findViewById(R.id.etemail);
-        etmobile=view.findViewById(R.id.etmobile);
-        etmessage=view.findViewById(R.id.etmessage);
-        submitbutton=view.findViewById(R.id.submit_customer_button_id);
-        submitbutton.setOnClickListener(this);
-    }
-    private void validation() {
-        String name = etname.getText().toString();
-        String email = etemail.getText().toString().trim();
-        String mobile = etmobile.getText().toString().trim();
-        String message = etmessage.getText().toString();
-        if (name.isEmpty()) {
-            etname.requestFocus();
-            etname.setError("Please enter name");
-        }else if (email.isEmpty()){
-            etemail.requestFocus();
-            etemail.setError("Please enter email");
-        }
-        else if (message.isEmpty()){
-            etemail.requestFocus();
-            etemail.setError("Please enter message");
-        }
-        else if (mobile.isEmpty()) {
-            etmobile.requestFocus();
-            etmobile.setError("Please enter mobile number");
-        }
-        else if (!isValidMobile(mobile)){
-            etmobile.requestFocus();
-            etmobile.setError("Please enter valid mobile number");
-        }
-        else {
-            if(isNetworkConnected()){
-                presenter.SendCustomerSupport(name,email,mobile,message);
-            }else {
-                showAlert("Please connect to internet", R.style.DialogAnimation);
+
+        etname=view.findViewById(R.id.name_id);
+        etemail=view.findViewById(R.id.email_id);
+        etmobile=view.findViewById(R.id.etmobile_id);
+        etmessage=view.findViewById(R.id.request_id);
+        submitbutton=view.findViewById(R.id.customer_submit_button_id);
+        submitbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validation();
             }
-        }
+        });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v==submitbutton){
-            validation();
-        }
-
-    }
 
     @Override
     public void success(String response) {
@@ -126,4 +93,37 @@ public class CustomerSupportFragment extends Fragment implements View.OnClickLis
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+    private void validation() {
+        String name = etname.getText().toString();
+        String email = etemail.getText().toString().trim();
+        String mobile = etmobile.getText().toString().trim();
+        String message = etmessage.getText().toString();
+        if (name.isEmpty()) {
+            etname.requestFocus();
+            etname.setError("Please enter name");
+        }else if (email.isEmpty()){
+            etemail.requestFocus();
+            etemail.setError("Please enter email");
+        }
+        else if (message.isEmpty()){
+            etemail.requestFocus();
+            etemail.setError("Please enter message");
+        }
+        else if (mobile.isEmpty()) {
+            etmobile.requestFocus();
+            etmobile.setError("Please enter mobile number");
+        }
+        else if (!isValidMobile(mobile)){
+            etmobile.requestFocus();
+            etmobile.setError("Please enter valid mobile number");
+        }
+        else {
+            if(isNetworkConnected()){
+                presenter.SendCustomerSupport(name,email,mobile,message);
+            }else {
+                showAlert("Please connect to internet", R.style.DialogAnimation);
+            }
+        }
+    }
+
 }

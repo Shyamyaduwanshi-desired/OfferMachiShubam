@@ -156,7 +156,7 @@
                         android:id="@+id/iv_main"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:src="@drawable/store"
+                        android:src="@drawable/logooffermachi"
                         android:layout_marginTop="5dp"
                         android:scaleType="centerCrop"/>
 
@@ -193,7 +193,7 @@
                 android:id="@+id/storelogothumb"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/store"
+                android:src="@drawable/logooffermachi"
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
                 android:layout_marginTop="120dp"/>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -223,7 +224,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 txtofferdescription.setText("");
             }
             else {
-                txtofferdescription.setText(description);
+//                txtofferdescription.setText(description);
+                txtofferdescription.setText(Html.fromHtml(description));
             }
 
             couponcode = object.getString("coupon_code");

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -44,6 +45,12 @@ public class MainActivity extends AppCompatActivity implements  ViewStoreOfferPr
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private ViewStoreOfferPresenter presenters;
     String idholder, storeid;
+    ViewPager viewPager;
+    LinearLayout sliderDotspanel;
+    private int dotscount;
+    private ImageView[] dots;
+    ArrayList<slider_viewpager_model> arrayList = new ArrayList<>();
+    slider_viewpages_adaper slider_viewpages_adaper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,59 @@ public class MainActivity extends AppCompatActivity implements  ViewStoreOfferPr
         }
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(locationReceiver,
                 new IntentFilter("Favourite"));
+
+
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        sliderDotspanel = (LinearLayout) findViewById(R.id.SliderDots);
+
+
+        slider_viewpages_adaper slider_viewpages_adaper = new slider_viewpages_adaper(this, arrayList);
+
+        viewPager.setAdapter(slider_viewpages_adaper);
+        viewPager.setCurrentItem(0);
+        slider_viewpages_adaper.setTimer(viewPager,3);
+        dotscount = slider_viewpages_adaper.getCount();
+        dots = new ImageView[dotscount];
+
+        for (int i = 0; i < dotscount; i++) {
+
+            dots[i] = new ImageView(this);
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.slider_non_active_dot));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(8, 0, 8, 0);
+
+            sliderDotspanel.addView(dots[i], params);
+        }
+
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.slider_active_dot));
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                for (int i = 0; i < dotscount; i++) {
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.slider_non_active_dot));
+                }
+
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.slider_active_dot));
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+
     }
 
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {

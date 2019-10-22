@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,11 +81,13 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
         if(selectCategoryModel.getOfferdescription().length()>30)
         {
-            holder.tvDsc.setText(selectCategoryModel.getOfferdescription().substring(0,30)+"...");
+            holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription().substring(0,30)+"..."));
         }
         else
         {
-            holder.tvDsc.setText(selectCategoryModel.getOfferdescription());
+//            holder.tvDsc.setText(selectCategoryModel.getOfferdescription());
+            holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription()));
+
         }
 
         if(selectCategoryModel.getOfferImage().equals("")){

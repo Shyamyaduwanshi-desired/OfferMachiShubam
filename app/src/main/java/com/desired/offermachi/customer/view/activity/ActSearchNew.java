@@ -105,7 +105,7 @@ public class ActSearchNew extends AppCompatActivity implements TrendingListPrese
         sSearchCatId=getIntent().getStringExtra("cat_id");
         sSearchNm=getIntent().getStringExtra("cat_name");
         sSearType=getIntent().getStringExtra("cat_type");
-        Log.e("","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm+" sSearType= "+sSearType);
+        Log.e("SearchActivity","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm+" sSearType= "+sSearType);
     }
 
 

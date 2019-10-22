@@ -12,6 +12,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -19,8 +21,10 @@ import android.widget.TextView;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.SearchBean;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.SearchPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
@@ -31,7 +35,7 @@ import java.util.List;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class SearchActivity extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener {
+public class SearchActivity extends AppCompatActivity implements TrendingListPresenter.TrendingList, SearchView.OnQueryTextListener , SearchPresenter.SearchListInfo{
 
     ImageView cancle;
     RecyclerView categoryrecycle;
@@ -41,6 +45,8 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
     String idholder;
     android.widget.SearchView searchView;
     private ArrayList<SelectCategoryModel> selectCategoryModelList;
+    private SearchPresenter searchPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,7 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
                 finish();
             }
         });
+        GetIntentData();
         initview();
     }
 
@@ -61,6 +68,8 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
         idholder = user.getId();
         selectCategoryModelList=new ArrayList<>();
         presenter = new TrendingListPresenter(SearchActivity.this, SearchActivity.this);
+        searchPresenter = new SearchPresenter(this, this);
+
         categoryrecycle = findViewById(R.id.categoryrecycleview);
 //        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
 //        categoryrecycle.setLayoutManager(gridLayoutManager1);
@@ -75,11 +84,18 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
 
         searchView = findViewById(R.id.search);
         searchView.setOnQueryTextListener(this);
-        if (isNetworkConnected()) {
+        if(TextUtils.isEmpty(sSearchNm)){
+            CallAPI(2);
+        }
+        else {
+            CallAPI(1);
+        }
+
+        /*if (isNetworkConnected()) {
             presenter.ViewAllTrending(idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
-        }
+        }*/
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(locationReceiver,
                 new IntentFilter("Favourite"));
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(CouponReceiver,
@@ -123,6 +139,31 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
+    }
+    ArrayList<SearchBean> AllSearchData=new ArrayList<>();
+
+    @Override
+    public void successSearch(ArrayList<SearchBean> responseByStore, ArrayList<SearchBean> responseByOffer, ArrayList<SearchBean> responseByLocation, ArrayList<String> response, String status) {
+      /*  AllSearchData.clear();
+
+        for (SearchBean bean : responseByStore)
+        {
+            AllSearchData.add(bean);
+        }
+        for (SearchBean bean : responseByOffer)
+        {
+            AllSearchData.add(bean);
+        }
+        for (SearchBean bean : responseByLocation)
+        {
+            AllSearchData.add(bean);
+        }
+
+       // CallAPI(2);
+
+        arrayAutoCompleteText.clear();
+        arrayAutoCompleteText=response;
+        SetAutoAdapter();*/
     }
 
     @Override
@@ -178,4 +219,31 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
         customerTrendingAdapter.setfilter(product);
         return true;
     }
+    private void CallAPI(int i) {
+        if (isNetworkConnected()) {
+            switch (i)
+            {
+                case 1:
+                    presenter.SearchAllTrending(idholder,sSearchCatId,sSearType);
+
+                    //searchPresenter.GetSearchList(sSearchCatId, sSearchNm);//for all searchable list data
+                    break;
+                case 2:
+                    presenter.ViewAllTrending(idholder);
+
+                    break;
+            }
+        } else {
+            showAlert("Please connect to internet.", R.style.DialogAnimation);
+        }
+    }
+
+    String sSearchCatId,sSearchNm,sSearType;
+    private void GetIntentData() {
+        sSearchCatId=getIntent().getStringExtra("cat_id");
+        sSearchNm=getIntent().getStringExtra("cat_name");
+        sSearType=getIntent().getStringExtra("cat_type");
+        Log.e("SearchActivity","sSearchCatId= "+sSearchCatId+" sSearchNm= "+sSearchNm+" sSearType= "+sSearType);
+    }
+
 }

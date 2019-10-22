@@ -350,8 +350,6 @@ public class StoreListPresenter {
                             }
                         }
                         storelist.success(list,totalRecord,countPage);
-
-
                     } else if (status == 404) {
                         storelist.error(reader.getString("message"));
                     }
@@ -373,7 +371,7 @@ public class StoreListPresenter {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
                 params.put("pageno", String.valueOf(currentPagNo));
-                params.put("perpage", "1");
+                params.put("perpage", "10");
                 params.put("latitude", UserSharedPrefManager.GetLat(context));
                 params.put("longitude", UserSharedPrefManager.GetLong(context));
 //                params.put("dist", UserSharedPrefManager.GetDistance(context));
@@ -382,7 +380,6 @@ public class StoreListPresenter {
                 return params;
             }
         };
-
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }

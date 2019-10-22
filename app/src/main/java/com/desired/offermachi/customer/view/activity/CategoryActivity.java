@@ -191,7 +191,7 @@ public class CategoryActivity extends AppCompatActivity implements View.OnClickL
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
         startActivity(intent);
         finish();
-        System.exit(0);
+       // System.exit(0);
         super.onBackPressed();
     }
 

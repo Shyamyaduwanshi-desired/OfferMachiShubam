@@ -1,101 +1,98 @@
 
 package com.desired.offermachi.customer.view.activity;
 
-        import android.Manifest;
-        import android.app.AlertDialog;
-        import android.app.Dialog;
-        import android.content.ActivityNotFoundException;
-        import android.content.Context;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.location.Address;
-        import android.location.Geocoder;
-        import android.location.Location;
-        import android.location.LocationListener;
-        import android.location.LocationManager;
-        import android.net.Uri;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.provider.MediaStore;
-        import android.provider.Settings;
-        import android.support.annotation.NonNull;
-        import android.support.design.widget.FloatingActionButton;
-        import android.support.design.widget.NavigationView;
-        import android.support.design.widget.Snackbar;
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.FragmentManager;
-        import android.support.v4.app.FragmentTransaction;
-        import android.support.v4.content.ContextCompat;
-        import android.support.v4.content.LocalBroadcastManager;
-        import android.support.v4.view.GravityCompat;
-        import android.support.v4.widget.DrawerLayout;
-        import android.support.v7.app.ActionBarDrawerToggle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
-        import android.text.TextUtils;
-        import android.util.Log;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.CompoundButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.RadioButton;
-        import android.widget.RadioGroup;
-        import android.widget.RelativeLayout;
-        import android.widget.Switch;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.desired.offermachi.R;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
+import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
+import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
+import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
+import com.desired.offermachi.customer.view.fragment.ExclusiveFragment;
+import com.desired.offermachi.customer.view.fragment.FavouritesFragment;
+import com.desired.offermachi.customer.view.fragment.FeedsFragment;
+import com.desired.offermachi.customer.view.fragment.FollowFragment;
+import com.desired.offermachi.customer.view.fragment.HelpFragment;
+import com.desired.offermachi.customer.view.fragment.HomeFragment;
+import com.desired.offermachi.customer.view.fragment.InviteFriendFragment;
+import com.desired.offermachi.customer.view.fragment.MycouponsFragment;
+import com.desired.offermachi.customer.view.fragment.ProfileFragment;
+import com.desired.offermachi.customer.view.fragment.SmartShoppingFragment;
+import com.desired.offermachi.customer.view.fragment.StoreFragment;
+import com.desired.offermachi.customer.view.fragment.TermConditionFragment;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.johnnylambada.location.LocationObserver;
+import com.johnnylambada.location.LocationProvider;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
-        import com.desired.offermachi.R;
-        import com.desired.offermachi.customer.constant.UserSharedPrefManager;
-        import com.desired.offermachi.customer.model.User;
-        import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
-        import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
-        import com.desired.offermachi.customer.view.fragment.CustomerSupportFragment;
-        import com.desired.offermachi.customer.view.fragment.DealsoftheDayFragment;
-        import com.desired.offermachi.customer.view.fragment.ExclusiveFragment;
-        import com.desired.offermachi.customer.view.fragment.FavouritesFragment;
-        import com.desired.offermachi.customer.view.fragment.FeedsFragment;
-        import com.desired.offermachi.customer.view.fragment.FollowFragment;
-        import com.desired.offermachi.customer.view.fragment.HelpFragment;
-        import com.desired.offermachi.customer.view.fragment.HomeFragment;
-        import com.desired.offermachi.customer.view.fragment.InviteFriendFragment;
-        import com.desired.offermachi.customer.view.fragment.MycouponsFragment;
-        import com.desired.offermachi.customer.view.fragment.ProfileFragment;
-        import com.desired.offermachi.customer.view.fragment.SmartShoppingFragment;
-        import com.desired.offermachi.customer.view.fragment.StoreFragment;
-        import com.desired.offermachi.customer.view.fragment.TermConditionFragment;
-        import com.google.android.gms.common.api.Status;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
 //import com.google.android.gms.location.places.Place;
 //import com.google.android.gms.maps.model.LatLng;
-        import com.google.android.gms.maps.model.LatLng;
-        import com.johnnylambada.location.LocationObserver;
-        import com.johnnylambada.location.LocationProvider;
-        import com.squareup.picasso.MemoryPolicy;
-        import com.squareup.picasso.NetworkPolicy;
-        import com.squareup.picasso.Picasso;
-
-        import java.io.IOException;
-        import java.util.Arrays;
-        import java.util.List;
-        import java.util.Locale;
-
-        import com.google.android.libraries.places.api.Places;
-        import com.google.android.libraries.places.api.model.Place;
-        import com.google.android.libraries.places.widget.Autocomplete;
-        import com.google.android.libraries.places.widget.AutocompleteActivity;
-        import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener/*, LocationListener*/,NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead,LocationObserver, Runnable {
+        implements NavigationView.OnNavigationItemSelectedListener/*, LocationListener*/, NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead, LocationObserver, Runnable {
     FragmentManager FM;
     FragmentTransaction FT;
-    LinearLayout smartshopping,dealsoftheday,coupons,favourites,ifollow;
-    ImageView smartshoppingimg,dealsofthedayimg,couponsimg,favouritesimg,ifollowimg;
-    TextView smartshoppingtext,dealsofthedaytext,couponstext,favouritestext,ifollowtext;
+    LinearLayout smartshopping, dealsoftheday, coupons, favourites, ifollow;
+    ImageView smartshoppingimg, dealsofthedayimg, couponsimg, favouritesimg, ifollowimg;
+    TextView smartshoppingtext, dealsofthedaytext, couponstext, favouritestext, ifollowtext;
     Toolbar toolbar;
     DrawerLayout drawer;
     ImageView ivTitleLogo;
@@ -103,24 +100,24 @@ public class DashBoardActivity extends AppCompatActivity
     ImageView info;
     private View navHeader;
     NavigationView navigationView;
-    TextView name,email;
+    TextView name, email;
     ImageView imageView;
-    String ImageHolder,username,useremail;
+    String ImageHolder, username, useremail;
     User user;
     ImageView btnnotification;
-    int count=0;
+    int count = 0;
     ImageView ivLocation;
     ImageView cancle;
 
     LocationManager locationManager;
-    public String lati ;
-    public String longi,idholder ;
+    public String lati;
+    public String longi, idholder;
 
     TextView tvNotiCount;
     private NotificationCountPresenter notiCount;
 //    PlacesClient placesClient;
 
-    TextView BottomtvNotiCountdeal,BottomtvNotiCountcoupons,BottomtvNotiCountfavorites;
+    TextView BottomtvNotiCountdeal, BottomtvNotiCountcoupons, BottomtvNotiCountfavorites;
     private BottomDealsoftheCountPresenter BottomNotiRead;
     /////BOttomNotificationCount
 
@@ -132,9 +129,9 @@ public class DashBoardActivity extends AppCompatActivity
 //        getLocation();
         setCurLoc();
         toolbar = findViewById(R.id.toolbar);
-        ivTitleLogo=toolbar.findViewById(R.id.logo);
-        tvMainTitle=toolbar.findViewById(R.id.tv_title);
-        ivLocation=toolbar.findViewById(R.id.location_id);
+        ivTitleLogo = toolbar.findViewById(R.id.logo);
+        tvMainTitle = toolbar.findViewById(R.id.tv_title);
+        ivLocation = toolbar.findViewById(R.id.location_id);
         tvNotiCount = toolbar.findViewById(R.id.txtMessageCount);
 //        notiCount = new NotificationCountPresenter(this,this);
 
@@ -143,42 +140,45 @@ public class DashBoardActivity extends AppCompatActivity
         BottomtvNotiCountcoupons = findViewById(R.id.coupons_txtMessageCount);
         BottomtvNotiCountfavorites = findViewById(R.id.fav_txtMessageCount);
 
-        notiCount = new NotificationCountPresenter(this,this);
+        notiCount = new NotificationCountPresenter(this, this);
 
-        BottomNotiRead = new BottomDealsoftheCountPresenter(this,this);
+        BottomNotiRead = new BottomDealsoftheCountPresenter(this, this);
 //        BottomNotiRead.BottomNotificationUnreadCount(idholder);
 
-        Places.initialize(this,getString(R.string.google_api_key1));
+        Places.initialize(this, getString(R.string.google_api_key1));
 //        placesClient = Places.createClient(this);
-        setToolTittle("",1);
+        setToolTittle("", 1);
         user = UserSharedPrefManager.getInstance(getApplicationContext()).getCustomer();
-        String pos= UserSharedPrefManager.GetClickNoti(this);
-        idholder=user.getId();
+        String pos = UserSharedPrefManager.GetClickNoti(this);
+        idholder = user.getId();
 
-        lati= UserSharedPrefManager.GetLat(this);
-        longi= UserSharedPrefManager.GetLong(this);
-      String distances= UserSharedPrefManager.GetDistance(this);
+        lati = UserSharedPrefManager.GetLat(this);
+        longi = UserSharedPrefManager.GetLong(this);
+        String distances = UserSharedPrefManager.GetDistance(this);
 
-        Toast.makeText(this, "lati= "+lati+" longi= "+longi+" distances= "+distances, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "lati= " + lati + " longi= " + longi + " distances= " + distances, Toast.LENGTH_SHORT).show();
 
-        String diffNavi= UserSharedPrefManager.GetClickNotiPos(this);
+        String diffNavi = UserSharedPrefManager.GetClickNotiPos(this);
         if (pos.equals("1")) {
 
 
             FM = getSupportFragmentManager();
             FT = FM.beginTransaction();
 
-            switch (diffNavi)
-            {
+            switch (diffNavi) {
                 case "0":
+                    ivLocation.setVisibility(View.VISIBLE);
                     FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
                     break;
 
                 case "1":
 //                    GoDealOfTheDay(1);
+                    ivLocation.setVisibility(View.VISIBLE);
                     FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
                     break;
                 case "2":
+                    ivLocation.setVisibility(View.GONE);
+
                     FT.replace(R.id.framelayout_id, new ExclusiveFragment()).commit();
                     break;
                 default:
@@ -188,14 +188,16 @@ public class DashBoardActivity extends AppCompatActivity
 //            FT.replace(R.id.framelayout_id, new DealsoftheDayFragment()).commit();
 
 
-            UserSharedPrefManager.SaveClickNoti(this,"0","");
-        }
-        else {
+            UserSharedPrefManager.SaveClickNoti(this, "0", "");
+        } else {
             if (user.getSmartShopping().equals("1")) {
+                ivLocation.setVisibility(View.GONE);
+
                 FM = getSupportFragmentManager();
                 FT = FM.beginTransaction();
                 FT.replace(R.id.framelayout_id, new SmartShoppingFragment()).commit();
             } else if (user.getSmartShopping().equals("0")) {
+                ivLocation.setVisibility(View.VISIBLE);
                 FM = getSupportFragmentManager();
                 FT = FM.beginTransaction();
                 FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
@@ -216,19 +218,18 @@ public class DashBoardActivity extends AppCompatActivity
         username = user.getUsername();
         useremail = user.getEmail();
         ImageHolder = user.getProfile();
-        Log.e("main", "ImageHolder=="+ImageHolder );
-        if (username.equals("null")){
+        Log.e("main", "ImageHolder==" + ImageHolder);
+        if (username.equals("null")) {
 
-        }else{
+        } else {
             name.setText(username);
         }
-        if (useremail.equals("null")){
+        if (useremail.equals("null")) {
 
-        }else{
+        } else {
             email.setText(useremail);
         }
-        if (ImageHolder!= null)
-        {
+        if (ImageHolder != null) {
             try {
                 Picasso.get().load(ImageHolder).networkPolicy(NetworkPolicy.NO_CACHE)
                         .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_avatar).into(imageView);
@@ -237,25 +238,25 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
 
-        smartshopping=(LinearLayout)findViewById(R.id.homelinear);
-        dealsoftheday=(LinearLayout)findViewById(R.id.category_linear_id);
-        coupons=(LinearLayout)findViewById(R.id.account_linear_id);
-        favourites=(LinearLayout)findViewById(R.id.cart_linear_id);
-        ifollow=(LinearLayout)findViewById(R.id.more_linear_id);
+        smartshopping = (LinearLayout) findViewById(R.id.homelinear);
+        dealsoftheday = (LinearLayout) findViewById(R.id.category_linear_id);
+        coupons = (LinearLayout) findViewById(R.id.account_linear_id);
+        favourites = (LinearLayout) findViewById(R.id.cart_linear_id);
+        ifollow = (LinearLayout) findViewById(R.id.more_linear_id);
 
-        smartshoppingimg=(ImageView)findViewById(R.id.home_img);
-        dealsofthedayimg=(ImageView)findViewById(R.id.categoryimg_id);
-        couponsimg=(ImageView)findViewById(R.id.account_img);
-        favouritesimg=(ImageView)findViewById(R.id.cart_img);
-        ifollowimg=(ImageView)findViewById(R.id.more_img);
+        smartshoppingimg = (ImageView) findViewById(R.id.home_img);
+        dealsofthedayimg = (ImageView) findViewById(R.id.categoryimg_id);
+        couponsimg = (ImageView) findViewById(R.id.account_img);
+        favouritesimg = (ImageView) findViewById(R.id.cart_img);
+        ifollowimg = (ImageView) findViewById(R.id.more_img);
 
-        smartshoppingtext=(TextView) findViewById(R.id.hometext_id);
-        dealsofthedaytext=(TextView)findViewById(R.id.categorytext_id);
-        couponstext=(TextView)findViewById(R.id.accountext_id);
-        favouritestext=(TextView)findViewById(R.id.carttext_id);
-        ifollowtext=(TextView)findViewById(R.id.moretext_id);
+        smartshoppingtext = (TextView) findViewById(R.id.hometext_id);
+        dealsofthedaytext = (TextView) findViewById(R.id.categorytext_id);
+        couponstext = (TextView) findViewById(R.id.accountext_id);
+        favouritestext = (TextView) findViewById(R.id.carttext_id);
+        ifollowtext = (TextView) findViewById(R.id.moretext_id);
 
-        info=(ImageView)findViewById(R.id.info_id);
+        info = (ImageView) findViewById(R.id.info_id);
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,7 +265,7 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-        btnnotification=findViewById(R.id.btnnotification);
+        btnnotification = findViewById(R.id.btnnotification);
         btnnotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -298,7 +299,7 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                if (user.getSmartShopping().equals("0")){
+                if (user.getSmartShopping().equals("0")) {
                     showdialog();
                 }
 
@@ -308,6 +309,8 @@ public class DashBoardActivity extends AppCompatActivity
         dealsoftheday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivLocation.setVisibility(View.VISIBLE);
+
                 GoDealOfTheDay(1);
             }
         });
@@ -316,6 +319,7 @@ public class DashBoardActivity extends AppCompatActivity
         coupons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivLocation.setVisibility(View.GONE);
                 GoMyCoupon(1);
             }
         });
@@ -324,12 +328,16 @@ public class DashBoardActivity extends AppCompatActivity
         favourites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivLocation.setVisibility(View.GONE);
+
                 GoFavorite(1);
             }
         });
         ifollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ivLocation.setVisibility(View.GONE);
+
                 GoIfollow(1);
             }
         });
@@ -346,13 +354,14 @@ public class DashBoardActivity extends AppCompatActivity
         drawer.closeDrawers();
         navigationView.setNavigationItemSelectedListener(this);
 
+
     }
 
     private void GoMyCoupon(int diff) {
 
-        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+        BottomNotiRead.BottomNotificationUnreadCount(idholder, lati, longi);
 
-        if (user.getSmartShopping().equals("0")){
+        if (user.getSmartShopping().equals("0")) {
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
             couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.whitecoupon));
@@ -364,8 +373,7 @@ public class DashBoardActivity extends AppCompatActivity
             favouritestext.setTextColor(getResources().getColor(R.color.yellow));
             ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
-            switch (diff)
-            {
+            switch (diff) {
                 case 1:
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -381,8 +389,9 @@ public class DashBoardActivity extends AppCompatActivity
         }
 
     }
+
     private void GoIfollow(int diff) {
-        if (user.getSmartShopping().equals("0")){
+        if (user.getSmartShopping().equals("0")) {
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
             couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -393,8 +402,7 @@ public class DashBoardActivity extends AppCompatActivity
             couponstext.setTextColor(getResources().getColor(R.color.yellow));
             favouritestext.setTextColor(getResources().getColor(R.color.yellow));
             ifollowtext.setTextColor(getResources().getColor(R.color.white));
-            switch (diff)
-            {
+            switch (diff) {
                 case 1:
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -409,10 +417,11 @@ public class DashBoardActivity extends AppCompatActivity
         }
 
     }
-    private void GoFavorite(int diff) {
-        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
 
-        if (user.getSmartShopping().equals("0")){
+    private void GoFavorite(int diff) {
+        BottomNotiRead.BottomNotificationUnreadCount(idholder, lati, longi);
+
+        if (user.getSmartShopping().equals("0")) {
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
             couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -425,8 +434,7 @@ public class DashBoardActivity extends AppCompatActivity
             favouritestext.setTextColor(getResources().getColor(R.color.white));
             ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
-            switch (diff)
-            {
+            switch (diff) {
                 case 1:
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -444,10 +452,9 @@ public class DashBoardActivity extends AppCompatActivity
 
     private void GoDealOfTheDay(int diff) {
 
-        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
+        BottomNotiRead.BottomNotificationUnreadCount(idholder, lati, longi);
 
-        if (user.getSmartShopping().equals("0")){
-
+        if (user.getSmartShopping().equals("0")) {
 
 
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
@@ -460,8 +467,7 @@ public class DashBoardActivity extends AppCompatActivity
             couponstext.setTextColor(getResources().getColor(R.color.yellow));
             favouritestext.setTextColor(getResources().getColor(R.color.yellow));
             ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-            switch (diff)
-            {
+            switch (diff) {
                 case 1:
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -483,24 +489,25 @@ public class DashBoardActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
+        //if(currentFragment() instanceof )
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (FM.getBackStackEntryCount() > 0) {
                 FM.popBackStack();
-                if(FM.getBackStackEntryCount() ==1)
-                {
-                    setToolTittle("",1);
+                if (FM.getBackStackEntryCount() == 1) {
+                    setToolTittle("", 1);
+                    ivLocation.setVisibility(View.VISIBLE);
+
                 }
-            }
-            else
-            {
+            } else {
                 new AlertDialog.Builder(this)
                         .setMessage("Are you sure you want to exit?")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this,"");//only for not show privious selected category
+                                UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this, "");//only for not show privious selected category
                                 Intent intent = new Intent(Intent.ACTION_MAIN);
                                 intent.addCategory(Intent.CATEGORY_HOME);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
@@ -517,20 +524,21 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
     }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         Fragment fragment = null;
         // Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch (menuItem.getItemId()) {
 
             case R.id.nav_home:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.VISIBLE);
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new HomeFragment();
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -538,30 +546,32 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_account:
-                if (count==0){
+                ivLocation.setVisibility(View.GONE);
+
+                if (count == 0) {
                     navigationView.getMenu().getItem(2).setVisible(true);
                     navigationView.getMenu().getItem(3).setVisible(true);
                     navigationView.getMenu().getItem(4).setVisible(true);
                     navigationView.getMenu().getItem(5).setVisible(true);
-                    count=1;
-                }else{
+                    count = 1;
+                } else {
                     navigationView.getMenu().getItem(2).setVisible(false);
                     navigationView.getMenu().getItem(3).setVisible(false);
                     navigationView.getMenu().getItem(4).setVisible(false);
                     navigationView.getMenu().getItem(5).setVisible(false);
 
-                    count=0;
+                    count = 0;
                 }
                 break;
 
             case R.id.nav_profile:
+                ivLocation.setVisibility(View.GONE);
 
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new ProfileFragment();
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -569,11 +579,12 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_feeds:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.GONE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new FeedsFragment();
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -585,8 +596,8 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
             case R.id.nav_smartshopping:
 
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     showdialog();
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -599,13 +610,14 @@ public class DashBoardActivity extends AppCompatActivity
                 }*/
 
                 break;
-            case  R.id.nav_store:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+            case R.id.nav_store:
+                ivLocation.setVisibility(View.VISIBLE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new StoreFragment();
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -616,13 +628,14 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_dealsday:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.VISIBLE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new DealsoftheDayFragment();
                     GoDealOfTheDay(0);
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -632,9 +645,11 @@ public class DashBoardActivity extends AppCompatActivity
 //                }
 
                 break;
-            case  R.id.nav_exclusive:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+            case R.id.nav_exclusive:
+                ivLocation.setVisibility(View.VISIBLE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new ExclusiveFragment();
                     drawer.closeDrawer(GravityCompat.START);
 
@@ -645,13 +660,14 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_mycoupons:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.GONE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new MycouponsFragment();
                     GoMyCoupon(0);
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -661,13 +677,14 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_follow:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.VISIBLE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new FollowFragment();
                     GoIfollow(0);
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -678,13 +695,14 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_fav:
-                if (user.getSmartShopping().equals("0")){
-                    UserSharedPrefManager.SaveStoreFilter(this,"");
+                ivLocation.setVisibility(View.GONE);
+
+                if (user.getSmartShopping().equals("0")) {
+                    UserSharedPrefManager.SaveStoreFilter(this, "");
                     fragment = new FavouritesFragment();
                     GoFavorite(0);
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
                 }
@@ -694,7 +712,7 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_rate:
-                if (user.getSmartShopping().equals("0")){
+                if (user.getSmartShopping().equals("0")) {
                     fragment = new HomeFragment();
                     Uri uri = Uri.parse("market://details?id=" + getPackageName());
                     Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
@@ -710,8 +728,7 @@ public class DashBoardActivity extends AppCompatActivity
                                 Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
                     }
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -722,11 +739,12 @@ public class DashBoardActivity extends AppCompatActivity
 
                 break;
             case R.id.nav_invite:
-                if (user.getSmartShopping().equals("0")){
-                    fragment = new InviteFriendFragment();  drawer.closeDrawer(GravityCompat.START);
+                ivLocation.setVisibility(View.GONE);
+                if (user.getSmartShopping().equals("0")) {
+                    fragment = new InviteFriendFragment();
+                    drawer.closeDrawer(GravityCompat.START);
 
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -738,12 +756,13 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_help:
-                if (user.getSmartShopping().equals("0")){
+                ivLocation.setVisibility(View.GONE);
+
+                if (user.getSmartShopping().equals("0")) {
                     fragment = new HelpFragment();
                     drawer.closeDrawer(GravityCompat.START);
 
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -755,12 +774,13 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_customer:
-                if (user.getSmartShopping().equals("0")){
+                ivLocation.setVisibility(View.GONE);
+
+                if (user.getSmartShopping().equals("0")) {
                     fragment = new CustomerSupportFragment();
                     drawer.closeDrawer(GravityCompat.START);
 
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -772,23 +792,24 @@ public class DashBoardActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_notification:
+
 //                fragment = new HomeFragment();
                 if (user.getSmartShopping().equals("0")) {
                     startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
                 }
                 break;
             case R.id.nav_terms:
+                ivLocation.setVisibility(View.GONE);
+
                 if (user.getSmartShopping().equals("0")) {
                     fragment = new TermConditionFragment();
                     drawer.closeDrawer(GravityCompat.START);
-                }
-                else{
+                } else {
                     Toast.makeText(this, "You cannot access when Smart Shopping is ON", Toast.LENGTH_SHORT).show();
                     drawer.closeDrawer(GravityCompat.START);
 //                    fragment = new SmartShoppingFragment();
@@ -798,7 +819,7 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("0")) {
                     fragment = new HomeFragment();
                     UserSharedPrefManager.getInstance(getApplicationContext()).logout();
-                }else{
+                } else {
                     fragment = new SmartShoppingFragment();
                     UserSharedPrefManager.getInstance(getApplicationContext()).logout();
                 }
@@ -815,12 +836,11 @@ public class DashBoardActivity extends AppCompatActivity
             e.printStackTrace();
         }*/
 
-        if(fragment==null)//only for not refresh
+        if (fragment == null)//only for not refresh
         {
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
 //           drawer.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             // Insert the fragment by replacing any existing fragment
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.framelayout_id, fragment).commit();
@@ -834,10 +854,9 @@ public class DashBoardActivity extends AppCompatActivity
         }
         return true;
     }
-    public  void setToolTittle(String tittle,int diff)
-    {
-        switch (diff)
-        {
+
+    public void setToolTittle(String tittle, int diff) {
+        switch (diff) {
             case 1:
                 ivTitleLogo.setVisibility(View.VISIBLE);
                 tvMainTitle.setVisibility(View.GONE);
@@ -857,17 +876,15 @@ public class DashBoardActivity extends AppCompatActivity
         tvMainTitle.setText(tittle);
     }
 
-    private void showdialog(){
+    private void showdialog() {
 
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.switch_layout);
         dialog.setTitle("Smart shopping Dialog");
-        Switch Switch =(Switch) dialog.findViewById(R.id.smartswitch);
+        Switch Switch = (Switch) dialog.findViewById(R.id.smartswitch);
         Switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-
 
 
                 // Toast.makeText(DashBoardActivity.this, "smart shoping", Toast.LENGTH_SHORT).show();
@@ -888,6 +905,8 @@ public class DashBoardActivity extends AppCompatActivity
 
                     info.setVisibility(View.INVISIBLE);
                     btnnotification.setVisibility(View.INVISIBLE);
+                    tvNotiCount.setVisibility(View.INVISIBLE);
+                    ivLocation.setVisibility(View.GONE);
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -897,6 +916,9 @@ public class DashBoardActivity extends AppCompatActivity
                 } else {
                     info.setVisibility(View.VISIBLE);
                     btnnotification.setVisibility(View.VISIBLE);
+                    tvNotiCount.setVisibility(View.VISIBLE);
+                    ivLocation.setVisibility(View.VISIBLE);
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.framelayout_id, new HomeFragment())
@@ -904,22 +926,22 @@ public class DashBoardActivity extends AppCompatActivity
                             .commit();
                 }
 
-                String Nameholder,EmailHolder,PhoneHolder,AddressHolder,GenderHolder,ImageHolder,Dobholder,SmartShoppingHolder,SoundHolder,idholder;
+                String Nameholder, EmailHolder, PhoneHolder, AddressHolder, GenderHolder, ImageHolder, Dobholder, SmartShoppingHolder, SoundHolder, idholder;
                 User user = UserSharedPrefManager.getInstance(DashBoardActivity.this).getCustomer();
-                idholder= user.getId();
+                idholder = user.getId();
 
-                Nameholder= user.getUsername();
-                EmailHolder=user.getEmail();
-                PhoneHolder= user.getMobile();
-                AddressHolder= user.getAddress();
-                GenderHolder= user.getGender();
-                Dobholder=user.getDob();
-                ImageHolder=user.getProfile();
-                SmartShoppingHolder=user.getSmartShopping();
-                SoundHolder=user.getNotificationsound();
+                Nameholder = user.getUsername();
+                EmailHolder = user.getEmail();
+                PhoneHolder = user.getMobile();
+                AddressHolder = user.getAddress();
+                GenderHolder = user.getGender();
+                Dobholder = user.getDob();
+                ImageHolder = user.getProfile();
+                SmartShoppingHolder = user.getSmartShopping();
+                SoundHolder = user.getNotificationsound();
 
 
-                if (isChecked){
+                if (isChecked) {
                     User user1 = new User(
                             idholder,
                             Nameholder,
@@ -935,7 +957,7 @@ public class DashBoardActivity extends AppCompatActivity
                     );
                     UserSharedPrefManager.getInstance(DashBoardActivity.this).userLogin(user1);
 
-                    startActivity(new Intent(DashBoardActivity.this,DashBoardActivity.class));
+                    startActivity(new Intent(DashBoardActivity.this, DashBoardActivity.class));
                     finish();
 
                 }
@@ -967,98 +989,117 @@ public class DashBoardActivity extends AppCompatActivity
             couponstext.setTextColor(getResources().getColor(R.color.yellow));
             favouritestext.setTextColor(getResources().getColor(R.color.yellow));
             ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
-        }
-        else
-        {
+        } else {
             info.setVisibility(View.GONE);
             btnnotification.setVisibility(View.VISIBLE);
         }
         notiCount.NotificationUnreadCount(idholder);
-        BottomNotiRead.BottomNotificationUnreadCount(idholder,lati,longi);
-
+        BottomNotiRead.BottomNotificationUnreadCount(idholder, lati, longi);
 
     }
-    Dialog DlgLoc=null;
+
+    Dialog DlgLoc = null;
     TextView tvCurloc;
     LinearLayout lyCurrLocation;
-    boolean clickFlag=false;
+    boolean clickFlag = false;
     Button btOkay;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    String sDistance="1";
-    public void DialogLocation()
-    {
-        if(DlgLoc!=null)
-        {
+    String sDistance = "1";
+
+    public void DialogLocation() {
+        if (DlgLoc != null) {
             DlgLoc.dismiss();
-            DlgLoc=null;
+            DlgLoc = null;
         }
         DlgLoc = new Dialog(DashBoardActivity.this);
         DlgLoc.setContentView(R.layout.dialog_select_location);
         DlgLoc.setTitle("Select your Location");
 
 
-        RelativeLayout rlCurrent=(RelativeLayout)DlgLoc.findViewById(R.id.rl_current_location);
+        RelativeLayout rlCurrent = (RelativeLayout) DlgLoc.findViewById(R.id.rl_current_location);
 
-        RelativeLayout rlOther=(RelativeLayout)DlgLoc.findViewById(R.id.rl_other);
+        RelativeLayout rlOther = (RelativeLayout) DlgLoc.findViewById(R.id.rl_other);
 
-        radioGroup = (RadioGroup)DlgLoc.findViewById(R.id.rg_location_distance);
+        radioGroup = (RadioGroup) DlgLoc.findViewById(R.id.rg_location_distance);
 
-        RadioButton  rb1 = (RadioButton)DlgLoc.findViewById(R.id.rb_one_km);
-        RadioButton rb2 = (RadioButton)DlgLoc.findViewById(R.id.rb_two_km);
-        RadioButton rb5 = (RadioButton)DlgLoc.findViewById(R.id.rb_five_km);
-        RadioButton rb10 = (RadioButton)DlgLoc.findViewById(R.id.rb_ten_km);
+        RadioButton rb1 = (RadioButton) DlgLoc.findViewById(R.id.rb_one_km);
+        RadioButton rb2 = (RadioButton) DlgLoc.findViewById(R.id.rb_two_km);
+        RadioButton rb5 = (RadioButton) DlgLoc.findViewById(R.id.rb_five_km);
+        RadioButton rb10 = (RadioButton) DlgLoc.findViewById(R.id.rb_ten_km);
 
-        ImageView cancle=(ImageView)DlgLoc.findViewById(R.id.cancle_img_id);
+        ImageView cancle = (ImageView) DlgLoc.findViewById(R.id.cancle_img_id);
         cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashBoardActivity.this,DashBoardActivity.class));
-                finish();
+                /*startActivity(new Intent(DashBoardActivity.this, DashBoardActivity.class));
+                finish();*/
+                DlgLoc.dismiss();
+
             }
         });
 
-        lyCurrLocation=(LinearLayout)DlgLoc.findViewById(R.id.ly_cur_loc);
-        btOkay=(Button)DlgLoc.findViewById(R.id.bt_okay);
-        tvCurloc=(TextView) DlgLoc.findViewById(R.id.tv_cur_loc);
+        lyCurrLocation = (LinearLayout) DlgLoc.findViewById(R.id.ly_cur_loc);
+        btOkay = (Button) DlgLoc.findViewById(R.id.bt_okay);
+        tvCurloc = (TextView) DlgLoc.findViewById(R.id.tv_cur_loc);
 
-        String diff= UserSharedPrefManager.GetCurrentOrOtherLoc(this);
+        String diff = UserSharedPrefManager.GetCurrentOrOtherLoc(this);
         tvCurloc.setText(UserSharedPrefManager.GetLocNm(this));
-        if(locationProvider!=null) {
+        if (locationProvider != null) {
             locationProvider.startTrackingLocation();
         }
 
-        String distances= UserSharedPrefManager.GetDistance(this);
-        switch (distances)
-        {
+        String distances = UserSharedPrefManager.GetDistance(this);
+        switch (distances) {
             case "1":
                 rb1.setChecked(true);
                 break;
             case "2":
                 rb2.setChecked(true);
                 break;
-             case "5":
-                 rb5.setChecked(true);
+            case "5":
+                rb5.setChecked(true);
                 break;
-             case "10":
-                 rb10.setChecked(true);
+            case "10":
+                rb10.setChecked(true);
                 break;
-                default:
-                    rb1.setChecked(true);
-                    break;
+            default:
+                rb1.setChecked(true);
+                break;
 
         }
 
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId)
-            {
-                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this,"1");
-                checkFlag=true;
-                clickFlag=true;
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this, "1");
+                checkFlag = false;
+
+                // checkFlag=true;
+                clickFlag = true;
                 SetDistance();
-                if(locationProvider!=null) {
+                /* UserSharedPrefManager.SaveCurrentLatLongAndLocNm(DashBoardActivity.this,lati,longi,sCurrentLocation,sDistance);*///static
+                Intent intent = new Intent("Refresh");
+            /*    intent.putExtra("catid",categoryListModel.getCatid());
+                intent.putExtra("followstatus",followstatus);
+                intent.putExtra("pos",i);*/
+                if (currentFragment() instanceof StoreFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof HomeFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof DealsoftheDayFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }if (currentFragment() instanceof ExclusiveFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof FollowFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+
+                UserSharedPrefManager.SaveCurrentLatLongAndLocNm(DashBoardActivity.this, lati, longi, sCurrentLocation, sDistance);
+                if (locationProvider != null) {
                     locationProvider.startTrackingLocation();
                 }
                 DlgLoc.dismiss();
@@ -1083,7 +1124,7 @@ public class DashBoardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this,"2");
+                UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this, "2");
                 SetDistance();
                 startAutocompleteActivity();
                 DlgLoc.dismiss();
@@ -1093,10 +1134,10 @@ public class DashBoardActivity extends AppCompatActivity
         btOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkFlag=true;
-                clickFlag=true;
+                // checkFlag=true;
+                clickFlag = true;
                 DlgLoc.dismiss();
-                if(locationProvider!=null) {
+                if (locationProvider != null) {
                     locationProvider.startTrackingLocation();
                 }
             }
@@ -1106,32 +1147,30 @@ public class DashBoardActivity extends AppCompatActivity
 
     }
 
-    public void SetDistance()
-    {
+    public void SetDistance() {
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
 
         // find the radiobutton by returned id
-        radioButton = (RadioButton)DlgLoc.findViewById(selectedId);
+        radioButton = (RadioButton) DlgLoc.findViewById(selectedId);
 //        Toast.makeText(DashBoardActivity.this,
 //                "You are seeing arround "+radioButton.getText(), Toast.LENGTH_SHORT).show();
-        switch (radioButton.getText().toString())
-        {
+        switch (radioButton.getText().toString()) {
             case "1 Km":
-                sDistance="1";
+                sDistance = "1";
                 break;
             case "2 Km":
-                sDistance="2";
+                sDistance = "2";
                 break;
             case "5 Km":
-                sDistance="5";
+                sDistance = "5";
                 break;
             case "10 Km":
-                sDistance="10";
+                sDistance = "10";
                 break;
         }
         Toast.makeText(DashBoardActivity.this,
-                "km= "+sDistance, Toast.LENGTH_SHORT).show();
+                "km= " + sDistance, Toast.LENGTH_SHORT).show();
     }
 //for current location
 /*void getLocation() {
@@ -1144,8 +1183,8 @@ public class DashBoardActivity extends AppCompatActivity
     }
 }*/
 
-    String sCurrentLocation="";
-    boolean checkFlag=false;
+    String sCurrentLocation = "";
+    boolean checkFlag = true;
   /*  @Override
     public void onLocationChanged(Location location) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -1201,9 +1240,8 @@ public class DashBoardActivity extends AppCompatActivity
 //        }
 //    }
 
-    public void RefreshLocWithHomeView(int diff)
-    {
-        UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation,sDistance);//static
+    public void RefreshLocWithHomeView(int diff) {
+        UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this, lati, longi, sCurrentLocation, sDistance);//static
         smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowonlineshop));
         dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
         couponsimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowcoupon));
@@ -1215,14 +1253,20 @@ public class DashBoardActivity extends AppCompatActivity
         favouritestext.setTextColor(getResources().getColor(R.color.yellow));
         ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+     /*   FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();*/
+        /* Intent intent=new Intent("Refresh");
+         *//*    intent.putExtra("catid",categoryListModel.getCatid());
+                intent.putExtra("followstatus",followstatus);
+                intent.putExtra("pos",i);*//*
+        LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+*/
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
 
-        checkFlag=false;
-        if(locationProvider!=null) {
+        checkFlag = false;
+        if (locationProvider != null) {
             locationProvider.stopTrackingLocation();
         }
     }
@@ -1274,36 +1318,50 @@ public class DashBoardActivity extends AppCompatActivity
         if (requestCode == 103) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                String addressname="";
-                if(TextUtils.isEmpty(place.getAddress())||place.getAddress().equals("null")||place.getAddress()=="null")
-                {
-                    addressname=place.getName();
+                String addressname = "";
+                if (TextUtils.isEmpty(place.getAddress()) || place.getAddress().equals("null") || place.getAddress() == "null") {
+                    addressname = place.getName();
 //                    addressname="";
-                }
-                else
-                {
-                    addressname=place.getAddress()+","+place.getName();
+                } else {
+                    addressname = place.getAddress() + "," + place.getName();
                 }
 
 
 //                edtSearchLocation.setText(addressname);
 //                tvLocation.setText(addressname);
                 LatLng latLng = place.getLatLng();
-                String  latitude = "" + latLng.latitude;
+                String latitude = "" + latLng.latitude;
                 String longitude = "" + latLng.longitude;
 
                 lati = "" + latLng.latitude;
                 longi = "" + latLng.longitude;
                 sCurrentLocation = addressname;
-                Toast.makeText(this, ""+addressname+" latitude= "+latitude+" longitude= "+longitude+""+sCurrentLocation, Toast.LENGTH_SHORT).show();
-              //  RefreshLocWithHomeView(1);
-                UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this,lati,longi,sCurrentLocation,"");//static
+                Toast.makeText(this, "" + addressname + " latitude= " + latitude + " longitude= " + longitude + "" + sCurrentLocation, Toast.LENGTH_SHORT).show();
+                //  RefreshLocWithHomeView(1);
+                UserSharedPrefManager.SaveCurrentLatLongAndLocNm(this, lati, longi, sCurrentLocation, "");//static
+                Intent intent = new Intent("Refresh");
 
-                Intent intent=new Intent("Refresh");
+                if (currentFragment() instanceof HomeFragment) {
             /*    intent.putExtra("catid",categoryListModel.getCatid());
                 intent.putExtra("followstatus",followstatus);
                 intent.putExtra("pos",i);*/
-                LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof StoreFragment) {
+            /*    intent.putExtra("catid",categoryListModel.getCatid());
+                intent.putExtra("followstatus",followstatus);
+                intent.putExtra("pos",i);*/
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof DealsoftheDayFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof ExclusiveFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                } if (currentFragment() instanceof FollowFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+
 
 //                if (isNetworkConnected()) {
 //                    presenter.getVendor(latitude, longitude);
@@ -1327,6 +1385,7 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
     }
+
     private void showDialog(String message) {
         new android.support.v7.app.AlertDialog.Builder(this)
                 .setMessage(message)
@@ -1337,14 +1396,13 @@ public class DashBoardActivity extends AppCompatActivity
                     }
                 }).show();
     }
+
     //notification count
     @Override
     public void successnoti(String response) {
-        if(TextUtils.isEmpty(response))
-        {
+        if (TextUtils.isEmpty(response)) {
             tvNotiCount.setText("0");
-        }
-        else {
+        } else {
 //            tvNotiCount.setText(push_notifications_count);
             tvNotiCount.setText(response);
 //            Log.e("","count= "+tvNotiCount);
@@ -1362,24 +1420,18 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
     @Override
-    public void successbottomnoti(String response,String deal,String coupon,String fav) {
+    public void successbottomnoti(String response, String deal, String coupon, String fav) {
 
 
-        if(TextUtils.isEmpty(deal))
-        {
+        if (TextUtils.isEmpty(deal)) {
             BottomtvNotiCountdeal.setText("0");
-        }
-        else if(TextUtils.isEmpty(coupon))
-        {
+        } else if (TextUtils.isEmpty(coupon)) {
             BottomtvNotiCountcoupons.setText("0");
-        }
-        else  if(TextUtils.isEmpty(fav))
-        {
+        } else if (TextUtils.isEmpty(fav)) {
 
             BottomtvNotiCountfavorites.setText("0");
 
-        }
-        else {
+        } else {
             BottomtvNotiCountdeal.setText(deal);
             BottomtvNotiCountcoupons.setText(coupon);
             BottomtvNotiCountfavorites.setText(fav);
@@ -1395,18 +1447,8 @@ public class DashBoardActivity extends AppCompatActivity
     public void failbottomnoti(String response) {
 
 
-
-
-
-
-
-
-
-
-
-
-
     }
+
     /*  @Override
       public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
           switch (requestCode) {
@@ -1435,11 +1477,10 @@ public class DashBoardActivity extends AppCompatActivity
               }
           }
       }*/
-    public void setCurLoc()
-    {
+    public void setCurLoc() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkLocationPermission()) {
-                LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     startActivityForResult(intent, 101);
@@ -1450,7 +1491,7 @@ public class DashBoardActivity extends AppCompatActivity
                 requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
             }
         } else {
-            LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             if (!manager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivityForResult(intent, 101);
@@ -1459,7 +1500,9 @@ public class DashBoardActivity extends AppCompatActivity
             }
         }
     }
+
     private LocationProvider locationProvider;
+
     private void initLocation() {
         locationProvider = new LocationProvider.Builder(this)
                 .locationObserver(this)
@@ -1470,9 +1513,9 @@ public class DashBoardActivity extends AppCompatActivity
                 .build();
         locationProvider.startTrackingLocation();
     }
+
     private boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-        {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return false;
         } else {
             return true;
@@ -1480,42 +1523,63 @@ public class DashBoardActivity extends AppCompatActivity
     }
 
 
-
     @Override
     public void run() {
-        Log.e("","run");
+        Log.e("", "run");
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        locationProvider.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        locationProvider.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
     public void onLocation(Location location) {
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
+
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    sb.append(address.getAddressLine(i)).append("\n");
+                }
+                sb.append(address.getLocality()).append("\n");
+                sb.append(address.getPostalCode()).append("\n");
+                sb.append(address.getCountryName());
+                String result = sb.toString();
+                Log.e("DashBoard", "current address= " + result);
+            }
             String address = addresses.get(0).getSubLocality();
             String city = addresses.get(0).getLocality();
-            Log.e("","run onLocation lati= "+location.getLatitude()+" longi= "+location.getLongitude());
+            Log.e("DashBoard", "run onLocation lati= " + location.getLatitude() + " longi= " + location.getLongitude());
+            Log.e("DashBoard", "current address= " + address);
+            if (address == null) {
+                sCurrentLocation = city;
+            } else {
+                sCurrentLocation = address + ", " + city;
+            }
 
-            sCurrentLocation=address + ", " + city;
 //        tvLocation.setText(address + ", " + city);
-            lati= String.valueOf(location.getLatitude());
-            longi= String.valueOf(location.getLongitude());
+            lati = String.valueOf(location.getLatitude());
+            longi = String.valueOf(location.getLongitude());
 
-            if(tvCurloc!=null&&clickFlag) {
+            if (tvCurloc != null && clickFlag) {
                 tvCurloc.setText(sCurrentLocation);
                 btOkay.setVisibility(View.VISIBLE);
                 lyCurrLocation.setVisibility(View.VISIBLE);
-                clickFlag=false;
+                clickFlag = false;
             }
 //        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
-            if(checkFlag) {
+            // if (checkFlag && clickFlag) {
+            if (UserSharedPrefManager.GetLat(this) == null) {
                 RefreshLocWithHomeView(1);
+
             }
+
 //            edtlocation.setText(address+" "+city);
            /* LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
@@ -1528,6 +1592,10 @@ public class DashBoardActivity extends AppCompatActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Fragment currentFragment() {
+        return getSupportFragmentManager().findFragmentById(R.id.framelayout_id);
     }
 }
 

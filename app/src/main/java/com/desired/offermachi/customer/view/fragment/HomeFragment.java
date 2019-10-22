@@ -261,7 +261,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Intent intent = new Intent(getActivity(), ActSearchNew.class);
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
             intent.putExtra("cat_id",sFindCatId);
             intent.putExtra("cat_name",name);
             intent.putExtra("cat_type",sType);

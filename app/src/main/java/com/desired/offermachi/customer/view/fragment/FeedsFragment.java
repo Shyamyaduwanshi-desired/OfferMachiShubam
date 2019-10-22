@@ -125,12 +125,14 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+/*
                 Fragment someFragment = new FeedsFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.framelayout_id, someFragment ); // give your fragment container id in first parameter
                 transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
-                transaction.commit();
+                transaction.commit();*/
+                pagNo=1;
+                CallAPI(1);
 
             }
         });

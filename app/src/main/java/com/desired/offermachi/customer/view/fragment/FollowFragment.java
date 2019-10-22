@@ -145,6 +145,8 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
                 new IntentFilter("Follow"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(StoreReceiver,
                 new IntentFilter("StoreFollow"));
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(RefreshReceiver,
+                new IntentFilter("Refresh"));
 
         //shyam added 25/09/19
 //        LocalBroadcastManager.getInstance(getContext()).registerReceiver(FilterReceiver,
@@ -155,6 +157,19 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
         public void onReceive(Context context, Intent intent) {
             followsatus = intent.getStringExtra("followstatus");
             Catid = intent.getStringExtra("catid");
+            if (getActivity()!=null) {
+                if (isNetworkConnected()) {
+                    presenter.ViewAllCategoryRetailer(idholder);
+                } else {
+                    showAlert("Please connect to internet.", R.style.DialogAnimation);
+                }
+            }
+
+        }
+    };
+    public BroadcastReceiver RefreshReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
             if (getActivity()!=null) {
                 if (isNetworkConnected()) {
                     presenter.CategoryFollow(idholder, Catid, followsatus);

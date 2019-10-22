@@ -30,6 +30,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -98,6 +99,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
     private String offerLocalityId="";
     private String offerLocality="";
     private ArrayList<RetailerLocation> alRetailerLocation = new ArrayList<>();
+    private CheckBox cb_selectall;
 
 
     @Override
@@ -301,7 +303,6 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             if (isNetworkConnected()) {
                 postpresenter.AddDealOfTheDay(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offercouponcode,alltime,offerLocalityId);
             }
-
         }
     }
     @Override
@@ -351,6 +352,15 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
             }
         }else if(v==tvDealOfDayLocation){
             showMultipleLocationDialog();
+        }
+        if (v == cb_selectall) {
+//            selectcategory();
+            if(cb_selectall.isChecked()){
+                locationAdapter.selectAll();
+            }
+            else {
+                locationAdapter.unselectall();
+            }
         }
     }
 
@@ -601,7 +611,8 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
         locationDlg.setContentView(R.layout.store_location_dlg);
         locationDlg.setTitle("");
         rvStoreLocation = locationDlg.findViewById(R.id.rvStoreLocation);
-
+        cb_selectall =  locationDlg.findViewById(R.id.cb_selectall);
+        cb_selectall.setOnClickListener(this);
         btnOkay = locationDlg.findViewById(R.id.btStoreLocationProceed);
         /*SearchView searchView = locationDlg.findViewById(R.id.svStoreLocationSearch);
         searchView.setOnQueryTextListener(this);
@@ -631,6 +642,7 @@ public class ActAddDealsOftheDay extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onLocationClick(RetailerLocation retailerLocation) {
+        cb_selectall.setChecked(false);
         for (RetailerLocation loc:alRetailerLocation) {
             if(loc.getId()==retailerLocation.getId()){
                 if (retailerLocation.isSelected()) {

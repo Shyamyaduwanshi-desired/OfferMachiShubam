@@ -38,7 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="60dp">
+                android:layout_marginLeft="60dp"
+                android:visibility="gone">
                 <ImageView
                     android:id="@+id/info_id"
                     android:layout_width="27dp"

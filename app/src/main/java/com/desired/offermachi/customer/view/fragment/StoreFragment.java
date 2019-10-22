@@ -115,12 +115,13 @@ RelativeLayout rlFilter,rlSortBy;
             @Override
             public void onClick(View view) {
 
-                Fragment someFragment = new StoreFragment();
+                /*Fragment someFragment = new StoreFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.framelayout_id, someFragment ); // give your fragment container id in first parameter
                 transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
-                transaction.commit();
-
+                transaction.commit();*/
+                pagNo=1;
+                CallAPI(1);
             }
         });
 
@@ -147,7 +148,23 @@ RelativeLayout rlFilter,rlSortBy;
                 new IntentFilter("StoreFollow"));
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(CatReceiver,
                 new IntentFilter("Category"));
+        LocalBroadcastManager.getInstance(getContext()).registerReceiver(RefreshDataReceiver,
+                new IntentFilter("Refresh"));
+
     }
+    public BroadcastReceiver RefreshDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent2) {
+            if (getActivity()!=null) {
+                if (isNetworkConnected()) {
+                    CallAPI(1);
+                } else {
+                    showAlert("Please connect to internet.", R.style.DialogAnimation);
+                }
+            }
+        }
+    };
+
     public BroadcastReceiver CatReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

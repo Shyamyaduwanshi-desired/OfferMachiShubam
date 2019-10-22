@@ -68,6 +68,7 @@
                         android:layout_toRightOf="@+id/rl_title"
                         android:layout_marginLeft="30dp"
                         android:src="@drawable/ic_info"
+                        android:padding="@dimen/margin_5"
                         tools:ignore="VectorDrawableCompat" />
 
                     <ImageView
@@ -78,6 +79,7 @@
                         android:layout_gravity="center"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
+                        android:padding="@dimen/margin_5"
                         android:src="@drawable/ic_notification_bell"
                         tools:ignore="VectorDrawableCompat" />
                     <TextView
@@ -90,7 +92,7 @@
                         android:textColor="@color/white"
                         android:textSize="6sp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="14dp"
+                        android:layout_marginRight="18dp"
                         android:layout_marginTop="8dp"/>
                 </RelativeLayout>
             </RelativeLayout>

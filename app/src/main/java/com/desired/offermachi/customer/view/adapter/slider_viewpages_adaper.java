@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.slider_viewpager_model;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -40,13 +42,19 @@ public class slider_viewpages_adaper extends PagerAdapter {
         return view == object;
     }
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(ViewGroup container, final int i) {
+        ImageView imageView;
+        final slider_viewpager_model slider_viewpager_model =arrayList.get(i);
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slider_custom_layout, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+        imageView = (ImageView) view.findViewById(R.id.imageView);
 
-        imageView.setImageResource(arrayList.get(position).getImg());
+//                imageView.setImageResource(Integer.parseInt(arrayList.get(i).getImg()));
+        if(slider_viewpager_model.getImg().equals("")){
+        }else{
+            Picasso.get().load(slider_viewpager_model.getImg()).placeholder(R.drawable.ic_broken).into(imageView);
+        }
         ViewPager vp = (ViewPager) container;
         vp.addView(view, 0);
         return view;

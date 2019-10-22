@@ -152,20 +152,34 @@
                     android:id="@+id/banner_relative_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
-                        android:id="@+id/iv_main"
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:src="@drawable/logooffermachi"
-                        android:layout_marginTop="5dp"
-                        android:scaleType="centerCrop"/>
+                        />
 
+<!--                    <ImageView-->
+<!--                        android:id="@+id/iv_main"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="170dp"-->
+<!--                        android:src="@drawable/logooffermachi"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:scaleType="centerCrop"/>-->
+                    <LinearLayout
+                        android:id="@+id/SliderDots"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="135dp"
+                        android:layout_marginLeft="100dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        />
                     <TextView
                         android:id="@+id/btnfollow"
                         android:layout_width="80dp"
                         android:layout_height="25dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginRight="10dp"
                         android:background="@drawable/view_background"
                         android:gravity="center"
                         android:text="follow"
@@ -189,15 +203,21 @@
 <!--                        android:layout_marginLeft="190dp"/>-->
                 </RelativeLayout>
             </LinearLayout>
-            <ImageView
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:foregroundGravity="center"
+                tools:ignore="VectorDrawableCompat"
                 android:id="@+id/storelogothumb"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                android:layout_width="78dp"
+                android:layout_height="80dp"
                 android:src="@drawable/logooffermachi"
                 android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="120dp"/>
-
+                android:layout_marginTop="120dp"
+                app:civ_border_color="@color/yellow"
+                app:civ_border_width="2dp"
+                />
             <RelativeLayout
                 android:id="@+id/lyname"
                 android:layout_width="wrap_content"
@@ -220,7 +240,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textColor="@color/blue"
-                        android:textSize="15dp" />
+                        android:textSize="17dp" />
 
                     <View
                         android:layout_width="match_parent"
@@ -241,7 +261,8 @@
                     android:scaleX=".6"
                     android:scaleY=".6"
                     android:theme="@style/MyRatingBar"
-                    android:transformPivotX="0dp" />
+                    android:transformPivotX="0dp"
+                    />
 
 
 <!--                <TextView-->
@@ -257,35 +278,36 @@
 <!--                    android:layout_marginLeft="4dp"/>-->
             </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ly_timer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/storelogothumb"
-                android:orientation="horizontal"
-                android:layout_below="@+id/lyname"
-                android:layout_marginTop="3dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CLosed Now"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/darkred"
-                    android:textSize="15dp"
-                    />
-                <TextView
-                    android:id="@+id/timmers_id"
-                    android:layout_width="20dp"
-                    android:layout_height="23dp"
-                    android:layout_marginLeft="5dp"
-                    android:drawableLeft="@drawable/black_watch"
-                    android:drawablePadding="10dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ly_timer"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_toRightOf="@+id/storelogothumb"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:layout_below="@+id/lyname"-->
+<!--                android:layout_marginTop="3dp">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/timmers_id"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="CLosed Now"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/darkred"-->
+<!--                    android:textSize="15dp"-->
+<!--                    />-->
+<!--                <TextView-->
+
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="23dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:drawableLeft="@drawable/black_watch"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
 
 <!--            <ImageView-->
 <!--                android:layout_below="@+id/lyname"-->
@@ -303,7 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/storelogothumb"
-                android:layout_marginTop="10dp">
+              >
                 <TextView
                     android:id="@+id/storedescription"
                     android:layout_width="wrap_content"
@@ -446,6 +468,13 @@
                                      android:theme="@style/MyRatingBar"
                                      android:layout_marginTop="5dp"/>
                              </LinearLayout>
+                            <TextView
+                                android:id="@+id/multiplelocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="vcxxxxxxxxxxxvfd"
+                                android:textColor="@color/purple"
+                                />
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -504,34 +533,34 @@
 <!--                                         android:textStyle="bold"-->
 <!--                                         />-->
 <!--                                 </LinearLayout>-->
-<!--                                <LinearLayout-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_toRightOf="@+id/storelogothumb"-->
-<!--                                    android:orientation="horizontal"-->
-<!--                                    android:layout_below="@+id/lyname"-->
-<!--                                    android:layout_marginTop="10dp"-->
-<!--                                    >-->
-<!--                                    <TextView-->
-<!--                                        android:layout_width="wrap_content"-->
-<!--                                        android:layout_height="wrap_content"-->
-<!--                                        android:text="CLosed Now"-->
-<!--                                        android:gravity="center"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        android:textColor="@color/darkred"-->
-<!--                                        android:textSize="15dp"-->
-<!--                                        />-->
-<!--                                    <TextView-->
-<!--                                        android:id="@+id/timmer_id"-->
-<!--                                        android:layout_width="20dp"-->
-<!--                                        android:layout_height="23dp"-->
-<!--                                        android:layout_marginLeft="5dp"-->
-<!--                                        android:drawableLeft="@drawable/black_watch"-->
-<!--                                        android:drawablePadding="10dp"-->
-<!--                                        android:textColor="@color/black"-->
-<!--                                        android:textStyle="bold"-->
-<!--                                        />-->
-<!--                                </LinearLayout>-->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@+id/storelogothumb"
+                                    android:orientation="horizontal"
+                                    android:layout_below="@+id/lyname"
+                                    android:layout_marginTop="10dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="CLosed Now"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/darkred"
+                                        android:textSize="15dp"
+                                        />
+                                    <TextView
+                                        android:id="@+id/timmer_id"
+                                        android:layout_width="20dp"
+                                        android:layout_height="23dp"
+                                        android:layout_marginLeft="5dp"
+                                        android:drawableLeft="@drawable/black_watch"
+                                        android:drawablePadding="10dp"
+                                        android:textColor="@color/black"
+                                        android:textStyle="bold"
+                                        />
+                                </LinearLayout>
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content">
@@ -541,193 +570,193 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"
                                         android:layout_alignParentBottom="true">
-<!--                                        <LinearLayout-->
-<!--                                            android:layout_width="match_parent"-->
-<!--                                            android:layout_height="wrap_content"-->
-<!--                                            android:orientation="vertical">-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Monday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/mondayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Tuesday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/tuesdayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Wednesday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/wednesdayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Thursday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/thursdayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Friday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/fridayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Saturday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/saturdayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"-->
-<!--                                                    android:textStyle="bold"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                            <LinearLayout-->
-<!--                                                android:layout_width="match_parent"-->
-<!--                                                android:layout_height="wrap_content"-->
-<!--                                                android:layout_marginTop="10dp"-->
-<!--                                                android:layout_marginLeft="15dp"-->
-<!--                                                android:layout_marginRight="15dp"-->
-<!--                                                android:weightSum="2">-->
-<!--                                                <TextView-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="#000"-->
-<!--                                                    android:textStyle="bold"-->
-<!--                                                    android:text="Sunday"/>-->
-<!--                                                <TextView-->
-<!--                                                    android:id="@+id/sundayopen"-->
-<!--                                                    android:layout_width="0dp"-->
-<!--                                                    android:layout_height="wrap_content"-->
-<!--                                                    android:layout_weight="1"-->
-<!--                                                    android:gravity="center"-->
-<!--                                                    android:textSize="16dp"-->
-<!--                                                    android:textColor="@color/purple"-->
-<!--                                                    android:text="-"-->
-<!--                                                    android:textStyle="bold"/>-->
-<!--                                            </LinearLayout>-->
-<!--                                        </LinearLayout>-->
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="1dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Monday"/>
+                                                <TextView
+                                                    android:id="@+id/mondayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Tuesday"/>
+                                                <TextView
+                                                    android:id="@+id/tuesdayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Wednesday"/>
+                                                <TextView
+                                                    android:id="@+id/wednesdayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Thursday"/>
+                                                <TextView
+                                                    android:id="@+id/thursdayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Friday"/>
+                                                <TextView
+                                                    android:id="@+id/fridayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textStyle="bold"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Saturday"/>
+                                                <TextView
+                                                    android:id="@+id/saturdayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"
+                                                    android:textStyle="bold"/>
+                                            </LinearLayout>
+                                            <LinearLayout
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10dp"
+                                                android:layout_marginLeft="15dp"
+                                                android:layout_marginRight="15dp"
+                                                android:weightSum="2">
+                                                <TextView
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/blue"
+                                                    android:textStyle="bold"
+                                                    android:text="Sunday"/>
+                                                <TextView
+                                                    android:id="@+id/sundayopen"
+                                                    android:layout_width="0dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_weight="1"
+                                                    android:gravity="center"
+                                                    android:textSize="16dp"
+                                                    android:textColor="@color/purple"
+                                                    android:text="-"
+                                                    android:textStyle="bold"/>
+                                            </LinearLayout>
+                                        </LinearLayout>
                                     </RelativeLayout>
                                 </LinearLayout>
                             </LinearLayout>

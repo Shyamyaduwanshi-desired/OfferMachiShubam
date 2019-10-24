@@ -44,6 +44,7 @@
                 android:layout_width="130dp"
                 android:layout_height="90dp"
                 android:padding="5dp"
+
                 android:layout_marginTop="5dp"
                 android:src="@drawable/logooffermachi"
                 android:scaleType="fitCenter"

@@ -264,6 +264,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             String Shoplogo=object.getString("shop_logo");
             JSONArray jsonArray = object.getJSONArray("retailer_banners_images");
             JSONObject object2;
+            arrayList.clear();
             for (int count = 0; count < jsonArray.length(); count++) {
                 object2 = jsonArray.getJSONObject(count);
                 slider_viewpager_model slider_viewpager_model=new slider_viewpager_model(
@@ -271,16 +272,17 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                 );
 
                 arrayList.add(slider_viewpager_model);
-                slider_viewpages_adaper = new slider_viewpages_adaper(this, arrayList);
-                viewPager.setAdapter(slider_viewpages_adaper);
 
             }
+            slider_viewpages_adaper = new slider_viewpages_adaper(this, arrayList);
+            viewPager.setAdapter(slider_viewpages_adaper);
 
             viewPager.setCurrentItem(0);
             slider_viewpages_adaper.setTimer(viewPager,3);
             dotscount = slider_viewpages_adaper.getCount();
 
             dots = new ImageView[dotscount];
+            sliderDotspanel.removeAllViews();
             for (int i = 0; i < dotscount; i++) {
 
                 dots[i] = new ImageView(this);

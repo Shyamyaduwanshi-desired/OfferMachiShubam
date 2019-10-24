@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.R;
+import com.desired.offermachi.RoundRectCornerImageView;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
@@ -121,13 +122,13 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         }
 
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
-            holder.productbutton.setText("View Coupon Code");//View Coupon Code
+            holder.productbutton.setText("View Coupon");//View Coupon Code
             holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
             holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
             holder.productbutton.setText("Redeemed");
         }else{
-            holder.productbutton.setText("Get Coupon Code");//Get Coupon Code
+            holder.productbutton.setText("Get Coupon");//Get Coupon Code
             holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
             holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
         }
@@ -149,7 +150,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             }
         });
 
-        holder.cv_image.setOnClickListener(new View.OnClickListener() {
+        holder.productimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ProductActivity.class);
@@ -200,7 +201,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         });
 
 
-        holder.rlLike.setOnClickListener(new View.OnClickListener() {
+        holder.likeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fav=selectCategoryModel.getOfferfav();
@@ -222,7 +223,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             }
         });
 
-        holder.rlShare.setOnClickListener(new View.OnClickListener() {
+        holder.iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
@@ -251,13 +252,14 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
      //   public CardView categorylinear;
-        ImageView productimg,likeimg,ivStoreLogo;
+        ImageView likeimg,ivStoreLogo,iv_share;
         TextView productname,productdate,offertype,tvDsc;
         Button productbutton;
         RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
         CardView cv_image;
         LinearLayout text_linear;
+        RoundRectCornerImageView productimg;
 //        AndroidLikeButton ivLikeBtn;
 
         public MyViewHolder(View itemView) {
@@ -267,11 +269,11 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             productname =  itemView.findViewById(R.id.tv_product_name);
             tvDsc =  itemView.findViewById(R.id.tv_prod_dsc);
             productdate = itemView.findViewById(R.id.tv_prod_date);
-            rlShare = itemView.findViewById(R.id.rl_share);
-            rlLike = itemView.findViewById(R.id.rl_like);
+            iv_share = itemView.findViewById(R.id.iv_share);
+           // rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_acoupon_code);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
-            cv_image=itemView.findViewById(R.id.cv_image);
+           // cv_image=itemView.findViewById(R.id.cv_image);
             offertype=itemView.findViewById(R.id.tv_flat_discount);
             likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);

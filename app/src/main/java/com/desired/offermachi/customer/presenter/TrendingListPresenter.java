@@ -121,7 +121,9 @@ public class TrendingListPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
+
                 Log.e("","userid= "+userid);
+
                 return params;
             }
         };

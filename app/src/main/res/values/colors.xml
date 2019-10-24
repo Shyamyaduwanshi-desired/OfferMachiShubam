@@ -26,4 +26,5 @@
     <color name="loc_txt">#D0D0D0</color>
     <color name="lighycolour">#23FFD400</color>
     <color name="lightgr">#63E9EDEF</color>
+    <color name="reddark">#F80202</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.desired.offermachi.customer.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ public class OfferPageMultipleLocation extends AppCompatActivity implements View
     ArrayList<muliplelocationshowmodel> multiplearrayList ;
     MultipleshoelocationAdapter multipleshoelocationAdapter;
     ImageView imageViewback;
+    Context context;
+
 
 
     @Override
@@ -43,11 +46,13 @@ public class OfferPageMultipleLocation extends AppCompatActivity implements View
         location_latitude= intent.getStringExtra("location_latitude");
         location_longitude= intent.getStringExtra("location_longitude");
 
-        multiple_location = findViewById(R.id.multiple_location_show);
+
+        multiple_location = (RecyclerView)findViewById(R.id.multiple_location_show);
         multiple_location.setHasFixedSize(true);
-        multiple_location.setLayoutManager(new LinearLayoutManager(this));
-        multiple_location.setItemAnimator(new DefaultItemAnimator());
+        multiple_location.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         multiple_location.setNestedScrollingEnabled(false);
+
+
 
         muliplelocationshowmodel muliplelocationshowmodel = new muliplelocationshowmodel(
                 idholder, locality_name, location_address,mobile,location_latitude,location_longitude

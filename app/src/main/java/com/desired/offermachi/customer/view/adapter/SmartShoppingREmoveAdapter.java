@@ -94,9 +94,9 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
 
 
         if (selectCategoryModel.getOfferfav().equals("1")){
-            holder.likeimg.setImageResource(R.drawable.ic_like);
+            holder.rlLike.setImageResource(R.drawable.ic_like);
         }else{
-            holder.likeimg.setImageResource(R.drawable.heart);
+            holder.rlLike.setImageResource(R.drawable.heart);
         }
 
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
@@ -173,14 +173,14 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
                 String fav=selectCategoryModel.getOfferfav();
                 if (fav.equals("0")) {
                     Favstatus="1";
-                    holder.likeimg.setImageResource(R.drawable.ic_like);
+                    holder.rlLike.setImageResource(R.drawable.ic_like);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
                     intent.putExtra("offerid", selectCategoryModel.getId());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if(fav.equals("1")) {
                     Favstatus="0";
-                    holder.likeimg.setImageResource(R.drawable.heart);
+                    holder.rlLike.setImageResource(R.drawable.heart);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
                     intent.putExtra("offerid", selectCategoryModel.getId());
@@ -227,7 +227,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         //   public CardView categorylinear;
-        ImageView productimg,likeimg,ivStoreLogo;
+        ImageView productimg,ivStoreLogo;
         TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
         RelativeLayout productbuttonlayout;
@@ -244,11 +244,11 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
             rlemove=itemView.findViewById(R.id.iv_delete);
-            productbutton=itemView.findViewById(R.id.bt_get_a_code);
+            productbutton=itemView.findViewById(R.id.bt_get_acoupon_code);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
 
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
-            likeimg=itemView.findViewById(R.id.iv_like);
+//            likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);
 //            ivLikeBtn=itemView.findViewById(R.id.bt_like);
         }

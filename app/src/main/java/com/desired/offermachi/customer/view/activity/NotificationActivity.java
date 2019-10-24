@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -75,6 +76,7 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     TextView tvLoadMore;
     int pagNo=1;
     private TextView tvDndName;
+    FloatingActionButton floting_button_readall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,8 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         categoryrecycle = findViewById(R.id.categoryrecycleview);
 
         tvDndName = findViewById(R.id.tv_disturb_name);
+        floting_button_readall = findViewById(R.id.floting_button_readall);
+        floting_button_readall.setOnClickListener(this);
         imageViewback.setOnClickListener(this);
         info.setOnClickListener(this);
         tvDONodist.setOnClickListener(this);
@@ -219,6 +223,13 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
         else if (v==tvLoadMore){
             pagNo=pagNo+1;
             CallAPI(1);
+        }else if (v==floting_button_readall){
+            if(arNoti.size()>0){
+                notiRead.ReadNotificationInBulk(idholder);
+            }
+            else {
+                Toast.makeText(NotificationActivity.this, "There is no Notification available", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }

@@ -90,13 +90,10 @@ public class ExclusiveOffersPresenter {
                                     object.getString("qr_code_image"),
                                     object.getString("coupon_code_status"),
                                     object.getString("shop_logo")
-
                             );
                             list.add(selectCategoryModel);
                         }
                         exclusiveList.success(list);
-
-
                     } else if (status == 404) {
                         exclusiveList.error(reader.getString("message"));
                     }

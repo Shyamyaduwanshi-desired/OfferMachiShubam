@@ -91,6 +91,61 @@ public class NotiFicationOpenPresenter {
         queue.add(postRequest);
 
     }
+    public void ReadNotificationInBulk(final String userid) {
+
+        if(!((Activity) context).isFinishing())
+        {
+            progress = new ProgressDialog(context);
+            progress.setMessage("Please Wait..");
+            progress.setCancelable(false);
+            showpDialog();
+        }
+
+//http://offermachi.in/api/push_notification_open_status_bulk
+        StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "push_notification_open_status_bulk", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
+                try {
+                    JSONObject reader = new JSONObject(response);
+                    int status = reader.getInt("status");
+                    String  message = reader.getString("message");
+                    if(status == 200){
+//                        String result=reader.getString("result");
+                        readNoti.successReadNoti(reader.getString("result"));
+                    }else {
+                        readNoti.errornoti(reader.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    readNoti.failnoti("Something went wrong. Please try after some time.");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(!((Activity) context).isFinishing()) {
+                    hidepDialog();
+                }
+                readNoti.failnoti("Server Error.\n Please try after some time.");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id", userid);
+                params.put("type", "customer");
+                return params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);
+
+    }
+
 
     private void showpDialog() {
         if (!progress.isShowing())

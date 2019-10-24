@@ -246,7 +246,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         }
 
         @Override
-    public void success(String response) {
+        public void success(String response) {
         try {
             JSONObject object = new JSONObject(response);
             Storeid=object.getString("id");
@@ -272,8 +272,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                 );
 
                 arrayList.add(slider_viewpager_model);
-
             }
+
             slider_viewpages_adaper = new slider_viewpages_adaper(this, arrayList);
             viewPager.setAdapter(slider_viewpages_adaper);
 
@@ -385,7 +385,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                         TextView  txtfridayopen=dialog.findViewById(R.id.fridayopen);
                         TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
                         TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
-
 
                         Mondayclosetime = timeto.nextToken();
                         txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);

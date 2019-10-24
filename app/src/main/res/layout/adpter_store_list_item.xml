@@ -57,7 +57,10 @@
                         android:layout_marginTop="5dp"
                         android:src="@drawable/logooffermachi"
                         android:scaleType="fitCenter"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        />
                     <!-- <ImageView
                          android:id="@+id/iv_image"
                          android:layout_width="fill_parent"
@@ -92,7 +95,7 @@
 
     <TextView
         android:id="@+id/btnviewall"
-        android:layout_width="130dp"
+        android:layout_width="138dp"
         android:layout_height="30dp"
         android:layout_below="@+id/cv_main"
         android:layout_marginTop="-4dp"

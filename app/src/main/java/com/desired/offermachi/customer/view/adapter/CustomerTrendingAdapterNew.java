@@ -97,9 +97,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
         }
 
-
-
-
         if(selectCategoryModel.getOfferdescription().length()>30)
         {
             holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription().substring(0,30)+"..."));

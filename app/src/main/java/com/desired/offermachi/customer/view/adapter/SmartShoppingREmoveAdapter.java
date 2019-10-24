@@ -59,7 +59,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
     @Override
     public SmartShoppingREmoveAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                                       int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.smart_shopping_remove_activity_new, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.remove_smart_shopping_activity, parent, false);
         SmartShoppingREmoveAdapter.MyViewHolder myViewHolder = new SmartShoppingREmoveAdapter.MyViewHolder(view);
         return myViewHolder;
     }
@@ -100,13 +100,13 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
         }
 
         if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
-            holder.productbutton.setText("View Coupon Code");//View Coupon Code
+            holder.productbutton.setText("View Coupon");//View Coupon Code
             holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
             holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
         }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
             holder.productbutton.setText("Redeemed");
         }else{
-            holder.productbutton.setText("Get Coupon Code");//Get Coupon Code
+            holder.productbutton.setText("Get Coupon");//Get Coupon Code
             holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
             holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
         }
@@ -188,7 +188,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
                 }
             }
         });
-        holder.removebutton.setOnClickListener(new View.OnClickListener() {
+        holder.rlemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("Remove");
@@ -229,9 +229,10 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
         //   public CardView categorylinear;
         ImageView productimg,likeimg,ivStoreLogo;
         TextView productname,productdate/*,offertype*/,tvDsc;
-        Button productbutton,removebutton;
+        Button productbutton;
         RelativeLayout productbuttonlayout;
-        RelativeLayout rlShare,rlLike;
+//        RelativeLayout rlShare,rlLike;
+        ImageView rlShare,rlLike,rlemove;
 //        AndroidLikeButton ivLikeBtn;
 
         public MyViewHolder(View itemView) {
@@ -242,9 +243,9 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             productdate = itemView.findViewById(R.id.tv_prod_date);
             rlShare = itemView.findViewById(R.id.rl_share);
             rlLike = itemView.findViewById(R.id.rl_like);
+            rlemove=itemView.findViewById(R.id.iv_delete);
             productbutton=itemView.findViewById(R.id.bt_get_a_code);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
-            removebutton=itemView.findViewById(R.id.remove_smart_button_id);
 
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);

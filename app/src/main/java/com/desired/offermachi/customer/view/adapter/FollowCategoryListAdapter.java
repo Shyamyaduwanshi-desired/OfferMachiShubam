@@ -2,6 +2,7 @@ package com.desired.offermachi.customer.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,8 +51,11 @@ public class FollowCategoryListAdapter extends RecyclerView.Adapter<FollowCatego
         status=categoryListModel.getFollowstatus();
         if (status.equals("1")){
             holder.unfolltext.setText("Unfollow");
+            holder.unfolltext.setBackground(ContextCompat.getDrawable(mContext,R.drawable.view_red_background));
         }else if (status.equals("0")){
             holder.unfolltext.setText("Follow");
+            holder.unfolltext.setBackground(ContextCompat.getDrawable(mContext,R.drawable.view_background));
+
         }
        /* holder.categorylinear.setOnClickListener(new View.OnClickListener() {
             @Override

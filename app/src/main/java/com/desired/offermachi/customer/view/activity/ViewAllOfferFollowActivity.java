@@ -66,7 +66,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     ImageView storelogothumb;
     private StoreDetailPresenter presenter;
     TextView txtstorename/*,txtstorenem2*/,txtstoredescription;
-    TextView txtmondayopen,txttuesdayopen,txtwednesdayopen,txtthursdayopen,txtfridayopen,txtsaturdayopen,txtsundayopen;
+//    TextView txtmondayopen,txttuesdayopen,txtwednesdayopen,txtthursdayopen,txtfridayopen,txtsaturdayopen,txtsundayopen;
     String Mondayopentime,Tuesdayopentime,Wednesdayopentime,Thursdayopentime,Fridayopentime,Saturdayopentime,Sundayopentime;
     String Mondayclosetime,Tuesdayclosetime,Wednesdayclosetime,Thursdayclosetime,Fridayclosetime,Saturdayclosetime,Sundayclosetime;
     String category_id,retailer_id;
@@ -164,11 +164,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
 
-//        multiple_location = findViewById(R.id.multiple_location_show);
-//        multiple_location.setHasFixedSize(true);
-//        multiple_location.setLayoutManager(new LinearLayoutManager(this));
-//        multiple_location.setItemAnimator(new DefaultItemAnimator());
-//        multiple_location.setNestedScrollingEnabled(false);
         location_icon=findViewById(R.id.location_icon_id);
         location_icon.setOnClickListener(this);
 
@@ -232,8 +227,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             intent.putExtra("location_longitude",location_longitude);
             startActivity(intent);
 
-//            Intent intent = new Intent(ViewAllOfferFollowActivity.this, OfferPageMultipleLocation.class);
-//            startActivity(intent);
         }else if (v==imageviewback){
             onBackPressed();
         } else if(v==info){
@@ -325,9 +318,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                 }
             });
 
-//            String locality = object.getString("retailer_locations");
-//            multiplelocation.setText(locality);
-
             JSONArray jsonArray2 = object.getJSONArray("retailer_locations");
             JSONObject object3;
             for (int count = 0; count < jsonArray2.length(); count++) {
@@ -382,8 +372,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                         cancle.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startActivity(new Intent(ViewAllOfferFollowActivity.this,ViewAllOfferFollowActivity.class));
-                                finish();
+                                dialog.dismiss();
                             }
                         });
 
@@ -416,7 +405,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
                         Sundayclosetime= timeto.nextToken();
                         txtsundayopen.setText(Sundayopentime+"-"+Sundayclosetime);
-
                         dialog.show();
 
                     }

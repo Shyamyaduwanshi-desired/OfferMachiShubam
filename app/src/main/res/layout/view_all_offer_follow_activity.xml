@@ -82,67 +82,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-<!--            <RelativeLayout-->
-<!--            android:id="@+id/relative"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:id="@+id/storelogothumb"-->
-<!--                android:src="@drawable/store"-->
-<!--                android:scaleType="centerCrop"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:foregroundGravity="center" />-->
-<!--            <LinearLayout-->
-<!--                android:id="@+id/lyname"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:layout_toRightOf="@+id/storelogothumb"-->
-<!--                android:orientation="vertical">-->
-<!--                <TextView-->
-<!--                    android:id="@+id/storename"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Dominos Store"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textColor="@color/blue"-->
-<!--                    android:textSize="14dp" />-->
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="3dp"-->
-<!--                    android:background="@color/orange"/>-->
-<!--            </LinearLayout>-->
-<!--            <ImageView-->
-<!--                android:id="@+id/storelogo"-->
-<!--                android:layout_width="120dp"-->
-<!--                android:layout_height="100dp"-->
-<!--                android:src="@drawable/store"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:scaleType="centerCrop"/>-->
-<!--            <TextView-->
-<!--                android:id="@+id/btnfollow"-->
-<!--                android:layout_width="70dp"-->
-<!--                android:layout_height="23dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:background="@drawable/view_background"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Unfollow"-->
-<!--                android:layout_below="@+id/lyname"-->
-<!--                android:layout_toRightOf="@+id/storelogothumb"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:visibility="gone"-->
-<!--                android:textSize="12dp" />-->
-<!--        </RelativeLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,13 +97,6 @@
                         android:layout_height="170dp"
                         />
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/iv_main"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="170dp"-->
-<!--                        android:src="@drawable/logooffermachi"-->
-<!--                        android:layout_marginTop="5dp"-->
-<!--                        android:scaleType="centerCrop"/>-->
                     <LinearLayout
                         android:id="@+id/SliderDots"
                         android:layout_width="wrap_content"
@@ -186,141 +118,160 @@
                         android:textColor="@color/white"
                         android:layout_marginTop="140dp"
                         android:textSize="12dp" />
-                    <!--                    <TextView-->
-<!--                        android:id="@+id/btnfollow"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="23dp"-->
-<!--                        android:background="@drawable/view_background"-->
-<!--                        android:text="Unfollow"-->
-<!--                        android:textColor="@color/white"-->
-<!--                        android:textSize="12dp"-->
-<!--                        android:gravity="center"-->
-<!--                        android:layout_alignBottom="@+id/iv_main"-->
-<!--                        android:layout_toRightOf="@+id/SliderDots"-->
-<!--                        android:layout_marginBottom="10dp"-->
-<!--                        android:paddingLeft="10dp"-->
-<!--                        android:paddingRight="10dp"-->
-<!--                        android:layout_marginLeft="190dp"/>-->
+
                 </RelativeLayout>
             </LinearLayout>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:foregroundGravity="center"
-                tools:ignore="VectorDrawableCompat"
+            <ImageView
                 android:id="@+id/storelogothumb"
-                android:layout_width="78dp"
+                android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/logooffermachi"
                 android:layout_marginLeft="1dp"
                 android:scaleType="centerCrop"
-                android:layout_marginTop="120dp"
-                app:civ_border_color="@color/yellow"
-                app:civ_border_width="2dp"
-                />
+                android:layout_marginTop="120dp"/>
 
-            <RelativeLayout
-                android:id="@+id/lyname"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="1dp"
-                android:layout_toRightOf="@+id/storelogothumb"
-                android:orientation="horizontal"
-                android:layout_marginTop="179dp"
-                >
-                <LinearLayout
-                    android:id="@+id/name_tittle_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/storename"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dominos Store"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textColor="@color/blue"
-                        android:textSize="17dp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:background="@color/orange"/>
-                </LinearLayout>
-
-                <RatingBar
-                    android:layout_toRightOf="@+id/name_tittle_id"
-                    android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:isIndicator="false"
-                    android:max="5"
-                    android:rating="5"
-                    android:scaleX=".6"
-                    android:scaleY=".6"
-                    android:theme="@style/MyRatingBar"
-                    android:transformPivotX="0dp"
-                    />
-
-
-<!--                <TextView-->
-<!--                    android:layout_toRightOf="@+id/ratingBar"-->
-<!--                    android:id="@+id/rating_test"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="5.0"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textColor="@color/blue"-->
-<!--                    android:textSize="18dp"-->
-<!--                    android:layout_marginLeft="4dp"/>-->
-            </RelativeLayout>
-
-<!--            <LinearLayout-->
-<!--                android:id="@+id/ly_timer"-->
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/lyname"-->
 <!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_marginLeft="4dp"-->
 <!--                android:layout_toRightOf="@+id/storelogothumb"-->
 <!--                android:orientation="horizontal"-->
-<!--                android:layout_below="@+id/lyname"-->
-<!--                android:layout_marginTop="3dp">-->
-<!--                <TextView-->
-<!--                    android:id="@+id/timmers_id"-->
+<!--                android:layout_marginTop="179dp"-->
+<!--                >-->
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/name_tittle_id"-->
 <!--                    android:layout_width="wrap_content"-->
 <!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="CLosed Now"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:textColor="@color/darkred"-->
-<!--                    android:textSize="15dp"-->
-<!--                    />-->
-<!--                <TextView-->
+<!--                    android:layout_marginLeft="1dp"-->
+<!--                    android:orientation="vertical">-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/storename"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text=""-->
+<!--                        android:gravity="center"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:textColor="@color/blue"-->
+<!--                        android:textSize="17dp" />-->
 
-<!--                    android:layout_width="20dp"-->
-<!--                    android:layout_height="23dp"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:drawableLeft="@drawable/black_watch"-->
-<!--                    android:drawablePadding="10dp"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textStyle="bold"-->
-<!--                    />-->
-<!--            </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="3dp"-->
+<!--                        android:background="@color/orange"/>-->
+<!--                </LinearLayout>-->
 
-<!--            <ImageView-->
-<!--                android:layout_below="@+id/lyname"-->
-<!--                android:layout_alignParentRight="true"-->
-<!--                android:id="@+id/location_id"-->
-<!--                android:layout_width="27dp"-->
-<!--                android:layout_height="20dp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginRight="20dp"-->
-<!--                android:src="@drawable/ic_facebook_placeholder_for_locate_places_on_maps"-->
-<!--                tools:ignore="VectorDrawableCompat"-->
-<!--                />-->
+<!--                <RatingBar-->
+<!--                    android:layout_toRightOf="@+id/name_tittle_id"-->
+<!--                    android:id="@+id/ratingBar"-->
+<!--                    style="?android:attr/ratingBarStyleIndicator"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="2dp"-->
+<!--                    android:isIndicator="false"-->
+<!--                    android:max="5"-->
+<!--                    android:rating="5"-->
+<!--                    android:scaleX=".6"-->
+<!--                    android:scaleY=".6"-->
+<!--                    android:theme="@style/MyRatingBar"-->
+<!--                    android:transformPivotX="0dp"-->
+<!--                    />-->
+
+
+<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_toRightOf="@+id/ratingBar"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/rating_test"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="5.0"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textStyle="bold"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textColor="@color/blue"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="18dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginLeft="4dp"/>&ndash;&gt;-->
+<!--            </RelativeLayout>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_toRightOf="@+id/storelogothumb"
+                android:layout_marginTop="179dp"
+                android:weightSum="3">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4">
+                    <LinearLayout
+                        android:id="@+id/name_tittle_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="1dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/storename"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue"
+                            android:textSize="17dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="@color/orange"/>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center">
+                    <android.support.v7.widget.AppCompatRatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?attr/ratingBarStyleSmall"
+                    android:theme="@style/RatingBar"
+                    android:rating="5"
+                    tools:rating="5"
+                        android:isIndicator="false"/>
+
+                    <!--                    <RatingBar-->
+<!--                        android:layout_toRightOf="@+id/name_tittle_id"-->
+<!--                        android:id="@+id/ratingBar"-->
+<!--                        style="?android:attr/ratingBarStyleIndicator"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:isIndicator="false"-->
+<!--                        android:max="5"-->
+<!--                        android:rating="5"-->
+<!--                        android:scaleX=".5"-->
+<!--                        android:scaleY=".6"-->
+<!--                        android:theme="@style/MyRatingBar"-->
+<!--                        android:transformPivotX="0dp"-->
+<!--                        />-->
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/mondayopen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:gravity="bottom"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/purple"
+                    android:layout_marginTop="3dp"
+                    android:text="5.0"/>
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/description_id"
                 android:layout_width="match_parent"
@@ -328,24 +279,23 @@
                 android:layout_below="@+id/storelogothumb"
                 android:orientation="vertical"
                 >
-
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    >
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:weightSum="2">
 
                     <LinearLayout
                         android:id="@+id/timmerclose_id"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1.7"
+                        android:gravity="start"
                         android:layout_marginLeft="80dp"
-                        android:layout_toRightOf="@+id/storelogothumb"
-                        android:orientation="horizontal"
-                        android:layout_below="@+id/lyname"
-                        android:gravity="center">
-
+                        >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -353,7 +303,8 @@
                             android:text="CLosed Now"
                             android:textColor="@color/darkred"
                             android:textSize="15dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:paddingLeft="20dp"/>
                         <TextView
                             android:id="@+id/timmer_id"
                             android:layout_width="20dp"
@@ -365,19 +316,21 @@
                             android:textStyle="bold"
                             />
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4">
 
-                    <ImageView
-                        android:id="@+id/location_icon_id"
-                        android:layout_width="60dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/ic_facebook_placeholder_for_locate_places_on_maps"
-                        android:layout_marginRight="10dp"
-                        android:layout_gravity="end"
-                        android:layout_marginLeft="50dp"
-                        />
-
+                        <ImageView
+                            android:id="@+id/location_icon_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:src="@drawable/ic_facebook_placeholder_for_locate_places_on_maps"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="end"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
-
                 <TextView
                     android:id="@+id/storedescription"
                     android:layout_width="wrap_content"
@@ -385,8 +338,10 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the Lorem ipsum dolleer sit amet it is the dummy text only not is the"
-                    android:textSize="10dp" />
+                    android:textStyle="bold"
+                    android:textColor="@color/blue"
+                    android:text=""
+                    android:textSize="15dp" />
             </LinearLayout>
 
 

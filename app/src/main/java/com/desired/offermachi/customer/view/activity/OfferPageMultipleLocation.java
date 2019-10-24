@@ -35,8 +35,6 @@ public class OfferPageMultipleLocation extends AppCompatActivity implements View
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
 
-
-
         Intent intent=getIntent();
         idholder= intent.getStringExtra("id");
         locality_name= intent.getStringExtra("locality_name");
@@ -52,7 +50,7 @@ public class OfferPageMultipleLocation extends AppCompatActivity implements View
         multiple_location.setNestedScrollingEnabled(false);
 
         muliplelocationshowmodel muliplelocationshowmodel = new muliplelocationshowmodel(
-                idholder, locality_name, location_address,mobile
+                idholder, locality_name, location_address,mobile,location_latitude,location_longitude
         );
 
         multiplearrayList.add(muliplelocationshowmodel);

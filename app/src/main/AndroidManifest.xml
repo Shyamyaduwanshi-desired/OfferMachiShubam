@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
   <!-- for OTP read-->
@@ -38,6 +39,7 @@
         <!--
         android:hardwareAccelerated="false" , android:largeHeap="true"
         tools:replace="android:appComponentFactory"-->
+        <activity android:name=".customer.view.activity.OfferPageMultipleLocation"/>
         <activity android:name=".retalier.view.activity.AddNewOfferDealsActivity"/>
         <activity android:name=".customer.view.activity.LocationActivity"/>
 <!--        <activity android:name=".customer.view.activity.MainActivity"></activity>-->

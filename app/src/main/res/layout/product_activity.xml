@@ -45,6 +45,7 @@
                     android:layout_marginRight="50dp"
                     android:layout_alignParentRight="true"
                     app:srcCompat="@drawable/ic_info"
+                    android:visibility="gone"
                     />
                 <ImageView
                     android:id="@+id/imgNotiBell"
@@ -151,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Dominos Pizza"
+                    android:text=""
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/blue"
                     android:textSize="19dp"
@@ -166,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Curabitur non nulla sit amet nisl temus convallis quis ac lectus.Donec rutrum congue leo eget malesuada.Curabitur non nulla sit amet nisl temus convallis quis ac lectus.Donec rutrum congue leo eget malesuada. "
+                    android:text=""
                     android:layout_marginLeft="10dp" />
             </LinearLayout>
             <LinearLayout
@@ -196,7 +197,7 @@
                         android:id="@+id/brandname"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Pizza"
+                        android:text=""
                         android:layout_weight="1"
                         android:textColor="@color/blue"
                         android:textSize="12dp"
@@ -248,7 +249,7 @@
                         android:id="@+id/time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12:00AM -12:15PM"
+                        android:text=""
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="1dp"/>
                 </LinearLayout>
@@ -294,7 +295,7 @@
                     android:id="@+id/enddate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Jul 31,2019"
+                    android:text=""
                     android:textColor="@color/orange"
                     android:drawablePadding="5dp"/>
             </LinearLayout>
@@ -360,7 +361,7 @@
                                     android:id="@+id/storename"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Dominos"
+                                    android:text=""
                                     android:layout_marginLeft="10dp"
                                     android:layout_marginTop="8dp"
                                     android:textColor="@color/black" />
@@ -417,7 +418,7 @@
                                     android:id="@+id/storename2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Dominos"
+                                    android:text=""
                                     android:textSize="17dp"
                                     android:textColor="@color/blue"
                                     android:layout_marginTop="10dp"/>
@@ -432,7 +433,7 @@
                                 android:id="@+id/storedescription"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Lorem ipsum dolleer sit amet it is the dummy text only not is the"
+                                android:text=""
                                 android:textSize="10dp"
                                 android:layout_marginTop="5dp"/>
                         </LinearLayout>

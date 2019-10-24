@@ -44,7 +44,7 @@
                     android:layout_marginRight="10dp"
                     android:src="@drawable/ic_info"
                     tools:ignore="VectorDrawableCompat"
-
+                    android:visibility="gone"
                     />
                 <ImageView
                     android:id="@+id/btnnotification"
@@ -72,7 +72,6 @@
             </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/categoryrecycleview"
         android:layout_width="match_parent"

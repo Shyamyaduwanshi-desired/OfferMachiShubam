@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.view.activity.ProductActivity;
@@ -70,14 +72,32 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     @Override
     public void onBindViewHolder(final CustomerTrendingAdapterNew.MyViewHolder holder, final int i) {
         final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
-        holder.productname.setText(selectCategoryModel.getOffername());
+//        holder.productname.setText(selectCategoryModel.getOffername());
 //        holder.offertype.setText(selectCategoryModel.getOffertype());
         holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
 
-        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
+//        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
 
 //        String text = "<font color=#cc0029>First Color</font> <font color=#ffcc00>Second Color</font>";
 //        yourtextview.setText(Html.fromHtml(text));
+
+
+        if (selectCategoryModel.getOffername()==null){
+            holder.productname.setText("");
+        }else {
+            holder.productname.setText(selectCategoryModel.getOffername());
+        }
+        Log.e("Adapter",""+selectCategoryModel.getOffertypename());
+        if(Util.isEmptyString(selectCategoryModel.getOffertypename())){
+            holder.offertype.setText("");
+            holder.text_linear.setVisibility(View.GONE);
+        }
+        else {
+            holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
+        }
+
+
+
 
         if(selectCategoryModel.getOfferdescription().length()>30)
         {
@@ -85,19 +105,14 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         }
         else
         {
-//            holder.tvDsc.setText(selectCategoryModel.getOfferdescription());
             holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription()));
-
         }
 
         if(selectCategoryModel.getOfferImage().equals("")){
         }else{
-//            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
-//                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(holder.productimg);
 
             Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
-
 
         if (selectCategoryModel.getOfferfav().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
@@ -133,7 +148,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
             }
         });
-
 
         holder.cv_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,6 +257,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
         CardView cv_image;
+        LinearLayout text_linear;
 //        AndroidLikeButton ivLikeBtn;
 
         public MyViewHolder(View itemView) {
@@ -260,6 +275,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             offertype=itemView.findViewById(R.id.tv_flat_discount);
             likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);
+            text_linear =itemView.findViewById(R.id.text_linear);
 //            ivLikeBtn=itemView.findViewById(R.id.bt_like);
         }
     }

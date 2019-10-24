@@ -44,7 +44,7 @@
                     android:layout_toLeftOf="@+id/btnnotification"
                     android:layout_marginRight="10dp"
                     app:srcCompat="@drawable/ic_info"
-
+                    android:visibility="gone"
 
                     />
                 <ImageView

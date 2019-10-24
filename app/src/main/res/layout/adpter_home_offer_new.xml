@@ -44,24 +44,33 @@
                 android:adjustViewBounds="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/logooffermachi" />
-
-                <TextView
-                    android:id="@+id/tv_flat_discount"
+                <LinearLayout
+                    android:id="@+id/text_linear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:background="@color/green"
-                    android:ellipsize="middle"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="4dp"
-                    android:paddingTop="2.2dp"
-                    android:paddingRight="6dp"
-                    android:paddingBottom="3.4dp"
-                    android:singleLine="true"
-                    android:text="Flat 20% off"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white"
-                    android:textSize="10dp" />
+                    android:visibility="visible"
+                    >
+                    <TextView
+                        android:id="@+id/tv_flat_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:ellipsize="middle"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="4dp"
+                        android:paddingTop="2.2dp"
+                        android:paddingRight="6dp"
+                        android:paddingBottom="3.4dp"
+                        android:singleLine="true"
+                        android:text="cgvhhhhh"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="10dp" />
+
+
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
             <LinearLayout
                 android:id="@+id/linear_category_id"
@@ -82,7 +91,7 @@
                         android:layout_marginTop="5dp"
                         android:ellipsize="middle"
                         android:singleLine="true"
-                        android:text="Electronics"
+                        android:text=""
                         android:gravity="center_vertical"
                         android:textSize="15dp"
                         android:textStyle="bold"
@@ -116,7 +125,7 @@
                     android:layout_marginTop="3dp"
                     android:ellipsize="middle"
                     android:singleLine="false"
-                    android:text="Electronicssdfsdfsdfdsfsdfsdfdsfsdfsdfsdfsd"
+                    android:text=""
                     android:gravity="center"
                     android:textSize="13dp" />
                 <TextView

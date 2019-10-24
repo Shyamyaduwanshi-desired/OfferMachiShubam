@@ -57,7 +57,8 @@
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/btnnotification"
                         android:src="@drawable/ic_info"
-                        tools:ignore="VectorDrawableCompat" />
+                        tools:ignore="VectorDrawableCompat"
+                        android:visibility="gone"/>
 
                     <ImageView
                         android:id="@+id/btnnotification"

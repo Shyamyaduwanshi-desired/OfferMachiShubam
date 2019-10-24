@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerOfferDetailPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
@@ -205,12 +206,30 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             String brandid = object.getString("offer_brand");
             String brandname = object.getString("offer_brand_name");
             txtbrandname.setText(brandname);
+
+            if(Util.isEmptyString(brandname)){
+                txtbrandname.setText("");
+            }
+            else {
+                txtbrandname.setText(brandname);
+            }
+
             offercategory = object.getString("offer_category");
             String subcategory = object.getString("sub_category");
             String offertype = object.getString("offer_type");
             String offervalue = object.getString("offer_value");
             String offertypename = object.getString("offer_type_name");
-            txtoffertypename.setText(offertypename + " Off " + offervalue);
+//            txtoffertypename.setText(offertypename + " Off " + offervalue);
+
+
+            if(Util.isEmptyString(offertypename)){
+                txtoffertypename.setText("");
+            }
+            else {
+                txtoffertypename.setText(offertypename + " Off " + offervalue);
+            }
+
+
             String offerdetail = object.getString("offer_details");
             String startdate = object.getString("start_date");
             String enddate = object.getString("end_date");

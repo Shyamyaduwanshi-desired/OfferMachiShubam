@@ -4,7 +4,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:elevation="4dp"
+    android:layout_margin="5dp"
+
     >
     <android.support.v7.widget.CardView
         android:id="@+id/cv_main"
@@ -13,9 +14,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:outlineSpotShadowColor="@color/black"
         app:cardBackgroundColor="@android:color/white"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
         app:cardCornerRadius="4dp"
         app:cardElevation="0dp">
         <RelativeLayout
@@ -44,10 +42,10 @@
                 android:layout_width="130dp"
                 android:layout_height="90dp"
                 android:padding="5dp"
-
+                android:layout_margin="10dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/logooffermachi"
-                android:scaleType="fitCenter"
+                android:scaleType="centerInside"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/storename"
@@ -62,21 +60,17 @@
                 android:layout_marginBottom="7dp"
                 android:text="Dominoz Pizza"
                 android:textColor="@color/black"/>
-
-
-            </LinearLayout>
+        </LinearLayout>
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
     <TextView
         android:id="@+id/btnviewall"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="30dp"
         android:text="View All Offers"
         android:textSize="10dp"
         android:gravity="center"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
         android:background="@drawable/view_offer_background"
         android:textColor="@color/white"
         android:layout_below="@+id/cv_main"

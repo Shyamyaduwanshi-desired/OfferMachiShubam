@@ -138,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ly_filter"
-        android:layout_marginBottom="120dp">
+        android:layout_marginBottom="65dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/categoryrecycleview"
@@ -164,6 +164,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="70dp"
         android:visibility="gone"
+
+
         />
 
 </RelativeLayout>

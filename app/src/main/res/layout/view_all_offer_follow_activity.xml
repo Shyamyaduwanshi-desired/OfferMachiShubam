@@ -16,9 +16,9 @@
             android:background="@drawable/splash">
             <ImageView
                 android:id="@+id/imageviewback"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_left_arrow"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="20dp"
@@ -198,11 +198,11 @@
                 android:layout_marginRight="15dp"
                 android:layout_toRightOf="@+id/storelogothumb"
                 android:layout_marginTop="179dp"
-                android:weightSum="3">
+                android:weightSum="2">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.4">
+                    android:layout_weight="1.3">
                     <LinearLayout
                         android:id="@+id/name_tittle_id"
                         android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.7"
                     android:gravity="center">
                     <android.support.v7.widget.AppCompatRatingBar
                         android:id="@+id/ratingBar"
@@ -259,17 +259,17 @@
 <!--                        android:transformPivotX="0dp"-->
 <!--                        />-->
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/mondayopen"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:gravity="bottom"
-                    android:textSize="15dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/purple"
-                    android:layout_marginTop="3dp"
-                    android:text="5.0"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/mondayopen"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.3"-->
+<!--                    android:gravity="bottom"-->
+<!--                    android:textSize="15dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColor="@color/purple"-->
+<!--                    android:layout_marginTop="3dp"-->
+<!--                    android:text="5.0"/>-->
             </LinearLayout>
 
             <LinearLayout
@@ -304,7 +304,7 @@
                             android:textColor="@color/darkred"
                             android:textSize="15dp"
                             android:textStyle="bold"
-                            />
+                            android:paddingLeft="0dp"/>
                         <TextView
                             android:id="@+id/timmer_id"
                             android:layout_width="20dp"
@@ -866,6 +866,7 @@
                            android:layout_marginTop="10dp"
                            android:textSize="18dp"
                            android:layout_marginLeft="10dp"
+                           android:textStyle="bold"
                            />
                        <!--<LinearLayout-->
                            <!--android:layout_width="match_parent"-->

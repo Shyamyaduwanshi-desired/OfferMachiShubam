@@ -77,7 +77,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     public void onBindViewHolder(final CustomerTrendingAdapterNew.MyViewHolder holder, final int i) {
         if(selectCategoryModelArrayList.size()>0) {
 
-
             selectCategoryModel = selectCategoryModelArrayList.get(i);
 //        holder.productname.setText(selectCategoryModel.getOffername());
 //        holder.offertype.setText(selectCategoryModel.getOffertype());

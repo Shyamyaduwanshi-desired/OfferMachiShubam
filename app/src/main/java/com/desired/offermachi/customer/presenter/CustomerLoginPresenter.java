@@ -58,7 +58,7 @@ public class CustomerLoginPresenter {
                         JSONObject jsonObject=new JSONObject(result);
                         String userid=jsonObject.getString("id");
                         String otp=jsonObject.getString("otp");
-                        Log.e("","Shyam otp= "+otp);
+                        Log.e("fdiikjb","Shyam otp= "+otp);
                         Intent intent = new Intent(context, OtpActivtivity.class);
                         intent.putExtra("userid",userid);
                         intent.putExtra("otp",otp);

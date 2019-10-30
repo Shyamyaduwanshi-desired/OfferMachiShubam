@@ -508,39 +508,177 @@ public class DashBoardActivity extends AppCompatActivity
     public void onBackPressed() {
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        //if(currentFragment() instanceof )
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if(currentFragment() instanceof StoreFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+           // menuItem.setChecked(true);
+            // Set action bar title
+           // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            if (FM.getBackStackEntryCount() > 0) {
-                FM.popBackStack();
-                if (FM.getBackStackEntryCount() == 1) {
-                    setToolTittle("", 1);
-                    ivLocation.setVisibility(View.VISIBLE);
-
-                }
-            } else {
-                new AlertDialog.Builder(this)
-                        .setMessage("Are you sure you want to exit?")
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this, "");//only for not show privious selected category
-                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_HOME);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
-                                startActivity(intent);
-                                finish();
-                                System.exit(0);
-                            }
-                        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).show();
-            }
         }
+      else  if(currentFragment() instanceof ProfileFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else  if(currentFragment() instanceof MycouponsFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        } else  if(currentFragment() instanceof FollowFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof FavouritesFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof FeedsFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof DealsoftheDayFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof ExclusiveFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof InviteFriendFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof HelpFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof CustomerSupportFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }else  if(currentFragment() instanceof TermConditionFragment ){
+            // Insert the fragment by replacing any existing fragment
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.framelayout_id, new HomeFragment()).commit();
+            // Highlight the selected item has been done by NavigationView
+            // menuItem.setChecked(true);
+            // Set action bar title
+            // setTitle(menuItem.getTitle());
+            // Close the navigation drawer
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        else {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+           /* } else {
+                if (FM.getBackStackEntryCount() > 0) {
+                    FM.popBackStack();
+                    if (FM.getBackStackEntryCount() == 1) {
+                        setToolTittle("", 1);
+                        ivLocation.setVisibility(View.VISIBLE);
+
+                    }
+                } else {*/
+                    new AlertDialog.Builder(this)
+                            .setMessage("Are you sure you want to exit?")
+                            .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    UserSharedPrefManager.SaveStoreFilter(DashBoardActivity.this, "");//only for not show privious selected category
+                                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                                    intent.addCategory(Intent.CATEGORY_HOME);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+                                    startActivity(intent);
+                                    finish();
+                                    System.exit(0);
+                                }
+                            }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+               // }
+            //}
+        }
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -160,6 +161,7 @@ public class CustomerFollowCategoryRetailerPresenter {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
                 followList.fail("Server Error.\n Please try after some time.");
             }
         }
@@ -173,9 +175,14 @@ public class CustomerFollowCategoryRetailerPresenter {
                 return params;
             }
         };
-
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                1000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
+      /*  RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(postRequest);*/
     }
 
     public void FollowStore(final String userid,final String retailerid,final String active) {

@@ -350,19 +350,22 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             if (storeopentime.equals("null")){
             }else{
                 StringTokenizer time = new StringTokenizer(storeopentime, ",");
-                Mondayopentime= time.nextToken();
+                while (time.hasMoreTokens()){
+                    Mondayopentime= time.nextToken();
 
-                Tuesdayopentime= time.nextToken();
+                    Tuesdayopentime= time.nextToken();
 
-                Wednesdayopentime= time.nextToken();
+                    Wednesdayopentime= time.nextToken();
 
-                Thursdayopentime= time.nextToken();
+                    Thursdayopentime= time.nextToken();
 
-                Fridayopentime= time.nextToken();
+                    Fridayopentime= time.nextToken();
 
-                Saturdayopentime= time.nextToken();
+                    Saturdayopentime= time.nextToken();
 
-                Sundayopentime= time.nextToken();
+                    Sundayopentime= time.nextToken();
+                }
+
             }
             if (storeclosetime.equals("null")){
 

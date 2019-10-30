@@ -310,7 +310,10 @@ public class FeedsFragment extends Fragment implements View.OnClickListener, Cus
         }
         else
         {
+
+
             tvLoadMore.setVisibility(View.GONE);
+            categoryrecycle.setPadding(0,0,0,0);
         }
 
     }

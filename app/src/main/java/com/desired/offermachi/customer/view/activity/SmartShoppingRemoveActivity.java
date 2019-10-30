@@ -205,8 +205,8 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
-        startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
+       // finish();
+       // startActivity(new Intent(getApplicationContext(),DashBoardActivity.class));
     }
 }
 

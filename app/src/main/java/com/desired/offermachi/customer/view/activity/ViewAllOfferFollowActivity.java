@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.StoreModel;
@@ -102,6 +103,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
     LinearLayout timmerclose;
     String locality_name,location_address,mobile,location_latitude,location_longitude;
     String status;
+    private JSONArray jsonArray2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +174,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
          btnfollow=findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);
-        Toast.makeText(this, ""+followstatus, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+followstatus, Toast.LENGTH_SHORT).show();
 
 
         RatingBar ratingbar = (RatingBar) findViewById(R.id.ratingBar);
@@ -225,6 +227,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             intent.putExtra("mobile",mobile);
             intent.putExtra("location_latitude",location_latitude);
             intent.putExtra("location_longitude",location_longitude);
+            intent.putExtra("location",jsonArray2.toString());
             startActivity(intent);
 
         }else if (v==imageviewback){
@@ -320,7 +323,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                 }
             });
 
-            JSONArray jsonArray2 = object.getJSONArray("retailer_locations");
+            jsonArray2 = object.getJSONArray("retailer_locations");
             JSONObject object3;
             for (int count = 0; count < jsonArray2.length(); count++) {
                 object3 = jsonArray2.getJSONObject(count);
@@ -340,6 +343,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
             String ShopCategory=object.getString("shop_category");
             String Shopdes=object.getString("about_store");
+            if(!Util.isEmptyString(Shopdes))
             txtstoredescription.setText(Shopdes);
             String storeopentime=object.getString("opening_time");
             String storeclosetime=object.getString("closing_time");

@@ -1117,6 +1117,15 @@ public class DashBoardActivity extends AppCompatActivity
                 if (currentFragment() instanceof FollowFragment) {
                     LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
                 }
+                if (currentFragment() instanceof FeedsFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof FavouritesFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof MycouponsFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
 
                 UserSharedPrefManager.SaveCurrentLatLongAndLocNm(DashBoardActivity.this, lati, longi, sCurrentLocation, sDistance);
                 if (locationProvider != null) {
@@ -1149,6 +1158,12 @@ public class DashBoardActivity extends AppCompatActivity
                     LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
                 }
                 if (currentFragment() instanceof FollowFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof FeedsFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof FavouritesFragment) {
                     LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
                 }
 

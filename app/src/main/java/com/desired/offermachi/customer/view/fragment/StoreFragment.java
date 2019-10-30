@@ -67,7 +67,7 @@ RelativeLayout rlFilter,rlSortBy;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         v=inflater.inflate(R.layout.fragment_store, container, false);
+        v=inflater.inflate(R.layout.fragment_store, container, false);
         diff=1;
         initview();
         Listner();
@@ -228,10 +228,12 @@ RelativeLayout rlFilter,rlSortBy;
         if(totalPages>=1&&pagNo<totalPages)
         {
             tvLoadMore.setVisibility(View.VISIBLE);
+
         }
         else
         {
             tvLoadMore.setVisibility(View.GONE);
+            storerecycle.setPadding(0,0,0,0);
         }
     }
 
@@ -242,7 +244,6 @@ RelativeLayout rlFilter,rlSortBy;
         }else{
             CallAPI(3);
         }
-
 
 //        if (getActivity()!=null) {
 //            if (isNetworkConnected()) {

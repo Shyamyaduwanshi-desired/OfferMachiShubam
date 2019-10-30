@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -60,13 +61,20 @@ public class OfferPageMultipleLocation extends AppCompatActivity implements View
                 JSONObject object3;
                 for (int count = 0; count < jsonArray.length(); count++) {
                     object3 = jsonArray.getJSONObject(count);
-                    idholder = object3.getString("id");
+                    idholder  = object3.getString("id");
+                    locality_name = object3.getString("locality_name");
+                    location_address = object3.getString("location_address");
+                    Log.e("Locatio","address..."+location_address);
+                    mobile=object3.getString("location_contact_phone");
+                    location_latitude=object3.getString("location_latitude");
+                    location_longitude=object3.getString("location_longitude");
+                    /*idholder = object3.getString("id");
                     locality_name = object3.getString("locality_name");
                     location_address = object3.getString("address");
                     mobile = object3.getString("mobile");
                     location_latitude = object3.getString("location_latitude");
                     location_longitude = object3.getString("location_longitude");
-
+*/
                     muliplelocationshowmodel = new muliplelocationshowmodel(
                             idholder, locality_name, location_address, mobile, location_latitude, location_longitude
                     );

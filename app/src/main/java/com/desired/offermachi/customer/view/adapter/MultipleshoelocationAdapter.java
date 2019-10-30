@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,7 +102,7 @@ public class MultipleshoelocationAdapter extends RecyclerView.Adapter<Multiplesh
 //            viewHolder.text_linear.setVisibility(View.GONE);
         }
         else {
-            viewHolder.locationaddress.setText(mylocation_model.getLocation_address());
+            viewHolder.locationaddress.setText(Html.fromHtml(mylocation_model.getLocation_address()));
         }
 
 

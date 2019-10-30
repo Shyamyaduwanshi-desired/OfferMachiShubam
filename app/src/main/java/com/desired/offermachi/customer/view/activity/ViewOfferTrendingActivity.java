@@ -1,5 +1,6 @@
 package com.desired.offermachi.customer.view.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,11 +33,11 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList, NotificationCountPresenter.NotiUnReadCount,HomePresenter.HomeList {
+public class ViewOfferTrendingActivity extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList, NotificationCountPresenter.NotiUnReadCount, HomePresenter.HomeList {
 
-    ImageView imageViewback,info;
+    ImageView imageViewback, info;
     RecyclerView categoryrecycle;
-//    private CustomerTrendingAdapter customerTrendingAdapter;
+    //    private CustomerTrendingAdapter customerTrendingAdapter;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private TrendingListPresenter presenter;
     HomePresenter homePresenter;
@@ -62,7 +63,7 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         homePresenter = new HomePresenter(ViewOfferTrendingActivity.this, ViewOfferTrendingActivity.this);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
-        info=findViewById(R.id.info_id);
+        info = findViewById(R.id.info_id);
         info.setOnClickListener(this);
         categoryrecycle = findViewById(R.id.categoryrecycleview);
 
@@ -74,16 +75,16 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         categoryrecycle.setItemAnimator(new DefaultItemAnimator());
         categoryrecycle.setNestedScrollingEnabled(false);
 
-        notiCount = new NotificationCountPresenter(this,this);
+        notiCount = new NotificationCountPresenter(this, this);
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
 
         if (isNetworkConnected()) {
             //presenter.ViewAllTrending(idholder);
-            if(Util.isEmptyString(catid)){
-                catid="";
+            if (Util.isEmptyString(catid)) {
+                catid = "";
             }
-            homePresenter.GetAllMultipleCateList(catid,idholder);
+            homePresenter.GetAllMultipleCateList(catid, idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
@@ -92,34 +93,37 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(CouponReceiver,
                 new IntentFilter("Refresh"));
     }
+
     public BroadcastReceiver locationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String fav = intent.getStringExtra("fav");
             String offerid = intent.getStringExtra("offerid");
-            presenter.AddFavourite(idholder,offerid,fav);
+            presenter.AddFavourite(idholder, offerid, fav);
         }
     };
     public BroadcastReceiver CouponReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent2) {
             if (isNetworkConnected()) {
-              //  presenter.ViewAllTrending(idholder);
-                if(Util.isEmptyString(catid)){
-                    catid="";
+                //  presenter.ViewAllTrending(idholder);
+                if (Util.isEmptyString(catid)) {
+                    catid = "";
                 }
-                homePresenter.GetAllMultipleCateList(catid,idholder);
+                if (!((Activity) ViewOfferTrendingActivity.this).isFinishing())
+                    homePresenter.GetAllMultipleCateList(catid, idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
 
         }
     };
+
     @Override
     public void onClick(View v) {
         if (v == imageViewback) {
             onBackPressed();
-        }else if(v==info){
+        } else if (v == info) {
             Intent intent = new Intent(ViewOfferTrendingActivity.this, InfoActivity.class);
             startActivity(intent);
         }
@@ -136,11 +140,11 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
     @Override
     public void favsuccess(String response) {
         if (isNetworkConnected()) {
-          //  presenter.ViewAllTrending(idholder);
-            if(Util.isEmptyString(catid)){
-                catid="";
+            //  presenter.ViewAllTrending(idholder);
+            if (Util.isEmptyString(catid)) {
+                catid = "";
             }
-            homePresenter.GetAllMultipleCateList(catid,idholder);
+            homePresenter.GetAllMultipleCateList(catid, idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
@@ -205,11 +209,9 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
 
     @Override
     public void successnoti(String response) {
-        if(TextUtils.isEmpty(response))
-        {
+        if (TextUtils.isEmpty(response)) {
             tvNotiCount.setText("0");
-        }
-        else {
+        } else {
 
             tvNotiCount.setText(response);
         }

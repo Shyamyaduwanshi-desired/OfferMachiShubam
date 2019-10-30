@@ -99,13 +99,17 @@
 
                     <LinearLayout
                         android:id="@+id/SliderDots"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginTop="135dp"
                         android:layout_marginLeft="100dp"
+                        android:layout_marginRight="90dp"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        />
+
+                        android:gravity="center"
+                        >
+
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/btnfollow"
                         android:layout_width="80dp"
@@ -852,6 +856,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@color/lightcolour1"
                     android:layout_below="@+id/cv"/>
             </LinearLayout>
                    <LinearLayout

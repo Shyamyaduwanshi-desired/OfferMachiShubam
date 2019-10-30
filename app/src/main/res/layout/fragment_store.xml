@@ -112,13 +112,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ly_filter"
-        android:layout_marginBottom="65dp">
+        android:layout_marginBottom="75dp"
+       >
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/storerecycleview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
+            android:paddingBottom="35dp"
             android:background="@color/lightcolour1"
             >
         </android.support.v7.widget.RecyclerView>

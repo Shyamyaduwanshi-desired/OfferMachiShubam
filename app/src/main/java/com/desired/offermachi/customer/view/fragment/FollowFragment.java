@@ -15,6 +15,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.CategoryListModel;
 import com.desired.offermachi.customer.model.FollowStoreModel;
 import com.desired.offermachi.customer.model.StoreModel;
@@ -172,6 +174,12 @@ public class FollowFragment extends Fragment implements View.OnClickListener, Cu
         public void onReceive(Context context, Intent intent) {
             if (getActivity()!=null) {
                 if (isNetworkConnected()) {
+                    if(Util.isEmptyString(Catid)){
+                        Catid="";
+                    }
+                    if(Util.isEmptyString(followsatus)){
+                        followsatus="";
+                    }
                     presenter.CategoryFollow(idholder, Catid, followsatus);
                 } else {
                     showAlert("Please connect to internet.", R.style.DialogAnimation);

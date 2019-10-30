@@ -93,7 +93,7 @@ public class MapActivity extends AppCompatActivity implements LocationObserver, 
                 intent.putExtra("distance",""+dist);
                 intent.putExtra("catIds",catid);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
         presenter=new SmartShoppingOfferPresenter(MapActivity.this,MapActivity.this);

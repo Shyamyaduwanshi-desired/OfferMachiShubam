@@ -1,11 +1,11 @@
 package com.desired.offermachi.customer.view.activity;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.TextUtils;
@@ -16,18 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.CustomerOfferDetailPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
-import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
-import com.desired.offermachi.retalier.model.UserModel;
-import com.desired.offermachi.retalier.presenter.ViewOfferDetailPresenter;
-import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
-
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -40,11 +34,11 @@ import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
 public class ProductActivity extends AppCompatActivity implements View.OnClickListener, CustomerOfferDetailPresenter.OfferDetail, NotificationCountPresenter.NotiUnReadCount {
-    ImageView imageViewback,info;
+    ImageView imageViewback, info;
     Button couponbutton;
     LinearLayout shareiconimge, viewalloffer;
     ImageView likeimg;
-    int count=0;
+    int count = 0;
     private CustomerOfferDetailPresenter presenter;
     String offerid, idholder;
     ImageView viewPager_product;
@@ -52,19 +46,20 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     ImageView qr_code_img_id;
     String couponcode, qrcodeimage;
     Button coupon_button_apply_id;
-    TextView btnok,tvNotiCount;
-    TextView txtstorename,txtstoredescription,txtstorename2;
+    TextView btnok, tvNotiCount;
+    TextView txtstorename, txtstoredescription, txtstorename2;
     ImageView storeimage;
     CircleImageView storelogothumb;
     String Storeid;
     String offercategory;
-    String fav,Favstatus;
+    String fav, Favstatus;
     TextView btnfollow;
     String followstatus;
     String couponstatus;
     ImageView imgNotiBell;
     ImageView imgshare;
     private NotificationCountPresenter notiCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,16 +76,16 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         idholder = user.getId();
         imageViewback = findViewById(R.id.imageviewback);
         imageViewback.setOnClickListener(this);
-        info= findViewById(R.id.info_id);
+        info = findViewById(R.id.info_id);
         info.setOnClickListener(this);
         couponbutton = (Button) findViewById(R.id.coupon_button_id);
         couponbutton.setOnClickListener(this);
-        imgNotiBell=findViewById(R.id.imgNotiBell);
+        imgNotiBell = findViewById(R.id.imgNotiBell);
         imgNotiBell.setOnClickListener(this);
-        imgshare=findViewById(R.id.imgshare);
+        imgshare = findViewById(R.id.imgshare);
         imgshare.setOnClickListener(this);
 
-        notiCount = new NotificationCountPresenter(this,this);
+        notiCount = new NotificationCountPresenter(this, this);
         tvNotiCount = findViewById(R.id.txtMessageCount);
         notiCount.NotificationUnreadCount(idholder);
        /* shareiconimge =findViewById(R.id.shareicon_image_id);
@@ -102,7 +97,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         txtstorename.setOnClickListener(this);
         storeimage = findViewById(R.id.storeimage);
         storelogothumb = findViewById(R.id.storelogothumb);
-        txtstoredescription=findViewById(R.id.storedescription);
+        txtstoredescription = findViewById(R.id.storedescription);
         likeimg = findViewById(R.id.heartfirst_image_id);
         likeimg.setOnClickListener(this);
         viewPager_product = findViewById(R.id.viewPager_product);
@@ -112,7 +107,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         txtenddate = findViewById(R.id.enddate);
         txttime = findViewById(R.id.time);
         txtbrandname = findViewById(R.id.brandname);
-        btnfollow=findViewById(R.id.btnfollow);
+        btnfollow = findViewById(R.id.btnfollow);
         btnfollow.setOnClickListener(this);
         if (isNetworkConnected()) {
             presenter.OfferDetail(idholder, offerid);
@@ -125,16 +120,16 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == imageViewback) {
             onBackPressed();
-        } else if(v==info){
+        } else if (v == info) {
             Intent intent = new Intent(ProductActivity.this, InfoActivity.class);
             startActivity(intent);
-        }else if (v == couponbutton) {
-            if (couponstatus.equals("0")){
-                couponstatus="1";
-                presenter.GetCoupons(idholder, offerid,couponstatus);
-            }else if (couponstatus.equals("1")){
+        } else if (v == couponbutton) {
+            if (couponstatus.equals("0")) {
+                couponstatus = "1";
+                presenter.GetCoupons(idholder, offerid, couponstatus);
+            } else if (couponstatus.equals("1")) {
                 showdialog(qrcodeimage, couponcode);
-            }else if (couponstatus.equals("2")){
+            } else if (couponstatus.equals("2")) {
 
             }
 
@@ -142,52 +137,52 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 
         }*/ else if (v == viewalloffer) {
             Intent intent = new Intent(ProductActivity.this, ViewStoreOfferActivity.class);
-            intent.putExtra("storeid",Storeid);
+            intent.putExtra("storeid", Storeid);
             startActivity(intent);
         } else if (v == txtstorename) {
             Intent intent = new Intent(ProductActivity.this, ViewAllOfferFollowActivity.class);
-            intent.putExtra("retailer_id",Storeid);
-            intent.putExtra("category_id",offercategory);
+            intent.putExtra("retailer_id", Storeid);
+            intent.putExtra("category_id", offercategory);
             startActivity(intent);
         } else if (v == likeimg) {
             if (fav.equals("0")) {
                 likeimg.setImageResource(R.drawable.ic_like);
-                Favstatus="1";
+                Favstatus = "1";
                 if (isNetworkConnected()) {
-                    presenter.AddFavourite(idholder,offerid,Favstatus);
-                }  else {
+                    presenter.AddFavourite(idholder, offerid, Favstatus);
+                } else {
                     showAlert("Please connect to internet.", R.style.DialogAnimation);
                 }
             } else if (fav.equals("1")) {
                 likeimg.setImageResource(R.drawable.heart);
-                Favstatus="0";
+                Favstatus = "0";
                 if (isNetworkConnected()) {
-                    presenter.AddFavourite(idholder,offerid,Favstatus);
-                }  else {
+                    presenter.AddFavourite(idholder, offerid, Favstatus);
+                } else {
                     showAlert("Please connect to internet.", R.style.DialogAnimation);
                 }
             }
-        }else if (v==btnfollow){
+        } else if (v == btnfollow) {
             if (isNetworkConnected()) {
-                if (followstatus.equals("0")){
-                    followstatus="1";
-                    presenter.AddStoreFollow(idholder,Storeid,followstatus);
-                }else if (followstatus.equals("1")){
-                    followstatus="0";
-                    presenter.AddStoreFollow(idholder,Storeid,followstatus);
+                if (followstatus.equals("0")) {
+                    followstatus = "1";
+                    presenter.AddStoreFollow(idholder, Storeid, followstatus);
+                } else if (followstatus.equals("1")) {
+                    followstatus = "0";
+                    presenter.AddStoreFollow(idholder, Storeid, followstatus);
                 }
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
 
-        }else if (v==imgNotiBell){
-            startActivity(new Intent(getApplicationContext(),NotificationActivity.class));
-        }else if (v== imgshare){
+        } else if (v == imgNotiBell) {
+            startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
+        } else if (v == imgshare) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_SUBJECT, "OfferMachi");
-            String shareMessage= "\nGet regular updates on the best deals, cashback offers, and discount coupons across retail stores in your location. Get it for free at.\n";
-            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + "com.desired.offermachi"  +"\n\n";
+            String shareMessage = "\nGet regular updates on the best deals, cashback offers, and discount coupons across retail stores in your location. Get it for free at.\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + "com.desired.offermachi" + "\n\n";
             sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, "choose one"));
@@ -207,10 +202,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             String brandname = object.getString("offer_brand_name");
             txtbrandname.setText(brandname);
 
-            if(Util.isEmptyString(brandname)){
+            if (Util.isEmptyString(brandname)) {
                 txtbrandname.setText("");
-            }
-            else {
+            } else {
                 txtbrandname.setText(brandname);
             }
 
@@ -222,10 +216,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
 //            txtoffertypename.setText(offertypename + " Off " + offervalue);
 
 
-            if(Util.isEmptyString(offertypename)){
+            if (Util.isEmptyString(offertypename)) {
                 txtoffertypename.setText("");
-            }
-            else {
+            } else {
                 txtoffertypename.setText(offertypename + " Off " + offervalue);
             }
 
@@ -238,11 +231,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             txttime.setText(time);
             String description = object.getString("description");
 
-            if(TextUtils.isEmpty(description))
-            {
+            if (TextUtils.isEmpty(description)) {
                 txtofferdescription.setText("");
-            }
-            else {
+            } else {
 //                txtofferdescription.setText(description);
                 txtofferdescription.setText(Html.fromHtml(description));
             }
@@ -250,13 +241,13 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             couponcode = object.getString("coupon_code");
             String postby = object.getString("posted_by");
             String status = object.getString("status");
-             fav=object.getString("favourite_status");
-            if (fav.equals("1")){
+            fav = object.getString("favourite_status");
+            if (fav.equals("1")) {
                 likeimg.setImageResource(R.drawable.ic_like);
-                count=1;
-            }else{
+                count = 1;
+            } else {
                 likeimg.setImageResource(R.drawable.heart);
-                count=0;
+                count = 0;
             }
             String offerimage = object.getString("offer_image");
             if (offerimage.equals("")) {
@@ -266,11 +257,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             }
             qrcodeimage = object.getString("qr_code_image");
             couponstatus = object.getString("coupon_code_status");
-            if (couponstatus.equals("1")){
+            if (couponstatus.equals("1")) {
                 couponbutton.setText("View Coupon Code");
-            }else if (couponstatus.equals("2")){
+            } else if (couponstatus.equals("2")) {
                 couponbutton.setText("Redeemed");
-            }else if (couponstatus.equals("0")){
+            } else if (couponstatus.equals("0")) {
                 couponbutton.setText("Get Coupon Code");
             }
 
@@ -285,15 +276,15 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         Log.e("details", "response=" + response);
         try {
             JSONObject object = new JSONObject(response);
-                    Storeid=object.getString("id");
-                    String Shopname=object.getString("shop_name");
-                    if(!Util.isEmptyString(Shopname)){
-                        txtstorename.setText(Shopname);
-                    }
-                    if(!Util.isEmptyString(Shopname)){
-                        txtstorename2.setText(Shopname);
-                    }
-                    String Shoplogo=object.getString("shop_logo");
+            Storeid = object.getString("id");
+            String Shopname = object.getString("shop_name");
+            if (!Util.isEmptyString(Shopname)) {
+                txtstorename.setText(Shopname);
+            }
+            if (!Util.isEmptyString(Shopname)) {
+                txtstorename2.setText(Shopname);
+            }
+            String Shoplogo = object.getString("shop_logo");
             if (Shoplogo.equals("")) {
             } else {
                 Picasso.get().load(Shoplogo).networkPolicy(NetworkPolicy.NO_CACHE)
@@ -304,22 +295,21 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
                 Picasso.get().load(Shoplogo).networkPolicy(NetworkPolicy.NO_CACHE)
                         .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(storelogothumb);
             }
-                    String ShopCategory=object.getString("shop_category");
+            String ShopCategory = object.getString("shop_category");
 
-                    String Shopdes=object.getString("about_store");
+            String Shopdes = object.getString("about_store");
+            if (!Util.isEmptyString(Shopdes))
+                txtstoredescription.setText(Shopdes);
+            followstatus = object.getString("favourite_status");
+            if (followstatus.equals("1")) {
+                btnfollow.setText("Unfollow");
+                btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.view_red_background));
+            } else if (followstatus.equals("0")) {
+                btnfollow.setText("Follow");
+                btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.view_background));
+            }
 
-                    txtstoredescription.setText(Shopdes);
-          followstatus=object.getString("favourite_status");
-          if (followstatus.equals("1")){
-              btnfollow.setText("Unfollow");
-              btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.view_red_background));
-          }else if (followstatus.equals("0")){
-            btnfollow.setText("Follow");
-              btnfollow.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.view_background));
-        }
-
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
 
         }
@@ -401,14 +391,13 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         });
         dialog.show();
     }
-//notification count
+
+    //notification count
     @Override
     public void successnoti(String response) {
-        if(TextUtils.isEmpty(response))
-        {
+        if (TextUtils.isEmpty(response)) {
             tvNotiCount.setText("0");
-        }
-        else {
+        } else {
 //            tvNotiCount.setText(push_notifications_count);
             tvNotiCount.setText(response);
 //            Log.e("","count= "+tvNotiCount);

@@ -41,6 +41,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.desired.offermachi.R;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.FileUtil;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
@@ -257,6 +258,9 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         else if (categoryid.equals("0")){
             Toast.makeText(this, "Please select Category", Toast.LENGTH_SHORT).show();
 
+        } else if (Util.isEmptyString(tvPushOfferLocation.getText().toString())){
+            Toast.makeText(this, "Please select Location", Toast.LENGTH_SHORT).show();
+
         }
         else{
             firsthomelinear.setVisibility(View.GONE);
@@ -293,9 +297,21 @@ public class ActAddPushOffer extends AppCompatActivity implements View.OnClickLi
         }else{
             alltime= offerstarttime+"-"+offerendtime;
 //            Toast.makeText(this, "Comming soon", Toast.LENGTH_SHORT).show();
-
+/*    params.put("user_id",user_id);
+                params.put("offer_title", offer_title);
+                params.put("offer_brand",offer_brand);
+                params.put("offer_type", offer_type);
+                params.put("offer_value", offer_value);
+                params.put("offer_image", offer_image);
+                params.put("offer_category", offer_category);
+                params.put("description",description);
+                params.put("start_date", start_date);
+                params.put("end_date", end_date);
+                params.put("coupon_code", coupon_code);
+                params.put("alltime", alltime);
+                params.put("offer_locality", offerLocalityId);*/
             if (isNetworkConnected()) {
-                postpresenter.sentRequest(idholder,offerid,offertitle,brandid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2,offerLocalityId);
+                postpresenter.sentRequest(idholder,offertitle,brandid,offerid,offervalue,picture,categoryid,offerdescription,offerstartdate,offerenddate,offercouponcode,alltime,2,offerLocalityId);
             }
 
         }

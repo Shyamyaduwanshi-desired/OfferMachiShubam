@@ -12,6 +12,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.NotificationModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.model.days_model;
@@ -426,11 +428,14 @@ public class NotificationActivity extends AppCompatActivity implements View.OnCl
     public void successReadNoti(String response) {
 
         String Custom_offertype=arNoti.get(ClickPos).getCustom_offertype();
-        UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
-        Intent myIntent = new Intent(this, DashBoardActivity.class);
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(myIntent);
-        finish();
+        if(!Util.isEmptyString(Custom_offertype)){
+            UserSharedPrefManager.SaveClickNoti(this,"1",Custom_offertype);
+            Intent myIntent = new Intent(this, DashBoardActivity.class);
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(myIntent);
+            finish();
+        }
+
 
     }
 

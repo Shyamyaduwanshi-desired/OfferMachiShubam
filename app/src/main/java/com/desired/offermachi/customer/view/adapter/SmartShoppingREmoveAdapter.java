@@ -188,6 +188,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
                 }
             }
         });
+
         holder.rlemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,6 +197,14 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             }
         });
+//        holder.rlemove.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent("Remove");
+//                intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
+//                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+//            }
+//        });
 
 
         holder.rlShare.setOnClickListener(new View.OnClickListener() {

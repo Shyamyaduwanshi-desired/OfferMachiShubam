@@ -25,10 +25,12 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
     private Context mContext;
     private String followstatus;
     String status;
+    String fromHome;
 
-    public CustomerStoreAdapter(Context context, ArrayList<StoreModel> storeModelArrayList) {
+    public CustomerStoreAdapter(Context context, ArrayList<StoreModel> storeModelArrayList, String fromHome) {
         this.mContext = context;
         this.storeModelArrayList = storeModelArrayList;
+        this.fromHome=fromHome;
 
     }
     @Override
@@ -100,7 +102,20 @@ public class CustomerStoreAdapter extends RecyclerView.Adapter<CustomerStoreAdap
     }
     @Override
     public int getItemCount() {
-        return storeModelArrayList.size();
+        if(fromHome.equals("1")){
+            if(storeModelArrayList.size()>10)
+            {
+                return 10;
+
+            }
+            else {
+                return storeModelArrayList.size();
+            }
+
+        }else {
+            return storeModelArrayList.size();
+
+        }
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView storeimage;

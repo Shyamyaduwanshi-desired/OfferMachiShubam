@@ -140,11 +140,10 @@
                     android:ellipsize="middle"
                     android:singleLine="true"
                     android:text="date"
-
                     android:gravity="center"
                     android:layout_gravity="bottom|right"
                     android:layout_marginRight="5dp"
-                    android:textSize="13dp"
+                    android:textSize="11sp"
                     />
 
                 <RelativeLayout

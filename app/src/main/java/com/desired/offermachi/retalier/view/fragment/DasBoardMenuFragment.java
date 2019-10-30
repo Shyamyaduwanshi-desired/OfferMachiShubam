@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class DasBoardMenuFragment extends Fragment {
     View view;
     String idholder;
     private ArrayList<DealsModelNew> alDealModel;
-    private ArrayList<ExpiressoonModel> expiressoonModel;
+    private ArrayList<ExpiressoonModel> expiressoonModel=new ArrayList<>();
     private ProgressDialog pDialog;
     TextView activeoffer,followerscount,dealtoday,expiressoon;
     private static final String ROOT_URL = "http://offermachi.in/api/get_retailer_dashboard";
@@ -192,11 +193,10 @@ public class DasBoardMenuFragment extends Fragment {
                                     for (int count = 0; count < jsonArray3.length(); count++) {
                                         object3 = jsonArray3.getJSONObject(count);
 
-                                         DealsModelNew dealsModelNew=new DealsModelNew(
+                                         ExpiressoonModel dealsModelNew=new ExpiressoonModel(
                                                  object3.optString("id"),
                                                  object3.optString("offer_id"),
                                                  object3.optString("offer_title"),
-                                                 object3.optString("offer_title_slug"),
                                                  object3.optString("offer_category"),
                                                  object3.optString("sub_category"),
                                                  object3.optString("offer_type"),
@@ -211,10 +211,8 @@ public class DasBoardMenuFragment extends Fragment {
                                                  object3.optString("posted_by"),
                                                  object3.optString("status"),
                                                  object3.optString("offer_brand_name"),
-                                                 object3.optString("favourite_status"),
+
                                                  object3.optString("offer_image"),
-                                                 object3.optString("qr_code_image"),
-                                                 object3.optString("coupon_code_status"),
                                                  object3.optString("shop_logo")
 //                                                object3.optString("id"),
 //                                                object3.optString("offer_id"),
@@ -238,7 +236,7 @@ public class DasBoardMenuFragment extends Fragment {
 //                                                object3.optString("qr_code_image")
 
                                         );
-                                        alDealModel.add(dealsModelNew);
+                                        expiressoonModel.add(dealsModelNew);
                                     }
                                 }
                             } catch (JSONException e) {
@@ -261,6 +259,7 @@ public class DasBoardMenuFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id",idholder);
+                Log.e("DashBoard...",""+idholder);
                 return params;
             }
         };
@@ -283,7 +282,7 @@ public class DasBoardMenuFragment extends Fragment {
     }
     private void displayData2 () {
 
-        expiressoonAdapter  = new ExperieSoonAdapterNew(getContext(), alDealModel);
+        expiressoonAdapter  = new ExperieSoonAdapterNew(getContext(), expiressoonModel);
         expiressoon_recyclerview.setAdapter(expiressoonAdapter);
         if (expiressoonAdapter.getItemCount() == 0) {
             Toast.makeText(getContext(), "No Data", Toast.LENGTH_SHORT).show();

@@ -9,7 +9,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -21,15 +20,11 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.model.category_model;
-import com.desired.offermachi.customer.presenter.CustomerSelectCategoryPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.ViewStoreOfferPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -96,7 +91,7 @@ public class ViewStoreOfferActivity extends AppCompatActivity implements View.On
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(ViewStoreOfferActivity.this,response);
-        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewStoreOfferActivity.this,response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewStoreOfferActivity.this,response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

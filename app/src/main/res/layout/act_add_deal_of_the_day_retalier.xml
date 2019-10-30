@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="55dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/splash">
+
             <ImageView
                 android:id="@+id/imageback"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_left_arrow"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
                 tools:ignore="VectorDrawableCompat" />
+
             <TextView
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="Deals of the Day"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Deals of the Day"
                 android:textColor="@color/black"
-                android:textSize="19dp"
-                android:gravity="center"/>
+                android:textSize="19dp" />
+
             <ImageView
                 android:id="@+id/search"
                 android:layout_width="39dp"
                 android:layout_height="30dp"
-                android:padding="5dp"
-                android:visibility="gone"
                 android:layout_marginLeft="270dp"
                 android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_search_magnifier_interface_symbol" />
+
             <ImageView
                 android:id="@+id/info_id"
                 android:layout_width="27dp"
                 android:layout_height="20dp"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_toLeftOf="@+id/btnnotification"
                 android:layout_marginRight="40dp"
+                android:layout_toLeftOf="@+id/btnnotification"
                 android:src="@drawable/ic_info"
-                tools:ignore="VectorDrawableCompat"
-                android:layout_alignParentRight="true"
-                />
+                tools:ignore="VectorDrawableCompat" />
+
             <ImageView
                 android:id="@+id/imgNotiBell"
                 android:layout_width="25dp"
@@ -62,143 +67,161 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="12dp"
                 app:srcCompat="@drawable/ic_notification_bell" />
+
             <TextView
                 android:id="@+id/txtMessageCount"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/circle_background"
                 android:gravity="center"
                 android:text="0"
                 android:textColor="@color/white"
-                android:textSize="6sp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="8dp"/>
+                android:textSize="6sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
+
     <LinearLayout
-        android:layout_below="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/cv"
         android:background="@drawable/home_background"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:text="Add Deal of the Day"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="18dp"
-            android:gravity="center"
-            android:layout_marginTop="20dp"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
             android:gravity="center"
-            android:layout_marginTop="20dp">
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:id="@+id/firstcircle_id"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:gravity="center"
-                android:background="@drawable/simple_circle_background">
+                android:background="@drawable/simple_circle_background"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
                     android:gravity="center"
+                    android:text="1"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <View
                 android:layout_width="100dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:background="@color/white"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@color/white" />
+
             <LinearLayout
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:gravity="center"
-                android:background="@drawable/simple_circle_background">
+                android:background="@drawable/simple_circle_background"
+                android:gravity="center">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2"
                     android:gravity="center"
+                    android:text="2"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="20dp">
-            <android.support.v7.widget.CardView
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/card_view"
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                card_view:cardBackgroundColor="#fff"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                card_view:cardBackgroundColor="#fff">
+
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:id="@+id/firsthome_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:visibility="visible">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_marginRight="10dp"
+                                android:orientation="horizontal"
                                 android:weightSum="1">
+
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.4"
                                     android:text="Offer Title"
-                                    android:textSize="18dp"
-                                    android:textColor="@color/black" />
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
                                 <EditText
                                     android:id="@+id/offertitle"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
                                     android:layout_weight="0.6"
+                                    android:background="@drawable/edit_background"
                                     android:hint="Offer title"
-                                    android:textSize="14sp"
                                     android:paddingLeft="10dp"
-                                    android:background="@drawable/edit_background"/>
+                                    android:textSize="14sp" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp">
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal">
+
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
                                     android:layout_weight="0.4"
                                     android:text="Offer Category"
-                                    android:textSize="18dp"
-                                    android:layout_gravity="center"
-                                    android:textColor="@color/black" />
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -221,22 +244,25 @@
                                 </RelativeLayout>
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_marginRight="10dp"
+                                android:orientation="horizontal"
                                 android:weightSum="1">
+
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
                                     android:layout_weight="0.4"
                                     android:text="Brand Name"
-                                    android:layout_gravity="center"
-                                    android:textSize="18dp"
-                                    android:textColor="@color/black" />
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -260,71 +286,78 @@
                                         android:background="@drawable/downarrow" />
                                 </RelativeLayout>
                             </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp"
-                                    android:weightSum="1">
-                                    <TextView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.4"
-                                        android:text="Offer Type"
-                                        android:layout_gravity="center"
-                                        android:textSize="18dp"
-                                        android:textColor="@color/black" />
-                                    <RelativeLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="0.6">
 
-                                        <Spinner
-                                            android:id="@+id/offertypespinner"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:background="@drawable/edit_background"
-                                            android:padding="8dp" />
-
-                                        <TextView
-                                            android:layout_width="18dp"
-                                            android:layout_height="18dp"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginRight="12dp"
-                                            android:background="@drawable/downarrow" />
-                                    </RelativeLayout>
-                                </LinearLayout>
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_marginTop="20dp"
                                 android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_marginRight="10dp"
+                                android:orientation="horizontal"
                                 android:weightSum="1">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:text="Offer Type"
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.6">
+
+                                    <Spinner
+                                        android:id="@+id/offertypespinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/edit_background"
+                                        android:padding="8dp" />
+
+                                    <TextView
+                                        android:layout_width="18dp"
+                                        android:layout_height="18dp"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="12dp"
+                                        android:background="@drawable/downarrow" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="10dp"
+                                android:orientation="horizontal"
+                                android:weightSum="1">
+
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0.4"
                                     android:text="Offer Value"
-                                    android:textSize="18dp"
-                                    android:textColor="@color/black" />
+                                    android:textColor="@color/black"
+                                    android:textSize="18dp" />
+
                                 <EditText
                                     android:id="@+id/offervalue"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
                                     android:layout_weight="0.6"
+                                    android:background="@drawable/edit_background"
                                     android:hint="Offer Value"
-                                    android:textSize="14sp"
-                                    android:paddingLeft="10dp"
                                     android:inputType="number"
                                     android:maxLength="5"
-                                    android:background="@drawable/edit_background"/>
+                                    android:paddingLeft="10dp"
+                                    android:textSize="14sp" />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -350,220 +383,239 @@
                                     android:background="@drawable/edit_background"
                                     android:hint="Location"
                                     android:maxLines="1"
+                                    android:paddingLeft="10dp"
                                     android:paddingTop="10dp"
                                     android:paddingBottom="10dp"
-                                    android:paddingLeft="10dp"
                                     android:textSize="14sp" />
 
                             </LinearLayout>
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Offers &amp; Discount Image"
-                                    android:textColor="@color/black"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="20dp"
-                                    android:textSize="18dp" />
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="180dp"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginRight="20dp"
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
+                                android:text="Offers &amp; Discount Image"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="180dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/home_offer_background"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/offerimage"
+                                    android:layout_width="150dp"
+                                    android:layout_height="100dp"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_marginTop="10dp"
-                                    android:layout_gravity="center"
-                                    android:orientation="vertical"
-                                    android:background="@drawable/home_offer_background">
+                                    android:layout_marginBottom="10dp" />
+
+                                <LinearLayout
+                                    android:id="@+id/imagepicker"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="vertical">
+
                                     <ImageView
-                                        android:id="@+id/offerimage"
-                                        android:layout_width="150dp"
-                                        android:layout_height="100dp"
-                                        android:layout_centerHorizontal="true"
-                                        android:layout_marginTop="10dp"
-                                        android:layout_marginBottom="10dp"/>
-                                    <LinearLayout
-                                        android:id="@+id/imagepicker"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/ic_image" />
+
+                                    <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_alignParentBottom="true"
-                                        android:layout_centerInParent="true"
-                                        android:layout_marginBottom="10dp"
-                                        android:orientation="vertical">
-                                        <ImageView
-                                            android:layout_width="30dp"
-                                            android:layout_height="30dp"
-                                            android:layout_gravity="center"
-                                            app:srcCompat="@drawable/ic_image"/>
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Offer Image"
-                                            android:textSize="18dp"/>
-                                    </LinearLayout>
+                                        android:text="Offer Image"
+                                        android:textSize="18dp" />
+                                </LinearLayout>
 
-                                </RelativeLayout>
-
+                            </RelativeLayout>
 
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="20dp"
                                 android:text="Offer Details"
                                 android:textColor="@color/black"
-                                android:textSize="18dp"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="20dp"/>
+                                android:textSize="18dp" />
 
-                                <EditText
-                                    android:id="@+id/offerdescription"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="120dp"
-                                    android:inputType="textMultiLine"
-                                    android:layout_marginLeft="20dp"
-                                    android:layout_marginRight="20dp"
-                                    android:layout_marginTop="15dp"
-                                    android:gravity="start"
-                                    android:textSize="14sp"
-                                    android:hint="Enter here offer description"
-                                    android:paddingLeft="10dp"
-                                    android:paddingTop="10dp"
-                                    android:background="@drawable/simple_background"/>
+                            <EditText
+                                android:id="@+id/offerdescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="20dp"
+                                android:background="@drawable/simple_background"
+                                android:gravity="start"
+                                android:hint="Enter here offer description"
+                                android:inputType="textMultiLine"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:textSize="14sp" />
 
                             <Button
                                 android:id="@+id/next_button_id"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
-                                android:background="@drawable/login_button_background"
                                 android:layout_marginLeft="@dimen/margin_save_button"
-                                android:layout_marginRight="@dimen/margin_save_button"
                                 android:layout_marginTop="20dp"
+                                android:layout_marginRight="@dimen/margin_save_button"
                                 android:layout_marginBottom="50dp"
+                                android:background="@drawable/login_button_background"
                                 android:text="Next"
-                                android:textSize="20dp"
                                 android:textAllCaps="false"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                                android:textSize="20dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/second_home_linear_id"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:visibility="gone"
-                            android:layout_marginTop="20dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Offer Date"
-                                        android:textSize="18dp"
-                                        android:textColor="@color/black" />
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="10dp"
-                                        android:weightSum="2">
-                                        <TextView
-                                            android:id="@+id/editText1"
-                                            android:layout_width="0dp"
-                                            android:layout_height="40dp"
-                                            android:gravity="center"
-                                            android:layout_weight="1"
-                                            android:layout_marginRight="5dp"
-                                            android:ems="10"
-                                            android:background="@drawable/edit_background"
-                                            android:hint="Start Date" />
-                                        <TextView
-                                            android:id="@+id/editexpirydate"
-                                            android:layout_width="0dp"
-                                            android:layout_height="40dp"
-                                            android:gravity="center"
-                                            android:layout_weight="1"
-                                            android:layout_marginLeft="5dp"
-                                            android:ems="10"
-                                            android:background="@drawable/edit_background"
-                                            android:hint="Expire Date" />
-                                    </LinearLayout>
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Genrate Coupon Code"
-                                android:textSize="18dp"
-                                android:layout_marginTop="10dp"
-                                android:textColor="@color/black" />
+                                android:text="Offer Date"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:id="@+id/editText1"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edit_background"
+                                    android:ems="10"
+                                    android:gravity="center"
+                                    android:hint="Start Date" />
+
+                                <TextView
+                                    android:id="@+id/editexpirydate"
+                                    android:layout_width="0dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edit_background"
+                                    android:ems="10"
+                                    android:gravity="center"
+                                    android:hint="Expire Date" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:text="Genrate Coupon Code"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:orientation="horizontal"
-                                android:weightSum="2"
-                                android:layout_marginTop="10dp">
+                                android:weightSum="2">
+
                                 <TextView
                                     android:id="@+id/offercouponcode"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:layout_weight="1"
-                                    android:text="Coupon Code"
                                     android:layout_marginRight="5dp"
-                                    android:textSize="14dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edit_background"
                                     android:gravity="center"
-                                    android:background="@drawable/edit_background"/>
+                                    android:text="Coupon Code"
+                                    android:textSize="14dp" />
+
                                 <TextView
                                     android:id="@+id/btngenerate"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:layout_weight="1"
-                                    android:text="Generate Coupon Code"
                                     android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
                                     android:background="@drawable/view_background"
-                                    android:textSize="14dp"
                                     android:gravity="center"
-                                    android:textColor="@color/white" />
+                                    android:text="Generate Coupon Code"
+                                    android:textColor="@color/white"
+                                    android:textSize="14dp" />
                             </LinearLayout>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Offer Time"
-                                android:textSize="18dp"
                                 android:layout_marginTop="10dp"
-                                android:textColor="@color/black" />
+                                android:text="Offer Time"
+                                android:textColor="@color/black"
+                                android:textSize="18dp" />
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
                                 android:orientation="horizontal"
-                                android:weightSum="2"
-                                android:layout_marginTop="10dp">
+                                android:weightSum="2">
+
                                 <TextView
                                     android:id="@+id/time_view_start"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:layout_weight="1"
-                                    android:hint="00:00"
                                     android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/edit_background"
                                     android:gravity="center"
-                                    android:background="@drawable/edit_background"/>
+                                    android:hint="00:00" />
+
                                 <TextView
                                     android:id="@+id/time_view_end"
                                     android:layout_width="0dp"
                                     android:layout_height="40dp"
-                                    android:gravity="center"
                                     android:layout_marginLeft="5dp"
                                     android:layout_weight="1"
-                                    android:hint="00:00"
-                                    android:background="@drawable/edit_background"/>
+                                    android:background="@drawable/edit_background"
+                                    android:gravity="center"
+                                    android:hint="00:00" />
 
                             </LinearLayout>
-                                <Button
-                                    android:id="@+id/submit_button_id"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:background="@drawable/login_button_background"
-                                    android:layout_marginLeft="@dimen/margin_save_button"
-                                    android:layout_marginRight="@dimen/margin_save_button"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="50dp"
-                                    android:text="Submit"
-                                    android:textSize="20dp"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white" />
+
+                            <Button
+                                android:id="@+id/submit_button_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="@dimen/margin_save_button"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="@dimen/margin_save_button"
+                                android:layout_marginBottom="50dp"
+                                android:background="@drawable/login_button_background"
+                                android:text="Submit"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="20dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </ScrollView>

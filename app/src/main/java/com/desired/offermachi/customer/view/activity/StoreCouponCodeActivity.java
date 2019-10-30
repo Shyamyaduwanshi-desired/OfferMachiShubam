@@ -21,15 +21,11 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.StoreListPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
-import com.desired.offermachi.customer.view.adapter.StoreViewallAdapter;
-import com.desired.offermachi.customer.view.fragment.HomeFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -92,7 +88,7 @@ public class StoreCouponCodeActivity extends AppCompatActivity implements View.O
 
     @Override
     public void success(ArrayList<StoreModel> response,int totalRecords,int totalPages) {
-        customerStoreAdapter=new CustomerStoreAdapter(getApplicationContext(),response);
+        customerStoreAdapter=new CustomerStoreAdapter(getApplicationContext(),response, "");
         storerecycle.setAdapter(customerStoreAdapter);
     }
 

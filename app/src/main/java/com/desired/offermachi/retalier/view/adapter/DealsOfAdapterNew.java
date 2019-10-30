@@ -142,7 +142,7 @@ public class DealsOfAdapterNew extends RecyclerView.Adapter<DealsOfAdapterNew.My
        });
 
 
-       holder.rlLike.setOnClickListener(new View.OnClickListener() {
+       holder.likeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fav=selectCategoryModel.getOfferfav();
@@ -164,7 +164,7 @@ public class DealsOfAdapterNew extends RecyclerView.Adapter<DealsOfAdapterNew.My
             }
         });
 
-        holder.rlShare.setOnClickListener(new View.OnClickListener() {
+        holder.iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
@@ -193,7 +193,7 @@ public class DealsOfAdapterNew extends RecyclerView.Adapter<DealsOfAdapterNew.My
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         //   public CardView categorylinear;
-        ImageView productimg,likeimg,ivStoreLogo;
+        ImageView productimg,likeimg,ivStoreLogo,iv_share;
         TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
         RelativeLayout rl_get_coupon_layout;
@@ -208,10 +208,11 @@ public class DealsOfAdapterNew extends RecyclerView.Adapter<DealsOfAdapterNew.My
             productname =  itemView.findViewById(R.id.tv_product_name);
             tvDsc =  itemView.findViewById(R.id.tv_prod_dsc);
             productdate = itemView.findViewById(R.id.tv_prod_date);
-            rlShare = itemView.findViewById(R.id.rl_share);
-            rlLike = itemView.findViewById(R.id.rl_like);
+          //  rlShare = itemView.findViewById(R.id.rl_share);
+         //   rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_a_code_id);
             cv_image=itemView.findViewById(R.id.cv_image);
+            iv_share=itemView.findViewById(R.id.iv_share);
 
             rl_get_coupon_layout=itemView.findViewById(R.id.bt_get_acoupon_code);
 

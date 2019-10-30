@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -23,22 +22,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.presenter.CustomerDealsOftheDaysPresenter;
 import com.desired.offermachi.customer.presenter.MyCouponPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
-import com.desired.offermachi.customer.model.category_model;
 import com.desired.offermachi.customer.view.activity.DashBoardActivity;
 import com.desired.offermachi.customer.view.activity.FilterShowActivity;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -225,7 +219,7 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
     public void success(ArrayList<SelectCategoryModel> response) {
 
 //        customerTrendingAdapter=new CustomerTrendingAdapter(getContext(),response);
-        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(getContext(),response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

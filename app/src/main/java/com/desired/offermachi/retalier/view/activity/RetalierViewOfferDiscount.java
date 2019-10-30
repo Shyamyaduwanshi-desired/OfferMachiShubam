@@ -23,6 +23,7 @@ import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.view.activity.InfoActivity;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModelNew;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.presenter.ViewOfferPresenter;
@@ -88,7 +89,7 @@ public class RetalierViewOfferDiscount extends AppCompatActivity implements View
     }
 
     @Override
-    public void success(ArrayList<DealsModelNew> response) {
+    public void success(ArrayList<ExpiressoonModel> response) {
         experieSoonAdapterNew = new ExperieSoonAdapterNew(getApplicationContext(), response);
         product_recyclerview.setAdapter(experieSoonAdapterNew);
     }

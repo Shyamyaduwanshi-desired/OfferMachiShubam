@@ -1,5 +1,6 @@
 package com.desired.offermachi.retalier.view.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,6 +31,7 @@ import com.desired.offermachi.R;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModelNew;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.FollowerModel;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
@@ -152,8 +154,14 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
         }
     }
 
-    @Override
+  /*  @Override
     public void success(ArrayList<DealsModelNew> response) {
+        pushOfferAdapterNew = new PushOfferAdapterNew(getApplicationContext(),response);
+        product_recyclerview.setAdapter(pushOfferAdapterNew);
+    }*/
+
+    @Override
+    public void success(ArrayList<ExpiressoonModel> response) {
         pushOfferAdapterNew = new PushOfferAdapterNew(getApplicationContext(),response);
         product_recyclerview.setAdapter(pushOfferAdapterNew);
     }
@@ -273,6 +281,7 @@ public class ActRetalierPushOffer extends AppCompatActivity implements View.OnCl
 
     @Override
     public void followerfail(String response) {
+        if(!((Activity) ActRetalierPushOffer.this).isFinishing())
         showAlert(response, R.style.DialogAnimation);
     }
 

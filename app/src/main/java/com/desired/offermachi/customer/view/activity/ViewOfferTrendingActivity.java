@@ -9,22 +9,22 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
+import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
+import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
@@ -32,13 +32,14 @@ import java.util.ArrayList;
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
 
-public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList, NotificationCountPresenter.NotiUnReadCount {
+public class ViewOfferTrendingActivity  extends AppCompatActivity implements View.OnClickListener, TrendingListPresenter.TrendingList, NotificationCountPresenter.NotiUnReadCount,HomePresenter.HomeList {
 
     ImageView imageViewback,info;
     RecyclerView categoryrecycle;
 //    private CustomerTrendingAdapter customerTrendingAdapter;
     private CustomerTrendingAdapterNew customerTrendingAdapter;
     private TrendingListPresenter presenter;
+    HomePresenter homePresenter;
     String idholder;
     String catid;
     TextView tvNotiCount;
@@ -58,6 +59,7 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         Intent intent = getIntent();
         catid = intent.getStringExtra("catid");
         presenter = new TrendingListPresenter(ViewOfferTrendingActivity.this, ViewOfferTrendingActivity.this);
+        homePresenter = new HomePresenter(ViewOfferTrendingActivity.this, ViewOfferTrendingActivity.this);
         imageViewback = findViewById(R.id.imageback);
         imageViewback.setOnClickListener(this);
         info=findViewById(R.id.info_id);
@@ -77,7 +79,11 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         notiCount.NotificationUnreadCount(idholder);
 
         if (isNetworkConnected()) {
-            presenter.ViewAllTrending(idholder);
+            //presenter.ViewAllTrending(idholder);
+            if(Util.isEmptyString(catid)){
+                catid="";
+            }
+            homePresenter.GetAllMultipleCateList(catid,idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
@@ -98,7 +104,11 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
         @Override
         public void onReceive(Context context, Intent intent2) {
             if (isNetworkConnected()) {
-                presenter.ViewAllTrending(idholder);
+              //  presenter.ViewAllTrending(idholder);
+                if(Util.isEmptyString(catid)){
+                    catid="";
+                }
+                homePresenter.GetAllMultipleCateList(catid,idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);
             }
@@ -119,17 +129,42 @@ public class ViewOfferTrendingActivity  extends AppCompatActivity implements Vie
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
 //        customerTrendingAdapter = new CustomerTrendingAdapter(ViewOfferTrendingActivity.this, response);
-        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewOfferTrendingActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewOfferTrendingActivity.this, response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 
     @Override
     public void favsuccess(String response) {
         if (isNetworkConnected()) {
-            presenter.ViewAllTrending(idholder);
+          //  presenter.ViewAllTrending(idholder);
+            if(Util.isEmptyString(catid)){
+                catid="";
+            }
+            homePresenter.GetAllMultipleCateList(catid,idholder);
         } else {
             showAlert("Please connect to internet.", R.style.DialogAnimation);
         }
+    }
+
+    @Override
+    public void categorysuccess(ArrayList<SelectCategoryModel> response) {
+
+    }
+
+    @Override
+    public void Offersuccess(ArrayList<SelectCategoryModel> response) {
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewOfferTrendingActivity.this, response, "");
+        categoryrecycle.setAdapter(customerTrendingAdapter);
+    }
+
+    @Override
+    public void Storesuccess(ArrayList<StoreModel> response) {
+
+    }
+
+    @Override
+    public void success(String response) {
+
     }
 
     @Override

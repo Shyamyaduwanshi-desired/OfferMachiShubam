@@ -227,8 +227,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
             intent.putExtra("location_longitude",location_longitude);
             startActivity(intent);
 
-
-
         }else if (v==imageviewback){
             onBackPressed();
         } else if(v==info){
@@ -272,7 +270,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                 slider_viewpager_model slider_viewpager_model=new slider_viewpager_model(
                         object2.getString("retailer_banner_image")
                 );
-
 
                 arrayList.add(slider_viewpager_model);
             }
@@ -389,7 +386,6 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
                         TextView  txtsaturdayopen=dialog.findViewById(R.id.saturdayopen);
                         TextView   txtsundayopen=dialog.findViewById(R.id.sundayopen);
 
-
                         Mondayclosetime = timeto.nextToken();
                         txtmondayopen.setText(Mondayopentime+"-"+Mondayclosetime);
 
@@ -468,7 +464,7 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
                 );
                 storelist.add(storeModel);
-                customerStoreAdapter=new CustomerStoreAdapter(getApplicationContext(),storelist);
+                customerStoreAdapter=new CustomerStoreAdapter(getApplicationContext(),storelist,"");
                 storerecycle.setAdapter(customerStoreAdapter);
 
             }
@@ -491,9 +487,8 @@ public class ViewAllOfferFollowActivity extends AppCompatActivity implements Vie
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewAllOfferFollowActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(ViewAllOfferFollowActivity.this, response,"");
         categoryrecycle.setAdapter(customerTrendingAdapter);
-
     }
 
     @Override

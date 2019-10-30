@@ -44,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.constant.hand;
 import com.desired.offermachi.customer.model.SearchBean;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
@@ -219,7 +220,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 
         if (getActivity()!=null) {
             if (isNetworkConnected()) {
-                if(TextUtils.isEmpty(catid))//only for null
+                if(Util.isEmptyString(catid))//only for null
                 {
                     catid="";
                 }
@@ -321,6 +322,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
         }
         else if (v==trendingviewall){
             Intent intent = new Intent(getActivity(), ViewOfferTrendingActivity.class);
+            intent.putExtra("catid",catid);
             startActivity(intent);
             getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }else if (v==storeviewall){
@@ -353,10 +355,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
 //            selectCategoryModelList.add(onsale);
 //        }
     }
+    String fromHome = "1";
 
     @Override
     public void Offersuccess(ArrayList<SelectCategoryModel> response) {
-        customerTrendingAdapterNew= new CustomerTrendingAdapterNew(getContext(),response);
+        customerTrendingAdapterNew= new CustomerTrendingAdapterNew(getContext(),response,fromHome);
         trendingrecycle.setAdapter(customerTrendingAdapterNew);
     }
 
@@ -373,7 +376,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Home
     }
     @Override
     public void Storesuccess(ArrayList<StoreModel> response) {
-        customerStoreAdapter=new CustomerStoreAdapter(getContext(),response);
+        customerStoreAdapter=new CustomerStoreAdapter(getContext(),response,fromHome);
         storerecycle.setAdapter(customerStoreAdapter);
     }
 

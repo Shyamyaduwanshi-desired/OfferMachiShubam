@@ -16,28 +16,19 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.desired.offermachi.R;
 
 
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
-import com.desired.offermachi.customer.model.StoreModel;
 import com.desired.offermachi.customer.model.User;
-import com.desired.offermachi.customer.model.category_model;
-import com.desired.offermachi.customer.presenter.CustomerCategoryListPresenter;
 import com.desired.offermachi.customer.presenter.CustomerSelectCategoryPresenter;
-import com.desired.offermachi.customer.presenter.HomePresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerStoreAdapter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
-import com.desired.offermachi.customer.view.fragment.HomeFragment;
 
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;
@@ -125,7 +116,7 @@ public class ViewOfferActivity extends AppCompatActivity implements View.OnClick
     public void success(ArrayList<SelectCategoryModel> response) {
 
 //        customerTrendingAdapter=new CustomerTrendingAdapter(ViewOfferActivity.this,response);
-        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewOfferActivity.this,response);
+        customerTrendingAdapter=new CustomerTrendingAdapterNew(ViewOfferActivity.this,response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

@@ -5,21 +5,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -30,7 +25,6 @@ import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.model.slider_viewpager_model;
-import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
 import com.desired.offermachi.customer.presenter.ViewStoreOfferPresenter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 import com.desired.offermachi.customer.view.adapter.slider_viewpages_adaper;
@@ -160,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements  ViewStoreOfferPr
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
 //        customerTrendingAdapter=new CustomerTrendingAdapter(ViewStoreOfferActivity.this,response);
-        customerTrendingAdapter = new CustomerTrendingAdapterNew(MainActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(MainActivity.this, response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
     }
 

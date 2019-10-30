@@ -30,6 +30,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModelNew;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.UserModel;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
 import com.squareup.picasso.MemoryPolicy;
@@ -45,14 +46,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapterNew.MyViewHolder>{
-    private ArrayList<DealsModelNew> selectCategoryModelArrayList;
+    private ArrayList<ExpiressoonModel> selectCategoryModelArrayList;
     private Context mContext;
     private String Favstatus;
     private String idholder;
 
     AppData appdata;
 
-    public ExperieSoonAdapterNew(Context context, ArrayList<DealsModelNew> selectCategoryModelArrayList) {
+    public ExperieSoonAdapterNew(Context context, ArrayList<ExpiressoonModel> selectCategoryModelArrayList) {
         this.selectCategoryModelArrayList = selectCategoryModelArrayList;
         this.mContext = context;
         appdata=new AppData();
@@ -68,7 +69,7 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
 
     @Override
     public void onBindViewHolder(final ExperieSoonAdapterNew.MyViewHolder holder, final int i) {
-        final DealsModelNew selectCategoryModel=selectCategoryModelArrayList.get(i);
+        final ExpiressoonModel selectCategoryModel=selectCategoryModelArrayList.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
         holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
 
@@ -86,14 +87,14 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
 
             Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
         }
-        if (selectCategoryModel.getOfferfav().equals("1")){
+        if (selectCategoryModel.getOfferstatus().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
         }else{
             holder.likeimg.setImageResource(R.drawable.heart);
         }
 
 
-        if (selectCategoryModel.getOfferfav().equals("1")){
+        if (selectCategoryModel.getOfferstatus().equals("1")){
             holder.likeimg.setImageResource(R.drawable.ic_like);
         }else{
             holder.likeimg.setImageResource(R.drawable.heart);
@@ -112,10 +113,10 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
 //        }
 
 
-        Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
-        if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
+        Log.e("","store logo= "+selectCategoryModel.getOfferImage());
+        if(TextUtils.isEmpty(selectCategoryModel.getOfferImage())||selectCategoryModel.getOfferImage().equals("")){
         }else{
-            Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
+            Picasso.get().load(selectCategoryModel.getOfferImage()).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.shortlogo).into(holder.ivStoreLogo);
         }
         holder.productname.setOnClickListener(new View.OnClickListener() {
@@ -214,7 +215,7 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
 //            }
 //        });
 
-        holder.rlShare.setOnClickListener(new View.OnClickListener() {
+        holder.iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
@@ -234,7 +235,7 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
     public int getItemCount() {
         return selectCategoryModelArrayList.size();
     }
-    public void setfilter(List<DealsModelNew> newlist) {
+    public void setfilter(List<ExpiressoonModel> newlist) {
         selectCategoryModelArrayList = new ArrayList<>();
         selectCategoryModelArrayList.addAll(newlist);
         notifyDataSetChanged();
@@ -243,7 +244,7 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         //   public CardView categorylinear;
-        ImageView productimg,likeimg,ivStoreLogo;
+        ImageView productimg,likeimg,ivStoreLogo,iv_share;
         TextView productname,productdate/*,offertype*/,tvDsc;
         RelativeLayout productbuttonlayout;
         RelativeLayout rlShare,rlLike;
@@ -258,11 +259,12 @@ public class ExperieSoonAdapterNew extends RecyclerView.Adapter<ExperieSoonAdapt
             productname =  itemView.findViewById(R.id.tv_product_name);
             tvDsc =  itemView.findViewById(R.id.tv_prod_dsc);
             productdate = itemView.findViewById(R.id.tv_prod_date);
-            rlShare = itemView.findViewById(R.id.rl_share);
-            rlLike = itemView.findViewById(R.id.rl_like);
+            //rlShare = itemView.findViewById(R.id.rl_share);
+            //rlLike = itemView.findViewById(R.id.rl_like);
             productbutton=itemView.findViewById(R.id.bt_get_a_code_id);
             productbuttonlayout=itemView.findViewById(R.id.bt_get_acoupon_code);
             cv_image=itemView.findViewById(R.id.cv_image);
+            iv_share=itemView.findViewById(R.id.iv_share);
 
 //            offertype=itemView.findViewById(R.id.tv_flat_diss);
             likeimg=itemView.findViewById(R.id.iv_like);

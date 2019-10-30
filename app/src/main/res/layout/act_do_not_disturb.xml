@@ -15,11 +15,11 @@
             android:background="@drawable/splash">
             <ImageView
                 android:id="@+id/imageback"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="15dp"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_left_arrow"
+                android:src="@drawable/ic_arrow_back_black_24dp"
                 tools:ignore="VectorDrawableCompat" />
             <TextView
                 android:id="@+id/logo"

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -26,7 +25,6 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.SearchPresenter;
 import com.desired.offermachi.customer.presenter.TrendingListPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
 import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapterNew;
 
 import java.util.ArrayList;
@@ -124,7 +122,7 @@ public class SearchActivity extends AppCompatActivity implements TrendingListPre
     public void success(ArrayList<SelectCategoryModel> response) {
 
 //        customerTrendingAdapter = new CustomerTrendingAdapter(SearchActivity.this, response);
-        customerTrendingAdapter = new CustomerTrendingAdapterNew(SearchActivity.this, response);
+        customerTrendingAdapter = new CustomerTrendingAdapterNew(SearchActivity.this, response, "");
         categoryrecycle.setAdapter(customerTrendingAdapter);
 
         for (SelectCategoryModel onsale : response) {

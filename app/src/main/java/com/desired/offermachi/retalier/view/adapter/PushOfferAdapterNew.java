@@ -29,6 +29,7 @@ import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.view.activity.ProductActivity;
 import com.desired.offermachi.retalier.constant.AppData;
 import com.desired.offermachi.retalier.model.DealsModelNew;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 import com.desired.offermachi.retalier.model.ViewOfferModel;
 import com.desired.offermachi.retalier.view.activity.RetalierProductActivity;
 import com.squareup.picasso.MemoryPolicy;
@@ -44,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNew.MyViewHolder>{
-    private ArrayList<DealsModelNew> pushofferdatalist;
+    private ArrayList<ExpiressoonModel> pushofferdatalist;
     private final Context mContext;
     int countBACK=0;
     int count=0;
@@ -52,7 +53,7 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
     private String idholder;
     AppData appdata;
 
-    public PushOfferAdapterNew(Context context, ArrayList<DealsModelNew> pushofferdatalist) {
+    public PushOfferAdapterNew(Context context, ArrayList<ExpiressoonModel> pushofferdatalist) {
         this.pushofferdatalist = pushofferdatalist;
         this.mContext = context;
         appdata=new AppData();
@@ -68,7 +69,7 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
 
     @Override
     public void onBindViewHolder(final PushOfferAdapterNew.MyViewHolder holder, final int i) {
-        final DealsModelNew selectCategoryModel=pushofferdatalist.get(i);
+        final ExpiressoonModel selectCategoryModel=pushofferdatalist.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
         holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
 
@@ -88,12 +89,12 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
         }
 
 
-        Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
+       /* Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
         if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
         }else{
             Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.shortlogo).into(holder.ivStoreLogo);
-        }
+        }*/
         holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +116,7 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
 
 
 
-        holder.rlShare.setOnClickListener(new View.OnClickListener() {
+        holder.iv_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sendIntent = new Intent();
@@ -135,7 +136,7 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
     public int getItemCount() {
         return pushofferdatalist.size();
     }
-    public void setfilter(List<DealsModelNew> newlist) {
+    public void setfilter(List<ExpiressoonModel> newlist) {
         pushofferdatalist = new ArrayList<>();
         pushofferdatalist.addAll(newlist);
         notifyDataSetChanged();
@@ -144,7 +145,7 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         //   public CardView categorylinear;
-        ImageView productimg,likeimg,ivStoreLogo;
+        ImageView productimg,likeimg,ivStoreLogo,iv_share;
         TextView productname,productdate/*,offertype*/,tvDsc;
         Button productbutton;
         RelativeLayout productbuttonlayout;
@@ -161,8 +162,9 @@ public class PushOfferAdapterNew extends RecyclerView.Adapter<PushOfferAdapterNe
             tvDsc =  itemView.findViewById(R.id.tv_prod_dsc);
             productdate = itemView.findViewById(R.id.tv_prod_date);
             rlShare = itemView.findViewById(R.id.rl_share);
+            iv_share=itemView.findViewById(R.id.iv_share);
 
-            productbutton=itemView.findViewById(R.id.bt_get_a_code);
+            productbutton=itemView.findViewById(R.id.bt_get_a_code_id);
             productbuttonlayout=itemView.findViewById(R.id.rl_get_coupon_layout);
             likeimg=itemView.findViewById(R.id.iv_like);
             ivStoreLogo=itemView.findViewById(R.id.iv_icon);

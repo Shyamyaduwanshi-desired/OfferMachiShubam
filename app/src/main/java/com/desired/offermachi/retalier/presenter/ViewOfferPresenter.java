@@ -2,7 +2,6 @@ package com.desired.offermachi.retalier.presenter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,11 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.desired.offermachi.retalier.constant.AppData;
-import com.desired.offermachi.retalier.constant.SharedPrefManagerLogin;
 import com.desired.offermachi.retalier.model.DealsModelNew;
-import com.desired.offermachi.retalier.model.UserModel;
-import com.desired.offermachi.retalier.model.ViewOfferModel;
-import com.desired.offermachi.retalier.model.retalier_category_model;
+import com.desired.offermachi.retalier.model.ExpiressoonModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,44 +26,45 @@ public class ViewOfferPresenter {
     private OfferDiscount offerDiscount;
 
 
-
     public ViewOfferPresenter(Context context, OfferDiscount offerDiscount) {
         this.context = context;
-        this.offerDiscount=offerDiscount;
+        this.offerDiscount = offerDiscount;
     }
 
-    public interface OfferDiscount{
-        void success(ArrayList<DealsModelNew> response);
+    public interface OfferDiscount {
+        void success(ArrayList<ExpiressoonModel> response);
+
         void error(String response);
+
         void fail(String response);
     }
+
     public void getOfferDiscount(final String userid) {
         final ProgressDialog progress = new ProgressDialog(context);
         progress.setMessage("Get Offer & Discount Please Wait..");
         progress.setCancelable(false);
         progress.show();
-        final ArrayList<DealsModelNew> list = new ArrayList<>();
+        final ArrayList<ExpiressoonModel> list = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_offer_and_discount", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progress.dismiss();
                 try {
                     JSONObject reader = new JSONObject(response);
-                   /* Log.e("offer", "result="+response );*/
+                    /* Log.e("offer", "result="+response );*/
                     int status = reader.getInt("status");
-                    String message=reader.getString("message");
+                    String message = reader.getString("message");
                     if (status == 200) {
                         list.clear();
-                        String result=reader.getString("result");
+                        String result = reader.getString("result");
                         JSONArray jsonArray = new JSONArray(result);
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
-                          object = jsonArray.getJSONObject(count);
-                            DealsModelNew viewOfferModel=new DealsModelNew(
+                            object = jsonArray.getJSONObject(count);
+                            ExpiressoonModel viewOfferModel = new ExpiressoonModel(
                                     object.optString("id"),
                                     object.optString("offer_id"),
                                     object.optString("offer_title"),
-                                    object.optString("offer_title_slug"),
                                     object.optString("offer_category"),
                                     object.optString("sub_category"),
                                     object.optString("offer_type"),
@@ -86,8 +83,9 @@ public class ViewOfferPresenter {
                                     object.optString("offer_image"),
                                     object.optString("qr_code_image"),
                                     object.optString("coupon_code_status"),
-                                    object.optString("shop_logo")
-                          );
+                                    object.optString("shop_logo"),
+                                    object.optString("offer_title_slug")
+                            );
                             list.add(viewOfferModel);
 
                         }
@@ -111,7 +109,7 @@ public class ViewOfferPresenter {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id",userid);
+                params.put("user_id", userid);
                 return params;
             }
         };
@@ -125,28 +123,27 @@ public class ViewOfferPresenter {
         progress.setMessage("Get Offer & Discount Please Wait..");
         progress.setCancelable(false);
         progress.show();
-        final ArrayList<DealsModelNew> list = new ArrayList<>();
+        final ArrayList<ExpiressoonModel> list = new ArrayList<>();
         StringRequest postRequest = new StringRequest(Request.Method.POST, AppData.url + "get_retailer_push_offer_data", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progress.dismiss();
                 try {
                     JSONObject reader = new JSONObject(response);
-                   /* Log.e("offer", "result="+response );*/
+                    /* Log.e("offer", "result="+response );*/
                     int status = reader.getInt("status");
-                    String message=reader.getString("message");
+                    String message = reader.getString("message");
                     if (status == 200) {
                         list.clear();
-                        String result=reader.getString("result");
+                        String result = reader.getString("result");
                         JSONArray jsonArray = new JSONArray(result);
                         JSONObject object;
                         for (int count = 0; count < jsonArray.length(); count++) {
-                          object = jsonArray.getJSONObject(count);
-                            DealsModelNew viewOfferModel=new DealsModelNew(
+                            object = jsonArray.getJSONObject(count);
+                            ExpiressoonModel viewOfferModel = new ExpiressoonModel(
                                     object.optString("id"),
                                     object.optString("offer_id"),
                                     object.optString("offer_title"),
-                                    object.optString("offer_title_slug"),
                                     object.optString("offer_category"),
                                     object.optString("sub_category"),
                                     object.optString("offer_type"),
@@ -165,9 +162,9 @@ public class ViewOfferPresenter {
                                     object.optString("offer_image"),
                                     object.optString("qr_code_image"),
                                     object.optString("coupon_code_status"),
-                                    object.optString("shop_logo")
-
-                          );
+                                    object.optString("shop_logo"),
+                                    object.optString("offer_title_slug")
+                            );
                             list.add(viewOfferModel);
 
                         }
@@ -191,7 +188,7 @@ public class ViewOfferPresenter {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("user_id",userid);
+                params.put("user_id", userid);
                 return params;
             }
         };
@@ -199,7 +196,6 @@ public class ViewOfferPresenter {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(postRequest);
     }
-
 
 
 }

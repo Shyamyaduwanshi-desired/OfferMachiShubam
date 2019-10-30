@@ -287,8 +287,12 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             JSONObject object = new JSONObject(response);
                     Storeid=object.getString("id");
                     String Shopname=object.getString("shop_name");
-                    txtstorename.setText(Shopname);
-                    txtstorename2.setText(Shopname);
+                    if(!Util.isEmptyString(Shopname)){
+                        txtstorename.setText(Shopname);
+                    }
+                    if(!Util.isEmptyString(Shopname)){
+                        txtstorename2.setText(Shopname);
+                    }
                     String Shoplogo=object.getString("shop_logo");
             if (Shoplogo.equals("")) {
             } else {

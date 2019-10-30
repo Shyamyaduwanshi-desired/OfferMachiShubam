@@ -16,9 +16,9 @@
             android:background="@drawable/splash">
             <ImageView
                 android:id="@+id/imageviewback"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_left_arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="20dp"
@@ -304,7 +304,7 @@
                             android:textColor="@color/darkred"
                             android:textSize="15dp"
                             android:textStyle="bold"
-                            android:paddingLeft="20dp"/>
+                            />
                         <TextView
                             android:id="@+id/timmer_id"
                             android:layout_width="20dp"

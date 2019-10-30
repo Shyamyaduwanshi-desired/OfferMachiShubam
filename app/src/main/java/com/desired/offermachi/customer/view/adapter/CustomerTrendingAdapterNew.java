@@ -53,10 +53,13 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     private String Favstatus;
     private String idholder;
     AppData appdata;
+    String fromHome;
+    private SelectCategoryModel selectCategoryModel;
 
-    public CustomerTrendingAdapterNew(Context context, ArrayList<SelectCategoryModel> selectCategoryModelArrayList) {
+    public CustomerTrendingAdapterNew(Context context, ArrayList<SelectCategoryModel> selectCategoryModelArrayList, String fromHome) {
         this.selectCategoryModelArrayList = selectCategoryModelArrayList;
         this.mContext = context;
+        this.fromHome=fromHome;
         appdata=new AppData();
         this.arSearchItem = new ArrayList<SelectCategoryModel>();
         this.arSearchItem.addAll(selectCategoryModelArrayList);
@@ -72,10 +75,13 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 
     @Override
     public void onBindViewHolder(final CustomerTrendingAdapterNew.MyViewHolder holder, final int i) {
-        final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
+        if(selectCategoryModelArrayList.size()>0) {
+
+
+            selectCategoryModel = selectCategoryModelArrayList.get(i);
 //        holder.productname.setText(selectCategoryModel.getOffername());
 //        holder.offertype.setText(selectCategoryModel.getOffertype());
-        holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
+            holder.productdate.setText("Exp on: " + appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));
 
 //        holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
 
@@ -83,61 +89,56 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
 //        yourtextview.setText(Html.fromHtml(text));
 
 
-        if (selectCategoryModel.getOffername()==null){
-            holder.productname.setText("");
-        }else {
-            holder.productname.setText(selectCategoryModel.getOffername());
-        }
-        Log.e("Adapter",""+selectCategoryModel.getOffertypename());
-        if(Util.isEmptyString(selectCategoryModel.getOffertypename())){
-            holder.offertype.setText("");
-            holder.text_linear.setVisibility(View.GONE);
-        }
-        else {
-            holder.offertype.setText(selectCategoryModel.getOffertypename()+" Off "+selectCategoryModel.getOffervalue());
-        }
+            if (selectCategoryModel.getOffername() == null) {
+                holder.productname.setText("");
+            } else {
+                holder.productname.setText(selectCategoryModel.getOffername());
+            }
+            Log.e("Adapter", "" + selectCategoryModel.getOffertypename());
+            if (Util.isEmptyString(selectCategoryModel.getOffertypename())) {
+                holder.offertype.setText("");
+                holder.text_linear.setVisibility(View.GONE);
+            } else {
+                holder.offertype.setText(selectCategoryModel.getOffertypename() + " Off " + selectCategoryModel.getOffervalue());
+            }
 
 
+            if (selectCategoryModel.getOfferdescription().length() > 30) {
+                holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription().substring(0, 30) + "..."));
+            } else {
+                holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription()));
+            }
 
+            if (selectCategoryModel.getOfferImage().equals("")) {
+            } else {
 
-        if(selectCategoryModel.getOfferdescription().length()>30)
-        {
-            holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription().substring(0,30)+"..."));
-        }
-        else
-        {
-            holder.tvDsc.setText(Html.fromHtml(selectCategoryModel.getOfferdescription()));
-        }
+                Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
+            }
 
-        if(selectCategoryModel.getOfferImage().equals("")){
-        }else{
+            if (selectCategoryModel.getOfferfav().equals("1")) {
+                holder.likeimg.setImageResource(R.drawable.ic_like);
+            } else {
+                holder.likeimg.setImageResource(R.drawable.heart);
+            }
 
-            Picasso.get().load(selectCategoryModel.getOfferImage()).placeholder(R.drawable.ic_broken).into(holder.productimg);
-        }
+            if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")) {
+                holder.productbutton.setText("View Coupon");//View Coupon Code
+                holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
+                holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
+            } else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")) {
+                holder.productbutton.setText("Redeemed");
+            } else {
+                holder.productbutton.setText("Get Coupon");//Get Coupon Code
+                holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
+                holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
+            }
 
-        if (selectCategoryModel.getOfferfav().equals("1")){
-            holder.likeimg.setImageResource(R.drawable.ic_like);
-        }else{
-            holder.likeimg.setImageResource(R.drawable.heart);
-        }
-
-        if (selectCategoryModel.getOfferCouponCodeStatus().equals("1")){
-            holder.productbutton.setText("View Coupon");//View Coupon Code
-            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.black));
-            holder.productbuttonlayout.setBackgroundResource(R.drawable.view_coupon_code_bg);
-        }else if (selectCategoryModel.getOfferCouponCodeStatus().equals("2")){
-            holder.productbutton.setText("Redeemed");
-        }else{
-            holder.productbutton.setText("Get Coupon");//Get Coupon Code
-            holder.productbutton.setTextColor(mContext.getResources().getColor(R.color.white));
-            holder.productbuttonlayout.setBackgroundResource(R.drawable.home_coupon_code_bg);
-        }
-
-        Log.e("","store logo= "+selectCategoryModel.getStoreLogo());
-        if(TextUtils.isEmpty(selectCategoryModel.getStoreLogo())||selectCategoryModel.getStoreLogo().equals("")){
-        }else{
-            Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.shortlogo).into(holder.ivStoreLogo);
+            Log.e("", "store logo= " + selectCategoryModel.getStoreLogo());
+            if (TextUtils.isEmpty(selectCategoryModel.getStoreLogo()) || selectCategoryModel.getStoreLogo().equals("")) {
+            } else {
+                Picasso.get().load(selectCategoryModel.getStoreLogo()).networkPolicy(NetworkPolicy.NO_CACHE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.shortlogo).into(holder.ivStoreLogo);
+            }
         }
        holder.productname.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,7 +242,20 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
     }
     @Override
     public int getItemCount() {
-        return selectCategoryModelArrayList.size();
+
+        if(fromHome.equals("1")){
+            if(selectCategoryModelArrayList.size()>10){
+                return 10;
+            }
+            else {
+                return selectCategoryModelArrayList.size();
+
+            }
+        }
+        else {
+            return selectCategoryModelArrayList.size();
+
+        }
     }
     public void setfilter(List<SelectCategoryModel> newlist) {
         selectCategoryModelArrayList = new ArrayList<>();

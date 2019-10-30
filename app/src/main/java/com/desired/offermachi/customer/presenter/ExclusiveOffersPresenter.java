@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.retalier.constant.AppData;
 
@@ -114,6 +115,8 @@ public class ExclusiveOffersPresenter {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("user_id", userid);
+                params.put("latitude", UserSharedPrefManager.GetLat(context));
+                params.put("longitude", UserSharedPrefManager.GetLong(context));
                 return params;
             }
         };

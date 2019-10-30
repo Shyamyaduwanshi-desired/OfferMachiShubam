@@ -1,4 +1,3 @@
-
 package com.desired.offermachi.customer.view.activity;
 
 import android.Manifest;
@@ -12,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,6 +49,7 @@ import android.widget.Toast;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.BottomDealsoftheCountPresenter;
 import com.desired.offermachi.customer.presenter.NotificationCountPresenter;
@@ -87,7 +89,7 @@ import java.util.Locale;
 //import com.google.android.gms.maps.model.LatLng;
 
 public class DashBoardActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener/*, LocationListener*/, NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead, LocationObserver, Runnable {
+        implements NavigationView.OnNavigationItemSelectedListener/*, LocationListener*/, NotificationCountPresenter.NotiUnReadCount, BottomDealsoftheCountPresenter.BottomNotiRead, LocationObserver, Runnable, LocationListener {
     FragmentManager FM;
     FragmentTransaction FT;
     LinearLayout smartshopping, dealsoftheday, coupons, favourites, ifollow;
@@ -119,6 +121,7 @@ public class DashBoardActivity extends AppCompatActivity
 
     TextView BottomtvNotiCountdeal, BottomtvNotiCountcoupons, BottomtvNotiCountfavorites;
     private BottomDealsoftheCountPresenter BottomNotiRead;
+    private FloatingActionButton fab;
     /////BOttomNotificationCount
 
 
@@ -128,12 +131,26 @@ public class DashBoardActivity extends AppCompatActivity
         setContentView(R.layout.activity_dash_board);
 //        getLocation();
         setCurLoc();
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+
         toolbar = findViewById(R.id.toolbar);
         ivTitleLogo = toolbar.findViewById(R.id.logo);
         tvMainTitle = toolbar.findViewById(R.id.tv_title);
         ivLocation = toolbar.findViewById(R.id.location_id);
         tvNotiCount = toolbar.findViewById(R.id.txtMessageCount);
 //        notiCount = new NotificationCountPresenter(this,this);
+        fab = findViewById(R.id.floting_button);
 
 
         BottomtvNotiCountdeal = findViewById(R.id.category_txtMessageCount_id);
@@ -192,12 +209,14 @@ public class DashBoardActivity extends AppCompatActivity
         } else {
             if (user.getSmartShopping().equals("1")) {
                 ivLocation.setVisibility(View.GONE);
+                fab.setVisibility(View.GONE);
 
                 FM = getSupportFragmentManager();
                 FT = FM.beginTransaction();
                 FT.replace(R.id.framelayout_id, new SmartShoppingFragment()).commit();
             } else if (user.getSmartShopping().equals("0")) {
                 ivLocation.setVisibility(View.VISIBLE);
+                fab.setVisibility(View.VISIBLE);
                 FM = getSupportFragmentManager();
                 FT = FM.beginTransaction();
                 FT.replace(R.id.framelayout_id, new HomeFragment()).commit();
@@ -282,7 +301,6 @@ public class DashBoardActivity extends AppCompatActivity
         });
 
 
-        FloatingActionButton fab = findViewById(R.id.floting_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -904,9 +922,10 @@ public class DashBoardActivity extends AppCompatActivity
                 if (user.getSmartShopping().equals("1")) {
 
                     info.setVisibility(View.INVISIBLE);
-                    btnnotification.setVisibility(View.INVISIBLE);
-                    tvNotiCount.setVisibility(View.INVISIBLE);
+                    btnnotification.setVisibility(View.VISIBLE);
+                    tvNotiCount.setVisibility(View.VISIBLE);
                     ivLocation.setVisibility(View.GONE);
+                    fab.setVisibility(View.GONE);
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -918,6 +937,8 @@ public class DashBoardActivity extends AppCompatActivity
                     btnnotification.setVisibility(View.VISIBLE);
                     tvNotiCount.setVisibility(View.VISIBLE);
                     ivLocation.setVisibility(View.VISIBLE);
+                    fab.setVisibility(View.VISIBLE);
+
 
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -976,7 +997,7 @@ public class DashBoardActivity extends AppCompatActivity
         super.onResume();
         if (user.getSmartShopping().equals("1")) {
             info.setVisibility(View.INVISIBLE);
-            btnnotification.setVisibility(View.INVISIBLE);
+            btnnotification.setVisibility(View.VISIBLE);
 
             smartshoppingimg.setImageDrawable(getResources().getDrawable(R.drawable.whiteonlineshop));
             dealsofthedayimg.setImageDrawable(getResources().getDrawable(R.drawable.yellowdeals));
@@ -1073,7 +1094,7 @@ public class DashBoardActivity extends AppCompatActivity
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 UserSharedPrefManager.SaveCurrentOrOtherLoc(DashBoardActivity.this, "1");
-                checkFlag = false;
+                checkFlag = true;
 
                 // checkFlag=true;
                 clickFlag = true;
@@ -1184,7 +1205,7 @@ public class DashBoardActivity extends AppCompatActivity
 }*/
 
     String sCurrentLocation = "";
-    boolean checkFlag = true;
+    boolean checkFlag = false;
   /*  @Override
     public void onLocationChanged(Location location) {
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -1260,9 +1281,9 @@ public class DashBoardActivity extends AppCompatActivity
                 intent.putExtra("followstatus",followstatus);
                 intent.putExtra("pos",i);*//*
         LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
-*/
+*//*
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.START);*/
 
 
         checkFlag = false;
@@ -1575,9 +1596,8 @@ public class DashBoardActivity extends AppCompatActivity
             }
 //        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
             // if (checkFlag && clickFlag) {
-            if (UserSharedPrefManager.GetLat(this) == null) {
+            if (Util.isEmptyString(UserSharedPrefManager.GetLat(this))) {
                 RefreshLocWithHomeView(1);
-
             }
 
 //            edtlocation.setText(address+" "+city);
@@ -1596,6 +1616,79 @@ public class DashBoardActivity extends AppCompatActivity
 
     public Fragment currentFragment() {
         return getSupportFragmentManager().findFragmentById(R.id.framelayout_id);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
+
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    sb.append(address.getAddressLine(i)).append("\n");
+                }
+                sb.append(address.getLocality()).append("\n");
+                sb.append(address.getPostalCode()).append("\n");
+                sb.append(address.getCountryName());
+                String result = sb.toString();
+                Log.e("DashBoard", "current address= " + result);
+            }
+            String address = addresses.get(0).getSubLocality();
+            String city = addresses.get(0).getLocality();
+            Log.e("DashBoard", "run onLocation lati= " + location.getLatitude() + " longi= " + location.getLongitude());
+            Log.e("DashBoard", "current address= " + address);
+            if (address == null) {
+                sCurrentLocation = city;
+            } else {
+                sCurrentLocation = address + ", " + city;
+            }
+
+//        tvLocation.setText(address + ", " + city);
+            lati = String.valueOf(location.getLatitude());
+            longi = String.valueOf(location.getLongitude());
+
+            if (tvCurloc != null && clickFlag) {
+                tvCurloc.setText(sCurrentLocation);
+                btOkay.setVisibility(View.VISIBLE);
+                lyCurrLocation.setVisibility(View.VISIBLE);
+                clickFlag = false;
+            }
+//        Toast.makeText(this, "lati= "+lati+" longi= "+longi, Toast.LENGTH_SHORT).show();
+            // if (checkFlag && clickFlag) {
+            if (!checkFlag) {
+                RefreshLocWithHomeView(1);
+            }
+
+//            edtlocation.setText(address+" "+city);
+           /* LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title("Current Position");
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+            mCurrLocationMarker =mMapSession.addMarker(markerOptions);*/
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
 

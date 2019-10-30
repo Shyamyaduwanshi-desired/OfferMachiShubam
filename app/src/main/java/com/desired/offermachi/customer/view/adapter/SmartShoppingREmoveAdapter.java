@@ -121,7 +121,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ProductActivity.class);
-                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.putExtra("offerid",selectCategoryModelArrayList.get(i).getId());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
 
@@ -132,23 +132,23 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             public void onClick(View v) {
                 User user = UserSharedPrefManager.getInstance(mContext).getCustomer();
                 idholder= user.getId();
-                String couponstatus=selectCategoryModel.getOfferCouponCodeStatus();
+                String couponstatus=selectCategoryModelArrayList.get(i).getOfferCouponCodeStatus();
                 if (couponstatus.equals("0")){
                     couponstatus="1";
-                    getcoupon(idholder,selectCategoryModel.getId(),couponstatus);
+                    getcoupon(idholder,selectCategoryModelArrayList.get(i).getId(),couponstatus);
 
                 }else if (couponstatus.equals("1")){
                     final Dialog dialog = new Dialog((Activity) v.getContext());
                     dialog.setContentView(R.layout.coupon_code_activity);
                     dialog.setTitle("Custom Dialog");
                     ImageView image=(ImageView)dialog.findViewById(R.id.qr_code_img_id);
-                    if(selectCategoryModel.getOfferqrcodeimage().equals("")){
+                    if(selectCategoryModelArrayList.get(i).getOfferqrcodeimage().equals("")){
                     }else{
-                        Picasso.get().load(selectCategoryModel.getOfferqrcodeimage()).networkPolicy(NetworkPolicy.NO_CACHE)
+                        Picasso.get().load(selectCategoryModelArrayList.get(i).getOfferqrcodeimage()).networkPolicy(NetworkPolicy.NO_CACHE)
                                 .memoryPolicy(MemoryPolicy.NO_CACHE).placeholder(R.drawable.ic_broken).into(image);
                     }
                     Button button=(Button)dialog.findViewById(R.id.coupon_button_apply_id);
-                    button.setText(selectCategoryModel.getCoupon_code());
+                    button.setText(selectCategoryModelArrayList.get(i).getCoupon_code());
                     TextView textView=(TextView)dialog.findViewById(R.id.coupon_ok_id);
                     textView.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -170,20 +170,20 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
         holder.rlLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fav=selectCategoryModel.getOfferfav();
+                String fav=selectCategoryModelArrayList.get(i).getOfferfav();
                 if (fav.equals("0")) {
                     Favstatus="1";
                     holder.rlLike.setImageResource(R.drawable.ic_like);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
-                    intent.putExtra("offerid", selectCategoryModel.getId());
+                    intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if(fav.equals("1")) {
                     Favstatus="0";
                     holder.rlLike.setImageResource(R.drawable.heart);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
-                    intent.putExtra("offerid", selectCategoryModel.getId());
+                    intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }
             }
@@ -192,7 +192,7 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent("Remove");
-                intent.putExtra("offerid", selectCategoryModel.getId());
+                intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
             }
         });

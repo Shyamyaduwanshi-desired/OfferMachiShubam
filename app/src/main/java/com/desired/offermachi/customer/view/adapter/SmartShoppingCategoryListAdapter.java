@@ -64,7 +64,7 @@ public class SmartShoppingCategoryListAdapter extends RecyclerView.Adapter<Smart
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, MapActivity.class);
-                myIntent.putExtra("catid",categoryListModel.getCatid());
+                myIntent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
             }
@@ -72,17 +72,17 @@ public class SmartShoppingCategoryListAdapter extends RecyclerView.Adapter<Smart
         holder.unfolltext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status=categoryListModel.getFollowstatus();
+                status=categoryListModelArrayList.get(i).getFollowstatus();
                 if (status.equals("0")){
                     followstatus="1";
                     Intent intent=new Intent("Follow");
-                    intent.putExtra("catid",categoryListModel.getCatid());
+                    intent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                     intent.putExtra("followstatus",followstatus);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if (status.equals("1")){
                     followstatus="0";
                     Intent intent=new Intent("Follow");
-                    intent.putExtra("catid",categoryListModel.getCatid());
+                    intent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                     intent.putExtra("followstatus",followstatus);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }

@@ -1,5 +1,6 @@
 package com.desired.offermachi.customer.view.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -127,7 +128,11 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
         @Override
         public void onReceive(Context context, Intent intent2) {
             if (isNetworkConnected()) {
-                smartShoppingOfferPresenter.sentRequest(idholder,latitude,longitude,catIds,distance);
+                if(!((Activity)SmartShoppingRemoveActivity.this).isFinishing()){
+                    smartShoppingOfferPresenter.sentRequest(idholder,latitude,longitude,catIds,distance);
+                }
+
+
                // presenter.ViewAllSmartData(idholder);
             } else {
                 showAlert("Please connect to internet.", R.style.DialogAnimation);

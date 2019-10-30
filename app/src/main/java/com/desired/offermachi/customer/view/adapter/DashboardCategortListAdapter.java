@@ -66,9 +66,9 @@ public class DashboardCategortListAdapter extends RecyclerView.Adapter<Dashboard
         holder.categorylinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handobj.setCatid(categoryListModel.getCatid());
-                handobj.setCatname(categoryListModel.getCatname());
-                handobj.setCatimage(categoryListModel.getBannerimage());
+                handobj.setCatid(categoryListModelArrayList.get(i).getCatid());
+                handobj.setCatname(categoryListModelArrayList.get(i).getCatname());
+                handobj.setCatimage(categoryListModelArrayList.get(i).getBannerimage());
                 Intent myIntent = new Intent(mContext, DashBoardActivity.class);
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
@@ -78,18 +78,18 @@ public class DashboardCategortListAdapter extends RecyclerView.Adapter<Dashboard
         holder.unfolltext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status=categoryListModel.getFollowstatus();
+                status=categoryListModelArrayList.get(i).getFollowstatus();
                 if (status.equals("0")){
                     followstatus="1";
                     Intent intent=new Intent("Follow");
-                    intent.putExtra("catid",categoryListModel.getCatid());
+                    intent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                     intent.putExtra("followstatus",followstatus);
                     intent.putExtra("pos",i);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if (status.equals("1")){
                     followstatus="0";
                     Intent intent=new Intent("Follow");
-                    intent.putExtra("catid",categoryListModel.getCatid());
+                    intent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                     intent.putExtra("followstatus",followstatus);
                     intent.putExtra("pos",i);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);

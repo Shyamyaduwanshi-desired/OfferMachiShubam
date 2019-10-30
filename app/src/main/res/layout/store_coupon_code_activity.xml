@@ -10,17 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <LinearLayout
+
+        <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="70dp">
+                    android:layout_height="wrap_content">
                     <android.support.v7.widget.CardView
                         android:id="@+id/cv"
                         android:layout_width="match_parent"
@@ -93,11 +87,22 @@
                             </RelativeLayout>
                         </RelativeLayout>
                     </android.support.v7.widget.CardView>
+
                 </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+              >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                   >
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -107,15 +112,16 @@
                         android:layout_marginTop="5dp"
                         android:textSize="18dp"
                         android:textStyle="bold" />
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/storerecycleview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_above="@+id/rl">
-                    </android.support.v7.widget.RecyclerView>
+
                 </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/storerecycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_above="@+id/rl"
+                    android:layout_marginBottom="15dp">
+                </android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

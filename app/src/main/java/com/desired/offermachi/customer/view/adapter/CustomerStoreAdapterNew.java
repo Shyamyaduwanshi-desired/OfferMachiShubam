@@ -67,7 +67,7 @@ public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreA
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ViewAllOfferFollowActivity.class);
-                myIntent.putExtra("retailer_id",storeModel.getId());
+                myIntent.putExtra("retailer_id",storeModelArrayList.get(listPosition).getId());
                 myIntent.putExtra("category_id",storeModel.getStoreCategory());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
@@ -79,7 +79,7 @@ public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreA
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ViewStoreOfferActivity.class);
-                myIntent.putExtra("storeid",storeModel.getId());
+                myIntent.putExtra("storeid",storeModelArrayList.get(listPosition).getId());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
             }
@@ -87,17 +87,17 @@ public class CustomerStoreAdapterNew extends RecyclerView.Adapter<CustomerStoreA
         holder.btnfollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                status=storeModel.getStoreFav();
+                status=storeModelArrayList.get(listPosition).getStoreFav();
                 if (status.equals("0")){
                     followstatus="1";
                     Intent intent=new Intent("StoreFollow");
-                    intent.putExtra("storeid",storeModel.getId());
+                    intent.putExtra("storeid",storeModelArrayList.get(listPosition).getId());
                     intent.putExtra("followstatus",followstatus);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if (status.equals("1")){
                     followstatus="0";
                     Intent intent=new Intent("StoreFollow");
-                    intent.putExtra("storeid",storeModel.getId());
+                    intent.putExtra("storeid",storeModelArrayList.get(listPosition).getId());
                     intent.putExtra("followstatus",followstatus);
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }

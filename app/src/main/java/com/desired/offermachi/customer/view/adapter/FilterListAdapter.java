@@ -86,7 +86,7 @@ public class FilterListAdapter  extends RecyclerView.Adapter<FilterListAdapter.M
                     lastChecked = cb;
                     lastCheckedPos = clickedPos;
                     Intent intent=new Intent("Category");
-                    intent.putExtra("catid",categoryListModel.getCatid());
+                    intent.putExtra("catid",categoryListModelArrayList.get(i).getCatid());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                     activity.finish();
                 }

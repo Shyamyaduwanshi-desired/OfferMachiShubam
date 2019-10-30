@@ -354,7 +354,7 @@ public class DashBoardActivity extends AppCompatActivity
         ifollow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivLocation.setVisibility(View.GONE);
+                ivLocation.setVisibility(View.VISIBLE);
 
                 GoIfollow(1);
             }
@@ -918,7 +918,6 @@ public class DashBoardActivity extends AppCompatActivity
                 favouritestext.setTextColor(getResources().getColor(R.color.yellow));
                 ifollowtext.setTextColor(getResources().getColor(R.color.yellow));
 
-
                 if (user.getSmartShopping().equals("1")) {
 
                     info.setVisibility(View.INVISIBLE);
@@ -1127,20 +1126,40 @@ public class DashBoardActivity extends AppCompatActivity
             }
         });
 
-//        rlCurrent.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-////                checkFlag=true;
-////                clickFlag=true;
-////                SetDistance();
-////                if(locationProvider!=null) {
-////                    locationProvider.startTrackingLocation();
-////                }
-////                DlgLoc.dismiss();
-//            }
-//
-//        });
+        rlCurrent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                checkFlag=true;
+                clickFlag=true;
+                SetDistance();
+                Intent intent = new Intent("Refresh");
+            /*    intent.putExtra("catid",categoryListModel.getCatid());
+                intent.putExtra("followstatus",followstatus);
+                intent.putExtra("pos",i);*/
+                if (currentFragment() instanceof StoreFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof HomeFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof DealsoftheDayFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }if (currentFragment() instanceof ExclusiveFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+                if (currentFragment() instanceof FollowFragment) {
+                    LocalBroadcastManager.getInstance(DashBoardActivity.this).sendBroadcast(intent);
+                }
+
+                UserSharedPrefManager.SaveCurrentLatLongAndLocNm(DashBoardActivity.this, lati, longi, sCurrentLocation, sDistance);
+                if (locationProvider != null) {
+                    locationProvider.startTrackingLocation();
+                }
+                DlgLoc.dismiss();
+            }
+
+        });
         rlOther.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

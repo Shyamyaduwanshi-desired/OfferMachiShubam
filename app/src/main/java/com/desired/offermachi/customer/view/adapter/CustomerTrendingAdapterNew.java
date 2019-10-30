@@ -144,7 +144,8 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ProductActivity.class);
-                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.putExtra("offerid",selectCategoryModelArrayList.get(i).getId());
+                Log.e("Adpater","id..."+"position..."+i+""+selectCategoryModelArrayList.get(i).getId());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
 
@@ -155,7 +156,7 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(mContext, ProductActivity.class);
-                myIntent.putExtra("offerid",selectCategoryModel.getId());
+                myIntent.putExtra("offerid",selectCategoryModelArrayList.get(i).getId());
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(myIntent);
 
@@ -167,10 +168,10 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
             public void onClick(View v) {
                 User user = UserSharedPrefManager.getInstance(mContext).getCustomer();
                 idholder= user.getId();
-                String couponstatus=selectCategoryModel.getOfferCouponCodeStatus();
+                String couponstatus=selectCategoryModelArrayList.get(i).getOfferCouponCodeStatus();
                 if (couponstatus.equals("0")){
                     couponstatus="1";
-                    getcoupon(idholder,selectCategoryModel.getId(),couponstatus);
+                    getcoupon(idholder,selectCategoryModelArrayList.get(i).getId(),couponstatus);
 
                 }else if (couponstatus.equals("1")){
                     final Dialog dialog = new Dialog((Activity) v.getContext());
@@ -205,20 +206,22 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
         holder.likeimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fav=selectCategoryModel.getOfferfav();
+                String fav=selectCategoryModelArrayList.get(i).getOfferfav();
                 if (fav.equals("0")) {
                     Favstatus="1";
                     holder.likeimg.setImageResource(R.drawable.ic_like);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
-                    intent.putExtra("offerid", selectCategoryModel.getId());
+                    intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
+                    Log.e("Adpater","id..."+"position..."+i+""+selectCategoryModelArrayList.get(i).getId());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }else if(fav.equals("1")) {
                     Favstatus="0";
                     holder.likeimg.setImageResource(R.drawable.heart);
                     Intent intent = new Intent("Favourite");
                     intent.putExtra("fav", Favstatus);
-                    intent.putExtra("offerid", selectCategoryModel.getId());
+                    intent.putExtra("offerid", selectCategoryModelArrayList.get(i).getId());
+                    Log.e("Adpater","id..."+selectCategoryModelArrayList.get(i).getId());
                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 }
             }
@@ -235,7 +238,6 @@ public class CustomerTrendingAdapterNew extends RecyclerView.Adapter<CustomerTre
                 sendIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                 sendIntent.setType("text/plain");
                 mContext.startActivity(Intent.createChooser(sendIntent, "choose one"));
-
 
             }
         });

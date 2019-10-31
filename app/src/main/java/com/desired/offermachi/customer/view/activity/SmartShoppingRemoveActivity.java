@@ -1,7 +1,6 @@
 package com.desired.offermachi.customer.view.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,33 +10,22 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.SmartShoppingNotificationDataPresenter;
 import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
-import com.desired.offermachi.customer.presenter.TrendingListPresenter;
-import com.desired.offermachi.customer.view.adapter.CustomerTrendingAdapter;
-import com.desired.offermachi.customer.view.adapter.SmartShoppingNotificationAdapter;
 import com.desired.offermachi.customer.view.adapter.SmartShoppingREmoveAdapter;
-import com.desired.offermachi.customer.view.adapter.SmartShoppingRemoveAdapter;
-import com.desired.offermachi.customer.model.category_model;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import libs.mjn.prettydialog.PrettyDialog;
 import libs.mjn.prettydialog.PrettyDialogCallback;

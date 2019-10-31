@@ -23,7 +23,7 @@ import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.SmartShoppingNotificationDataPresenter;
 import com.desired.offermachi.customer.presenter.SmartShoppingOfferPresenter;
-import com.desired.offermachi.customer.view.adapter.SmartShoppingREmoveAdapter;
+import com.desired.offermachi.customer.view.adapter.SmartShoppingRemoveActivityAdapter;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
     RecyclerView categoryrecycle;
     String result;
 //    private SmartShoppingNotificationAdapter smartShoppingNotificationAdapter;
-    private SmartShoppingREmoveAdapter smartShoppingNotificationAdapter;
+    private SmartShoppingRemoveActivityAdapter smartShoppingNotificationAdapter;
     private SmartShoppingNotificationDataPresenter presenter;
     SmartShoppingOfferPresenter smartShoppingOfferPresenter;
     String idholder;
@@ -145,7 +145,7 @@ public class SmartShoppingRemoveActivity  extends AppCompatActivity implements V
 
     @Override
     public void success(ArrayList<SelectCategoryModel> response) {
-        smartShoppingNotificationAdapter = new SmartShoppingREmoveAdapter(SmartShoppingRemoveActivity.this,response);
+        smartShoppingNotificationAdapter = new SmartShoppingRemoveActivityAdapter(SmartShoppingRemoveActivity.this,response);
         categoryrecycle.setAdapter(smartShoppingNotificationAdapter);
     }
 

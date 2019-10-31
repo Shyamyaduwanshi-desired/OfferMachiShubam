@@ -39,17 +39,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShoppingREmoveAdapter.MyViewHolder>{
+public class SmartShoppingRemoveActivityAdapter extends RecyclerView.Adapter<SmartShoppingRemoveActivityAdapter.MyViewHolder>{
     private ArrayList<SelectCategoryModel> selectCategoryModelArrayList;
     private Context mContext;
     private String Favstatus;
     private String idholder;
     AppData appdata;
 
-    public SmartShoppingREmoveAdapter(Context context, ArrayList<SelectCategoryModel> selectCategoryModelArrayList) {
+    public SmartShoppingRemoveActivityAdapter(Context context, ArrayList<SelectCategoryModel> selectCategoryModelArrayList) {
         this.selectCategoryModelArrayList = selectCategoryModelArrayList;
         this.mContext = context;
         appdata=new AppData();
@@ -57,15 +56,15 @@ public class SmartShoppingREmoveAdapter  extends RecyclerView.Adapter<SmartShopp
     }
 
     @Override
-    public SmartShoppingREmoveAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
-                                                                      int viewType) {
+    public SmartShoppingRemoveActivityAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                              int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.remove_smart_shopping_activity, parent, false);
-        SmartShoppingREmoveAdapter.MyViewHolder myViewHolder = new SmartShoppingREmoveAdapter.MyViewHolder(view);
+        SmartShoppingRemoveActivityAdapter.MyViewHolder myViewHolder = new SmartShoppingRemoveActivityAdapter.MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final SmartShoppingREmoveAdapter.MyViewHolder holder, final int i) {
+    public void onBindViewHolder(final SmartShoppingRemoveActivityAdapter.MyViewHolder holder, final int i) {
         final SelectCategoryModel selectCategoryModel=selectCategoryModelArrayList.get(i);
         holder.productname.setText(selectCategoryModel.getOffername());
         holder.productdate.setText("Exp on: "+appdata.ConvertDate4(selectCategoryModel.getOfferenddate()));

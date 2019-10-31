@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.desired.offermachi.R;
 import com.desired.offermachi.customer.constant.UserSharedPrefManager;
+import com.desired.offermachi.customer.constant.Util;
 import com.desired.offermachi.customer.model.SelectCategoryModel;
 import com.desired.offermachi.customer.model.User;
 import com.desired.offermachi.customer.presenter.MyCouponPresenter;
@@ -150,7 +151,10 @@ public class MycouponsFragment  extends Fragment implements View.OnClickListener
         @Override
         public void onReceive(Context context, Intent intent) {
             String Catid = intent.getStringExtra("catid");
-         //   presenter.ViewAllCoupons(idholder,"");
+            if(Util.isEmptyString(Catid)){
+                Catid="";
+            }
+            presenter.ViewAllCouponsWithFilter(idholder,"",Catid);
 
 //            presenter.DealFilter(idholder,Catid);
 //            Toast.makeText(getActivity(), "coming soon", Toast.LENGTH_SHORT).show();
